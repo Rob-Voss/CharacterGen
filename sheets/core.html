@@ -1,0 +1,3878 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Dragon Grog 3.5</title>
+  
+  <meta name="description" content="A character brewer">
+  
+  
+  
+  
+  <!-- .less style links for DEVELOPMENT COMMENT OUT AFTER COMPILE, BEFORE COMMIT -->
+
+  <link rel="stylesheet/less" type="text/css" href="less/print.less" />
+  <link rel="stylesheet/less" type="text/css" href="less/style.less" />
+
+  			<!-- js for uncompiled .less -->
+  <script src="js/less-1.6.1.js" type="text/javascript"></script>
+
+			<!-- Aw yeah. the Javascript -->
+  <script type="text/javascript" src="js/jquery-2.1.1.js"></script>			
+  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/items.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  
+  
+
+  			<!-- Google Web -->
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Walter+Turncoat' rel='stylesheet' type='text/css'>
+  
+  <link rel="stylesheet" href="css/style.css">
+  
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-43651845-3', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+  
+</head>
+
+<body>
+		
+	<div id="print-nav-wrap">
+		<div id="nav-controls">
+			
+			<form id="form-picture" runat="server">
+				<h3>
+					Upload a Character Sketch
+				</h3>
+				<p>
+					.jpg, .gif, .png files supported. Portrait layout images work best. 
+				</p>
+				<input type='file' id="picture-upload" />
+			</form>
+		</div>
+	</div>
+	
+	<section id="print-page-four">
+
+		<div class="paper">
+			
+			<div class="width-100 tall-namebox">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-name print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-player print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-race print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							RACE
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-class print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							CLASS
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			<!-- RIGHT TEXT AREAS -->
+				<div class="right-text-areas">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							THE BASICS
+						</h1>
+						<p>
+							AWW. IS THERE NOT ENOUGH ROOM ON THE EYE COLOR LINE FOR RED/GRAY HETEROCHROMIA IRIDUM. 
+						</p>
+					</div>
+				</div> 
+
+				
+
+
+
+
+
+
+
+			<!-- RIGHT TEXT AREAS -->
+
+
+
+			<div class="quarter left-text-areas">
+				<div class="box blackbox dragongrog width-100">
+					<h1> 
+						PICTURE
+					</h1>
+					<p>
+						WORTH A THOUSAND WORDS, BUT NOT A SINGLE +1
+					</p>
+				</div>
+			</div>
+			<div id="print-picture" class="picture-area left-text-areas"></div>
+
+			<!-- RIGHT TEXT AREAS -->
+				<div class="right-text-areas">
+					<div class="print-text-area-quote">
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-eyes" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									EYES
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-hair" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									HAIR
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-height" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									HEIGHT
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-weight" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label label-width-100">
+									WEIGHT
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-skin" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									SKIN
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-handedness" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									HANDEDNESS
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-age" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									AGE
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-gender" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label label-width-100">
+									GENDER
+								</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							APPEARANCE
+						</h1>
+						<p>
+							WHAT YOU LOOK LIKE
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-appearance" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+
+
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							PERSONALITY
+						</h1>
+						<p>
+							MAYBE YOU'RE JUST A RACIST. CURSED ELVES!
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-personality">
+						<div id="print-personality" class="character-content"> 
+							 
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							QUOTE
+						</h1>
+						<p>
+							WORDS TO LIVE BY
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-quote">
+						<div id="print-quote" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							LIFE OBJECTIVE
+						</h1>
+						<p>
+							YOUR DRIVING FORCE
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-objective" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+				
+				
+				
+				
+				
+			<!-- RIGHT TEXT AREAS -->
+
+			<div class="quarter clear-left pad-top left-text-areas">
+				<div class="box blackbox dragongrog width-100 float-left">
+					<h1> 
+						OTHER NOTABLE INFORMATION
+					</h1>
+					<p>
+						I KNOW THERE ISN'T A SPOT FOR CHILDHOOD BEAR WRASLIN' KILLS. YOU CAN'T HAVE A BONUS EITHER.
+					</p>
+				</div>
+			</div>
+	
+			
+
+			<div class="quarter clear-left print-text-area left-text-areas">
+				<div id="print-other-info" class="character-content"> 
+					
+				</div>
+				<div class="text-area-line the-top-one"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+
+			</div>
+
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							RECENT HISTORY
+						</h1>
+						<p>
+							WHAT YOU'VE BEEN UP TO 
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-history" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							ALLIES & ENEMIES
+						</h1>
+						<p>
+							WHO'S SEEN YOUR FACE AND GIVEN IT A SECOND THOUGHT?
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-allies-enemies" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+				</div>
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							HOME, ANCESTORY, FAMILY & RELIGION
+						</h1>
+						<p>
+							AND POLITICS, TOO. 
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-home">
+						<div id="print-ancestry" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+				</div>
+
+		</div>
+	</section>		
+
+	<div class="page-space"></div>
+
+	<section id="print">
+		<div class="paper">
+		
+		<!-- SKILLS SECTION FLOAT RIGHT HALFS -->
+			<div class="half float-right">
+				<div class="box blackbox dragongrog">
+					<h1> 
+						SKILLS
+					</h1>
+					<p>
+						 NEVER LEAVE HOME WITHOUT THEM
+					</p>
+				</div>
+				<div class="twelfth">
+					<p class="mini-title">
+						SKILL NAME
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						RANK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						ABILITY MOD.
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC. MOD.
+					</p>
+				</div>
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						NOTES
+					</p>
+				</div>
+				
+				
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						appraise
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-appr" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						balance
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bala" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						bluff
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bluf" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						climb
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-clim" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						concentration
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-conc" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-craft-title" class="form-skill-form">
+						craft:
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-craf" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+
+				<div id="wrin-craft-1">
+					<div class="twelfth">
+						<p id="print-wrin-craft-1" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-craft-2">
+					<div class="twelfth">
+						<p id="print-wrin-craft-2" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-2" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-craft-3">
+					<div class="twelfth">
+						<p id="print-wrin-craft-3" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-3" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-craft-4">
+					<div class="twelfth">
+						<p id="print-wrin-craft-4" class="form-skill-form">
+							craft: Successful Public Policy
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-4" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						decipher script
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-deci" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						diplomacy
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-dipl" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						disable device
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-disa" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						disguise
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-disg" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						escape artist
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-esca" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						forgery
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-forg" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						gather information
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-gath" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						handle animal
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-hand" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						heal
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-heal" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						hide
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-hide" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						intimidate
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-inti" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						jump
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-jump" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-knowledge-title" class="form-skill-form faint-background">
+						knowledge:
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-know" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div id="wrin-knowledge-1">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-1" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-knowledge-2">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-2" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-2" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-knowledge-3">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-3" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-3" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-knowledge-4">
+					<div class="twelfth">
+						<p id="print-wrin-knowledge-4" class="form-skill-form">
+							Knowledge: Star Trek Trivia
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-knowledge-total-4" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+
+				<div class="twelfth">
+					<p class="form-skill-form">
+						listen
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-list" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						move silently
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-move" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						open lock
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-open" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-perform-title" class="form-skill-form faint-background">
+						perform: 
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-perf" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div id="wrin-perform-1">
+					<div class="twelfth">
+						<p id="print-wrin-perform-1" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-perform-2">
+					<div class="twelfth">
+						<p id="print-wrin-perform-2" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-2" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-perform-3">
+					<div class="twelfth">
+						<p id="print-wrin-perform-3" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-3" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+				<div id="wrin-perform-4">
+					<div class="twelfth">
+						<p id="print-wrin-perform-4" class="form-skill-form">
+							Perform: Homer Simpson Impression
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-perform-total-4" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+
+
+				<div class="twelfth">
+					<p id="print-profession-title" class="form-skill-form">
+						profession
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-prof" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div id="wrin-profession-1">
+					<div class="twelfth">
+						<p id="print-wrin-profession-1" class="form-skill-form">
+							Profession: TV Personality
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-profession-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						ride
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-ride" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						search
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-sear" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						sense motive
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-sens" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						sleight of hand
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-slei" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						spellcraft
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-spel" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						spot
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-spot" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						survival
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-surv" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						swim
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-swim" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						tumble
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-tumb" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						use magic device
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-usem" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						use rope
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-user" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bla1" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bla2" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bla3" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				
+				
+				
+				
+				
+				
+			</div>
+		
+		
+		<!-- NAME, PLAYER, ETC BLOCK TOP -->
+			<div class="half">
+				<div class="quarter">
+					<div class="print-name print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						NAME
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="print-player print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						PLAYER
+					</p>
+				</div>
+				<div class="quarter">
+					<div id="print-alignment" class="print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						ALIGNMENT
+					</p>
+				</div>
+				<div class="quarter">
+					<div id="print-experience" class="print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						EXPERIENCE
+					</p>
+				</div>
+				<div class="quarter">
+					<div id="print-class" class="print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						CLASS
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="eighth">
+						<div id="print-level" class="print-fill print-fill fill-space half">
+							
+						</div>
+						<p class="label">
+							LEVEL
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="print-levelup" class="print-fill print-fill fill-space half">
+					
+						</div>
+						<p class="label">
+							LEVEL UP AT XP
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						MULTI-CLASS
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="eighth">
+						<div class="print-fill fill-space half">
+					
+						</div>
+						<p class="label">
+							LEVEL
+						</p>
+					</div>
+					<div class="eighth">
+						<div class="print-fill fill-space half">
+					
+						</div>
+						<p class="label">
+							LEVEL UP AT XP
+						</p>
+					</div>
+				</div>
+			</div>
+		
+		
+		<!-- DRAGONGROG BLOCK. ABILITY SCORES. HIT POINTS -->
+			<div class="half">
+				
+				<div class="print-fill fill-space"></div>
+				<div class="box blackbox dragongrog">
+					<img src="images/dragongrog-logo.png" alt="Dragon Grog" />
+				</div>
+				<div class="print-fill fill-space"></div>
+				
+				<div class="quarter">
+					<div class="twelfth">
+						<p class="mini-title">
+							ABILITY<br>NAME
+						</p>
+					</div>
+					<div class="twelfth">
+						<p class="mini-title">
+							ABILITY<br>SCORE
+						</p>
+					</div>
+					<div class="twelfth">
+						<p class="mini-title">
+							ABILITY<br>MODIFIER
+						</p>
+					</div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								STR
+							</h1>
+							<p>
+								STRENGTH
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-str" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-str box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								DEX
+							</h1>
+							<p>
+								DEXTERITY
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-dex" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-dex box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								CON
+							</h1>
+							<p>
+								CONSTITUTION
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-con" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-con box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								WIS
+							</h1>
+							<p>
+								WISDOM
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-wis" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-wis box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								INT
+							</h1>
+							<p>
+								INTELIGENCE
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-int" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-int box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								CHA
+							</h1>
+							<p>
+								CHARISMA
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-cha" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-cha box"></div></div>
+				</div>
+				<div class="quarter">
+					<div class="box blackbox">
+						<h1>
+							HIT POINTS
+						</h1>
+						<p>
+							MORE PRECIOUS THAN GOLD
+						</p>
+					</div>
+					<div class="box tallbox">
+						
+						<div id="hit-points" class="print-text-center print-fill print-list fill-space"></div>
+						<p class="label">
+							BASE HP
+						</p>
+						
+						<h2>
+							WOUNDS<br>CURRENT HP<br>NOTES
+						</h2>
+					</div>
+				</div>
+			</div>
+
+		<!-- SAVING THROWS -->
+			<div class="half">
+				<div class="print-fill med-fill-space"></div>
+				
+				<div class="quarter">
+					<div class="twelfth">
+						<p class="mini-title">
+							SAVING<br>THROWS
+						</p>
+					</div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							TOTAL<br>...Aw Yeah.
+						</p>
+					</div>
+					<div class="operator"><p></p></div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							BASE<br>SAVE
+						</p>
+					</div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h2>
+								FORTITUDE
+							</h2>
+							<p>
+								CONSTITUTION
+							</p>
+						</div>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-for-tot" class="box op-box"></div></div>
+					<div class="operator">
+						<p>=</p>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-for" class="box op-box"></div></div>
+					<div class="operator">
+						<p>+</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							ABILITY<br>MODIFIER
+						</p>
+					</div>
+					<div class="operator"><p></p></div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							MAGIC<br>MODIFIER
+						</p>
+					</div>
+					<div class="operator"><p></p></div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							MISC.<br>MODIFIER
+						</p>
+					</div>
+					
+					<div class="twelfth with-operator">
+						<div class="print-mod-con box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div class="print-sav-for-mag box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div id="print-sav-for-misc" class="print-sav-for-misc box op-box"></div>
+					</div>
+					
+				</div>
+				<div class="sm-print-fill fill-space"></div>
+				<div class="quarter">
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h2>
+								REFLEX
+							</h2>
+							<p>
+								DEXTERITY
+							</p>
+						</div>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-ref-tot" class="box op-box"></div></div>
+					<div class="operator">
+						<p>=</p>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-ref" class="box op-box"></div></div>
+					<div class="operator">
+						<p>+</p>
+					</div>
+				</div>
+				<div class="quarter">
+					
+					<div class="twelfth with-operator">
+						<div class="print-mod-dex box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div class="print-sav-ref-mag box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div id="print-sav-ref-misc" class="print-sav-ref-misc box op-box"></div>
+					</div>
+					
+				</div>
+				<div class="sm-print-fill fill-space"></div>
+				<div class="quarter">
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h2>
+								WILL
+							</h2>
+							<p>
+								WISDOM
+							</p>
+						</div>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-wil-tot" class="box op-box"></div></div>
+					<div class="operator">
+						<p>=</p>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-wil" class="box op-box"></div></div>
+					<div class="operator">
+						<p>+</p>
+					</div>
+				</div>
+				<div class="quarter">
+					
+					<div class="twelfth with-operator">
+						<div class="print-mod-wis box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div class="box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div id="print-sav-wil-misc" class="box op-box"></div>
+					</div>
+					
+				</div>
+				<div class="sm-print-fill fill-space"></div>
+			</div>
+			
+		
+			
+		<!-- ARMOR CLASS MINI TITLES-->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<p class="mini-title">
+						ARMOR<br>CLASS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>BASE
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						ARMOR<br>BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						SHIELD<br>BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						NATURAL<br>ARMOR
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						SIZE<br>BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						DEFLECT<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						MISC.<br>MOD.
+					</p>
+				</div>
+			</div>
+			
+		<!-- AC, BASE ARMOR CLASS -->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							AC
+						</h1>
+						<p>
+							ARMOR CLASS
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ac-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						10
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-armor-bonus" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-shield-bonus" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-size-bonus" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+			
+		<!-- FF, CONDITIONAL ARMOR CLASS -->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							FF
+						</h1>
+						<p>
+							FLAT-FOOTED
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ff-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						10
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+			
+		<!-- TOUCH, CONDITIONAL ARMOR CLASS -->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							TOUCH
+						</h1>
+						<p>
+							CUZ... MAGIC
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div id="print-to-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						10
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		
+		
+		
+		<!-- MELEE ATTACK MINI TITLES -->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						MELEE<br>ATTACK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p id="melee-attack-mod-title" class="mini-title">
+						STR<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						SIZE<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC.<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TEMP<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL 2nd<br>ATTACK
+					</p>
+				</div>
+				
+				
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							MELEE
+						</h1>
+						<p>
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="melee-attack-mod" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-one box">
+						<h4>
+							1st
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-attack-first-one" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-two box">
+						<h4>
+							2nd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-three box">
+						<h4>
+							3rd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-four-one box">
+						<h4>
+							4th
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+			
+		
+		<!-- RANGED ATTACK MINI TITLES -->
+			<div class="half">
+				<div class="print-fill med-fill-space"></div>
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						RANGED<br>ATTACK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						DEX<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						SIZE<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC.<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TEMP<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL 2nd<br>ATTACK
+					</p>
+				</div>
+				
+				
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h2>
+							RANGED
+						</h2>
+						<p>
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-one box">
+						<h4>
+							1st
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-first-one" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-first-two" class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-two box">
+						<h4>
+							2nd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-second-one" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-second-two" class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-three box">
+						<h4>
+							3rd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-four-one box">
+						<h4>
+							4th
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+	
+		
+		
+		<!-- GRAPPLE AND INITIATIVE -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						<br><br>GRAPPLE
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>STR<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>SIZE<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>MISC.<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>TOTAL
+					</p>
+				</div>
+				<div class="operator">
+					<p></p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>MISC.<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>
+					</p>
+				</div>
+			</div>
+			<div class="half clear-left">
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							GR
+						</h1>
+						<p>
+							GRAPPLE
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div class="print-mod-str box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="print-bab-one box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-grapple-tot" class="box"></div>
+				</div>
+				<div class="operator">
+					<p></p>
+				</div>
+				
+				<div class="twentieth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ini-misc" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ini-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box blackbox">
+						<h1>
+							INI
+						</h1>
+						<p>
+							INITIATIVE
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+		<!-- INITIATIVE
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						<br>INITIATIVE
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						MISC.<br>MOD.
+					</p>
+				</div>
+			</div>
+			<div class="half clear-left">
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							INI
+						</h1>
+						<p>
+							INITIATIVE
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+		-->
+		
+		
+		<!-- RACIAL ABILITIES -->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				<div class="box blackbox dragongrog half-wider">
+					<h1> 
+						RACIAL ABILITIES
+					</h1>
+					<p>
+						POWER TO THE PEOPLE
+					</p>
+				</div>
+				<div class="print-fill fill-space"></div>
+				<p class="label half-wider">
+					DARKVISION?
+				</p>
+				<div class="print-fill fill-space"></div>
+				<p class="label half-wider">
+					HIDDEN WALL SENSING?
+				</p>
+				
+				<div class="print-fill fill-space"></div>
+				<p class="label half-wider">
+					FLATULANT?
+				</p>
+				
+			</div>
+		
+		
+		</div>
+		
+		
+	</section>	
+	
+	<div class="page-space"></div>
+	
+	<section id="print-page-three">
+		<div class="paper">
+			
+			<div class="width-100 tall-namebox">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-name print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-player print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-race print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							RACE
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-class print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							CLASS
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="width-100 tall-weapon">
+			</div>
+		
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					WEAPONS & ATTACKS
+				</h1>
+				<p>
+					 TOOLS OF THE TRADE. AND THAT THING YOU FLAIL AROUND LIKE A MORON. GOOD STUFF.
+				</p>
+			</div>
+
+			<div id="weapon-slot-one" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 1
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s1-atkbonus" class="fill-space print-list tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div id="pr-w-s1-notes" class="fill-space print-list tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div id="pr-w-s1-ammo" class="fill-space print-list tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			
+			<div id="weapon-slot-two" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 2
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s2-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s2-atkbonus" class="fill-space print-list tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s2-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div id="pr-w-s2-notes" class="fill-space print-list tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div id="pr-w-s2-ammo" class="fill-space print-list tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			
+			<div id="weapon-slot-thr" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 3
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s3-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s3-atkbonus" class="fill-space print-list tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s3-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div id="pr-w-s3-notes" class="fill-space print-list tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div id="pr-w-s3-ammo" class="fill-space print-list tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			
+
+			<div class="print-fill fill-space"></div>
+
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					ARMOR AND PROTECTIVE ITEMS
+				</h1>
+				<p>
+					KEEPING THE GUSHY PARTS IN
+				</p>
+			</div>
+
+			
+
+			<div id="armor-slot-one" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							ARMOR SLOT
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							ARMOR BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX DEX BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CHECK PENALTY
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SPELL FAILURE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX <br>SPEED
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>SAVES
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							DONNING N/H/R
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-armor-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ITEM
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEIGHT CATEGORY
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-armor-ar-bonus" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-m-dex" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-check" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-sp-fail" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-max-sp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-hardness" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-hit-points" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-a-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-donning" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<p class="mini-title text-left">
+						NOTES
+					</p>
+				</div>
+			</div>
+
+			<div id="armor-slot-two" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							SHIELD SLOT
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							ARMOR BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX DEX BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CHECK PENALTY
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SPELL FAILURE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX <br>SPEED
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>SAVES
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>DONNING
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-shield-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ITEM
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="pr-shield-weight-category" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEIGHT CATEGORY
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-shield-ar-bonus" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-m-dex" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-check" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-sp-fail" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-max-sp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-hardness" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-hit-points" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-donning" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<p class="mini-title text-left">
+						NOTES
+					</p>
+				</div>
+			</div>
+
+			
+		
+			<!-- Equipment -->
+			<div class="fill-space">
+				
+			</div>
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					GEAR
+				</h1>
+				<p>
+					VALUABLE LOOT, AND OTHER ASSORTED HEAVY JUNK
+				</p>
+			</div>
+
+			<!-- Gear List Left Column -->
+			<div class="gear-left">
+				
+				<div id="print-item-1" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-2" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-3" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-4" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-5" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-6" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-7" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-8" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-9" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-10" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-11" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-12" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-13" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-14" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>	
+
+			</div>
+				
+			<!-- Gear List Right Column WITH ENCUMBERANCE TABLE and COIN TABLE -->
+			<div class="gear-right">
+				
+				<div class="encumberance">
+
+					
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							ENCUMBERANCE / CARRYING CAPACITY
+						</h1>
+						<p>
+							 YEAH, WE'RE DOING THAT
+						</p>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>TOTAL WEIGHT
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>LIGHT LOAD
+							</p>
+						</div>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<div class="quarter">
+								<p class="mini-title">
+									MEDIUM <br>LOAD
+								</p>
+							</div>
+							<div class="quarter">
+								<p class="mini-title">
+									HEAVY LOAD<br> LIFT OVER HEAD 
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<p class="mini-title">
+									LIFT OFF <br>GROUND 
+								</p>
+							</div>
+							<div class="quarter">
+								<p class="mini-title">
+									PUSH <br>OR DRAG
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-total-weight" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-light-load" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+					<div class="quarter">
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-medium-load" class="box encumberance-box">
+
+								</div>
+							</div>
+							<div class="quarter">
+								<div id="print-heavy-load" class="box encumberance-box">
+
+								</div>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-lift-load" class="box encumberance-box">
+
+								</div>
+							</div>
+							<div class="quarter">
+								<div id="print-push-load" class="box encumberance-box">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="encumberance">
+					
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							MONEY
+						</h1>
+						<p>
+							50 COINS = 1LB  |  THIS TUNIC BROUGHT TO YOU BY CAPITALISM
+						</p>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>COPPER PIECES
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>SILVER PIECES
+							</p>
+						</div>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>GOLD PIECES
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>PLATINUM PIECES
+							</p>
+						</div>
+					</div>
+
+					
+					
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-coins-copper" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-coins-silver"  class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-coins-gold" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-coins-platinum" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+				
+				<div id="print-item-15" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-16" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-17" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-18" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-19" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-20" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-21" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-22" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				
+			</div>
+
+			<!-- Consumables -->
+			<div class="fill-space">
+				
+			</div>
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					CONSUMABLES
+				</h1>
+				<p>
+					A BACKPACK FULL OF TRAIL RATIONS KEEPS THE DOCTOR AWAY
+				</p>
+			</div>
+			<div class="gear-left">
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-1" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-1" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-2" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-2" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-5" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-5" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-6" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-6" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+
+
+
+			</div>
+
+
+
+			<div class="gear-right">
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-3" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-3" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-4" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-4" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-7" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-7" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="cons-fill-space"></div>
+					<div id="pr-cons-name-8" class="box skill-box cons-item-name"></div>
+					<div id="pr-cons-qty-8" class="box skill-box cons-item-notes"></div>
+					<p class="label item-name">
+						ITEM
+					</p>
+					<p class="label item-notes">
+						QTY
+					</p>
+				</div>
+
+
+
+			</div>
+
+
+
+		</div>
+	</section>			
+
+
+
+	<div class="page-space"></div>
+	
+	<section id="print-page-two">
+		<div class="paper">
+			<div class="width-100 tall-namebox">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-name print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-player print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-race print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							RACE
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-class print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							CLASS
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="gear-right">
+				<div class="print-fill fill-space"></div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						MORE GEAR
+					</h1>
+					<p>
+						BECAUSE I HAVE HORDING TENDANCIES. AND ALSO A PROBLEM. 
+					</p>
+				</div>
+				<div id="print-item-23" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-24" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-25" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-26" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-27" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-28" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-29" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-30" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-31" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-32" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-33" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+
+
+
+
+			</div>
+
+
+
+
+
+		<!-- FEATS -->
+			<div class="half">
+				<div class="print-fill fill-space">
+				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						FEATS
+					</h1>
+					<p>
+						 A BAG OF RATS SLAYS THE DRAGON!
+					</p>
+				</div>
+			</div>
+		
+			<div class="half">
+				<div id="print-feat-1" class="print-fill fill-space print-list fill-space-feats">
+					
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-2" class="print-fill fill-space print-list fill-space-feats">
+					
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-3" class="print-fill fill-space print-list fill-space-feats">
+					
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-4" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-5" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-6" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-7" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-8" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-9" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-10" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES. NO, 20TH LEVEL HUMAN FIGHTER. THERE AREN'T ANY MORE SLOTS.
+				</p>
+			</div>
+		
+		
+		<!-- SPECIAL ABILITIES -->
+			<div class="half">
+				<div class="print-fill fill-space">
+				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						CLASS & SPECIAL ABILITIES
+					</h1>
+					<p>
+						 CIRCUMSTANTIAL SKILL MODIFIERS AND OTHER THINGS THAT MAKE YOU... YOU KNOW... SPECIAL.
+					</p>
+				</div>
+			</div>
+			<div class="half">
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				
+			</div>
+			
+			
+		</div>
+			
+	</section>
+
+
+
+
+
+</body>
+</html>
+
+		
+		

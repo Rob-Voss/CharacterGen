@@ -1,0 +1,659 @@
+@body: 'helvetica neue', 'helvetica', arial, sans-serif;
+@marker: 'Permanent Marker', 'helvetica neue', arial, sans-serif;
+@walter: 'Walter Turncoat', serif;
+@ubuntu: 'ubuntu', 'helvetica neue', 'helvetica', 'arial', sans-serif;
+@sintony: 'sintony', 'times', 'times new roman', serif;
+@backgroundcolor: #fff;
+
+body
+	{
+	margin: 0;
+	padding: 0;
+	}
+
+h1, h2, h3, p
+	{
+	font-family: @body;
+	font-weight: 400;
+	}
+
+/*
+#build
+	{
+	display: none;
+	}
+*/
+
+
+.clear-both
+	{
+	clear: both;
+	}
+
+.clear-left
+	{
+	clear: left;
+	}
+
+.clear-right
+	{
+	clear: right;
+	}
+
+#print, #print-page-two, #print-page-three, #print-page-four
+	{
+	/*
+	width: 100%;	
+	height: 116.5vw;
+	max-width: 1224px;
+	max-height: 1584px;
+	*/
+	width: 1224px;
+	height: 1584px;
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	background-color: white;
+	}
+
+.paper
+	{
+	width: 96%;
+	display: block;
+	margin: 0 auto;
+	padding-top: 30px;
+	}
+
+.half
+	{
+	width: 48.5%;
+	}
+
+.quarter
+	{
+	width: 50%;
+	float: left;
+	}
+
+.eighth
+	{
+	width: 50%;
+	float: left;
+	.label
+		{
+		width: 92%;
+		}
+	}
+
+.tenth
+	{
+	width: 10%;
+	float: left;
+	}
+	
+.twelfth
+	{
+	width: 32%;
+	float: left;
+	}
+
+.sixteenth
+	{
+	width: 12%;
+	float: left;
+	}
+
+.sixteenth-blackbox
+	{
+	width: 15.5%;
+	float: left;
+	}
+
+.sixteenth-right
+	{
+	width: 12%;
+	float: right;
+	}
+
+.sixteenth-right-right
+	{
+	.sixteenth-right;
+	padding-right: 0.5%;
+	}
+.twentieth 
+	{
+	width: 9%;
+	float: left;
+	}
+	
+.twentieth-blackbox
+	{
+	width: 18%;
+	float: left;
+	}
+
+
+
+
+.fill-space
+	{
+	width: 100%;
+	display: block;
+	height: 20px;
+	clear: left;
+	}
+
+.fill-space-feats, .tall-weapon
+	{
+	height: 30px;
+	font-family: @marker;
+	}
+
+.tall-namebox
+	{
+	height: 45px;
+	}
+
+.med-fill-space
+	{
+	.fill-space;
+	height: 10px;
+	}
+
+.sm-fill-space
+	{
+	.fill-space;
+	height: 1px;
+	}
+
+.cons-fill-space
+	{
+	.fill-space;
+	height: 5px;
+	}
+
+.label
+	{
+	margin: 0;
+	padding: 0;
+	width: 96%;
+	font-size: 8px;
+	border-top: 2px solid black;
+	}
+
+.full-width
+	{
+	width: 98%;
+	}
+
+
+.print-text-center
+	{
+	font-family: @marker;
+	font-size: 19px;
+	text-align: center;
+	}
+
+.print-fill
+	{
+	font-family: @marker;
+	font-size: 14px;
+	}
+
+.print-fill-weapon
+	{
+	.print-fill;
+	font-size: 18px;
+	line-height: 35px;
+	}
+
+.box
+	{
+	width: 94%;
+	height: 35px;
+	border: solid 3px black;
+	box-sizing:border-box;
+	  -moz-box-sizing:border-box;
+	  -webkit-box-sizing:border-box;
+	margin-bottom: 5px;
+	font-family: @marker;
+	font-size: 19px;
+	text-align: center;
+	
+	
+	h1, h2, h4, p
+		{
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		}
+	h1
+		{
+		font-size: 19px;
+		line-height: 20px;
+		font-weight: 900;
+		}
+	h2
+		{
+		font-size: 14px;
+		line-height: 21px;
+		font-weight: 900;
+		}
+	h4
+		{
+		font-size: 18px;
+		padding-top: 3px;
+		color: #ddd;
+		font-family: 'helvetica neue';
+		}
+	h5
+		{
+		font-size: 14px;
+		display: inline-block;
+		color: #ddd;
+		font-family: 'helvetica neue';
+		}
+	p
+		{
+		font-size: 7px;
+		line-height: 8px;
+		}
+	}
+
+.blackbox
+	{
+	background-color: black;
+	color: white;
+	}
+
+.emptybox
+	{
+	border: none;
+	}
+
+.skill-box
+	{
+	border: 1px solid #777;
+	height: 25px;
+	}
+
+.weapon-box-sm
+	{
+	font-size: 14px;
+	line-height: 29px;
+	}
+
+.encumberance-box
+	{
+	margin: 0 auto;
+	}
+
+.tallbox
+	{
+	height: 223px;
+	h2
+		{
+		color: #ddd;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 30px;
+		padding-top: 25px;
+		}
+	.fill-space
+		{
+		height: 35px;
+		}
+	.label
+		{
+		margin: 0 auto;
+		font-size: 8px;
+		line-height: 9px;
+		}
+	}
+
+.feat-name
+	{
+	width: 25%;
+	margin-right: 1%;
+	float: left;
+	}
+
+.item-notes
+	{
+	.feat-name;
+	margin-right: 0;
+	}
+
+.feat-notes
+	{
+	width: 72%;
+	float: left;
+	}
+
+.item-name
+	{
+	.feat-notes;
+	margin-right: 1%;
+	}
+
+.cons-item-name
+	{
+	.item-name;
+	margin-bottom: 0;
+	}
+
+.cons-item-notes
+	{
+	.item-notes;
+	margin-bottom: 0;
+	}
+
+.dragongrog
+	{
+	width: 98%;
+	}
+
+.width-100
+	{
+	width: 100%;
+	border: none;
+	margin-bottom: 0;
+	h1
+		{
+		padding-top: 2px;
+		}
+	}
+
+.label-width-100
+	{
+	width: 100%;
+	}
+
+.mini-title
+	{
+	.label;
+	text-align: center;
+	border: none;
+	padding: 4px 0;
+	}
+
+.with-operator
+	{
+	width: 30.5%;
+	}
+
+.op-box
+	{
+	margin: 0 auto;
+	}
+
+.operator
+	{
+	width: 3%;
+	float: left;
+	p
+		{
+		padding: 0;
+		margin: 0;
+		
+		padding-top: 6px;
+		}
+	}
+
+.twentieth-fixed-value
+	{
+	text-align: center;
+	font-size: 23px;
+	padding: 0;
+	margin: 4px 0 0 0;
+	}
+
+.half-wider
+	{
+	width: 99%;
+	}
+
+.float-right
+	{
+	float: right;
+	width: 51%;
+	clear: left;
+	}
+
+.form-skill-form
+	{
+	margin: 0;
+	font-size: 11px;
+	padding: 5px 6px;
+	text-transform: uppercase;
+	width: 200%;
+	}
+
+.faint-background
+	{
+	background-color: #f2f2f2;
+	}
+
+.text-left
+	{
+	text-align: left;
+	}
+
+.slot
+	{
+	width: 100%;
+	border-bottom: 2px solid #999;
+	border-left: 2px solid #999;
+	border-right: 2px solid #999;
+	padding: 0 1%;
+	height: 110px;
+	margin: 0;
+	box-sizing:border-box;
+	  -moz-box-sizing:border-box;
+	  -webkit-box-sizing:border-box;
+	}
+
+.w-marg-bot
+	{
+	margin-bottom: 4px;
+	}
+
+#weapon-slot-two, #weapon-slot-thr, #armor-slot-two
+	{
+	display: none;
+	}
+
+.gear-fill-space
+	{
+	width: 100%;
+	display: block;
+	height: 20px;
+	}
+
+.gear-right
+	{
+	float: right;
+	width: 50%;
+	}
+
+.gear-left
+	{
+	float: left;
+	width: 50%;
+	}
+
+.gear-item-name-right
+	{
+	margin-left: 2%;
+	}
+
+.encumberance
+	{
+	width: 98%;
+	margin-top: 10px;
+	margin-left: 2%;
+	height: 116px;
+	border-bottom: 2px solid #000;
+	border-left: 2px solid #000;
+	border-right: 2px solid #000;
+	box-sizing:border-box;
+	  -moz-box-sizing:border-box;
+	  -webkit-box-sizing:border-box;
+	}
+
+.fill-space-gear
+	{
+	.fill-space-feats;
+	}
+
+.picture-area
+	{
+	width: 50%;
+	float: left;
+	clear: left;
+	height: 675px;
+	/* background-image: url('../images/devyrwryn.png'); */
+	background-position: top center;
+	background-size: 100% auto;
+	}
+
+.pad-top
+	{
+	padding-top: 30px;
+	}
+
+.print-text-area
+	{
+	height: 675px;
+	background-color: @backgroundcolor;
+	}
+
+.character-content
+	{
+	padding: 5px 20px 0 20px;
+	font-family: @marker;
+	font-size: 17px;
+	line-height: 28px;
+	height: 1px;
+	float: left;
+	}
+
+.text-area-line
+	{
+	border-bottom: 2px solid black;
+	height: 26px;
+	margin: 0 17px;
+	}
+
+.the-top-one
+	{
+	height: 30px;
+	}
+
+.left-text-areas
+	{
+	width: 49%;
+	}
+
+.right-text-areas
+	{
+	width: 49%;
+	float: right;
+	clear: right;
+	}
+
+.float-left
+	{
+	float: left;
+	}
+
+.print-text-area-sm
+	{
+	height: 116px;
+	background-color: @backgroundcolor;
+	}
+
+.print-text-area-quote
+	{
+	height: 60px;
+	background-color: @backgroundcolor;
+	}
+
+.print-text-area-personality
+	{
+	height: 172px;
+	background-color: @backgroundcolor;
+	}
+
+.print-text-area-home
+	{
+	height: 200px;
+	background-color: @backgroundcolor;
+	}
+
+.right-label
+	{
+	margin-left: 4%;
+	}
+
+.print-race, .print-class
+	{
+	padding-left: 12px;
+	}
+
+.print-list
+	{
+	font-size: 16px;
+	line-height: 42px;
+	}
+
+.gear-right-print-list
+	{
+	font-size: 16px;
+	line-height: 42px;
+	padding-left: 15px;
+	}
+
+.page-space
+	{
+	width: 100%;
+	display: block;
+	height: 30px;
+	}
+	
+
+
+
+#wrin-craft-1, #wrin-craft-2, #wrin-craft-3, #wrin-craft-4,
+#wrin-knowledge-1, #wrin-knowledge-2, #wrin-knowledge-3, #wrin-knowledge-4,
+#wrin-perform-1, #wrin-perform-2, #wrin-perform-3, #wrin-perform-4,
+#wrin-profession-1
+	{
+	display: none;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

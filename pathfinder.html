@@ -1,0 +1,5344 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>dragonGrog Pathfinder</title>
+  
+  <meta name="description" content="A character brewer">
+  
+  
+  
+  
+  <!-- .less style links for DEVELOPMENT COMMENT OUT AFTER COMPILE, BEFORE COMMIT -->
+
+  <link rel="stylesheet/less" type="text/css" href="pf/less/path-style.less" />
+  <link rel="stylesheet/less" type="text/css" href="pf/less/path-print.less" />
+  			
+  			
+  			<!-- js for uncompiled .less -->
+  <script src="pf/js/less-1.6.1.js" type="text/javascript"></script>
+
+			<!-- Aw yeah. the Javascript -->
+  <script type="text/javascript" src="pf/js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="js/lib/Rules/pathfinder.js"></script>
+  <script type="text/javascript" src="pf/js/jquery.js"></script>
+  
+
+  			<!-- Google Web -->
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Walter+Turncoat' rel='stylesheet' type='text/css'>
+
+  <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-43651845-3', 'auto');
+		ga('send', 'pageview');
+
+	</script>
+  
+</head>
+
+<body>
+
+	
+	
+	
+	<section id="build">
+		<!-- Title & List -->
+			<h1> 
+				Dragon Grog Pathfinder
+			</h1>
+			<h2>
+				This is a Pre-alpha development version. It mostly doesn't work. We apologize, and are working to get the conversion for Pathfinder for the Internet as Christmas 2014 present. 
+			</h2>
+
+			<div id="mondodevspacer"></div>
+		<!-- End title & List -->
+
+		<h2>
+			Select your Class
+		</h2>
+		
+		<section id="class-select">
+			<input id="class" class="button" type="button" value="Barbarian" onclick="classSelect('Barbarian');">
+			<input id="ranger" class="button" type="button" value="Bard" onclick="classSelect('Bard');">
+			<input id="mage" class="button" type="button" value="Cleric" onclick="classSelect('Cleric');">
+			<input id="rogue" class="button" type="button" value="Druid" onclick="classSelect('Druid');">
+			<input id="class" class="button" type="button" value="Fighter" onclick="classSelect('Fighter');">
+			<input id="ranger" class="button" type="button" value="Monk" onclick="classSelect('Monk');">
+			<input id="mage" class="button" type="button" value="Paladin" onclick="classSelect('Paladin');">
+			<input id="rogue" class="button" type="button" value="Ranger" onclick="classSelect('Ranger');">
+			<input id="class" class="button" type="button" value="Rogue" onclick="classSelect('Rogue');">
+			<input id="ranger" class="button" type="button" value="Sorcerer" onclick="classSelect('Sorcerer');">
+			<input id="mage" class="button" type="button" value="Wizard" onclick="classSelect('Wizard');">
+		</section>
+		
+		<p id="show-class"></p>
+		
+		<h2>
+			Select your Race
+		</h2>
+		
+		
+		<section id="race-select">
+			<input id="human" class="button" type="button" value="Human" onclick="raceSelect('Human');">
+			<input id="dwarf" class="button" type="button" value="Dwarf" onclick="raceSelect('Dwarf');">
+			<input id="elf" class="button" type="button" value="Elf" onclick="raceSelect('Elf');">
+			<input id="gnome" class="button" type="button" value="Gnome" onclick="raceSelect('Gnome');">
+			<input id="Half-elf" class="button" type="button" value="Half-elf" onclick="raceSelect('Half-elf');">
+			<input id="Half-orc" class="button" type="button" value="Half-orc" onclick="raceSelect('Half-orc');">
+			<input id="Halfling" class="button" type="button" value="Halfling" onclick="raceSelect('Halfling');">
+			<!-- Adding new races: search for string "NewBlankRace" in script.js and add javascript accordingly based on new race perameters. -->
+		</section>
+		
+		
+		<p id="show-race"></p>		
+		
+		
+		<section id="dice-sys">
+			<h2>
+				Roll for your base Attributes
+			</h2>
+			<h3>
+				Roll six numbers between 3 and 18, then assign them to your stats as you wish. Racial
+				Traits will be calculated after you hit Apply.
+			</h3> 
+			
+			<input id="roll-classic" class="roll-attribute button" type="button" value="Classic (3d6)" onclick="rollClassic();">
+			<input id="roll-standard" class="roll-attribute button" type="button" value="Standard (4d6 -lowest)" onclick="rollStandard();">
+			<input id="roll-heroic" class="roll-attribute button" type="button" value="Heroic (2d6 +6)" onclick="rollHeroic();">
+			
+
+
+
+
+
+			<div class="stats-to-assign">
+				<p class="float-left" id="stat-1">Stat 1:</p>
+				<p class="float-left stat-values" id="stat-val-1">0</p>
+				<p class="float-left" id="stat-2">Stat 2:</p>
+				<p class="float-left stat-values" id="stat-val-2">0</p>
+				<p class="float-left" id="stat-3">Stat 3:</p>
+				<p class="float-left stat-values" id="stat-val-3">0</p>
+				<p class="float-left" id="stat-4">Stat 4:</p>
+				<p class="float-left stat-values" id="stat-val-4">0</p>
+				<p class="float-left" id="stat-5">Stat 5:</p>
+				<p class="float-left stat-values" id="stat-val-5">0</p>
+				<p class="float-left" id="stat-6">Stat 6:</p>
+				<p class="float-left stat-values" id="stat-val-6">0</p>
+			</div>
+			
+			<form>
+				<h3>
+					Now Allocate:
+				</h3>
+				<label id="stat-label-1">0</label>
+				<select id="attrOne" value="ERROR">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="STR">STR</option>
+					<option class="dex-option" value="DEX">DEX</option>
+					<option class="con-option" value="CON">CON</option>
+					<option class="wis-option" value="WIS">WIS</option>
+					<option class="int-option" value="INT">INT</option>
+					<option class="cha-option" value="CHA">CHA</option>
+				</select><br>
+				<label id="stat-label-2">0</label>
+				<select id="attrTwo" value="ERROR">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="STR">STR</option>
+					<option class="dex-option" value="DEX">DEX</option>
+					<option class="con-option" value="CON">CON</option>
+					<option class="wis-option" value="WIS">WIS</option>
+					<option class="int-option" value="INT">INT</option>
+					<option class="cha-option" value="CHA">CHA</option>
+				</select><br>
+				<label id="stat-label-3">0</label>
+				<select id="attrThr" value="ERROR">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="STR">STR</option>
+					<option class="dex-option" value="DEX">DEX</option>
+					<option class="con-option" value="CON">CON</option>
+					<option class="wis-option" value="WIS">WIS</option>
+					<option class="int-option" value="INT">INT</option>
+					<option class="cha-option" value="CHA">CHA</option>
+				</select><br>
+				<label id="stat-label-4">0</label>
+				<select id="attrFou" value="ERROR">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="STR">STR</option>
+					<option class="dex-option" value="DEX">DEX</option>
+					<option class="con-option" value="CON">CON</option>
+					<option class="wis-option" value="WIS">WIS</option>
+					<option class="int-option" value="INT">INT</option>
+					<option class="cha-option" value="CHA">CHA</option>
+				</select><br>
+				<label id="stat-label-5">0</label>
+				<select id="attrFiv" value="ERROR">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="STR">STR</option>
+					<option class="dex-option" value="DEX">DEX</option>
+					<option class="con-option" value="CON">CON</option>
+					<option class="wis-option" value="WIS">WIS</option>
+					<option class="int-option" value="INT">INT</option>
+					<option class="cha-option" value="CHA">CHA</option>
+				</select><br>
+				<label id="stat-label-6">0</label>
+				<select id="attrSix" value="ERROR">
+					<option value="blankSelect" disabled="disabled" selected="selected"> -- select -- </option>
+					<option class="str-option" value="STR">STR</option>
+					<option class="dex-option" value="DEX">DEX</option>
+					<option class="con-option" value="CON">CON</option>
+					<option class="wis-option" value="WIS">WIS</option>
+					<option class="int-option" value="INT">INT</option>
+					<option class="cha-option" value="CHA">CHA</option>
+				</select><br>
+				
+				<input id="apply-all" type="button" name="button" Value="Apply" onClick="assignAttributes(this.form);">
+				
+			</form>
+			
+			<section class="total-points">
+				<h2>
+					Total Points Distributed:
+				</h2>
+				<p id="total-points">
+					---
+				</p>
+				<p id="playability">
+					---
+				</p>
+			</section>
+			<section id="final-base-attributes">
+				<h2>
+					Final Scores
+				</h2>
+				<h3>
+					STR
+				</h3>
+				<h4 id="final-str">
+					---
+				</h4>
+				<h4 id="final-str-mod">
+					+ ---
+				</h4>
+				<input type="button" class="add-one-attribute" value="+2" onclick="addOneAbilityScore('strAttr');">
+
+				<h3>
+					DEX
+				</h3>
+				<h4 id="final-dex">
+					---
+				</h4>
+				<h4 id="final-dex-mod">
+					+ ---
+				</h4>
+				<input type="button" class="add-one-attribute" value="+2" onclick="addOneAbilityScore('dexAttr');">
+				<h3>
+					CON
+				</h3>
+				<h4 id="final-con">
+					---
+				</h4>
+				<h4 id="final-con-mod">
+					+ ---
+				</h4>
+				<input type="button" class="add-one-attribute" value="+2" onclick="addOneAbilityScore('conAttr');">
+				<h3>
+					WIS
+				</h3>
+				<h4 id="final-wis">
+					---
+				</h4>
+				<h4 id="final-wis-mod">
+					+ ---
+				</h4>
+				<input type="button" class="add-one-attribute" value="+2" onclick="addOneAbilityScore('wisAttr');">
+				<h3>
+					INT
+				</h3>
+				<h4 id="final-int">
+					---
+				</h4>
+				<h4 id="final-int-mod">
+					+ ---
+				</h4>
+				<input type="button" class="add-one-attribute" value="+2" onclick="addOneAbilityScore('intAttr');">
+				<h3>
+					CHA
+				</h3>
+				<h4 id="final-cha">
+					---
+				</h4>
+				<h4 id="final-cha-mod">
+					+ ---
+				</h4>
+				<input type="button" class="add-one-attribute" value="+2" onclick="addOneAbilityScore('chaAttr');">
+			</section>
+
+		</section>
+		
+		<section id="select-skills">
+			<h2>
+				This is the skills section
+			</h2>
+			<p>
+				Spend your skill points in the Points column, and press update to calculate
+				the results. When finished, press Accept Skills.
+			</p>
+			
+			<p id ="sk-points-starting">
+				Skill Points:
+			</p>
+			
+			<div class="skill-button-top">
+				<input id="update-skills" form="skPtsInp" type="button" name="button" Value="Update Skills" onClick="calcPoints(this.form);"> 
+				<!-- <input id="dev-load-skills" form="skPtsInp" type="button" name="button" Value="Load" onClick="loadSkills();"> 
+				<input id="log-ab-modifiers" type="button" name="button" value="Log Ab Mods" onClick="addAbModifiers();"> 
+				<input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();"> -->
+
+			</div>
+			<div id="skills-finish">
+				<!-- <input id="accept-skills" type="button" name="button" value="Accept Skills" onClick="acceptSkills();"> 
+				
+				^^^ THIS STILL NEEDS TO BE WRITTEN OUT OF THE JAVASCRIPT SO IT DOESNT DUMP OUT OF A FUNCTION WHEN IT 
+				CANT FIND IT. 
+				-->
+				
+			</div>
+			
+			<div class="skills class-sk">
+				<p>[MAX]</p>
+				<p id="c-acro">[]</p>
+				<p id="c-appr">[]</p>
+				<p id="c-bluf">[]</p>
+				<p id="c-clim">[]</p>
+				<p id="c-craf">[]</p>
+				<p id="c-dipl">[]</p>
+				<p id="c-disa">[]</p>
+				<p id="c-disg">[]</p>
+				<p id="c-esca">[]</p>
+				<p id="c-fly" >[]</p>
+				<p id="c-hand">[]</p>
+				<p id="c-heal">[]</p>
+				<p id="c-inti">[]</p>
+				<p id="c-know">[]</p>
+				<p id="c-ling">[]</p>
+				<p id="c-perc">[]</p>
+				<p id="c-perf">[]</p>
+				<p id="c-prof">[]</p>
+				<p id="c-ride">[]</p>
+				<p id="c-sens">[]</p>
+				<p id="c-slei">[]</p>
+				<p id="c-spel">[]</p>
+				<p id="c-stea">[]</p>
+				<p id="c-surv">[]</p>
+				<p id="c-swim">[]</p>
+				<p id="c-usem">[]</p>
+			</div>
+			
+			<div class="skills class-name">
+				<p>Skill Name</p>
+
+				<p>Acrobatics</p>
+				<p>Appraise</p>
+				<p>Bluff</p>
+				<p>Climb</p>
+				<p>Craft: <input id="wrin-craft" placeholder="Alchemy"></p>
+				<p>Diplomacy</p>
+				<p>Disable Device</p>
+				<p>Disguise</p>
+				<p>Escape Artist</p>
+				<p>Fly</p>
+				<p>Handle Animal</p>
+				<p>Heal</p>
+				<p>Intimidate</p>
+				<p>Knowledge: <input id="wrin-knowledge" placeholder="Arcana"></p>
+				<p>Linguistics</p>
+				<p>Perception</p>
+				<p>Perform: <input id="wrin-perform" placeholder="Act"></p>
+				<p>Profession: <input id="wrin-profession" placeholder="Dire Sheep Herder"></p>
+				<p>Ride</p>
+				<p>Sense Motive</p>
+				<p>Sleight of Hand</p>
+				<p>Spellcraft</p>
+				<p>Stealth</p>
+				<p>Survival</p>
+				<p>Swim</p>
+				<p>Use Magic Device</p>
+				<!--
+				<p><input name="sk-craft" placeholder="Luck"></p>
+				<p><input name="sk-craft" placeholder="Coup de Grace"></p>
+				<p><input name="sk-craft" placeholder="Overrule DM"></p>
+				-->
+			</div>
+			
+			<div class="skills input-points">
+				<p>Points</p>
+				<form id="skPtsInp">
+					<div class="sk-input-wr"><input  type="number" id="in_acro" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_appr" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_bluf" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_clim" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_craf" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_dipl" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_disa" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_disg" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_esca" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_fly"  value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_hand" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_heal" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_inti" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_know" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_ling" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_perc" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_perf" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_prof" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_ride" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_sens" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_slei" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_spel" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_stea" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_surv" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_swim" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_usem" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<!--
+					<div class="sk-input-wr"><input  type="number" id="in_bla1" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_bla2" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					<div class="sk-input-wr"><input  type="number" id="in_bla3" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
+					-->
+				</form>
+
+			</div>
+			
+			<div class="skills ab-mod">
+				<p>Ability MOD</p>
+				<p id="m-acro" class="am-dex">[]</p>
+				<p id="m-appr" class="am-int">[]</p>
+				<p id="m-bluf" class="am-cha">[]</p>
+				<p id="m-clim" class="am-str">[]</p>
+				<p id="m-craf" class="am-int">[]</p>
+				<p id="m-dipl" class="am-cha">[]</p>
+				<p id="m-disa" class="am-int">[]</p>
+				<p id="m-disg" class="am-cha">[]</p>
+				<p id="m-esca" class="am-dex">[]</p>
+				<p id="m-fly" class="am-dex">[]</p>
+				<p id="m-hand" class="am-cha">[]</p>
+				<p id="m-heal" class="am-wis">[]</p>
+				<p id="m-inti" class="am-cha">[]</p>
+				<p id="m-know" class="am-int">[]</p>
+				<p id="m-ling" class="am-int">[]</p>
+				<p id="m-perc" class="am-wis">[]</p>
+				<p id="m-perf" class="am-cha">[]</p>
+				<p id="m-prof" class="am-wis">[]</p>
+				<p id="m-ride" class="am-dex">[]</p>
+				<p id="m-sens" class="am-wis">[]</p>
+				<p id="m-slei" class="am-dex">[]</p>
+				<p id="m-spel" class="am-int">[]</p>
+				<p id="m-stea" class="am-dex">[]</p>
+				<p id="m-surv" class="am-wis">[]</p>
+				<p id="m-swim" class="am-str">[]</p>
+				<p id="m-usem" class="am-cha">[]</p>
+				<!--
+				<input name="m-xxxx" placeholder="Not Compiled"><br>
+				<input name="m-xxxx" placeholder="Not Compiled"><br>
+				<input name="m-xxxx" placeholder="Not Compiled"><br>
+				-->
+			</div>
+			
+			<div class="skills class-sk">
+				<p>Misc.</p>
+				<p id="ms-acro">-</p>
+				<p id="ms-appr">-</p>
+				<p id="ms-bluf">-</p>
+				<p id="ms-clim">-</p>
+				<p id="ms-craf">-</p>
+				<p id="ms-dipl">-</p>
+				<p id="ms-disa">-</p>
+				<p id="ms-disg">-</p>
+				<p id="ms-esca">-</p>
+				<p id="ms-fly" >-</p>
+				<p id="ms-hand">-</p>
+				<p id="ms-heal">-</p>
+				<p id="ms-inti">-</p>
+				<p id="ms-know">-</p>
+				<p id="ms-ling">-</p>
+				<p id="ms-perc">-</p>
+				<p id="ms-perf">-</p>
+				<p id="ms-prof">-</p>
+				<p id="ms-ride">-</p>
+				<p id="ms-sens">-</p>
+				<p id="ms-slei">-</p>
+				<p id="ms-spel">-</p>
+				<p id="ms-stea">-</p>
+				<p id="ms-surv">-</p>
+				<p id="ms-swim">-</p>
+				<p id="ms-usem">-</p>
+			</div>
+			
+			<div class="skills skill-total">
+				<p>TOTAL</p>
+				<p id="t-acro">[]</p>
+				<p id="t-appr">[]</p>
+				<p id="t-bluf">[]</p>
+				<p id="t-clim">[]</p>
+				<p id="t-craf">[]</p>
+				<p id="t-dipl">[]</p>
+				<p id="t-disa">[]</p>
+				<p id="t-disg">[]</p>
+				<p id="t-esca">[]</p>
+				<p id="t-fly" >[]</p>
+				<p id="t-hand">[]</p>
+				<p id="t-heal">[]</p>
+				<p id="t-inti">[]</p>
+				<p id="t-know">[]</p>
+				<p id="t-ling">[]</p>
+				<p id="t-perc">[]</p>
+				<p id="t-perf">[]</p>
+				<p id="t-prof">[]</p>
+				<p id="t-ride">[]</p>
+				<p id="t-sens">[]</p>
+				<p id="t-slei">[]</p>
+				<p id="t-spel">[]</p>
+				<p id="t-stea">[]</p>
+				<p id="t-surv">[]</p>
+				<p id="t-swim">[]</p>
+				<p id="t-usem">[]</p>
+			</div>
+			
+			<div class="full-width">
+				<!-- <input id="compile-skills" form="skPtsInp" type="button" name="button" Value="Compile" onClick="compileSkills(this.form);"> -->
+			</div>
+
+
+			<div class="add-skills">
+				<form>
+					<p>
+						Add Additional Craft, Knowledge, Perform, and Profession skills here.
+					</p>
+					<div class="add-skill-labels">
+						<p>Class Skill</p>
+						<p>Skill Type</p>
+						<p>Name/Subtype</p>
+						<p>Skill Points</p>
+						<p>Ability Modifier</p>
+						<p>Misc. Modifier</p><br>
+					</div>
+					<select id="wrin-inclass-1" class="user-added-skill" value="">
+						<option selected="selected" disabled="disabled" value="false"> - select - </option>
+						<option value="true">Yes</option>
+						<option value="false">No</option>
+					</select>
+					<select id="wrin-skill-select-1" class="user-added-skill">
+						<option selected="selected" disabled="disabled" value="blank"> - select - </option>
+						<option value="craft">Craft: </option>
+						<option value="knowledge">Knowledge: </option>
+						<option value="perform">Perform: </option>
+						<option value="profession">Profession: </option> 
+						<option value="writein">Write In</option> 
+					</select>
+					<input id="blank-subtype-1" type="text" class="user-added-skill" value="" placeholder="Subtype">
+					<input id="bla27" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-abmod-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					<input id="wrin-skill-misc-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
+					
+					
+					<input id="wrin-skill-submit-1" type="button" value="Submit" onclick="addSkill();">
+					
+
+				</form>
+			</div>
+
+		</section>
+		
+		<div id="mondodevspacer"></div>
+		
+		<section id="select-feats">
+			<h2>
+				Select Feats
+			</h2>
+			<p>
+				Select your feats from the lists below. As of V0.0.2, there is no error handling for 
+				feats with prerequisites. Consult the rule book before making your selections. Some 
+				feats will update your skill totals above. 
+			</p>
+			<p>
+				&Dagger; indicates feat has prerequisites.
+			</p>
+			<p id="feat-name-1" class="feat-name-list"></p>
+			<p id="feat-name-2" class="feat-name-list"></p>
+			<p id="feat-name-3" class="feat-name-list"></p>
+			<p id="feat-name-4" class="feat-name-list"></p>
+			<p id="feat-name-5" class="feat-name-list"></p>
+
+
+			<p id ="feats-starting">
+				Feats Remaining: <p id="feats-remaining">1</p>
+			</p>
+			
+			<div class="feat-group feat-group-wide">
+				<h2>
+					Combat Feats
+				</h2>
+				<div class="feat-group empty-feat-group">
+					<input class="button" type="button" value="Blind Fight" onclick="selectFeat('Blind Fight');">
+					<input class="button" type="button" value="&Dagger; Combat Expertise" onclick="selectFeat('Combat Expertise');">
+					<input class="button" type="button" value="&Dagger; Improved Disarm" onclick="selectFeat('Improved Disarm');">
+					<input class="button" type="button" value="&Dagger; Improved Feint" onclick="selectFeat('Improved Feint');">
+					<input class="button" type="button" value="&Dagger; Improved Trip" onclick="selectFeat('Improved Trip');">
+					<input class="button" type="button" value="&Dagger; Whirlwind Attack" onclick="selectFeat('Whirlwind Attack');">
+					<input class="button" type="button" value="Combat Reflexes" onclick="selectFeat('Combat Reflexes');">
+					<input class="button" type="button" value="&Dagger; Dodge" onclick="selectFeat('Dodge');">
+					<input class="button" type="button" value="&Dagger; Mobility" onclick="selectFeat('Mobility');">
+					<input class="button" type="button" value="&Dagger; Sprint Attack" onclick="selectFeat('Sprint Attack');">
+					<input class="button" type="button" value="&Dagger; Improved Critical" onclick="weaponFeat('Improved Critical');">
+					<input class="button" type="button" value="Improved Unarmed Strike" onclick="selectFeat('Improved Unarmed Strike');">
+				</div>
+				<div class="feat-group empty-feat-group">	
+					
+					<input class="button" type="button" value="&Dagger; Improved Grapple" onclick="selectFeat('Improved Grapple');">
+					<input class="button" type="button" value="&Dagger; Deflect Arrows" onclick="selectFeat('Deflect Arrows');">
+					<input class="button" type="button" value="&Dagger; Snatch Arrows" onclick="selectFeat('Snatch Arrows');">
+					<input class="button" type="button" value="&Dagger; Stunning Fist" onclick="selectFeat('Stunning Fist');">
+					<input class="button" type="button" value="&Dagger; Dodge" onclick="selectFeat('Dodge');">
+					<input class="button" type="button" value="&Dagger; Mounted Combat" onclick="selectFeat('Mounted Combat');">
+					<input class="button" type="button" value="&Dagger; Mounted Archery" onclick="selectFeat('Mounted Archery');">
+					<input class="button" type="button" value="&Dagger; Ride-By Attack" onclick="selectFeat('Ride-By Attack');">
+					<input class="button" type="button" value="&Dagger; Spirited Charge" onclick="selectFeat('Spirited Charge');">
+					<input class="button" type="button" value="&Dagger; Trample" onclick="selectFeat('Trample');">
+					<input class="button" type="button" value="Point Blank Shot" onclick="selectFeat('Point Blank Shot');">
+					<input class="button" type="button" value="&Dagger; Far Shot" onclick="selectFeat('Far Shot');">
+				</div>
+			
+				<div class="feat-group empty-feat-group">
+					
+					<input class="button" type="button" value="&Dagger; Precise Shot" onclick="selectFeat('Precise Shot');">
+					<input class="button" type="button" value="&Dagger; Rapid Shot" onclick="selectFeat('Rapid Shot');">
+					<input class="button" type="button" value="&Dagger; Manyshot" onclick="selectFeat('Many Shot');">
+					<input class="button" type="button" value="&Dagger; Shot on the Run" onclick="selectFeat('Shot on the Run');">
+					<input class="button" type="button" value="&Dagger; Improved Precise Shot" onclick="selectFeat('Improved Precise Shot');">
+					<input class="button" type="button" value="&Dagger; Power Attack" onclick="selectFeat('Power Attack');">
+					<input class="button" type="button" value="&Dagger; Cleave" onclick="selectFeat('Cleave');">
+					<input class="button" type="button" value="&Dagger; Great Cleave" onclick="selectFeat('Great Cleave');">
+					<input class="button" type="button" value="&Dagger; Improved Bull Rush" onclick="selectFeat('Improved Bull Rush');">
+					<input class="button" type="button" value="&Dagger; Improved Overrun" onclick="selectFeat('Improved Overrun');">
+					<input class="button" type="button" value="&Dagger; Improved Sunder" onclick="selectFeat('Improved Sunder');">
+					<input class="button" type="button" value="&Dagger; Rapid Reload" onclick="selectFeat('Rapid Reload');">
+				</div>
+
+				<div class="feat-group empty-feat-group">
+					
+					<input class="button" type="button" value="&Dagger; Two-Weapon Defense" onclick="selectFeat('Two-Weapon Defense');">
+					<input class="button" type="button" value="&Dagger; Imp. Two-Weapon Fighting" onclick="selectFeat('Improved Two-Weapon Fighting');">
+					<input class="button" type="button" value="&Dagger; Gr. Two-Weapon Fighting" onclick="selectFeat('Greater Two-Weapon Fighting');">
+					<input class="button" type="button" value="&Dagger; Weapon Finesse" onclick="featUpdateSkill('Weapon Finesse');">
+					<input class="button" type="button" value="&Dagger; Weapon Focus" onclick="weaponFeat('Weapon Focus');">
+					<input class="button" type="button" value="&Dagger; Weapon Sepcialization" onclick="weaponFeat('Weapon Specialization');">
+					<input class="button" type="button" value="&Dagger; Greater Weapon Focus" onclick="weaponFeat('Greater Weapon Focus');">
+					<input class="button" type="button" value="&Dagger; Gr. Weapon Specialization" onclick="weaponFeat('Greater Weapon Specialization');">
+				</div>
+			</div>
+			
+			<div class="feat-group feat-group-wide">
+				<h2>
+					Universal Skill Bonus
+				</h2>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Acrobatic" onclick="featUpdateSkill('Acrobatic');">
+					<input class="button" type="button" value="Agile" onclick="featUpdateSkill('Agile');">
+					<input class="button" type="button" value="Alertness" onclick="featUpdateSkill('Alertness');">
+					<input class="button" type="button" value="Animal Affinity" onclick="featUpdateSkill('Animal Affinity');">
+				</div>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Athletic" onclick="featUpdateSkill('Athletic');">
+					<input class="button" type="button" value="Deceitful" onclick="featUpdateSkill('Deceitful');">
+					<input class="button" type="button" value="Deft Hands" onclick="featUpdateSkill('Deft Hands');">
+					<input class="button" type="button" value="Diligent" onclick="featUpdateSkill('Diligent');">
+				</div>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Investigator" onclick="featUpdateSkill('Investigator');">
+					<input class="button" type="button" value="Magical Aptitude" onclick="featUpdateSkill('Magical Aptitude');">
+					<input class="button" type="button" value="Negotiator" onclick="featUpdateSkill('Negotiator');">
+					<input class="button" type="button" value="Nimble Fingers" onclick="featUpdateSkill('Nimble Fingers');">
+				</div>
+				<div class="empty-feat-group">
+					<input class="button" type="button" value="Persuasive" onclick="featUpdateSkill('Persuasive');">
+					<input class="button" type="button" value="Self-Sufficient" onclick="featUpdateSkill('Self-Sufficient');">
+					<input class="button" type="button" value="Skill Focus" onclick="skillFocus('Skill Focus');">
+					<input class="button" type="button" value="Stealthy" onclick="featUpdateSkill('Stealthy');">
+				</div>
+			</div>
+			
+							
+				
+			
+			<div class="feat-group">
+				<h2>
+					Item <br>Creation
+				</h2>
+				<input class="button" type="button" value="&Dagger; Scribe Scroll" onclick="selectFeat('Scribe Scroll');">
+				<input class="button" type="button" value="&Dagger; Craft Wondrous Item" onclick="selectFeat('Craft Wondrous Item');">
+				<input class="button" type="button" value="&Dagger; Brew Potion" onclick="selectFeat('Brew Potion');">
+				<input class="button" type="button" value="&Dagger; Craft Magic Arms and Armor" onclick="selectFeat('Craft Magic Arms & Armor');">
+				<input class="button" type="button" value="&Dagger; Craft Wand" onclick="selectFeat('Craft Wand');">
+				<input class="button" type="button" value="&Dagger; Craft Rod" onclick="selectFeat('Craft Rod');">
+				<input class="button" type="button" value="&Dagger; Craft Staff" onclick="selectFeat('Craft Staff');">
+				<input class="button" type="button" value="&Dagger; Forge Ring" onclick="selectFeat('Forge Ring');">
+			</div>
+			
+			
+
+			<div class="feat-group">
+				<h2>
+					Other <br>Bonus
+				</h2>
+				
+				<input class="button" type="button" value="Great Fortitude" onclick="featUpdateSkill('Great Fortitude');">
+				<input class="button" type="button" value="Iron Will" onclick="featUpdateSkill('Iron Will');">
+				<input class="button" type="button" value="Lightening Reflexes" onclick="featUpdateSkill('Lightening Reflexes');">
+				<input class="button" type="button" value="Improved Initiative" onclick="featUpdateSkill('Improved Initiative');">
+				<input class="button" type="button" value="Endurance" onclick="selectFeat('Endurance');">
+				<input class="button" type="button" value="&Dagger; Diehard" onclick="selectFeat('Diehard');">
+				<input class="button" type="button" value="&Dagger; Leadership" onclick="selectFeat('Leadership');">
+				<input class="button" type="button" value="Run" onclick="selectFeat('Run');">
+				<input class="button" type="button" value="Toughness" onclick="featUpdateSkill('Toughness');">
+			</div>
+			
+			<div class="feat-group">
+				<h2>
+					Combat Proficiency
+				</h2>
+				
+				<input class="button" type="button" value="Armor Proficiency (Light)" onclick="selectFeat('Armor Proficiency (Light)');">
+				<input class="button" type="button" value="&Dagger; Armor Proficiency (Medium)" onclick="selectFeat('Armor Proficiency (Medium)');">
+				<input class="button" type="button" value="&Dagger; Armor Proficiency (Heavy)" onclick="selectFeat('Armor Proficiency (Heavy)');">
+				<input class="button" type="button" value="&Dagger; Exotic Weapon Proficiency" onclick="weaponFeat('Exotic Weapon Proficiency');">
+				<input class="button" type="button" value="Martial Weapon Proficiency" onclick="weaponFeat('Martial Weapon Proficiency');">
+				<input class="button" type="button" value="Shield Proficiency" onclick="selectFeat('Shield Proficiency');">
+				<input class="button" type="button" value="&Dagger; Tower Shield Proficiency" onclick="selectFeat('Tower Shield Proficiency');">
+				<input class="button" type="button" value="Simple Weapon Proficiency" onclick="selectFeat('Simple Weapon Proficiency');">
+				<input class="button" type="button" value="&Dagger; Two Weapon Fighting" onclick="selectFeat('Two Weapon Fighting');">
+				<input class="button" type="button" value="Track" onclick="selectFeat('Track');">
+			</div>	
+
+			<div class="feat-group">
+				<h2>
+					Casting <br>Feats
+				</h2>
+				
+				<input class="button" type="button" value="Combat Casting" onclick="selectFeat('Combat Casting');">
+				<input class="button" type="button" value="Eschew Materials" onclick="selectFeat('Eschew Materials');">
+				<input class="button" type="button" value="&Dagger; Extra Turning" onclick="selectFeat('Extra Turning');">
+				<input class="button" type="button" value="Improved Counterspell" onclick="selectFeat('Improved Counterspell');">
+				<input class="button" type="button" value="&Dagger; Improved Turning" onclick="selectFeat('Improved Turning');">
+				<input class="button" type="button" value="&Dagger; Natural Spell" onclick="selectFeat('Natural Spell');">
+				<input class="button" type="button" value="Spell Focus" onclick="selectFeat('Spell Focus');">
+				<input class="button" type="button" value="Greater Spell Focus" onclick="selectFeat('Greater Spell Focus');">
+				<input class="button" type="button" value="&Dagger; Spell Mastery" onclick="selectFeat('Spell Mastery');">
+				<input class="button" type="button" value="Spell Penetration" onclick="selectFeat('Spell Penetration');">
+				<input class="button" type="button" value="&Dagger; Greater Spell Penetration" onclick="selectFeat('Greater Spell Penetration');">
+
+
+			</div>
+
+			<div class="feat-group">
+				<h2>
+					Metamagic
+				</h2>
+				<input class="button" type="button" value="Empower Spell" onclick="selectFeat('Empower Spell');">
+				<input class="button" type="button" value="Enlarge Spell" onclick="selectFeat('Enlarge Spell');">
+				<input class="button" type="button" value="Extend Spell" onclick="selectFeat('Extend Spell');">
+				<input class="button" type="button" value="Heighten Spell" onclick="selectFeat('Heighten Spell');">
+				<input class="button" type="button" value="Maximize Spell" onclick="selectFeat('Maximize Spell');">
+				<input class="button" type="button" value="Quicken Spell" onclick="selectFeat('Quicken Spell');">
+				<input class="button" type="button" value="Silent Spell" onclick="selectFeat('Silent Spell');">
+				<input class="button" type="button" value="Still Spell" onclick="selectFeat('Still Spell');">
+				<input class="button" type="button" value="Widen Spell" onclick="selectFeat('Widen Spell');">
+			</div>
+			
+			
+		</section>
+		
+		<div id="mondodevspacer"></div>
+		<div id="mondodevspacer"></div>
+
+		<section id="equipment">
+			<h2>
+				Select Equipment
+			</h2>
+			<p>
+				To roll your starting gold (anywhere from 5 to 240, depending on class) click below. 
+				For simplicity, all prices and values are displayed in Copper Value. Weight for everything
+				is calculated (all weight values for MED unless otherwise noted). Weapons and Armor will
+				populate slots on the equipment character sheet.
+			</p>
+			<p>
+				Note: items with quantity always appear at the bottom of the list. This is just a strange 
+				artifact of how the functionality of the section was coded. 
+			</p>
+			<h2>
+				Instructions
+			</h2>
+			<p>
+				Items, weapons and armor with a gold value WORK, Items with a &mdash; symbol DO NOT. Weapons and Armor 
+				with a &mdash; symbol followed by a gold value work, but will not populate the appropriate slots on the character sheet. 
+			</p>
+		
+			<input id="roll-starting-gold" type="button" value="Roll" onclick="rollStartingGold();">
+		
+			<div class="equip-inv-stat">
+				<p>Copper Coins: </p>
+				<p id="copper-remaining">10000000</p>
+				<p>Total Weight: </p>
+				<p id="total-weight">0</p>
+			</div>
+			
+			
+			<div class="item-list equip-list-item">
+				
+				
+				<h3>
+					Inventory
+				</h3>
+				
+				<!--
+				artisan’s outfit, 
+				entertainer’s outfit, 
+				explorer’s outfit, 
+				monk’s outfit, 
+				peasant’s outfit, 
+				scholar’s outfit, or 
+				traveler’s outfit.
+				-->
+				
+				<p class="item" id="item-purchase-no-0"></p>
+				<p class="item" id="item-purchase-no-1"></p>
+				<p class="item" id="item-purchase-no-2"></p>
+				<p class="item" id="item-purchase-no-3"></p>		
+				<p class="item" id="item-purchase-no-4"></p>
+				<p class="item" id="item-purchase-no-5"></p>		
+				<p class="item" id="item-purchase-no-6"></p>
+				<p class="item" id="item-purchase-no-7"></p>		
+				<p class="item" id="item-purchase-no-8"></p>
+				<p class="item" id="item-purchase-no-9"></p>		
+				<p class="item" id="item-purchase-no-10"></p>
+				<p class="item" id="item-purchase-no-11"></p>
+				<p class="item" id="item-purchase-no-12"></p>
+				<p class="item" id="item-purchase-no-13"></p>		
+				<p class="item" id="item-purchase-no-14"></p>
+				<p class="item" id="item-purchase-no-15"></p>		
+				<p class="item" id="item-purchase-no-16"></p>
+				<p class="item" id="item-purchase-no-17"></p>		
+				<p class="item" id="item-purchase-no-18"></p>
+				<p class="item" id="item-purchase-no-19"></p>		
+				<p class="item" id="item-purchase-no-20"></p>
+				<p class="item" id="item-purchase-no-21"></p>
+				<p class="item" id="item-purchase-no-22"></p>
+				<p class="item" id="item-purchase-no-23"></p>		
+				<p class="item" id="item-purchase-no-24"></p>
+				<p class="item" id="item-purchase-no-25"></p>		
+				<p class="item" id="item-purchase-no-26"></p>
+				<p class="item" id="item-purchase-no-27"></p>		
+				<p class="item" id="item-purchase-no-28"></p>
+				<p class="item" id="item-purchase-no-29"></p>	
+				<p class="item" id="item-purchase-no-30"></p>
+				<p class="item" id="item-purchase-no-31"></p>
+				<p class="item" id="item-purchase-no-32"></p>
+				<p class="item" id="item-purchase-no-33"></p>		
+				<p class="item" id="item-purchase-no-34"></p>
+				<p class="item" id="item-purchase-no-35"></p>		
+				<p class="item" id="item-purchase-no-36"></p>
+				<p class="item" id="item-purchase-no-37"></p>		
+				<p class="item" id="item-purchase-no-38"></p>
+				<p class="item" id="item-purchase-no-39"></p>	
+				<p class="item" id="item-purchase-no-40"></p>
+				<p class="item" id="item-purchase-no-41"></p>
+				<p class="item" id="item-purchase-no-42"></p>
+				<p class="item" id="item-purchase-no-43"></p>		
+				<p class="item" id="item-purchase-no-44"></p>
+				<p class="item" id="item-purchase-no-45"></p>		
+				<p class="item" id="item-purchase-no-46"></p>
+				<p class="item" id="item-purchase-no-47"></p>		
+				<p class="item" id="item-purchase-no-48"></p>
+				<p class="item" id="item-purchase-no-49"></p>	
+				<p class="item" id="item-purchase-no-50"></p>
+				<p class="item" id="item-purchase-no-51"></p>
+				<p class="item" id="item-purchase-no-52"></p>
+				<p class="item" id="item-purchase-no-53"></p>		
+				<p class="item" id="item-purchase-no-54"></p>
+				<p class="item" id="item-purchase-no-55"></p>		
+				<p class="item" id="item-purchase-no-56"></p>
+				<p class="item" id="item-purchase-no-57"></p>		
+				<p class="item" id="item-purchase-no-58"></p>
+				<p class="item" id="item-purchase-no-59"></p>	
+				
+				<p class="item-stack" id="item-Arrows"></p>			<p class="item-qty" id="qty-Arrows"></p>
+				<p class="item-stack" id="item-Bolts"></p>			<p class="item-qty" id="qty-Bolts"></p>		
+				<p class="item-stack" id="item-Shuriken"></p>		<p class="item-qty" id="qty-Shuriken"></p>
+				<p class="item-stack" id="item-Ration"></p>			<p class="item-qty" id="qty-Ration"></p>
+				<p class="item-stack" id="item-Caltrops"></p>		<p class="item-qty" id="qty-Caltrops"></p>
+				<p class="item-stack" id="item-Canvas"></p>			<p class="item-qty" id="qty-Canvas"></p>	
+				<p class="item-stack" id="item-Firewood"></p>		<p class="item-qty" id="qty-Firewood"></p>
+				<p class="item-stack" id="item-Bullets"></p>			<p class="item-qty" id="qty-Bullets"></p>
+				<p class="item-stack" id="item-Rope (Hemp)"></p>		<p class="item-qty" id="qty-Rope (Hemp)"></p>
+				<p class="item-stack" id="item-Rope (Silk)"></p>		<p class="item-qty" id="qty-Rope (Silk)"></p>
+					
+				
+			</div>
+		
+			<!-- Simple Weapons -->		
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Simple Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Gauntlet</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyWeapon( 'Gauntlet', 200, 1, '1d3', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '-', '-', true );">
+				</div>
+				<div class="buy-item">
+					<p>Dagger</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Punching Dagger</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Spiked Gauntlet</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Mace</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Sickle</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Club</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Mace</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Morningstar</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Shortspear</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Longspear</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Quarterstaff</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Spear</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Crossbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Heavy Crossbow', 5000, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Crossbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bolts</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 20, 'Bolts', 100, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Dart</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Javelin</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Sling</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Gauntlet', 200, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Sling Bullets</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItemStack( 10, 'Bullets', 50, 5 );">
+				</div>
+			</div>
+			
+			<!-- Martial Weapons 1 -->	
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Martial Weapons
+					</h3>
+				</div>
+				<div class="buy-item"> 											<!--   weaponName,	  itemCost, 	itemWeight, 	dmg, 	crit, 	rang, 	type, 	size, 	reach, 	hardness, hp, 	saves -->
+					<p>Throwing Axe</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyWeapon('Throwing Axe', 800, 		2, 			'1d6', 	'20/x2', '10ft', 	'slsh', 	'MED', 	'No', 	'-', 	'-', '-' );"> 
+				</div>
+				<div class="buy-item">
+					<p>Light Hammer</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyWeapon( 'Light Hammer', 100, 2, '1d4', '20/x2', '20ft', 'bldg', 'MED', No', '-', '-', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Handaxe</p>
+					<input class="buy-item-button" type="button" value="600" onclick="buyWeapon( 'Handaxe', 600, 3, '1d6', '20/x3', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Kukri</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyWeapon( 'Kukri', 800, 2, '1d4', '18+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Light Pick</p>
+					<input class="buy-item-button" type="button" value="400" onclick="buyWeapon( 'Light Pick', 400, 3, '1d4', '20/x4', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-'  );">
+				</div>
+				<div class="buy-item">
+					<p>Sap</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyWeapon( 'Sap', 100, 2, '1d6', '20/x2', '&mdash;', 'bldg', 'MED', 'No', '-', '-', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Short Sword</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyWeapon( 'Short Sword', 1000, 2, '1d6', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '10', '2', '-' );">											
+				</div>
+				<div class="buy-item">
+					<p>Battleaxe</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyWeapon( 'Battleaxe', 1000, 6, '1d6', '20/x3', '&mdash;', 'slsh', 'MED', 'No', '5', '5', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Flail</p>
+					<input class="buy-item-button" type="button" value="&mdash;800" onclick="buyItem( 'Flail', 800, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Longsword</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyWeapon( 'Longsword', 1500, 4, '1d8', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '10', '5', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Pick</p>
+					<input class="buy-item-button" type="button" value="&mdash;800" onclick="buyItem( 'Heavy Pick', 800, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Rapier</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyWeapon( 'Rapier', 2000, 2, '1d6', '18+/x2', '&mdash;', 'pirc', 'MED', 'No', '10', '5', '-' );">
+				</div>
+				<div class="buy-item">
+					<p>Scimitar</p>
+					<input class="buy-item-button" type="button" value="&mdash;1500" onclick="buyItem( 'Scimitar', 1500, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Trident</p>
+					<input class="buy-item-button" type="button" value="&mdash;1500" onclick="buyItem( 'Trident', 1500, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Warhammer</p>
+					<input class="buy-item-button" type="button" value="&mdash;1200" onclick="buyItem( 'Warhammer', 1200, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Falchion</p>
+					<input class="buy-item-button" type="button" value="&mdash;7500" onclick="buyItem( 'Falchion', 7500, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Glaive</p>
+					<input class="buy-item-button" type="button" value="&mdash;800" onclick="buyItem( 'Glaive', 800, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Greataxe</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyWeapon( 'Greataxe', 2000, 12, '1d12', 'x3', '&mdash;', 'slsh', 'MED', 'No', '5', '10', '-', true );">
+				</div>
+				<div class="buy-item">
+					<p>Greatclub</p>
+					<input class="buy-item-button" type="button" value="&mdash;500" onclick="buyItem( 'Greatclub', 500, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Flail</p>
+					<input class="buy-item-button" type="button" value="&mdash;1500" onclick="buyItem( 'Heavy Flail', 1500, 10 );">
+				</div>
+
+			</div>
+		
+			<!-- Martial Weapons 2 -->	
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Martial Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Greatsword</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyWeapon( 'Greatsword', 5000, 8, '2d6', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-', true );">
+				</div>
+				<div class="buy-item">
+					<p>Guisarme</p>
+					<input class="buy-item-button" type="button" value="&mdash;900" onclick="buyItem( 'Guisarme', 900, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Halberd</p>
+					<input class="buy-item-button" type="button" value="&mdash;1000" onclick="buyItem( 'Halberd', 1000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Lance</p>
+					<input class="buy-item-button" type="button" value="&mdash;1000" onclick="buyItem( 'Lance', 1000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Ranseur</p>
+					<input class="buy-item-button" type="button" value="&mdash;1000" onclick="buyItem( 'Ranseur', 1000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Scythe</p>
+					<input class="buy-item-button" type="button" value="&mdash;1800" onclick="buyItem( 'Scythe', 1800, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Longbow</p>
+					<input class="buy-item-button" type="button" value="7500" onclick="buyWeapon( 'Longbow', 7500, 3, '1d8', 'x3', '100ft', 'pirc', 'MED', 'No', '-', '-', '-', true );">
+				</div>
+				<div class="buy-item">
+					<p>Composite Longbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;10k+" onclick="buyItem( 'Composite Longbow', 10000, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Shortbow</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyWeapon( 'Shortbow', 3000, 2, '1d6', 'x3', '60ft', 'pirc', 'MED', 'No', '5', '5', '-', true );">
+				</div>
+				<div class="buy-item">
+					<p>Composite Shortbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;7500" onclick="buyItem( 'Composite Shortbow', 7500, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>20 Arrows</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 20, 'Arrows', 100, 3 );">
+				</div>
+				
+				<div class="buy-item-float-5">
+				</div>
+					
+			</div>
+
+			<!-- Exotic Weapons -->	
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Exotic Weapons
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Kama</p>
+					<input class="buy-item-button" type="button" value="&mdash;200" onclick="buyItem( 'Kama', 200, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Nunchaku</p>
+					<input class="buy-item-button" type="button" value="&mdash;200" onclick="buyItem( 'Nunchaku', 200, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Sai</p>
+					<input class="buy-item-button" type="button" value="&mdash;100" onclick="buyItem( 'Sai', 100, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Siangham</p>
+					<input class="buy-item-button" type="button" value="&mdash;300" onclick="buyItem( 'Siangham', 300, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bastard Sword</p>
+					<input class="buy-item-button" type="button" value="3500" onclick="buyWeapon( 'Bastard Sword', 3500, 6, '1d10', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-', true );">
+				</div>
+				<div class="buy-item">
+					<p>Dwarven Waraxe</p>
+					<input class="buy-item-button" type="button" value="&mdash;3000" onclick="buyItem( 'Dwarven Waraxe', 3000, 8 );">
+				</div>
+				<div class="buy-item">
+					<p>Whip</p>
+					<input class="buy-item-button" type="button" value="&mdash;100" onclick="buyItem( 'Whip', 100, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Orc Double Axe</p>
+					<input class="buy-item-button" type="button" value="&mdash;6000" onclick="buyItem( 'Orc Double Axe', 6000, 15 );">
+				</div>
+				<div class="buy-item">
+					<p>Spiked Chain</p>
+					<input class="buy-item-button" type="button" value="&mdash;2500" onclick="buyItem( 'Spiked Chain', 2500, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Dire Flail</p>
+					<input class="buy-item-button" type="button" value="&mdash;9000" onclick="buyItem( 'Dire Flail', 9000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Gnome Hooked Hammer</p>
+					<input class="buy-item-button" type="button" value="&mdash;2000" onclick="buyItem( 'Gnome Hooked Hammer', 2000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Two-Bladed Sword</p>
+					<input class="buy-item-button" type="button" value="&mdash;10000" onclick="buyItem( 'Two-Bladed Sword', 10000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Dwarven Urgrosh</p>
+					<input class="buy-item-button" type="button" value="&mdash;5000" onclick="buyItem( 'Dwarven Urgrosh', 5000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Bolas</p>
+					<input class="buy-item-button" type="button" value="&mdash;500" onclick="buyItem( 'Bolas', 500, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Net</p>
+					<input class="buy-item-button" type="button" value="&mdash;2000" onclick="buyItem( 'Net', 2000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Hand Crossbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;10000" onclick="buyItem( 'Hand Crossbow', 10000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Repeating Crossbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;40000" onclick="buyItem( 'Heavy Repeating Crossbow', 40000, 12 );">
+				</div>
+				<div class="buy-item">
+					<p>Light Repeating Crossbow</p>
+					<input class="buy-item-button" type="button" value="&mdash;25000" onclick="buyItem( 'Light Repeating Crossbow', 25000, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>20 Bolts</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 20, 'Bolts', 100, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>5 Shuriken</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 5, 'Shuriken', 100, 0.5 );">
+				</div>
+				
+			</div>
+
+			<!-- Armor & Shields -->	
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Armor & Shields
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Lt Padded Armor</p> <!-- armorName, itemCost, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs -->
+					<input class="buy-item-button" type="button" value="500" onclick="buyArmor( 'Lt Padded Armor', 500, 10, 1, 8, 0, 0.05, 30, '2', '5', '-', '1/5/1' );">
+				</div>
+				<div class="buy-item">
+					<p>Lt Leather Armor</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyArmor( 'Lt Leather Armor', 1000, 15, 2, 6, 0, 0.1, 30, '2', '10', '-', '1/5/1' );">
+				</div>
+				<div class="buy-item">
+					<p>Lt Studded Leather Armor</p>
+					<input class="buy-item-button" type="button" value="2500" onclick="buyArmor( 'Lt Studded Leather Armor', 2500, 20, 3, 5, -1, 0.15, 30, '2', '15', '-', '1/5/1' );">
+				</div>
+				<div class="buy-item">
+					<p>Lt Chain Shirt</p>
+					<input class="buy-item-button" type="button" value="10000" onclick="buyArmor( 'Lt Chain Shirt', 10000, 25, 4, 4, -2, 0.2, 30, '10', '20', '-', '1/5/1' );">
+				</div>
+				<div class="buy-item">
+					<p>Med Hide Armor</p>
+					<input class="buy-item-button" type="button" value="&mdash;1500" onclick="buyItem( 'Med Hide Armor', 1500, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Scale Mail</p>
+					<input class="buy-item-button" type="button" value="&mdash;5000" onclick="buyItem( 'Med Scale Mail', 5000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Chain Mail</p>
+					<input class="buy-item-button" type="button" value="&mdash;15000" onclick="buyItem( 'Med Chain Mail', 15000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Med Breastplate</p>
+					<input class="buy-item-button" type="button" value="&mdash;20000" onclick="buyItem( 'Med Breastplate', 20000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Splint Mail</p>
+					<input class="buy-item-button" type="button" value="&mdash;20000" onclick="buyItem( 'Heavy Splint Mail', 20000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Banded Mail</p>
+					<input class="buy-item-button" type="button" value="&mdash;25000" onclick="buyItem( 'Heavy Banded Mail', 25000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Half-Plate</p>
+					<input class="buy-item-button" type="button" value="&mdash;60000" onclick="buyItem( 'Heavy Half-Plate', 60000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Full-Plate</p>
+					<input class="buy-item-button" type="button" value="&mdash;150000" onclick="buyItem( 'Heavy Full-Plate', 150000, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Buckler</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyShield( 'Buckler', 1500, 5, 1, '-', -1, 0.05, '-', '10', '5', '-', '1ma' );">
+				</div>
+				<div class="buy-item">
+					<p>Light Wooden Shield</p>
+					<input class="buy-item-button" type="button" value="300" onclick="buyShield( 'Light Wooden Shield', 300, 5, 1, '-', -1, 0.05, '-', '5', '7', '-', '1ma' );">
+				</div>
+				<div class="buy-item">
+					<p>Light Steel Shield</p>
+					<input class="buy-item-button" type="button" value="&mdash;900" onclick="buyItem( 'Light Steel Shield', 900, 6 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Wooden Shield</p>
+					<input class="buy-item-button" type="button" value="&mdash;700" onclick="buyItem( 'Heavy Wooden Shield', 700, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Heavy Steel Shield</p>
+					<input class="buy-item-button" type="button" value="&mdash;2000" onclick="buyItem( 'Heavy Steel Shield', 2000, 15 );">
+				</div>
+				<div class="buy-item">
+					<p>Tower Shield</p>
+					<input class="buy-item-button" type="button" value="&mdash;3000" onclick="buyItem( 'Tower Shield', 3000, 45 );">
+				</div>
+				<div class="buy-item">
+					<p>Armor Spikes</p>
+					<input class="buy-item-button" type="button" value="&mdash;5000" onclick="buyItem( 'Armor Spikes', 5000, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Locked Gauntlet</p>
+					<input class="buy-item-button" type="button" value="&mdash;800" onclick="buyItem( 'Locked Gauntlet', 800, 5 );">
+				</div>
+			
+			</div>
+			<!-- Armor & Shields 2 -->		
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Armor & Shields
+					</h3>
+				</div>
+
+				<div class="buy-item">
+					<p>Shield Spikes</p>
+					<input class="buy-item-button" type="button" value="&mdash;1000" onclick="buyItem( 'Shield Spikes', 1000, 5 );">
+				</div>
+				
+				<div class="buy-item-float-19"></div>
+				
+			</div>
+		
+			<!-- Adventuring Gear 1 -->
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>
+				<div class="buy-item">
+					<p>Backpack</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Backpack', 200, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Backpack</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Small Backpack', 200, 0.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Barrel</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Barrel', 200, 30 );">
+				</div>
+				<div class="buy-item">
+					<p>Basket</p>
+					<input class="buy-item-button" type="button" value="40" onclick="buyItem( 'Basket', 40, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bedroll</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Bedroll', 10, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Bedroll</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Small Bedroll', 10, 1.25 );">
+				</div>
+				<div class="buy-item">
+					<p>Bell</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Bell', 10, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Winter Blanket</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Winter Blanket', 50, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Winter Blanket</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Small Winter Blanket', 50, 1.25 );">
+				</div>
+				<div class="buy-item">
+					<p>Block and Tackle</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Block and Tackle', 50, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Wine Bottle & Glass</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Wine Bottle & Glass', 200, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Bucket</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Bucket', 50, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Caltrops (bag)</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 1, 'Caltrops', 100, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Candle</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Candle', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Canvas (per sq-yd)</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItemStack( 1, 'Canvas', 10, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Map Case</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Map Case', 100, 0.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Chain (per 10ft)</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyItemStack( 10, 'Chain', 3000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Chalk</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Chalk', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Chest</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Chest', 200, 25 );">
+				</div>
+				<div class="buy-item">
+					<p>Crowbar</p>
+					<input class="buy-item-button" type="button" value="200" onclick="buyItem( 'Crowbar', 200, 5 );">
+				</div>
+			
+			</div>
+			<!-- Adventuring Gear 2 -->
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>
+			
+				<div class="buy-item">
+					<p>Firewood (25lb)</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItemStack( 25, 'Firewood', 1, 25 );">
+				</div>
+				<div class="buy-item">
+					<p>Fishhook</p>
+					<input class="buy-item-button" type="button" value="20" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Fishing Net</p>
+					<input class="buy-item-button" type="button" value="400" onclick="buyItem( 'Fishing Net', 400, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Flask</p>
+					<input class="buy-item-button" type="button" value="3" onclick="buyItem( 'Flask', 3, 1.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Flint & Steel</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Flint and Steel', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Grappling Hook</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItem( 'Grappling Hook', 100, 4 );">
+				</div>
+				<div class="buy-item">
+					<p>Hammer</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Hammer', 50, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Ink</p>
+					<input class="buy-item-button" type="button" value="800" onclick="buyItem( 'Ink', 800, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Inkpen</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItem( 'Inkpen', 50, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Chalk</p>
+					<input class="buy-item-button" type="button" value="1" onclick="buyItem( 'Chalk', 1, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Clay Jug</p>
+					<input class="buy-item-button" type="button" value="3" onclick="buyItem( 'Clay Jug', 3, 9 );">
+				</div>
+				<div class="buy-item">
+					<p>10-Foot Ladder</p>
+					<input class="buy-item-button" type="button" value="5" onclick="buyItem( '10-Foot Ladder', 5, 20 );">
+				</div>
+				<div class="buy-item">
+					<p>Common Lamp</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Common Lamp', 10, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Bullseye Lantern</p>
+					<input class="buy-item-button" type="button" value="1200" onclick="buyItem( 'Bullseye Lantern', 1200, 3 );">
+				</div>
+				<div class="buy-item">
+					<p>Hooded Lantern</p>
+					<input class="buy-item-button" type="button" value="700" onclick="buyItem( 'Hooded Lantern', 700, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Simple Lock</p>
+					<input class="buy-item-button" type="button" value="2000" onclick="buyItem( 'Simple Lock', 2000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Average Lock</p>
+					<input class="buy-item-button" type="button" value="4000" onclick="buyItem( 'Average Lock', 4000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Good Lock</p>
+					<input class="buy-item-button" type="button" value="8000" onclick="buyItem( 'Good Lock', 8000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Amazing Lock</p>
+					<input class="buy-item-button" type="button" value="15000" onclick="buyItem( 'Simple Lock', 15000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Manacles</p>
+					<input class="buy-item-button" type="button" value="1500" onclick="buyItem( 'Manacles', 1500, 2 );">
+				</div>
+			
+			
+			</div>
+			<!-- Adventuring Gear 3 -->	
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>			
+				<div class="buy-item">
+					<p>Masterwork Manacles</p>
+					<input class="buy-item-button" type="button" value="5000" onclick="buyItem( 'Masterwork Manacles', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Small Steel Mirror</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItem( 'Small Steel Mirror', 1000, 0.5 );">
+				</div>
+				<div class="buy-item">
+					<p>Clay Tankard</p>
+					<input class="buy-item-button" type="button" value="2" onclick="buyItem( 'Clay Tankard', 2, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Oil (1 pint flask)</p>
+					<input class="buy-item-button" type="button" value="10" onclick="buyItem( 'Oil (1 pint flask)', 10, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Paper (sheet)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Parchment (sheet)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Miner's Pick</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Clay Pitcher</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Piton</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>10-foot Pole</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Iron Pot</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Belt Pouch</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Portable Ram</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Trail Ration (1 day)</p>
+					<input class="buy-item-button" type="button" value="50" onclick="buyItemStack( 1, 'Ration', 50, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Hempen Rope (50ft)</p>
+					<input class="buy-item-button" type="button" value="100" onclick="buyItemStack( 50, 'Rope (Hemp)', 100, 10 );">
+				</div>
+				<div class="buy-item">
+					<p>Silken Rope (50ft)</p>
+					<input class="buy-item-button" type="button" value="1000" onclick="buyItemStack( 50, 'Rope (Silk)', 1000, 5 );">
+				</div>
+				<div class="buy-item">
+					<p>Sack</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Sealing Wax</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Sewing Needle</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				<div class="buy-item">
+					<p>Signal Whistle</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Fishhook', 20, 0 );">
+				</div>
+				
+				
+				
+			</div>
+			<!-- Adventuring Gear 4 -->		
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Gear
+					</h3>
+				</div>			
+				<div class="buy-item">
+					<p>Signet Ring</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Sledge</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Soap</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Shovel</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Spyglass</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Tent</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Torch</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Vial (1oz.)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Waterskin</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Whet Stone</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item-float-10">
+				
+				</div>
+			</div>
+			
+			<!-- Adventuring Gear Specialty -->		
+			<div class="item-list">
+				<div class="buy-item">
+					<h3>
+						Specialty Gear
+					</h3>
+				</div>	
+				<div class="buy-item">
+					<p>Acid (flask)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Alchemist's Fire (flask)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Antitoxin (vial)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Everburning Torch</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Holy Water (flask)</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Smokestick</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Sunrod</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Tanglefoot Bag</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Thunderstone</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Tindertwig</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item-float-10">
+				
+				</div>
+				
+			</div>
+			
+			<!-- Adventuring Gear Specialty -->		
+			<div class="item-list sm-text-list">
+				<div class="buy-item">
+					<h3>
+						Tools and Skill Kits
+					</h3>
+				</div>	
+				<div class="buy-item">
+					<p>Alchemist's Lab</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>	
+				<div class="buy-item">
+					<p>Artisan's Tools</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Climber's Kit</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Disguise Kit</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Healer's Kit</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Holly and Mistletoe</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Wooden Holy Symbol</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Silver Holy Symbol</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Hourglass</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Magnifying Glass</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Musical Instrument</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Merchant's Scale</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Spell Component Pouch</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Wizard's Spellbook</p>
+					<input class="buy-item-button" type="button" value="&mdash;" onclick="buyItem( 'Masterwork', 5000, 2 );">
+				</div>
+				<div class="buy-item">
+					<p>Thieves' Tools</p>
+					<input class="buy-item-button" type="button" value="3000" onclick="buyItem( 'Thieves Tools', 3000, 1 );">
+				</div>
+				<div class="buy-item">
+					<p>Water Clock</p>
+					<input class="buy-item-button" type="button" value="100000" onclick="buyItem( 'Water Clock', 100000, 200 );">
+				</div>
+			
+			</div>
+			
+			
+			
+			
+		</section>
+	
+
+	</section>
+	
+
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	<div id="mondodevspacer"></div>
+	
+
+	<section id="roll-playing">
+		<section id="describe">
+			<form>
+				<h2>
+					Character Description
+				</h2>
+				<p>
+					Here, input all of your description, character background information and other roll information. 
+					Soon, you'll also be able to select from character art or upload an image file to populate the print
+					sheet. 
+				</p>
+				
+
+				<input class="form-input" id="form-name" type="text" placeholder="Character Name">
+				<input class="form-input" id="form-player" type="text" placeholder="Player Name">
+				<input class="form-input" id="form-alignment" type="text" placeholder="Alignment">
+				<input class="form-input" id="form-eyes" type="text" placeholder="Eye Color">
+				<input class="form-input" id="form-hair" type="text" placeholder="Hair Color">
+				<input class="form-input" id="form-height" type="text" placeholder="Height">
+				<input class="form-input" id="form-weight" type="text" placeholder="Weight">
+				<input class="form-input" id="form-skin" type="text" placeholder="Skin">
+				<input class="form-input" id="form-handedness" type="text" placeholder="Handedness">
+				<input class="form-input" id="form-age" type="text" placeholder="Age">
+				<input class="form-input" id="form-gender" type="text" placeholder="Gender">
+
+				<h3>
+					Appearance
+				</h3>
+				<textarea class="text-area" maxlength="1500" id="form-appearance"></textarea>
+				
+
+				<h3>
+					Personality
+				</h3>
+				<textarea class="text-area" id="form-personality"></textarea>
+
+				<h3>
+					Quote
+				</h3>
+				<textarea class="text-area describe-small" id="form-quote"></textarea>
+
+				<h3>
+					Life Objective
+				</h3>
+				<textarea class="text-area" id="form-objective"></textarea>
+
+				<h3>
+					Recent History
+				</h3>
+				<textarea class="text-area" id="form-history"></textarea>
+
+				<h3>
+					Allies & Enemies
+				</h3>
+				<textarea class="text-area" id="form-allies-enemies"></textarea>
+
+				<h3>
+					Home, Ancestry, Family, Diety 
+				</h3>
+				<textarea class="text-area" id="form-ancestry"></textarea>
+
+				<h3>
+					Other Notable Information
+				</h3>
+				<textarea class="text-area" id="form-other-info"></textarea>
+
+				<input type="button" class="form-button" value="Populate Sheet" onclick="populateCharacterSheet();">
+
+
+			</form>
+			
+			<form id="form-picture" runat="server">
+				<h3>
+					Upload a Character Sketch
+				</h3>
+				<p>
+					.jpg, .gif, .png files supported. Portrait layout images work best. 
+				</p>
+				<input type='file' id="picture-upload" />
+		
+			</form>
+			
+		</section>
+	</section>
+
+
+
+	<div class="page-space"></div>
+	
+	<section id="print-page-four">
+		<div class="paper">
+			
+			<div class="width-100 tall-namebox">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-name print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-player print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-race print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							RACE
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-class print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							CLASS
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			<!-- RIGHT TEXT AREAS -->
+				<div class="right-text-areas">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							THE BASICS
+						</h1>
+						<p>
+							AWW. IS THERE NOT ENOUGH ROOM ON THE EYE COLOR LINE FOR RED/GRAY HETEROCHROMIA IRIDUM. 
+						</p>
+					</div>
+				</div> 
+
+				
+
+
+
+
+
+
+
+			<!-- RIGHT TEXT AREAS -->
+
+
+
+			<div class="quarter left-text-areas">
+				<div class="box blackbox dragongrog width-100">
+					<h1> 
+						PICTURE
+					</h1>
+					<p>
+						WORTH A THOUSAND WORDS, BUT NOT A SINGLE +1
+					</p>
+				</div>
+			</div>
+			<div id="print-picture" class="picture-area left-text-areas"></div>
+
+			<!-- RIGHT TEXT AREAS -->
+				<div class="right-text-areas">
+					<div class="print-text-area-quote">
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-eyes" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									EYES
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-hair" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									HAIR
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-height" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									HEIGHT
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-weight" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label label-width-100">
+									WEIGHT
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-skin" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									SKIN
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-handedness" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									HANDEDNESS
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-age" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label">
+									AGE
+								</p>
+							</div>
+							<div class="quarter">
+								<div id="print-gender" class="print-fill fill-space half">
+									
+								</div>
+								<p class="label label-width-100">
+									GENDER
+								</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							APPEARANCE
+						</h1>
+						<p>
+							WHAT YOU LOOK LIKE
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-appearance" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+
+
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							PERSONALITY
+						</h1>
+						<p>
+							MAYBE YOU'RE JUST A RACIST. CURSED ELVES!
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-personality">
+						<div id="print-personality" class="character-content"> 
+							 
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							QUOTE
+						</h1>
+						<p>
+							WORDS TO LIVE BY
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-quote">
+						<div id="print-quote" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							LIFE OBJECTIVE
+						</h1>
+						<p>
+							YOUR DRIVING FORCE
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-objective" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+				
+				
+				
+				
+				
+			<!-- RIGHT TEXT AREAS -->
+
+			<div class="quarter clear-left pad-top left-text-areas">
+				<div class="box blackbox dragongrog width-100 float-left">
+					<h1> 
+						OTHER NOTABLE INFORMATION
+					</h1>
+					<p>
+						I KNOW THERE ISN'T A SPOT FOR CHILDHOOD BEAR WRASLIN' KILLS. YOU CAN'T HAVE A BONUS EITHER.
+					</p>
+				</div>
+			</div>
+	
+			
+
+			<div class="quarter clear-left print-text-area left-text-areas">
+				<div id="print-other-info" class="character-content"> 
+					
+				</div>
+				<div class="text-area-line the-top-one"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+				<div class="text-area-line"></div>
+
+			</div>
+
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							RECENT HISTORY
+						</h1>
+						<p>
+							WHAT YOU'VE BEEN UP TO 
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-history" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+
+				</div>
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							ALLIES & ENEMIES
+						</h1>
+						<p>
+							WHO'S SEEN YOUR FACE AND GIVEN IT A SECOND THOUGHT?
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-sm">
+						<div id="print-allies-enemies" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+				</div>
+				
+				<div class="right-text-areas pad-top">
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							HOME, ANCESTORY, FAMILY & RELIGION
+						</h1>
+						<p>
+							AND POLITICS, TOO. 
+						</p>
+					</div>
+				</div> 
+
+				<div class="right-text-areas">
+					<div class="print-text-area-home">
+						<div id="print-ancestry" class="character-content"> 
+							
+						</div>
+						<div class="text-area-line the-top-one"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+						<div class="text-area-line"></div>
+					</div>
+				</div>
+
+		</div>
+	</section>		
+
+	<div class="page-space"></div>
+
+	<section id="print">
+		<div class="paper">
+		
+		<!-- SKILLS SECTION FLOAT RIGHT HALFS -->
+			<div class="half float-right">
+				<div class="box blackbox dragongrog">
+					<h1> 
+						SKILLS
+					</h1>
+					<p>
+						 NEVER LEAVE HOME WITHOUT THEM
+					</p>
+				</div>
+				<div class="twelfth">
+					<p class="mini-title">
+						SKILL NAME
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						RANK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						ABILITY MOD.
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC. MOD.
+					</p>
+				</div>
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						NOTES
+					</p>
+				</div>
+				
+				
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						appraise
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-appr" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						balance
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bala" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						bluff
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bluf" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						climb
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-clim" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						concentration
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-conc" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-craft-title" class="form-skill-form">
+						craft:
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-craf" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+
+				<div id="wrin-craft-1">
+					<div class="twelfth">
+						<p id="print-wrin-craft-1" class="form-skill-form">
+							
+						</p>
+					</div>
+					<div class="sixteenth"><div id="print-wrin-craft-total-1" class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth"><div class="box skill-box"></div></div>
+					<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				</div>
+
+
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						decipher script
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-deci" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						diplomacy
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-dipl" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						disable device
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-disa" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						disguise
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-disg" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						escape artist
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-esca" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						forgery
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-forg" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						gather information
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-gath" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						handle animal
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-hand" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						heal
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-heal" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						hide
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-hide" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						intimidate
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-inti" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						jump
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-jump" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-knowledge-title" class="form-skill-form faint-background">
+						knowledge:
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-know" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						listen
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-list" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						move silently
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-move" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						open lock
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-open" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-perform-title" class="form-skill-form faint-background">
+						perform: 
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-perf" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p id="print-profession-title" class="form-skill-form">
+						profession
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-prof" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						ride
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-ride" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						search
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-sear" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						sense motive
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-sens" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						sleight of hand
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-slei" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						spellcraft
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-spel" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						spot
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-spot" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						survival
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-surv" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						swim
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-swim" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						tumble
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-tumb" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						use magic device
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-usem" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						use rope
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-user" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bla1" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form faint-background">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bla2" class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth"><div class="box skill-box faint-background"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box faint-background"></div></div>
+				
+				<div class="twelfth">
+					<p class="form-skill-form">
+						________________________________
+					</p>
+				</div>
+				<div class="sixteenth"><div id="pr-bla3" class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth"><div class="box skill-box"></div></div>
+				<div class="sixteenth-blackbox"><div class="box skill-box"></div></div>
+				
+				
+				
+				
+				
+				
+				
+			</div>
+		
+		
+		<!-- NAME, PLAYER, ETC BLOCK TOP -->
+			<div class="half">
+				<div class="quarter">
+					<div class="print-name print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						NAME
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="print-player print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						PLAYER
+					</p>
+				</div>
+				<div class="quarter">
+					<div id="print-alignment" class="print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						ALIGNMENT
+					</p>
+				</div>
+				<div class="quarter">
+					<div id="print-experience" class="print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						EXPERIENCE
+					</p>
+				</div>
+				<div class="quarter">
+					<div id="print-class" class="print-fill print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						CLASS
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="eighth">
+						<div id="print-level" class="print-fill print-fill fill-space half">
+							
+						</div>
+						<p class="label">
+							LEVEL
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="print-levelup" class="print-fill print-fill fill-space half">
+					
+						</div>
+						<p class="label">
+							LEVEL UP AT XP
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="print-fill fill-space half">
+					
+					</div>
+					<p class="label">
+						MULTI-CLASS
+					</p>
+				</div>
+				<div class="quarter">
+					<div class="eighth">
+						<div class="print-fill fill-space half">
+					
+						</div>
+						<p class="label">
+							LEVEL
+						</p>
+					</div>
+					<div class="eighth">
+						<div class="print-fill fill-space half">
+					
+						</div>
+						<p class="label">
+							LEVEL UP AT XP
+						</p>
+					</div>
+				</div>
+			</div>
+		
+		
+		<!-- DRAGONGROG BLOCK. ABILITY SCORES. HIT POINTS -->
+			<div class="half">
+				
+				<div class="print-fill fill-space"></div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						dragonGrog.com V1.0.0
+					</h1>
+					<p>
+						 HTML d20/3.5/PF character sheet
+					</p>
+				</div>
+				<div class="print-fill fill-space"></div>
+				
+				<div class="quarter">
+					<div class="twelfth">
+						<p class="mini-title">
+							ABILITY<br>NAME
+						</p>
+					</div>
+					<div class="twelfth">
+						<p class="mini-title">
+							ABILITY<br>SCORE
+						</p>
+					</div>
+					<div class="twelfth">
+						<p class="mini-title">
+							ABILITY<br>MODIFIER
+						</p>
+					</div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								STR
+							</h1>
+							<p>
+								STRENGTH
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-str" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-str box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								DEX
+							</h1>
+							<p>
+								DEXTERITY
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-dex" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-dex box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								CON
+							</h1>
+							<p>
+								CONSTITUTION
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-con" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-con box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								WIS
+							</h1>
+							<p>
+								WISDOM
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-wis" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-wis box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								INT
+							</h1>
+							<p>
+								INTELIGENCE
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-int" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-int box"></div></div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h1>
+								CHA
+							</h1>
+							<p>
+								CHARISMA
+							</p>
+						</div>
+					</div>
+					<div class="twelfth"><div id="print-ab-cha" class="box"></div></div>
+					<div class="twelfth"><div class="print-mod-cha box"></div></div>
+				</div>
+				<div class="quarter">
+					<div class="box blackbox">
+						<h1>
+							HIT POINTS
+						</h1>
+						<p>
+							MORE PRECIOUS THAN GOLD
+						</p>
+					</div>
+					<div class="box tallbox">
+						
+						<div id="hit-points" class="print-text-center print-fill print-list fill-space"></div>
+						<p class="label">
+							BASE HP
+						</p>
+						
+						<h2>
+							WOUNDS<br>CURRENT HP<br>NOTES
+						</h2>
+					</div>
+				</div>
+			</div>
+
+		<!-- SAVING THROWS -->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				
+				<div class="quarter">
+					<div class="twelfth">
+						<p class="mini-title">
+							SAVING<br>THROWS
+						</p>
+					</div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							TOTAL<br>...Aw Yeah.
+						</p>
+					</div>
+					<div class="operator"><p></p></div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							BASE<br>SAVE
+						</p>
+					</div>
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h2>
+								FORTITUDE
+							</h2>
+							<p>
+								CONSTITUTION
+							</p>
+						</div>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-for-tot" class="box op-box"></div></div>
+					<div class="operator">
+						<p>=</p>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-for" class="box op-box"></div></div>
+					<div class="operator">
+						<p>+</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							ABILITY<br>MODIFIER
+						</p>
+					</div>
+					<div class="operator"><p></p></div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							MAGIC<br>MODIFIER
+						</p>
+					</div>
+					<div class="operator"><p></p></div>
+					<div class="twelfth with-operator">
+						<p class="mini-title">
+							MISC.<br>MODIFIER
+						</p>
+					</div>
+					
+					<div class="twelfth with-operator">
+						<div class="print-mod-con box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div class="print-sav-for-mag box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div id="print-sav-for-misc" class="print-sav-for-misc box op-box"></div>
+					</div>
+					
+				</div>
+				<div class="sm-print-fill fill-space"></div>
+				<div class="quarter">
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h2>
+								REFLEX
+							</h2>
+							<p>
+								DEXTERITY
+							</p>
+						</div>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-ref-tot" class="box op-box"></div></div>
+					<div class="operator">
+						<p>=</p>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-ref" class="box op-box"></div></div>
+					<div class="operator">
+						<p>+</p>
+					</div>
+				</div>
+				<div class="quarter">
+					
+					<div class="twelfth with-operator">
+						<div class="print-mod-dex box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div class="print-sav-ref-mag box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div id="print-sav-ref-misc" class="print-sav-ref-misc box op-box"></div>
+					</div>
+					
+				</div>
+				<div class="sm-print-fill fill-space"></div>
+				<div class="quarter">
+					<div class="twelfth">
+						<div class="box blackbox">
+							<h2>
+								WILL
+							</h2>
+							<p>
+								WISDOM
+							</p>
+						</div>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-wil-tot" class="box op-box"></div></div>
+					<div class="operator">
+						<p>=</p>
+					</div>
+					<div class="twelfth with-operator"><div id="print-sav-wil" class="box op-box"></div></div>
+					<div class="operator">
+						<p>+</p>
+					</div>
+				</div>
+				<div class="quarter">
+					
+					<div class="twelfth with-operator">
+						<div class="print-mod-wis box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div class="box op-box"></div>
+					</div>
+					<div class="operator"><p>+</p></div>
+					<div class="twelfth with-operator">
+						<div id="print-sav-wil-misc" class="box op-box"></div>
+					</div>
+					
+				</div>
+				<div class="sm-print-fill fill-space"></div>
+			</div>
+			
+		
+			
+		<!-- ARMOR CLASS MINI TITLES-->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				<div class="twentieth-blackbox">
+					<p class="mini-title">
+						ARMOR<br>CLASS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>BASE
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						ARMOR<br>BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						SHIELD<br>BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						NATURAL<br>ARMOR
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						SIZE<br>BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						DEFLECT<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						MISC.<br>MOD.
+					</p>
+				</div>
+			</div>
+			
+		<!-- AC, BASE ARMOR CLASS -->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							AC
+						</h1>
+						<p>
+							ARMOR CLASS
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ac-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						10
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-armor-bonus" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-shield-bonus" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+			
+		<!-- FF, CONDITIONAL ARMOR CLASS -->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							FF
+						</h1>
+						<p>
+							FLAT-FOOTED
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ff-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						10
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+			
+		<!-- TOUCH, CONDITIONAL ARMOR CLASS -->
+			<div class="half">
+				<div class="twentieth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							TOUCH
+						</h1>
+						<p>
+							CUZ... MAGIC
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div id="print-to-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						10
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="twentieth-fixed-value">
+						0
+					</p>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		
+		
+		
+		<!-- MELEE ATTACK MINI TITLES -->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						MELEE<br>ATTACK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p id="melee-attack-mod-title" class="mini-title">
+						STR<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						SIZE<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC.<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TEMP<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL 2nd<br>ATTACK
+					</p>
+				</div>
+				
+				
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							MELEE
+						</h1>
+						<p>
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="melee-attack-mod" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-one box">
+						<h4>
+							1st
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-attack-first-one" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							2nd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							3rd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- MELEE ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							4th
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+			
+		
+		<!-- RANGED ATTACK MINI TITLES -->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						RANGED<br>ATTACK
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						DEX<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						SIZE<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						MISC.<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TEMP<br>MODIFIER
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="sixteenth">
+					<p class="mini-title">
+						TOTAL 2nd<br>ATTACK
+					</p>
+				</div>
+				
+				
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h2>
+							RANGED
+						</h2>
+						<p>
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="print-bab-one box">
+						<h4>
+							1st
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-first-one" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-first-two" class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							2nd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-second-one" class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div id="print-ranged-second-two" class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							3rd
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+		
+		<!-- RANGED ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<div class="box emptybox">
+						
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box emptybox"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box">
+						<h4>
+							4th
+						</h4>
+					</div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+				<div class="sixteenth">
+					<div class="box"></div>
+				</div>
+			</div>
+	
+		
+		
+		<!-- GRAPPLE AND INITIATIVE -->
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						<br><br>GRAPPLE
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>STR<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>SIZE<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>MISC.<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						BASE<br>ATTACK BONUS
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>TOTAL
+					</p>
+				</div>
+				<div class="operator">
+					<p></p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>MISC.<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br><br>
+					</p>
+				</div>
+			</div>
+			<div class="half clear-left">
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							GR
+						</h1>
+						<p>
+							GRAPPLE
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div class="print-mod-str box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="print-bab-one box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-grapple-tot" class="box"></div>
+				</div>
+				<div class="operator">
+					<p></p>
+				</div>
+				
+				<div class="twentieth">
+					<div class="print-mod-dex box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ini-misc" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div id="print-ini-tot" class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box blackbox">
+						<h1>
+							INI
+						</h1>
+						<p>
+							INITIATIVE
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+		<!-- INITIATIVE
+			<div class="half">
+				
+				<div class="sixteenth-blackbox">
+					<p class="mini-title">
+						<br>INITIATIVE
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						<br>TOTAL
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						DEX<br>MOD.
+					</p>
+				</div>
+				<div class="twentieth">
+					<p class="mini-title">
+						MISC.<br>MOD.
+					</p>
+				</div>
+			</div>
+			<div class="half clear-left">
+				<div class="sixteenth-blackbox">
+					<div class="box blackbox">
+						<h1>
+							INI
+						</h1>
+						<p>
+							INITIATIVE
+						</p>
+					</div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+				<div class="twentieth">
+					<div class="box"></div>
+				</div>
+			</div>
+		-->
+		
+		
+		<!-- RACIAL ABILITIES -->
+			<div class="half">
+				<div class="print-fill fill-space"></div>
+				<div class="box blackbox dragongrog half-wider">
+					<h1> 
+						RACIAL ABILITIES
+					</h1>
+					<p>
+						POWER TO THE PEOPLE
+					</p>
+				</div>
+				<div class="print-fill fill-space"></div>
+				<p class="label half-wider">
+					DARKVISION?
+				</p>
+				<div class="print-fill fill-space"></div>
+				<p class="label half-wider">
+					HIDDEN WALL SENSING?
+				</p>
+				
+				<div class="print-fill fill-space"></div>
+				<p class="label half-wider">
+					FLATULANT?
+				</p>
+				
+			</div>
+		
+		
+		</div>
+		
+		
+	</section>	
+	
+	<div class="page-space"></div>
+	
+	<section id="print-page-three">
+		<div class="paper">
+			
+			<div class="width-100 tall-namebox">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-name print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-player print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-race print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							RACE
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-class print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							CLASS
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="width-100 tall-weapon">
+			</div>
+		
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					WEAPONS & ATTACKS
+				</h1>
+				<p>
+					 TOOLS OF THE TRADE. AND THAT THING YOU FLAIL AROUND LIKE A MORON. GOOD STUFF.
+				</p>
+			</div>
+
+			<div id="weapon-slot-one" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 1
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s1-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s1-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s1-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			
+			<div id="weapon-slot-two" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 1
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s2-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s2-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s2-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s2-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			
+			<div id="weapon-slot-thr" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							WEAPON SLOT 1
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							DAMAGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CRITICAL
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							RANGE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							TYPE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SIZE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							REACH
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SAVES
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-w-s3-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEAPON
+						</p>
+					</div>
+					<div class="eighth">
+						
+						<div id="pr-w-s3-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ATTACK BONUS
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-w-s3-dmg" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-crit" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-rang" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-type" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-size" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-reach" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-hardn" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-hp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-w-s3-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label">
+						NOTES
+					</p>
+				</div>
+				<!-- Ammo -->
+				<div class="quarter">
+					<div class="fill-space tall-weapon">
+
+					</div>
+					<p class="label full-width">
+						AMMUNITION & CHARGES
+					</p>
+				</div>
+			</div>
+			
+
+			<div class="print-fill fill-space"></div>
+
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					ARMOR AND PROTECTIVE ITEMS
+				</h1>
+				<p>
+					KEEPING THE GUSHY PARTS IN
+				</p>
+			</div>
+
+			
+
+			<div id="armor-slot-one" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							ARMOR SLOT
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							ARMOR BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX DEX BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CHECK PENALTY
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SPELL FAILURE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX <br>SPEED
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>SAVES
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							DONNING N/H/R
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-armor-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ITEM
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEIGHT CATEGORY
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-armor-ar-bonus" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-m-dex" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-check" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-sp-fail" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-max-sp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-hardness" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-hit-points" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-a-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-armor-donning" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<p class="mini-title text-left">
+						NOTES
+					</p>
+				</div>
+			</div>
+
+			<div id="armor-slot-two" class="slot">
+				<!-- Name and Bonus titles -->
+				<div class="quarter">
+					<div class="eighth">
+						<p class="mini-title text-left">
+							SHIELD SLOT
+						</p>
+					</div>
+				</div>
+				<!-- All box titles -->
+				<div class="quarter">
+					<div class="tenth">
+						<p class="mini-title">
+							ARMOR BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX DEX BONUS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							CHECK PENALTY
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							SPELL FAILURE
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							MAX <br>SPEED
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>WEIGHT
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HARDNESS
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>HP
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>SAVES
+						</p>
+					</div>
+					<div class="tenth">
+						<p class="mini-title">
+							<br>DONNING
+						</p>
+					</div>
+				</div>
+				<!-- Name and Bonus -->
+				<div class="quarter">
+					<div class="eighth">
+						<div id="pr-shield-name" class="print-fill-weapon fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							ITEM
+						</p>
+					</div>
+					<div class="eighth">
+						<div id="pr-shield-weight-category" class="fill-space tall-weapon">
+
+						</div>
+						<p class="label">
+							WEIGHT CATEGORY
+						</p>
+					</div>
+				</div>
+				<!-- 10 boxes -->
+				<div class="quarter">
+					<div class="tenth w-marg-bot">
+						<div id="pr-shield-ar-bonus" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-m-dex" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-check" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-sp-fail" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-max-sp" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-weight" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-hardness" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-hit-points" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-saves" class="box weapon-box-sm">		
+						</div>
+					</div>
+					<div class="tenth">
+						<div id="pr-shield-donning" class="box weapon-box-sm">		
+						</div>
+					</div>
+				</div>
+				<!-- Notes -->
+				<div class="quarter">
+					<p class="mini-title text-left">
+						NOTES
+					</p>
+				</div>
+			</div>
+
+			
+		
+			<!-- Equipment -->
+			<div class="fill-space">
+				
+			</div>
+			<div class="box blackbox dragongrog width-100">
+				<h1> 
+					GEAR
+				</h1>
+				<p>
+					 VALUABLE LOOT, AND OTHER ASSORTED HEAVY JUNK.
+				</p>
+			</div>
+
+			<!-- Gear List Left Column -->
+			<div class="gear-left">
+				
+				<div id="print-item-1" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-2" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-3" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-4" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-5" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-6" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div id="print-item-7" class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill print-list fill-space fill-space-gear"></div>
+				<p class="label item-name">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>	
+
+			</div>
+				
+			<!-- Gear List Right Column WITH ENCUMBERANCE TABLE and COIN TABLE -->
+			<div class="gear-right">
+				
+				<div class="encumberance">
+
+					
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							ENCUMBERANCE / CARRYING CAPACITY
+						</h1>
+						<p>
+							 YEAH, WE'RE DOING THAT
+						</p>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>TOTAL WEIGHT
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>LIGHT LOAD
+							</p>
+						</div>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<div class="quarter">
+								<p class="mini-title">
+									MEDIUM <br>LOAD
+								</p>
+							</div>
+							<div class="quarter">
+								<p class="mini-title">
+									HEAVY LOAD<br> LIFT OVER HEAD 
+								</p>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<p class="mini-title">
+									LIFT OFF <br>GROUND 
+								</p>
+							</div>
+							<div class="quarter">
+								<p class="mini-title">
+									PUSH <br>OR DRAG
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-total-weight" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-light-load" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+					<div class="quarter">
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-medium-load" class="box encumberance-box">
+
+								</div>
+							</div>
+							<div class="quarter">
+								<div id="print-heavy-load" class="box encumberance-box">
+
+								</div>
+							</div>
+						</div>
+						<div class="quarter">
+							<div class="quarter">
+								<div id="print-lift-load" class="box encumberance-box">
+
+								</div>
+							</div>
+							<div class="quarter">
+								<div id="print-push-load" class="box encumberance-box">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="encumberance">
+					
+					<div class="box blackbox dragongrog width-100">
+						<h1> 
+							MONEY
+						</h1>
+						<p>
+							THIS TUNIC BROUGHT TO YOU BY CAPITALISM
+						</p>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>COPPER PIECES
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>SILVER PIECES
+							</p>
+						</div>
+					</div>
+
+					<div class="quarter">
+						<div class="quarter">
+							<p class="mini-title">
+								<br>GOLD PIECES
+							</p>
+						</div>
+						<div class="quarter">
+							<p class="mini-title">
+								<br>PLATINUM PIECES
+							</p>
+						</div>
+					</div>
+
+					
+					
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-coins-copper" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-coins-silver"  class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+					<div class="quarter">
+						<div class="quarter">
+							<div id="print-coins-gold" class="box encumberance-box">
+
+							</div>
+						</div>
+						<div class="quarter">
+							<div id="print-coins-platinum" class="box encumberance-box">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+				
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				<div class="print-fill fill-space fill-space-gear"></div>
+				<p class="label item-name gear-item-name-right">
+					ITEM
+				</p>
+				<p class="label item-notes">
+					LOCATION ON PERSON
+				</p>
+				
+			</div>
+		</div>
+	</section>			
+
+
+
+	<div class="page-space"></div>
+	
+	<section id="print-page-two">
+		<div class="paper">
+			<div class="width-100 tall-namebox">
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-name print-fill fill-space half print-name">
+						
+						</div>
+						<p class="label">
+							NAME
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-player print-fill fill-space half print-player">
+						
+						</div>
+						<p class="label">
+							PLAYER
+						</p>
+					</div>
+				</div>
+				<div class="quarter">
+					<div class="quarter">
+						<div class="print-race print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							RACE
+						</p>
+					</div>
+					<div class="quarter">
+						<div class="print-class print-fill fill-space half">
+						
+						</div>
+						<p class="label right-label">
+							CLASS
+						</p>
+					</div>
+				</div>
+			</div>
+		
+		<!-- FEATS -->
+			<div class="half">
+				<div class="print-fill fill-space">
+				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						FEATS
+					</h1>
+					<p>
+						 A BAG OF RATS SLAYS THE DRAGON!
+					</p>
+				</div>
+			</div>
+		
+			<div class="half">
+				<div id="print-feat-1" class="print-fill fill-space print-list fill-space-feats">
+					
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-2" class="print-fill fill-space print-list fill-space-feats">
+					
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-3" class="print-fill fill-space print-list fill-space-feats">
+					
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-4" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-5" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-6" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-7" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-8" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-9" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES
+				</p>
+			</div>
+			<div class="half">
+				<div id="print-feat-10" class="print-fill fill-space print-list fill-space-feats">
+				
+				</div>
+				<p class="label feat-name">
+					FEAT NAME
+				</p>
+				<p class="label feat-notes">
+					FEAT NOTES. NO, 20TH LEVEL HUMAN FIGHTER. THERE AREN'T ANY MORE SLOTS.
+				</p>
+			</div>
+		
+		
+		<!-- SPECIAL ABILITIES -->
+			<div class="half">
+				<div class="print-fill fill-space">
+				
+				</div>
+				<div class="box blackbox dragongrog">
+					<h1> 
+						CLASS & SPECIAL ABILITIES
+					</h1>
+					<p>
+						 CIRCUMSTANTIAL SKILL MODIFIERS AND OTHER THINGS THAT MAKE YOU... YOU KNOW... SPECIAL.
+					</p>
+				</div>
+			</div>
+			<div class="half">
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				<div class="print-fill fill-space print-fill fill-space-feats">
+				
+				</div>
+				<p class="label full-width">
+					ABILITY
+				</p>
+				
+			</div>
+			
+			
+		</div>
+			
+	</section>
+
+	<div id="mondodevspacer"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+		
+		

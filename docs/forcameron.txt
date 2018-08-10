@@ -1,0 +1,121 @@
+Retrieve the source code from github https://github.com/chrisjefferies/dragonGrog/blob/master/charactersheet.html
+
+you need charactersheet.html
+FOLDER: less 
+FOLDER: js
+
+
+
+Instructions: 
+
+you will be making charactersheet.html work by writing a form that lets the user select certain features
+about the dynamic sheet, and "generate" one. 
+
+Character sheet pages Id's:
+
+#print-page-four
+#print
+#print-page-three
+#print-page-two
+
+Start with having them all display: none;
+
+then allow the user to configure the following divs as display: either block or none. 
+
+
+
+#wrin-craft-1
+// Think "write-in craft 1"
+#wrin-craft-2
+#wrin-craft-3
+#wrin-craft-4
+
+Each of these has a p which acts as its label. The Id's for these p's are:
+
+#print-wrin-craft-1
+#print-wrin-craft-2
+#print-wrin-craft-3
+#print-wrin-craft-4
+
+There are also sets for "knowledge", and "perform"
+
+There is one for "profession" also. (so no profession-2, ...-3, or ...-4, ONLY a ...-1)
+
+
+There are two optional weapon slots and an optional shield slot. Id's:
+
+By default, #weapon-slot-one and #armor-slot-one are visible. If you want to make them turn off-able, go ahead. 
+simple CSS fix. 
+
+
+#weapon-slot-two
+#weapon-slot-thr //NOTE it's thr, not three. 
+#armor-slot-two
+
+
+You should also have the option to fill in the write in skills at the bottom. They don't have Id's so have fun with that. 
+
+You should also have the option to not include the character page (first one, #print-page-four).
+
+enjoy. 
+
+
+
+
+
+
+                 o
+                  |
+                ,'~'.
+               /     \
+              |   ____|_
+              |  '___,,_'         .----------------.
+              |  ||(o |o)|       (    GOOD LUCK     )
+              |   -------         ,----------------'
+              |  _____|         -'
+              \  '####,
+               -------
+             /________\
+           (  )        |)
+           '_ ' ,------|\         _
+          /_ /  |      |_\        ||
+         /_ /|  |     o| _\      _|| 
+        /_ / |  |      |\ _\____//' |
+       (  (  |  |      | (_,_,_,____/
+        \ _\ |   ------|        
+         \ _\|_________|
+          \ _\ \__\\__\
+          |__| |__||__|
+       ||/__/  |__||__|
+               |__||__|
+               |__||__|
+               /__)/__)
+              /__//__/
+             /__//__/
+            /__//__/.
+          .'    '.   '.
+         (_kOs____)____)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
