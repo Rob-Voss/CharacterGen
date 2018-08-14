@@ -20,6 +20,8 @@ class Inventory {
         this.wSlotTwo = {};
         this.wSlotThree = {};
 
+        this.customItemNo = 0;
+
         return this;
     }
 
@@ -108,7 +110,6 @@ class Inventory {
         }
     }
 
-
     /**
      * Treat: PLATINUM = 1000
      *        GOLD 	   = 100
@@ -134,29 +135,29 @@ class Inventory {
      */
     rollStartingGold(input) {
         if (input === "first") {
-            switch (this.generator.selClass) {
+            switch (this.generator.character.selClass) {
                 case "DRUID":
-                    calculateGold(2, 10);
+                    this.calculateGold(2, 10);
                     break;
                 case "SORCERER":
                 case "WIZARD":
-                    calculateGold(3, 10);
+                    this.calculateGold(3, 10);
                     break;
                 case "BARD":
                 case "BARBARIAN":
-                    calculateGold(4, 10);
+                    this.calculateGold(4, 10);
                     break;
                 case "CLERIC":
                 case "ROGUE":
-                    calculateGold(5, 10);
+                    this.calculateGold(5, 10);
                     break;
                 case "FIGHTER":
                 case "PALADIN":
                 case "RANGER":
-                    calculateGold(6, 10);
+                    this.calculateGold(6, 10);
                     break;
                 case "MONK":
-                    calculateGold(5, 1);
+                    this.calculateGold(5, 1);
                     break;
                 case "NewBlankClass":
                     // A placeholder for future class additions.
@@ -170,7 +171,7 @@ class Inventory {
                 gold += ( 9 * i ) * 10;
             } */
 
-            switch (Number(this.generator.levelAdvance)) {
+            switch (Number(this.generator.character.levelAdvance)) {
                 case 2:
                     var gold = 900;
                     break;
@@ -262,9 +263,7 @@ class Inventory {
      * @param itemWeight
      */
     buyItem(itemName, itemCost, itemWeight) {
-
         // alert("window item item-purchase-no :" + window.itemPurchaseNo);
-
         var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
         if (itemCost <= goldRemaining) {
             goldRemaining = goldRemaining - itemCost;
@@ -294,13 +293,11 @@ class Inventory {
      */
     buyItemStack(itemQty, itemName, itemCost, itemWeight) {
         var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
-
         if (itemCost <= goldRemaining) {
             goldRemaining = goldRemaining - itemCost;
             document.getElementById("copper-remaining").innerHTML = goldRemaining;
 
             var itemQuantity = Number(document.getElementById("qty-" + itemName).innerHTML);
-
             itemQuantity += itemQty;
 
             document.getElementById("item-" + itemName).innerHTML = itemName;
@@ -385,7 +382,7 @@ class Inventory {
             }
 
             if (confirmAr) {
-                this.aSlot = new Armor(armorName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning);
+                this.aSlot = new Armor(armorName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs);
                 this.armorSlot = true;
             }
 
@@ -855,7 +852,7 @@ class Inventory {
                     var skill = document.getElementById("cu-i-skil").value;
 
                     if (skill != "write") {
-                        this.generator.featUpdateSkillTwin(skill);
+                        this.generator.feats.featUpdateSkillTwin(skill);
                         this.generator.calcPoints();
                     }
                 }
@@ -865,9 +862,7 @@ class Inventory {
                 document.getElementById("cu-i-whichSkill").style.display = "none";
                 document.getElementById("custom-item").style.display = "none";
                 document.getElementById("custom-item-form").reset();
-
                 break;
-
         }
     }
 
@@ -897,8 +892,8 @@ class Inventory {
                     default:
                         // alert("Sw1 default case ping.");
                         break;
-
                 }
+
                 switch (window["note" + window.noteIndex[i]]) {
                     case "Frost":
                     case "Flaming":

@@ -26,7 +26,7 @@ $(document).ready(function() {
 	
 	$('.sk-input').change(
 		function() {
-			generator.updateSkillPoints();
+			generator.skills.updateSkillPoints();
 		}
 	);
 
