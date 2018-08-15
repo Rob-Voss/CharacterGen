@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
-
 	<head>
-		<title>Interactive D&amp;D Map</title>
+		<title>Interactive D&amp;D ServerMap</title>
 		<meta charset='utf-8' />
 		<style>
 			* { box-sizing: border-box; }
@@ -177,12 +176,13 @@
 				color: darkblue;
 			}
 		</style>
+
 	</head>
 
 	<body>
 		<div id='main'>
 			<p>
-				Interactive D&amp;D Map Visualiser. Enter your name, then press Join to join as a player, or, if you're the DM enter the DM password (comes up when you run the server) and press Host as DM.
+				Interactive D&amp;D ServerMap Visualiser. Enter your name, then press Join to join as a player, or, if you're the DM enter the DM password (comes up when you run the server) and press Host as DM.
 			</p>
 			<input id='username' placeholder='Username' />
 			<p>
@@ -330,8 +330,10 @@
 		</div>
 
 		<script src='/socket.io/socket.io.js'></script>
-		<script src='client.js'></script>
-		<script src='map.js'></script>
+		<script src="Client.js"></script>
+		<script src="EventHandler.js"></script>
+		<script src="Map.js"></script>
+		<script src="ServerMap.js"></script>
 	</body>
 
 </html>
