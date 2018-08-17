@@ -8,205 +8,167 @@ class Feats {
      */
     constructor(characterGen) {
         this.generator = characterGen;
+        this.allSubMenus = ["combat", "skill", "other", "proficiency", "creation", "casting", "metamagic"];
 
         return this;
     }
 
     /**
-     *
+     * Show the appropriate Feat Sub Menu
      * @param whichSubMenu
      */
     featsSubMenu(whichSubMenu) {
-        var allSubMenus = ["combat", "skill", "other", "proficiency", "creation", "casting", "metamagic"];
-        for (let i = 0; i < allSubMenus.length; i++) {
-            if (allSubMenus[i] === whichSubMenu) {
-                document.getElementById("feats-" + whichSubMenu).style.display = "block";
-            } else {
-                document.getElementById("feats-" + allSubMenus[i]).style.display = "none";
-            }
+        for (let i = 0; i < this.allSubMenus.length; i++) {
+            let isMenu = this.allSubMenus[i] === whichSubMenu;
+            document.getElementById("feats-" + (isMenu) ? whichSubMenu : this.allSubMenus[i]).style.display = (isMenu) ? "block" : "none";
         }
         window.scrollTo(0, 0);
     }
 
     /**
      *
-     * @param featName
+     * @param {String} featName
      */
     featUpdateSkill(featName) {
-        var confirmF = confirm("Select " + featName + "?");
+        let confirmR,
+            confirmF = confirm("Select " + featName + "?"),
+            featsRemaining = Number(document.getElementById("feats-remaining").innerHTML);
         if (confirmF) {
-            var featsRemaining = Number(document.getElementById("feats-remaining").innerHTML);
             if (featsRemaining > 0) {
                 featsRemaining -= 1;
-                var confirmR = true;
-                document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                this.generator.character.numOfFeats += 1;
-                document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = featName;
+                confirmR = true;
             } else {
-                var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+                confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
                 if (confirmR) {
                     featsRemaining -= 1;
-                    document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                    this.generator.character.numOfFeats += 1;
-                    document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = featName;
                 }
             }
+            document.getElementById("feats-remaining").innerHTML = featsRemaining;
+            this.generator.character.numberOfFeats += 1;
+            document.getElementById("feat-name-" + this.generator.character.numberOfFeats).innerHTML = featName;
         }
 
         if (confirmF === true && confirmR === true) {
+            let twins = [];
             switch (featName) {
                 case "Acrobatic":
-                    this.featUpdateSkillTwin("jump");
-                    this.featUpdateSkillTwin("tumb");
+                    twins = ["jump", "tumb"];
                     break;
                 case "Agile":
-                    this.featUpdateSkillTwin("bala");
-                    this.featUpdateSkillTwin("esca");
+                    twins = ["bala", "esca"];
                     break;
                 case "Alertness":
-                    this.featUpdateSkillTwin("list");
-                    this.featUpdateSkillTwin("spot");
+                    twins = ["list", "spot"];
                     break;
                 case "Animal Affinity":
-                    this.featUpdateSkillTwin("hand");
-                    this.featUpdateSkillTwin("ride");
+                    twins = ["hand", "ride"];
                     break;
                 case "Athletic":
-                    this.featUpdateSkillTwin("clim");
-                    this.featUpdateSkillTwin("swim");
+                    twins = ["clim", "swim"];
                     break;
                 case "Deceitful":
-                    this.featUpdateSkillTwin("disg");
-                    this.featUpdateSkillTwin("forg");
+                    twins = ["disg", "forg"];
                     break;
                 case "Deft Hands":
-                    this.featUpdateSkillTwin("slei");
-                    this.featUpdateSkillTwin("user");
+                    twins = ["slei", "user"];
                     break;
                 case "Diligent":
-                    this.featUpdateSkillTwin("appr");
-                    this.featUpdateSkillTwin("deci");
+                    twins = ["appr", "deci"];
                     break;
                 case "Investigator":
-                    this.featUpdateSkillTwin("gath");
-                    this.featUpdateSkillTwin("sear");
+                    twins = ["gath", "sear"];
                     break;
                 case "Magical Aptitude":
-                    this.featUpdateSkillTwin("spel");
-                    this.featUpdateSkillTwin("usem");
+                    twins = ["spel", "usem"];
                     break;
                 case "Negotiator":
-                    this.featUpdateSkillTwin("dipl");
-                    this.featUpdateSkillTwin("sens");
+                    twins = ["dipl", "sens"];
                     break;
                 case "Nimble Fingers":
-                    this.featUpdateSkillTwin("disa");
-                    this.featUpdateSkillTwin("open");
+                    twins = ["disa", "open"];
                     break;
                 case "Persuasive":
-                    this.featUpdateSkillTwin("bluf");
-                    this.featUpdateSkillTwin("inti");
+                    twins = ["bluf", "inti"];
                     break;
                 case "Self-Sufficient":
-                    this.featUpdateSkillTwin("heal");
-                    this.featUpdateSkillTwin("surv");
+                    twins = ["heal", "surv"];
                     break;
                 case "Stealthy":
-                    this.featUpdateSkillTwin("hide");
-                    this.featUpdateSkillTwin("move");
+                    twins = ["hide", "move"];
                     break;
-                case "Weapon Finesse":
-                    alert("Melee Attack Modifier has been changed to DEX.");
-                    this.generator.character.weaponFinesse = true;
-                    break;
-                case "Improved Initiative":
-                    this.generator.character.improvedInitiative = true;
-                    break;
-                case "Great Fortitude":
-                    this.generator.character.greatFortitude = true;
-                    break;
-                case "Iron Will":
-                    this.generator.character.ironWill = true;
-                    break;
-                case "Lightening Reflexes":
-                    this.generator.character.lighteningReflexes = true;
-                    break;
-                case "Toughness":
-                    this.generator.character.toughness = true;
-                    break;
-
             }
-            // document.getElementById("ms-clim").innerHTML = 2;
+            this.featUpdateSkillTwin(twins);
+
+            this.generator.character.weaponFinesse = featName === "Weapon Finesse";
+            this.generator.character.improvedInitiative = featName === "Improved Initiative";
+            this.generator.character.greatFortitude = featName === "Great Fortitude";
+            this.generator.character.ironWill = featName === "Iron Will";
+            this.generator.character.lighteningReflexes = featName === "Lightening Reflexes";
+            this.generator.character.toughness = featName === "Toughness";
         }
     }
 
     /**
      *
-     * @param featShortCode
+     * @param {Array} featShortCodes
      */
-    featUpdateSkillTwin(featShortCode) {
-        var featUpdateMiscMod = document.getElementById("ms-" + featShortCode).innerHTML;
-        if (featUpdateMiscMod === "-") {
-            document.getElementById("ms-" + featShortCode).innerHTML = 2;
-        } else {
-            featUpdateMiscMod = Number(featUpdateMiscMod);
-            featUpdateMiscMod += 2;
-            document.getElementById("ms-jump").innerHTML = featUpdateMiscMod;
-        }
+    featUpdateSkillTwin(featShortCodes) {
+        featShortCodes.forEach(function(element) {
+            let featUpdateMiscMod = document.getElementById("ms-" + element).innerHTML;
+            if (featUpdateMiscMod === "-") {
+                document.getElementById("ms-" + element).innerHTML = 2;
+            } else {
+                featUpdateMiscMod = Number(featUpdateMiscMod) + 2;
+                document.getElementById("ms-jump").innerHTML = featUpdateMiscMod;
+            }
+        });
     }
 
     /**
      *
-     * @param featName
+     * @param {String} featName
      */
     selectFeat(featName) {
-        var confirmF = confirm("Select " + featName + "?");
+        let confirmR,
+            confirmF = confirm("Select " + featName + "?"),
+            featsRemaining = Number(document.getElementById("feats-remaining").innerHTML);
         if (confirmF) {
-            var featsRemaining = Number(document.getElementById("feats-remaining").innerHTML);
             if (featsRemaining > 0) {
                 featsRemaining -= 1;
-                document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                this.generator.character.numOfFeats += 1;
-                document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = featName;
             } else {
-                var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+                confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
                 if (confirmR) {
                     featsRemaining -= 1;
-                    document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                    this.generator.character.numOfFeats += 1;
-                    document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = featName;
                 }
             }
+            document.getElementById("feats-remaining").innerHTML = featsRemaining;
+            this.generator.character.numberOfFeats += 1;
+            document.getElementById("feat-name-" + this.generator.character.numberOfFeats).innerHTML = featName;
         }
     }
 
     /**
      *
-     * @param featName
+     * @param {string} featName
      */
     weaponFeat(featName) {
-        var confirmW = confirm("Select " + featName + "?");
+        let confirmR,
+            confirmW = confirm("Select " + featName + "?"),
+            featsRemaining = Number(document.getElementById("feats-remaining").innerHTML);
         if (confirmW) {
-            var featsRemaining = Number(document.getElementById("feats-remaining").innerHTML);
-
             if (featsRemaining > 0) {
                 featsRemaining -= 1;
-                document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                this.generator.character.numOfFeats += 1;
-                var featTarget = prompt("Which weapon will this feat affect?");
-                document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
             } else {
-                var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
+                confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
                 if (confirmR) {
                     featsRemaining -= 1;
-                    document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                    this.generator.character.numOfFeats += 1;
-                    var featTarget = prompt("Which weapon will this feat affect?");
-                    document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
                 }
             }
+            document.getElementById("feats-remaining").innerHTML = featsRemaining;
+            this.generator.character.numberOfFeats += 1;
+            let featTarget = prompt("Which weapon will this feat affect?");
+            document.getElementById("feat-name-" + this.generator.character.numberOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
         }
     }
-
 
 }

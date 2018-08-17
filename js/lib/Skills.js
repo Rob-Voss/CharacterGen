@@ -215,10 +215,10 @@ class Skills {
             } else {
                 this.generator.character.skillPointsSpent += Number(document.getElementById("bla" + (i + 1)).value);
             }
-            // alert("SPENT/this.generator.character.skPts: " + this.generator.character.skillPointsSpent + " " + this.generator.character.skPts );
+            // alert("SPENT/this.generator.character.skillPoints: " + this.generator.character.skillPointsSpent + " " + this.generator.character.skillPoints );
         }
 
-        var dispSkillPoints = this.generator.character.skPts - this.generator.character.skillPointsSpent;
+        var dispSkillPoints = this.generator.character.skillPoints - this.generator.character.skillPointsSpent;
         document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + dispSkillPoints;
     }
 
@@ -226,7 +226,7 @@ class Skills {
      *
      */
     calculateSkillPoints() {
-        switch (this.generator.character.selClass) {
+        switch (this.generator.character.class) {
             case "CLERIC":
             case "FIGHTER":
             case "PALADIN":
@@ -249,7 +249,7 @@ class Skills {
             case "NewBlankClass":
                 // A placeholder for future class additions.
                 //
-                // This is the SECOND place (in order of execution) where the value of this.generator.character.selClass affects subsequent calculations.
+                // This is the SECOND place (in order of execution) where the value of this.generator.character.class affects subsequent calculations.
                 //
                 break;
         }
@@ -287,26 +287,26 @@ class Skills {
      */
     levelSkillPointIncrease() {
         var points = this.generator.character.baseSkillPoints + this.generator.character.intMod;
-        if (this.generator.character.selRace === "HUMAN") {
+        if (this.generator.character.race === "HUMAN") {
             points += 1;
         }
         if (points <= 0) {
-            this.generator.character.skPts += 1;
+            this.generator.character.skillPoints += 1;
         } else {
-            this.generator.character.skPts += points;
+            this.generator.character.skillPoints += points;
         }
 
-        document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + this.generator.character.skPts
+        document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + this.generator.character.skillPoints
 
     }
 
     /**
-     *
+     * Calculates Skill Points. Shows all Class Skills
      */
     showClassSkills() {
         this.calculateSkillPoints();
         //First, basic data input based on class (first function above)
-        switch (this.generator.character.selClass) {
+        switch (this.generator.character.class) {
             case "BARBARIAN":
                 //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
                 this.generator.character.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
@@ -345,7 +345,7 @@ class Skills {
             case "NewBlankClass":
                 // A placeholder for future class additions.
                 //
-                // This is the first place (in order of execution) where the value of this.generator.character.selClass affects subsequent calculations.
+                // This is the first place (in order of execution) where the value of this.generator.character.class affects subsequent calculations.
                 //
                 break;
         }
@@ -371,21 +371,21 @@ class Skills {
             if (featsRemaining > 0) {
                 featsRemaining -= 1;
                 document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                this.generator.character.numOfFeats += 1;
+                this.generator.character.numberOfFeats += 1;
                 alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
                 var featTarget = prompt("Which skill will this feat affect?");
-                document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
+                document.getElementById("feat-name-" + this.generator.character.numberOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
                 this.decodeSkillFocus(featTarget);
             } else {
                 var confirmR = confirm("You have no more feats available. Suffer the wrath of your DM and continue anyway?");
                 if (confirmR) {
                     featsRemaining -= 1;
                     document.getElementById("feats-remaining").innerHTML = featsRemaining;
-                    this.generator.character.numOfFeats += 1;
+                    this.generator.character.numberOfFeats += 1;
                     alert("In order for the skills calculation to update properly, \n enter the skill name without spaces \n Example: UseRope");
                     var featTarget = prompt("Which skill will this feat affect?");
 
-                    document.getElementById("feat-name-" + this.generator.character.numOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
+                    document.getElementById("feat-name-" + this.generator.character.numberOfFeats).innerHTML = (featName + " (" + featTarget + ") ");
 
                     this.decodeSkillFocus(featTarget);
                 }
@@ -405,7 +405,7 @@ class Skills {
             var skillPoints = (basePoints * 4);
         }
 
-        if (this.generator.character.selRace === "HUMAN") {
+        if (this.generator.character.race === "HUMAN") {
             var totalSkillPoints = skillPoints + 4;
         } else {
             var totalSkillPoints = skillPoints;
@@ -413,11 +413,11 @@ class Skills {
         // "NewBlankRace"
         // A placeholder for future class additions.
         //
-        // This is the SECOND place (in order of execution) where the value of this.generator.character.selRace affects subsequent calculations.
+        // This is the SECOND place (in order of execution) where the value of this.generator.character.race affects subsequent calculations.
         //
         document.getElementById("sk-points-starting").innerHTML = ("Total Skill Points: " + totalSkillPoints);
-        this.generator.character.skPts = totalSkillPoints;
-        // alert("Total BASE Skill Points Calculated: " + this.generator.character.skPts);
+        this.generator.character.skillPoints = totalSkillPoints;
+        // alert("Total BASE Skill Points Calculated: " + this.generator.character.skillPoints);
     }
 
 }

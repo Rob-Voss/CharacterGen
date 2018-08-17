@@ -79,7 +79,7 @@ var calcPoints = function(form) {
 
 
 	var skPtsUsed = ( Number(inappr) + Number(inbala) + Number(inbluf) + Number(inclim) + Number(inconc) + Number(incraf) + Number(indeci) + Number(indipl) + Number(indisa) + Number(indisg) + Number(inesca) + Number(inforg) + Number(ingath) + Number(inhand) + Number(inheal) + Number(inhide) + Number(ininti) + Number(injump) + Number(inknow) + Number(inlist) + Number(inmove) + Number(inopen) + Number(inperf) + Number(inprof) + Number(inride) + Number(insear) + Number(insens) + Number(inslei) + Number(inspel) + Number(inspot) + Number(insurv) + Number(inswim) + Number(intumb) + Number(inusem) + Number(inuser) + Number(inbla1) + Number(inbla2) + Number(inbla3) );
-	// alert("inappr " + inappr + "\ninbluf " + inbluf + "\nskPts = " + skPts);
+	// alert("inappr " + inappr + "\ninbluf " + inbluf + "\nskillPoints = " + skillPoints);
 		
 	window.skPtsRemaining = window.skPts - skPtsUsed;
 	

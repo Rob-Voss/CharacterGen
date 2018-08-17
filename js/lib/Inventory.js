@@ -21,18 +21,19 @@ class Inventory {
         this.wSlotThree = {};
 
         this.customItemNo = 0;
+        this.allSubMenus = ["simpweap", "martweap", "exotweap", "armor", "gear", "substances", "tools", "custom"];
 
         return this;
     }
 
     /**
      *
-     * @param weaponName
-     * @param itemCost
-     * @param itemWeight
-     * @param dmg
-     * @param crit
-     * @param rang
+     * @param {String} name
+     * @param {number} cost
+     * @param {number} weight
+     * @param damage
+     * @param critical
+     * @param range
      * @param type
      * @param size
      * @param reach
@@ -40,41 +41,36 @@ class Inventory {
      * @param hp
      * @param saves
      */
-    buyWeapon(weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves) {
-        var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
-
-        if (itemCost <= goldRemaining) {
-            goldRemaining = goldRemaining - itemCost;
-            document.getElementById("copper-remaining").innerHTML = goldRemaining;
-
+    buyWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hp, saves) {
+        let goldRemaining = Number(document.getElementById("copper-remaining").innerHTML),
+            totalWeight = Number(document.getElementById("total-weight").innerHTML),
+            notes = " ",
+            bonus = " ";
+        if (cost <= goldRemaining) {
+            goldRemaining = goldRemaining - cost;
             window.itemPurchaseNo += 1;
-            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = weaponName;
-            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block";
+            totalWeight += weight;
 
-            var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-            totalWeight += itemWeight;
+            document.getElementById("copper-remaining").innerHTML = goldRemaining;
+            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = name;
+            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block";
             document.getElementById("total-weight").innerHTML = totalWeight;
 
-            var notes = " ";
-            var bonus = " ";
-
-            this.equipWeapon(weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, notes, bonus);
-
+            this.equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
             this.invDisplay();
         } else {
             alert("You cannot afford this item.");
         }
-
     }
 
     /**
      *
-     * @param weaponName
-     * @param itemCost
-     * @param itemWeight
-     * @param dmg
-     * @param crit
-     * @param rang
+     * @param {String} name
+     * @param {number} cost
+     * @param {number} weight
+     * @param damage
+     * @param critical
+     * @param range
      * @param type
      * @param size
      * @param reach
@@ -84,29 +80,27 @@ class Inventory {
      * @param notes
      * @param bonus
      */
-    equipWeapon(weaponName, itemCost, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, notes, bonus) {
+    equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus) {
         if (this.weaponSlotOne === undefined) {
-            var confirmWa = confirm("Do you want to equip this weapon in slot one?");
+            let confirmWa = confirm("Do you want to equip this weapon in slot one?");
+            if (confirmWa) {
+                this.weaponSlotOne = true;
+                this.wSlotOne = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
+            }
         } else if (this.weaponSlotTwo === undefined) {
-            var confirmWb = confirm("Do you want to equip this weapon in slot two?");
+            let confirmWb = confirm("Do you want to equip this weapon in slot two?");
+            if (confirmWb) {
+                this.weaponSlotTwo = true;
+                this.wSlotTwo = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
+            }
         } else if (this.weaponSlotThree === undefined) {
-            var confirmWc = confirm("Do you want to equip this weapon in slot three?");
+            let confirmWc = confirm("Do you want to equip this weapon in slot three?");
+            if (confirmWc) {
+                this.weaponSlotThree = true;
+                this.wSlotThree = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
+            }
         } else {
             alert("You have no more open weapon slots. User-added weapon slots are not supported in this version.");
-        }
-
-        if (confirmWa) {
-            this.weaponSlotOne = true;
-            this.wSlotOne = new Weapon(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, notes, bonus);
-
-        }
-        if (confirmWb) {
-            this.weaponSlotTwo = true;
-            this.wSlotTwo = new Weapon(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, notes, bonus);
-        }
-        if (confirmWc) {
-            this.weaponSlotThree = true;
-            this.wSlotThree = new Weapon(weaponName, itemWeight, dmg, crit, rang, type, size, reach, hardness, hp, saves, notes, bonus);
         }
     }
 
@@ -115,11 +109,11 @@ class Inventory {
      *        GOLD 	   = 100
      *        SILVER   = 10
      *        COPPER   = 1
-     * @param mxFactor
-     * @param fMonks
+     * @param {number} mxFactor
+     * @param {number} fMonks
      */
     calculateGold(mxFactor, fMonks) {
-        var startingGold = 0;
+        let startingGold = 0;
         for (let i = 0; i < mxFactor; i++) {	// Roll a d4 [mxFactor] times.
             startingGold += (Math.floor(Math.random() * 4 + 1) * fMonks) * 100; // Calculate Number of Coppers in Possession.
         }
@@ -131,11 +125,11 @@ class Inventory {
 
     /**
      *
-     * @param input
+     * @param {String} input
      */
     rollStartingGold(input) {
         if (input === "first") {
-            switch (this.generator.character.selClass) {
+            switch (this.generator.character.class) {
                 case "DRUID":
                     this.calculateGold(2, 10);
                     break;
@@ -164,13 +158,8 @@ class Inventory {
                     break;
             }
         }
-        if (input === "leveled") {
-            /*
-            var gold = 0;
-            for ( i = 0 ; i < this.generator.levelAdvance ; i++ ) {
-                gold += ( 9 * i ) * 10;
-            } */
 
+        if (input === "leveled") {
             switch (Number(this.generator.character.levelAdvance)) {
                 case 2:
                     var gold = 900;
@@ -231,12 +220,12 @@ class Inventory {
                     break;
             }
 
-
             document.getElementById("copper-remaining").innerHTML = (gold * 100);
             document.getElementById("roll-starting-gold").style.display = "none"; // Remove button to prevent repeats.
             document.getElementById("inventory").style.display = "block";
             document.getElementById("equip-variable-buffer").style.display = "block";
         }
+
         if (input === "input") {
             document.getElementById("copper-remaining").innerHTML = document.getElementById("gold-input").value;
             document.getElementById("roll-starting-gold").style.display = "none"; // Remove button to prevent repeats.
@@ -258,26 +247,25 @@ class Inventory {
 
     /**
      *
-     * @param itemName
-     * @param itemCost
-     * @param itemWeight
+     * @param {String} name
+     * @param {number} cost
+     * @param {number} weight
      */
-    buyItem(itemName, itemCost, itemWeight) {
-        // alert("window item item-purchase-no :" + window.itemPurchaseNo);
-        var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
-        if (itemCost <= goldRemaining) {
-            goldRemaining = goldRemaining - itemCost;
+    buyItem(name, cost, weight) {
+        let goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
+        if (cost <= goldRemaining) {
+            goldRemaining = goldRemaining - cost;
             document.getElementById("copper-remaining").innerHTML = goldRemaining;
 
             window.itemPurchaseNo += 1;
-            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = itemName;
+            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = name;
             document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block";
 
             var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-            totalWeight += itemWeight;
+            totalWeight += weight;
             document.getElementById("total-weight").innerHTML = totalWeight;
 
-            this.buySpecialItem(itemName, window.itemPurchaseNo);
+            this.buySpecialItem(name, window.itemPurchaseNo);
             this.invDisplay();
         } else {
             alert("You cannot afford this item.");
@@ -286,28 +274,28 @@ class Inventory {
 
     /**
      *
-     * @param itemQty
-     * @param itemName
-     * @param itemCost
-     * @param itemWeight
+     * @param quantity
+     * @param name
+     * @param cost
+     * @param weight
      */
-    buyItemStack(itemQty, itemName, itemCost, itemWeight) {
-        var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
-        if (itemCost <= goldRemaining) {
-            goldRemaining = goldRemaining - itemCost;
+    buyItemStack(quantity, name, cost, weight) {
+        let goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
+        if (cost <= goldRemaining) {
+            goldRemaining = goldRemaining - cost;
             document.getElementById("copper-remaining").innerHTML = goldRemaining;
 
-            var itemQuantity = Number(document.getElementById("qty-" + itemName).innerHTML);
-            itemQuantity += itemQty;
+            var itemQuantity = Number(document.getElementById("qty-" + name).innerHTML);
+            itemQuantity += quantity;
 
-            document.getElementById("item-" + itemName).innerHTML = itemName;
-            document.getElementById("item-" + itemName).style.display = "block";
+            document.getElementById("item-" + name).innerHTML = name;
+            document.getElementById("item-" + name).style.display = "block";
 
-            document.getElementById("qty-" + itemName).innerHTML = itemQuantity;
-            document.getElementById("qty-" + itemName).style.display = "block";
+            document.getElementById("qty-" + name).innerHTML = itemQuantity;
+            document.getElementById("qty-" + name).style.display = "block";
 
             var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-            totalWeight += itemWeight;
+            totalWeight += weight;
             document.getElementById("total-weight").innerHTML = totalWeight;
 
             this.invDisplay();
@@ -318,25 +306,24 @@ class Inventory {
 
     /**
      *
-     * @param itemName
-     * @param itemNumber
+     * @param {String} name
+     * @param {String} number
      */
-    buySpecialItem(itemName, itemNumber) {
-        var goldRemaining;
-        switch (itemName) {
+    buySpecialItem(name, number) {
+        let goldRemaining, confirmBow;
+        switch (name) {
             case "Composite Longbow":
-                var confirmBow = prompt("Composite bows take a STR bonus. \n Input desired STR bonus. Cost is +100gp (10,000 CP) per point. \n Input a number.");
+                confirmBow = prompt("Composite bows take a STR bonus. \n Input desired STR bonus. Cost is +100gp (10,000 CP) per point. \n Input a number.");
                 goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
                 goldRemaining = goldRemaining - (Number(confirmBow) * 10000);
-                document.getElementById("item-purchase-no-" + itemNumber).innerHTML = itemName + " (+" + confirmBow + ")";
+                document.getElementById("item-purchase-no-" + number).innerHTML = name + " (+" + confirmBow + ")";
                 document.getElementById("copper-remaining").innerHTML = goldRemaining;
-
                 break;
             case "Composite Shortbow":
-                var confirmBow = prompt("Composite bows take a STR bonus. \n Input desired STR bonus. Cost is +75gp (7,500 CP) per point. \n Input a number.");
+                confirmBow = prompt("Composite bows take a STR bonus. \n Input desired STR bonus. Cost is +75gp (7,500 CP) per point. \n Input a number.");
                 goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
                 goldRemaining = goldRemaining - (Number(confirmBow) * 7500);
-                document.getElementById("item-purchase-no-" + itemNumber).innerHTML = itemName + " (+" + confirmBow + ")";
+                document.getElementById("item-purchase-no-" + number).innerHTML = name + " (+" + confirmBow + ")";
                 document.getElementById("copper-remaining").innerHTML = goldRemaining;
                 break;
         }
@@ -344,45 +331,44 @@ class Inventory {
 
     /**
      *
-     * @param armorName
-     * @param itemCost
-     * @param itemWeight
+     * @param name
+     * @param cost
+     * @param weight
      * @param armorBonus
      * @param maxDex
      * @param check
-     * @param spFail
+     * @param spellFail
      * @param maxSp
-     * @param hardn
+     * @param hardness
      * @param hp
      * @param saves
      * @param donning
      * @param exs
      */
-    buyArmor(armorName, itemCost, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs) {
-        var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
-        if (itemCost <= goldRemaining) {
-            goldRemaining = goldRemaining - itemCost;
-            document.getElementById("copper-remaining").innerHTML = goldRemaining;
-
+    buyArmor(name, cost, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning, exs) {
+        let changeArmor,
+            confirmAr,
+            goldRemaining = Number(document.getElementById("copper-remaining").innerHTML),
+            totalWeight = Number(document.getElementById("total-weight").innerHTML) + weight;
+        if (cost <= goldRemaining) {
+            goldRemaining = goldRemaining - cost;
             window.itemPurchaseNo += 1;
-            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = armorName;
+            document.getElementById("copper-remaining").innerHTML = goldRemaining;
+            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = name;
             document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block";
-
-            var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-            totalWeight += itemWeight;
             document.getElementById("total-weight").innerHTML = totalWeight;
 
             if (this.armorSlot) {
-                var changeArmor = confirm("You already have armor equipped. Replace " + this.aSlot.aName + " with this?");
+                changeArmor = confirm("You already have armor equipped. Replace " + this.aSlot.aName + " with this?");
                 if (changeArmor) {
-                    this.aSlot = new Armor(armorName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs);
+                    this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning, exs);
                 }
             } else if (this.armorSlot === undefined) {
-                var confirmAr = confirm("Do you want to equip this armor?");
+                confirmAr = confirm("Do you want to equip this armor?");
             }
 
             if (confirmAr) {
-                this.aSlot = new Armor(armorName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs);
+                this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning, exs);
                 this.armorSlot = true;
             }
 
@@ -390,7 +376,6 @@ class Inventory {
                 document.getElementById("print-armor-bonus").innerHTML = this.aSlot.arBonus;
                 // Update AC on character sheet. So it ca be relied upon later for calculations during population.
             }
-
             this.invDisplay();
         } else {
             alert("You cannot afford this item.");
@@ -399,47 +384,47 @@ class Inventory {
 
     /**
      *
-     * @param shieldName
-     * @param itemCost
-     * @param itemWeight
+     * @param name
+     * @param cost
+     * @param weight
      * @param armorBonus
      * @param maxDex
      * @param check
-     * @param spFail
+     * @param spellFail
      * @param maxSp
-     * @param hardn
+     * @param hardness
      * @param hp
      * @param saves
      * @param donning
      */
-    buyShield(shieldName, itemCost, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning) {
-        var goldRemaining = Number(document.getElementById("copper-remaining").innerHTML);
+    buyShield(name, cost, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning) {
+        let changeArmor,
+            confirmSh,
+            goldRemaining = Number(document.getElementById("copper-remaining").innerHTML),
+            totalWeight = Number(document.getElementById("total-weight").innerHTML) + weight;
 
-        if (itemCost <= goldRemaining) {
-            goldRemaining = goldRemaining - itemCost;
+        if (cost <= goldRemaining) {
+            goldRemaining = goldRemaining - cost;
             document.getElementById("copper-remaining").innerHTML = goldRemaining;
 
             window.itemPurchaseNo += 1;
-            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = shieldName;
+            document.getElementById("item-purchase-no-" + window.itemPurchaseNo).innerHTML = name;
             document.getElementById("item-purchase-no-" + window.itemPurchaseNo).style.display = "block";
-
-            var totalWeight = Number(document.getElementById("total-weight").innerHTML);
-            totalWeight += itemWeight;
             document.getElementById("total-weight").innerHTML = totalWeight;
 
             if (this.shieldSlot) {
-                var changeArmor = confirm("You already have a shield equipped. Replace " + this.sSlot.shieldName + " with this?");
+                changeArmor = confirm("You already have a shield equipped. Replace " + this.sSlot.shieldName + " with this?");
                 if (changeArmor) {
-                    this.sSlot = new Shield(shieldName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning);
+                    this.sSlot = new Shield(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning);
                 }
             }
 
             if (this.shieldSlot === undefined) {
-                var confirmSh = confirm("Do you want to equip this shield?");
+                confirmSh = confirm("Do you want to equip this shield?");
             }
 
             if (confirmSh) {
-                this.sSlot = new Shield(shieldName, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning);
+                this.sSlot = new Shield(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning);
                 this.shieldSlot = true;
             }
 
@@ -447,33 +432,44 @@ class Inventory {
                 document.getElementById("print-shield-bonus").innerHTML = this.sSlot.arBonus;
                 // Update AC on character sheet.
             }
-
             this.invDisplay();
         } else {
             alert("You cannot afford this item.");
         }
-
     }
 
     /**
      *
-     * @param kindOfItem
+     * @param {String} kindOfItem
      */
     updateCustomForm(kindOfItem) {
         switch (kindOfItem) {
             case "weapon":
                 // Print total enhancement bonus from enchantments.
-                var base = Number(document.getElementById("cu-w-basecost").value) * 100;
-                var qual = Number(document.getElementById("cu-w-qual").value);
-                var weaponType = document.getElementById("cu-w-weapon-type").value;
-                var material = document.getElementById("cu-w-mater").value;
-                var weight = Number(document.getElementById("cu-w-weig").value);
-                var baseMaterial = document.getElementById("cu-w-base-material").value;
+                let enchant1,
+                    enchant2,
+                    enchant3,
+                    materialPrice = 0,
+                    list,
+                    isMelee,
+                    base = Number(document.getElementById("cu-w-basecost").value) * 100,
+                    qual = Number(document.getElementById("cu-w-qual").value),
+                    weaponType = document.getElementById("cu-w-weapon-type").value,
+                    material = document.getElementById("cu-w-mater").value,
+                    weight = Number(document.getElementById("cu-w-weig").value),
+                    baseMaterial = document.getElementById("cu-w-base-material").value,
+                    critRan = Number(document.getElementById("cu-w-crit-rang").value),
+                    critMult = Number(document.getElementById("cu-w-crit-mult").value),
+                    en1 = document.getElementById("cu-w-enhan-val-1").value,
+                    en2 = document.getElementById("cu-w-enhan-val-2").value,
+                    en3 = document.getElementById("cu-w-enhan-val-3").value,
+                    enhan = Number(document.getElementById("cu-w-enhan").innerHTML),
+                    masterwork = (qual === 1 && enhan < 1) ? 30000 : 0,
+                    enhanPrice = (2000 * Math.pow(enhan, 2)) * 100;
 
-                var en1 = document.getElementById("cu-w-enhan-val-1").value;
                 switch (en1) {
                     case "none":
-                        var enchant1 = 0;
+                        enchant1 = 0;
                         break;
                     case "anar":
                     case "axio":
@@ -484,114 +480,112 @@ class Inventory {
                     case "shbu":
                     case "unho":
                     case "woun":
-                        var enchant1 = 2;
+                        enchant1 = 2;
                         break;
                     case "spee":
-                        var enchant1 = 3;
+                        enchant1 = 3;
                         break;
                     case "bril":
                     case "danc":
-                        var enchant1 = 4;
+                        enchant1 = 4;
                         break;
                     case "vorp":
-                        var enchant1 = 5;
+                        enchant1 = 5;
                         break;
                     default:
-                        var enchant1 = 1;
-                        break;
-                }
-                var en2 = document.getElementById("cu-w-enhan-val-2").value;
-                switch (en2) {
-                    case "none":
-                        var enchant2 = 0;
-                        break;
-                    case "anar":
-                    case "axio":
-                    case "disr":
-                    case "flbu":
-                    case "icbu":
-                    case "holy":
-                    case "shbu":
-                    case "unho":
-                    case "woun":
-                        var enchant2 = 2;
-                        break;
-                    case "spee":
-                        var enchant2 = 3;
-                        break;
-                    case "bril":
-                    case "danc":
-                        var enchant2 = 4;
-                        break;
-                    case "vorp":
-                        var enchant2 = 5;
-                        break;
-                    default:
-                        var enchant2 = 1;
-                        break;
-                }
-                var en3 = document.getElementById("cu-w-enhan-val-3").value;
-                switch (en3) {
-                    case "none":
-                        var enchant3 = 0;
-                        break;
-                    case "anar":
-                    case "axio":
-                    case "disr":
-                    case "flbu":
-                    case "icbu":
-                    case "holy":
-                    case "shbu":
-                    case "unho":
-                    case "woun":
-                        var enchant3 = 2;
-                        break;
-                    case "spee":
-                        var enchant3 = 3;
-                        break;
-                    case "bril":
-                    case "danc":
-                        var enchant3 = 4;
-                        break;
-                    case "vorp":
-                        var enchant3 = 5;
-                        break;
-                    default:
-                        var enchant3 = 1;
+                        enchant1 = 1;
                         break;
                 }
 
-                var materialPrice = 0;
+                switch (en2) {
+                    case "none":
+                        enchant2 = 0;
+                        break;
+                    case "anar":
+                    case "axio":
+                    case "disr":
+                    case "flbu":
+                    case "icbu":
+                    case "holy":
+                    case "shbu":
+                    case "unho":
+                    case "woun":
+                        enchant2 = 2;
+                        break;
+                    case "spee":
+                        enchant2 = 3;
+                        break;
+                    case "bril":
+                    case "danc":
+                        enchant2 = 4;
+                        break;
+                    case "vorp":
+                        enchant2 = 5;
+                        break;
+                    default:
+                        enchant2 = 1;
+                        break;
+                }
+
+                switch (en3) {
+                    case "none":
+                        enchant3 = 0;
+                        break;
+                    case "anar":
+                    case "axio":
+                    case "disr":
+                    case "flbu":
+                    case "icbu":
+                    case "holy":
+                    case "shbu":
+                    case "unho":
+                    case "woun":
+                        enchant3 = 2;
+                        break;
+                    case "spee":
+                        enchant3 = 3;
+                        break;
+                    case "bril":
+                    case "danc":
+                        enchant3 = 4;
+                        break;
+                    case "vorp":
+                        enchant3 = 5;
+                        break;
+                    default:
+                        enchant3 = 1;
+                        break;
+                }
 
                 switch (material) {
                     case "Standard":
-                        var materialPrice = 0;
+                        materialPrice = 0;
                         break;
                     case "Adamantine":
-                        var materialPrice = 300000;
+                        materialPrice = 300000;
                         break;
                     case "Mithral":
-                        var materialPrice = 50000 * weight;
+                        materialPrice = 50000 * weight;
                         break;
                     case "Deep Crystal":
-                        var materialPrice = 100000;
+                        materialPrice = 100000;
                         break;
                     case "Mundane Crystal":
-                        var materialPrice = 30000;
+                        materialPrice = 30000;
                         break;
                     case "Cold Iron":
-                        var materialPrice = base;
+                        materialPrice = base;
                         break;
                     case "Alchemical Silver":
                         switch (weaponType) {
                             case "Light":
-                                var materialPrice = 2000;
+                                materialPrice = 2000;
                                 break;
                             case "One-Handed":
-                                var materialPrice = 9000;
+                                materialPrice = 9000;
                                 break;
                             case "Two-Handed":
-                                var materialPrice = 18000;
+                                materialPrice = 18000;
                                 break;
                         }
                         // var materialPrice = 12500;
@@ -600,21 +594,21 @@ class Inventory {
 
                 switch (baseMaterial) {
                     case "Steel":
-                        var list = document.getElementsByClassName("steel-only");
+                        list = document.getElementsByClassName("steel-only");
                         for (let i = 0; i < list.length; i++) {
                             list[i].style.display = "block";
                         }
-                        var list = document.getElementsByClassName("wood-only");
+                        list = document.getElementsByClassName("wood-only");
                         for (let i = 0; i < list.length; i++) {
                             list[i].style.display = "none";
                         }
                         break;
                     case "Wood":
-                        var list = document.getElementsByClassName("wood-only");
+                        list = document.getElementsByClassName("wood-only");
                         for (let i = 0; i < list.length; i++) {
                             list[i].style.display = "block";
                         }
-                        var list = document.getElementsByClassName("steel-only");
+                        list = document.getElementsByClassName("steel-only");
                         for (let i = 0; i < list.length; i++) {
                             list[i].style.display = "none";
                         }
@@ -625,7 +619,6 @@ class Inventory {
                 document.getElementById("cu-w-enhan").innerHTML = enchant1 + enchant2 + enchant3;
                 document.getElementById("cu-w-bonus").innerHTML = qual;
 
-
                 if (enchant1 + enchant2 + enchant3 > 0) {
                     document.getElementById("cu-w-qual-disp").innerHTML = 1;
                     document.getElementById("cu-w-bonus").innerHTML = enchant1 + enchant2 + enchant3;
@@ -634,71 +627,43 @@ class Inventory {
                     }
                 }
 
-                var enhan = Number(document.getElementById("cu-w-enhan").innerHTML);
-
-                if (qual === 1 && enhan < 1) {
-                    var masterwork = 30000;
-                } else {
-                    var masterwork = 0;
-                }
-
                 switch (material) {
                     case "Darkwood":
                     case "Adamantine":
                     case "Mithral":
                     case "Deep Crystal":
                     case "Mundane Crystal":
-                        var masterwork = 0;
-                        var qual = 1;
+                        masterwork = 0;
+                        qual = 1;
                         break;
                 }
 
-                var enhanPrice = (2000 * Math.pow(enhan, 2)) * 100;
-
                 if (material === "Cold Iron") {
-                    var enhanPrice = ((2000 * Math.pow(enhan, 2)) * 100) + 200000;
+                    enhanPrice = ((2000 * Math.pow(enhan, 2)) * 100) + 200000;
                 }
 
                 document.getElementById("cu-w-cost").innerHTML = base + enhanPrice + masterwork + materialPrice;
-
-                var critRan = Number(document.getElementById("cu-w-crit-rang").value);
-                var critMult = Number(document.getElementById("cu-w-crit-mult").value);
                 document.getElementById("cu-w-crit").innerHTML = critRan + "+/x" + critMult;
 
-                if (weaponType === "Light" || weaponType === "One-Handed" || weaponType === "Two-Handed") {
-                    var isMelee = true;
-                } else {
-                    var isMelee = false;
-                }
+                isMelee = (weaponType === "Light" || weaponType === "One-Handed" || weaponType === "Two-Handed");
 
                 if (isMelee) {
                     document.getElementById("cu-w-rang-base").style.display = "none";
-                    var list = document.getElementsByClassName("melee-only");
+                    list = document.getElementsByClassName("melee-only");
                     for (let i = 0; i < list.length; i++) {
                         list[i].style.display = "block";
                     }
                 } else {
                     document.getElementById("cu-w-rang-base").style.display = "block";
-                    var list = document.getElementsByClassName("melee-only");
+                    list = document.getElementsByClassName("melee-only");
                     for (let i = 0; i < list.length; i++) {
                         list[i].style.display = "none";
                     }
                 }
                 break;
             case "item":
-                var masterwork = Number(document.getElementById("cu-i-qual").value);
-                if (masterwork) {
-                    document.getElementById("cu-i-whichSkill").style.display = "block";
-                } else {
-                    document.getElementById("cu-i-whichSkill").style.display = "none";
-                }
-                /*
-                if (document.getElementById("cu-i-skil").value === "write") {
-                    document.getElementById("cu-i-writein").style.display = "block";
-                } else {
-                    document.getElementById("cu-i-writein").style.display = "none";
-                }
-                */
+                masterwork = Number(document.getElementById("cu-i-qual").value);
+                document.getElementById("cu-i-whichSkill").style.display = (masterwork) ? "block" : "none";
                 break;
             case "armor":
                 // var base = Number(document.getElementById("cu-a-basecost").value) * 100;
@@ -710,17 +675,12 @@ class Inventory {
 
     /**
      *
-     * @param whichSubMenu
+     * @param {String} whichSubMenu
      */
     equipSubMenu(whichSubMenu) {
-        var allSubMenus = ["simpweap", "martweap", "exotweap", "armor", "gear", "substances", "tools", "custom"];
-        for (let i = 0; i < allSubMenus.length; i++) {
-            if (allSubMenus[i] === whichSubMenu) {
-                document.getElementById("equip-" + whichSubMenu).style.display = "block";
-            } else {
-                document.getElementById("equip-" + allSubMenus[i]).style.display = "none";
-
-            }
+        for (let i = 0; i < this.allSubMenus.length; i++) {
+            let isSubMenu = this.allSubMenus[i] === whichSubMenu;
+            document.getElementById("equip-" + (isSubMenu) ? whichSubMenu : this.allSubMenus[i]).style.display = (isSubMenu) ? "block" : "none";
         }
         document.getElementById("custom-weapon").style.display = "none";
         document.getElementById("custom-weapon-display").style.display = "none";
@@ -733,7 +693,7 @@ class Inventory {
      *
      */
     customItemSubMenu() {
-        var kind = document.getElementById("custom-select").value;
+        let kind = document.getElementById("custom-select").value;
         document.getElementById("custom-" + kind).style.display = "block";
         if (kind === "weapon" || kind === "armor") {
             document.getElementById("custom-" + kind + "-display").style.display = "block";
@@ -743,7 +703,7 @@ class Inventory {
 
     /**
      *
-     * @param itemKind
+     * @param {String} itemKind
      */
     createCustomItem(itemKind) {
         switch (itemKind) {

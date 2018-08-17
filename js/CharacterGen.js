@@ -153,9 +153,9 @@ class CharacterGen {
         document.getElementById("print-ancestry").innerHTML = document.getElementById("form-ancestry").value;
         document.getElementById("print-other-info").innerHTML = document.getElementById("form-other-info").value;
 
-        if (this.character.numOfFeats > 0) {
-            if (this.character.numOfFeats !== 0) {
-                for (let i = 1; i < (this.character.numOfFeats + 1); i++) {
+        if (this.character.numberOfFeats > 0) {
+            if (this.character.numberOfFeats !== 0) {
+                for (let i = 1; i < (this.character.numberOfFeats + 1); i++) {
                     document.getElementById("print-feat-" + i).innerHTML = document.getElementById("feat-name-" + i).innerHTML;
                 }
             }
@@ -189,16 +189,16 @@ class CharacterGen {
 
         var list = document.getElementsByClassName("print-race");
         for (let i = 0; i < list.length; i++) {
-            list[i].innerHTML = (this.character.selRace);
+            list[i].innerHTML = (this.character.race);
         }
 
         var list = document.getElementsByClassName("print-class");
         for (let i = 0; i < list.length; i++) {
-            list[i].innerHTML = (this.character.selClass);
+            list[i].innerHTML = (this.character.class);
         }
 
         document.getElementById("print-alignment").innerHTML = formAlignment;
-        document.getElementById("print-class").innerHTML = this.character.selClass;
+        document.getElementById("print-class").innerHTML = this.character.class;
         document.getElementById("print-level").innerHTML = this.character.levelAdvance;
         document.getElementById("print-experience").innerHTML = (500 * (this.character.levelAdvance - 1) * this.character.levelAdvance);
         document.getElementById("print-levelup").innerHTML = (500 * (this.character.levelAdvance) * (this.character.levelAdvance + 1));
@@ -208,29 +208,29 @@ class CharacterGen {
         document.getElementById("print-ab-wis").innerHTML = this.character.wisAttr;
         document.getElementById("print-ab-int").innerHTML = this.character.intAttr;
         document.getElementById("print-ab-cha").innerHTML = this.character.chaAttr;
-        document.getElementById("print-sav-for").innerHTML = this.character.forSave;
-        document.getElementById("print-sav-ref").innerHTML = this.character.refSave;
-        document.getElementById("print-sav-wil").innerHTML = this.character.wilSave;
+        document.getElementById("print-sav-for").innerHTML = this.character.fortitudeSave;
+        document.getElementById("print-sav-ref").innerHTML = this.character.reflexSave;
+        document.getElementById("print-sav-wil").innerHTML = this.character.willSave;
 
         if (this.character.greatFortitude) {
-            document.getElementById("print-sav-for-tot").innerHTML = (this.character.forSave + this.character.conMod + 2);
+            document.getElementById("print-sav-for-tot").innerHTML = (this.character.fortitudeSave + this.character.conMod + 2);
             document.getElementById("print-sav-for-misc").innerHTML = 2;
         } else {
-            document.getElementById("print-sav-for-tot").innerHTML = (this.character.forSave + this.character.conMod);
+            document.getElementById("print-sav-for-tot").innerHTML = (this.character.fortitudeSave + this.character.conMod);
         }
 
         if (this.character.ironWill) {
-            document.getElementById("print-sav-wil-tot").innerHTML = (this.character.wilSave + this.character.wisMod + 2);
+            document.getElementById("print-sav-wil-tot").innerHTML = (this.character.willSave + this.character.wisMod + 2);
             document.getElementById("print-sav-wil-misc").innerHTML = 2;
         } else {
-            document.getElementById("print-sav-wil-tot").innerHTML = (this.character.wilSave + this.character.wisMod);
+            document.getElementById("print-sav-wil-tot").innerHTML = (this.character.willSave + this.character.wisMod);
         }
 
         if (this.character.lighteningReflexes) {
-            document.getElementById("print-sav-ref-tot").innerHTML = (this.character.refSave + this.character.dexMod + 2);
+            document.getElementById("print-sav-ref-tot").innerHTML = (this.character.reflexSave + this.character.dexMod + 2);
             document.getElementById("print-sav-ref-misc").innerHTML = 2;
         } else {
-            document.getElementById("print-sav-ref-tot").innerHTML = (this.character.refSave + this.character.dexMod);
+            document.getElementById("print-sav-ref-tot").innerHTML = (this.character.reflexSave + this.character.dexMod);
         }
 
         if (this.character.toughness) {
@@ -241,31 +241,28 @@ class CharacterGen {
 
         var listStr = document.getElementsByClassName("print-mod-str");
         for (let i = 0; i < listStr.length; i++) {
-            listStr[i].innerHTML = ("+" + this.character.strMod);
+            listStr[i].innerHTML = (this.character.strMod < 0 ? "-" + this.character.strMod : "+" + this.character.strMod);
         }
-
         var listDex = document.getElementsByClassName("print-mod-dex");
         for (let i = 0; i < listDex.length; i++) {
-            listDex[i].innerHTML = ("+" + this.character.dexMod);
+            listDex[i].innerHTML = (this.character.dexMod < 0 ? "-" + this.character.dexMod : "+" + this.character.dexMod);
         }
-
         var listCon = document.getElementsByClassName("print-mod-con");
         for (let i = 0; i < listCon.length; i++) {
-            listCon[i].innerHTML = ("+" + this.character.conMod);
+            listCon[i].innerHTML = (this.character.conMod < 0 ? "-" + this.character.conMod : "+" + this.character.conMod);
         }
         var listWis = document.getElementsByClassName("print-mod-wis");
         for (let i = 0; i < listWis.length; i++) {
-            listWis[i].innerHTML = ("+" + this.character.wisMod);
+            listWis[i].innerHTML = (this.character.wisMod < 0 ? "-" + this.character.wisMod : "+" + this.character.wisMod);
         }
         var listInt = document.getElementsByClassName("print-mod-int");
         for (let i = 0; i < listInt.length; i++) {
-            listInt[i].innerHTML = ("+" + this.character.intMod);
+            listInt[i].innerHTML = (this.character.intMod < 0 ? "-" + this.character.intMod : "+" + this.character.intMod);
         }
         var listCha = document.getElementsByClassName("print-mod-cha");
         for (let i = 0; i < listCha.length; i++) {
-            listCha[i].innerHTML = ("+" + this.character.chaMod);
+            listCha[i].innerHTML = (this.character.chaMod < 0 ? "-" + this.character.chaMod : "+" + this.character.chaMod);
         }
-
         var listBab = document.getElementsByClassName("print-bab-one");
         for (let i = 0; i < listBab.length; i++) {
             listBab[i].innerHTML = ("+" + this.character.baseAttackBonus);
@@ -292,7 +289,7 @@ class CharacterGen {
 
         if (this.character.weaponFinesse === true) {
             document.getElementById("melee-attack-mod-title").innerHTML = ("DEX<br>MODIFIER");
-            document.getElementById("melee-attack-mod").innerHTML = ("+" + this.character.dexMod);
+            document.getElementById("melee-attack-mod").innerHTML = (this.character.dexMod < 0 ? "-" + this.character.dexMod : "+" + this.character.dexMod);
             document.getElementById("print-attack-first-one").innerHTML = (this.character.baseAttackBonus + this.character.dexMod);
             if (this.character.small) {
                 document.getElementById("print-attack-first-one").innerHTML = (this.character.baseAttackBonus + this.character.dexMod + 1);
@@ -487,10 +484,10 @@ class CharacterGen {
      *
      */
     printLeftoverMoney() {
-        var money = document.getElementById("copper-remaining").innerHTML;
-        var gold = Math.floor(money * 0.01);
-        var silver = (Math.floor(money * 0.1)) - (gold * 10);
-        var copper = (money) - (gold * 100) - (silver * 10);
+        var money = document.getElementById("copper-remaining").innerHTML,
+            gold = Math.floor(money * 0.01),
+            silver = (Math.floor(money * 0.1)) - (gold * 10),
+            copper = (money) - (gold * 100) - (silver * 10);
         document.getElementById("print-coins-gold").innerHTML = gold;
         document.getElementById("print-coins-silver").innerHTML = silver;
         document.getElementById("print-coins-copper").innerHTML = copper;
@@ -509,19 +506,11 @@ class CharacterGen {
 
     /**
      *
-     */
-    rollManual() {
-        document.getElementById("gener-ability-scores").style.display = "none";
-        document.getElementById("input-ability-scores").style.display = "block";
-    }
-
-    /**
-     *
      * @param {String} whichRules
      */
     rulesSelect(whichRules) {
         switch (whichRules) {
-            case "baseRace":
+            case "base":
                 document.getElementById("race-select").style.display = "block";
                 document.getElementById("race-source").style.display = "none";
                 document.getElementById("instructions").style.display = "none";

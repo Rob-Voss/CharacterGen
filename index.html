@@ -11,7 +11,6 @@
 
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.8.1/less.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
 
     <!-- Google Web -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,300' rel='stylesheet' type='text/css'>
@@ -39,21 +38,46 @@
         window.onload = function () {
             generator = new CharacterGen();
             window.itemPurchaseNo = 0;
-        }
+        };
+
+        $(document).ready(function () {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#print-picture').css('background', 'transparent url(' + e.target.result + ') center top no-repeat');
+                        $('#print-picture').css('background-size', '100% auto');
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#picture-upload").change(function () {
+                readURL(this);
+            });
+
+            $('.sk-input').change(
+                function () {
+                    generator.skills.updateSkillPoints();
+                }
+            );
+        });
+
+        $('.sk-input').change(function () {
+            alert("Handler for .change() called.");
+        });
     </script>
 </head>
 
 <body>
 <section id="build">
-    <!-- Title & List -->
-
-
-    <!-- End title & List -->
-
     <section id="race-source" class="menu menuspeed" data-scrollSpeed="-1">
         <input class="button top-button-40" type="button" value="Base Races"
-               onclick="generator.rulesSelect('baseRace');">
-        <!--<input class="button" type="button" value="Monster Races" onclick="generator.rulesSelect(mons);">-->
+               onclick="generator.rulesSelect('base');">
+        <input class="button" type="button" value="Monster Races"
+               onclick="generator.rulesSelect('monster');">
     </section>
 
     <section id="instructions" class="menu menu-tall menu-wide">
@@ -88,7 +112,6 @@
         <div class="bottom-buffer"></div>
     </section>
 
-
     <section id="race-select" class="menu menuspeed" data-scrollSpeed="-1">
         <input class="button back-button" type="button" value="&#8592; Back"
                onclick="generator.navigate('race-source');">
@@ -97,9 +120,12 @@
         </h2>
         <input id="human" class="button top-button-20" type="button" value="Human"
                onclick="generator.character.raceSelect('Human');">
-        <input id="dwarf" class="button" type="button" value="Dwarf" onclick="generator.character.raceSelect('Dwarf');">
-        <input id="elf" class="button" type="button" value="Elf" onclick="generator.character.raceSelect('Elf');">
-        <input id="gnome" class="button" type="button" value="Gnome" onclick="generator.character.raceSelect('Gnome');">
+        <input id="dwarf" class="button" type="button" value="Dwarf"
+               onclick="generator.character.raceSelect('Dwarf');">
+        <input id="elf" class="button" type="button" value="Elf"
+               onclick="generator.character.raceSelect('Elf');">
+        <input id="gnome" class="button" type="button" value="Gnome"
+               onclick="generator.character.raceSelect('Gnome');">
         <input id="Half-elf" class="button" type="button" value="Half-elf"
                onclick="generator.character.raceSelect('Half-elf');">
         <input id="Half-orc" class="button" type="button" value="Half-orc"
@@ -113,8 +139,8 @@
 
         <input class="button top-button-40" type="button" value="Base Classes"
                onclick="generator.rulesSelect('baseClass');">
-        <!--<input class="button" type="button" value="Players Handbook II" onclick="generator.rulesSelect(mons);">-->
-        <!--<input class="button" type="button" value="Complete Adventurer" onclick="generator.rulesSelect(mons);">-->
+        <input class="button" type="button" value="Players Handbook II" onclick="generator.rulesSelect('PHBII');">
+        <input class="button" type="button" value="Complete Adventurer" onclick="generator.rulesSelect('Complete');">
     </section>
 
 
@@ -133,8 +159,9 @@
         <input class="button" type="button" value="Druid"
                onclick="generator.character.classSelect('Druid'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Fighter"
-               onclick="generator.character.classSelect('Fighter'); generator.character.specialCases('fighter-bf'); ">
-        <input class="button" type="button" value="Monk" onclick="generator.character.specialCases('monk-option');">
+               onclick="generator.character.classSelect('Fighter'); generator.character.specialCases('fighterBonusFeat'); ">
+        <input class="button" type="button" value="Monk"
+               onclick="generator.character.specialCases('monk-option');">
         <input class="button" type="button" value="Paladin"
                onclick="generator.character.classSelect('Paladin'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Ranger"
@@ -160,144 +187,122 @@
                onclick="generator.character.classSelect('Monk'); generator.character.specialCases('stunningFist'); generator.character.specialCases('monk-close'); ">
     </section>
 
-
     <section id="dice-sys" class="menu">
-
-        <h2>Character Level</h2s>
-            <input id="level-input" class="button" type="number" value="1" min="1" max="20">
-
-            <div id="gener-ability-scores">
+        <h2>Character Level</h2>
+        <input id="level-input" class="button" type="number" value="1" min="1" max="20">
+        <div id="gener-ability-scores">
+            <h2>
+                Roll for your base Attributes
+            </h2>
+            <input id="roll-classic" class="roll-attribute button" type="button" value="Classic (3d6)"
+                   onclick="generator.character.rollAttributes('Classic');">
+            <input id="roll-standard" class="roll-attribute button" type="button" value="Standard (4d6 -lowest)"
+                   onclick="generator.character.rollAttributes('Standard');">
+            <input id="roll-heroic" class="roll-attribute button" type="button" value="Heroic (2d6 +6)"
+                   onclick="generator.character.rollAttributes('Heroic');">
+            <input id="roll-manual" class="roll-attribute button" type="button" value="Input Manually"
+                   onclick="document.getElementById('gener-ability-scores').style.display = 'none'; document.getElementById('input-ability-scores').style.display = 'block';">
+            <form id="roll-allocate">
+                <h3>
+                    Now Allocate:
+                </h3>
+                <label id="stat-label-1">0</label>
+                <select id="attrOne" value="ERROR">
+                    <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
+                    <option class="str-option" value="STR">STR</option>
+                    <option class="dex-option" value="DEX">DEX</option>
+                    <option class="con-option" value="CON">CON</option>
+                    <option class="wis-option" value="WIS">WIS</option>
+                    <option class="int-option" value="INT">INT</option>
+                    <option class="cha-option" value="CHA">CHA</option>
+                </select><br>
+                <label id="stat-label-2">0</label>
+                <select id="attrTwo" value="ERROR">
+                    <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
+                    <option class="str-option" value="STR">STR</option>
+                    <option class="dex-option" value="DEX">DEX</option>
+                    <option class="con-option" value="CON">CON</option>
+                    <option class="wis-option" value="WIS">WIS</option>
+                    <option class="int-option" value="INT">INT</option>
+                    <option class="cha-option" value="CHA">CHA</option>
+                </select><br>
+                <label id="stat-label-3">0</label>
+                <select id="attrThr" value="ERROR">
+                    <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
+                    <option class="str-option" value="STR">STR</option>
+                    <option class="dex-option" value="DEX">DEX</option>
+                    <option class="con-option" value="CON">CON</option>
+                    <option class="wis-option" value="WIS">WIS</option>
+                    <option class="int-option" value="INT">INT</option>
+                    <option class="cha-option" value="CHA">CHA</option>
+                </select><br>
+                <label id="stat-label-4">0</label>
+                <select id="attrFou" value="ERROR">
+                    <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
+                    <option class="str-option" value="STR">STR</option>
+                    <option class="dex-option" value="DEX">DEX</option>
+                    <option class="con-option" value="CON">CON</option>
+                    <option class="wis-option" value="WIS">WIS</option>
+                    <option class="int-option" value="INT">INT</option>
+                    <option class="cha-option" value="CHA">CHA</option>
+                </select><br>
+                <label id="stat-label-5">0</label>
+                <select id="attrFiv" value="ERROR">
+                    <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
+                    <option class="str-option" value="STR">STR</option>
+                    <option class="dex-option" value="DEX">DEX</option>
+                    <option class="con-option" value="CON">CON</option>
+                    <option class="wis-option" value="WIS">WIS</option>
+                    <option class="int-option" value="INT">INT</option>
+                    <option class="cha-option" value="CHA">CHA</option>
+                </select><br>
+                <label id="stat-label-6">0</label>
+                <select id="attrSix" value="ERROR">
+                    <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
+                    <option class="str-option" value="STR">STR</option>
+                    <option class="dex-option" value="DEX">DEX</option>
+                    <option class="con-option" value="CON">CON</option>
+                    <option class="wis-option" value="WIS">WIS</option>
+                    <option class="int-option" value="INT">INT</option>
+                    <option class="cha-option" value="CHA">CHA</option>
+                </select><br>
+                <input id="apply-all" type="button" class="button" name="button" Value="Apply"
+                       onclick="generator.character.assignAttributes(this.form);">
+            </form>
+            <section class="total-points">
                 <h2>
-                    Roll for your base Attributes
+                    Total Points Distributed:
                 </h2>
-
-                <input id="roll-classic" class="roll-attribute button" type="button" value="Classic (3d6)"
-                       onclick="generator.character.rollClassic();">
-                <input id="roll-standard" class="roll-attribute button" type="button" value="Standard (4d6 -lowest)"
-                       onclick="generator.character.rollStandard();">
-                <input id="roll-heroic" class="roll-attribute button" type="button" value="Heroic (2d6 +6)"
-                       onclick="generator.character.rollHeroic();">
-                <input id="roll-manual" class="roll-attribute button" type="button" value="Input Manually"
-                       onclick="generator.character.rollManual();">
-
-
-                <form id="roll-allocate">
-                    <h3>
-                        Now Allocate:
-                    </h3>
-                    <label id="stat-label-1">0</label>
-                    <select id="attrOne" value="ERROR">
-                        <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
-                        <option class="str-option" value="STR">STR</option>
-                        <option class="dex-option" value="DEX">DEX</option>
-                        <option class="con-option" value="CON">CON</option>
-                        <option class="wis-option" value="WIS">WIS</option>
-                        <option class="int-option" value="INT">INT</option>
-                        <option class="cha-option" value="CHA">CHA</option>
-                    </select><br>
-                    <label id="stat-label-2">0</label>
-                    <select id="attrTwo" value="ERROR">
-                        <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
-                        <option class="str-option" value="STR">STR</option>
-                        <option class="dex-option" value="DEX">DEX</option>
-                        <option class="con-option" value="CON">CON</option>
-                        <option class="wis-option" value="WIS">WIS</option>
-                        <option class="int-option" value="INT">INT</option>
-                        <option class="cha-option" value="CHA">CHA</option>
-                    </select><br>
-                    <label id="stat-label-3">0</label>
-                    <select id="attrThr" value="ERROR">
-                        <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
-                        <option class="str-option" value="STR">STR</option>
-                        <option class="dex-option" value="DEX">DEX</option>
-                        <option class="con-option" value="CON">CON</option>
-                        <option class="wis-option" value="WIS">WIS</option>
-                        <option class="int-option" value="INT">INT</option>
-                        <option class="cha-option" value="CHA">CHA</option>
-                    </select><br>
-                    <label id="stat-label-4">0</label>
-                    <select id="attrFou" value="ERROR">
-                        <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
-                        <option class="str-option" value="STR">STR</option>
-                        <option class="dex-option" value="DEX">DEX</option>
-                        <option class="con-option" value="CON">CON</option>
-                        <option class="wis-option" value="WIS">WIS</option>
-                        <option class="int-option" value="INT">INT</option>
-                        <option class="cha-option" value="CHA">CHA</option>
-                    </select><br>
-                    <label id="stat-label-5">0</label>
-                    <select id="attrFiv" value="ERROR">
-                        <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
-                        <option class="str-option" value="STR">STR</option>
-                        <option class="dex-option" value="DEX">DEX</option>
-                        <option class="con-option" value="CON">CON</option>
-                        <option class="wis-option" value="WIS">WIS</option>
-                        <option class="int-option" value="INT">INT</option>
-                        <option class="cha-option" value="CHA">CHA</option>
-                    </select><br>
-                    <label id="stat-label-6">0</label>
-                    <select id="attrSix" value="ERROR">
-                        <option value="blankSelect" disabled="disabled" selected="selected"> -- select --</option>
-                        <option class="str-option" value="STR">STR</option>
-                        <option class="dex-option" value="DEX">DEX</option>
-                        <option class="con-option" value="CON">CON</option>
-                        <option class="wis-option" value="WIS">WIS</option>
-                        <option class="int-option" value="INT">INT</option>
-                        <option class="cha-option" value="CHA">CHA</option>
-                    </select><br>
-
-                    <input id="apply-all" type="button" class="button" name="button" Value="Apply"
-                           onclick="generator.character.assignAttributes(this.form);">
-
-
-                </form>
-
-
-                <section class="total-points">
-                    <h2>
-                        Total Points Distributed:
-                    </h2>
-                    <p id="total-points">
-                        ---
-                    </p>
-                    <p id="playability">
-                        ---
-                    </p>
-                </section>
-
-
-            </div>
-
-            <div id="input-ability-scores">
-                <h2>
-                    Input Ability Scores Manually.
-                </h2>
-                <form>
-                    <p>STR</p>
-                    <input id="inpstrAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
-                    <p>DEX</p>
-                    <input id="inpdexAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
-                    <p>CON</p>
-                    <input id="inpconAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
-                    <p>WIS</p>
-                    <input id="inpwisAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
-                    <p>INT</p>
-                    <input id="inpintAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
-                    <p>CHA</p>
-                    <input id="inpchaAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
-
-
-                    <input id="apply-all-man" type="button" class="button" value="Submit"
-                           onclick="generator.character.assignAttribMan(this.form);">
-                </form>
-            </div>
-
+                <p id="total-points">
+                    ---
+                </p>
+            </section>
+        </div>
+        <div id="input-ability-scores">
+            <h2>
+                Input Ability Scores Manually.
+            </h2>
+            <form>
+                <p>STR</p>
+                <input id="inpstrAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
+                <p>DEX</p>
+                <input id="inpdexAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
+                <p>CON</p>
+                <input id="inpconAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
+                <p>WIS</p>
+                <input id="inpwisAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
+                <p>INT</p>
+                <input id="inpintAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
+                <p>CHA</p>
+                <input id="inpchaAttr" class="input" type="number" value="" min="0" max="30" placeholder="0">
+                <input id="apply-all-man" type="button" class="button" value="Submit"
+                       onclick="generator.character.assignAttributesManually(this.form);">
+            </form>
+        </div>
     </section>
 
     <section id="final-base-attributes" class="final-base-attributes menu menuspeed" data-scrollSpeed="-1">
-
         <input class="button back-button" type="button" value="Start Over" onclick="generator.navigate('start-over');">
-
         <div class="final-text">
             <h3>Race:</h3>
             <h2 id="show-race-2">Human</h2>
@@ -307,7 +312,6 @@
             <h2 id="show-level">1</h2>
             <h3>HP:</h3>
             <h2 id="show-hp">0</h2>
-
             <h3>Money:</h3>
             <h2 id="copper-remaining">-</h2>
             <h3>Weight:</h3>
@@ -324,9 +328,8 @@
             ---
         </h4>
         <h4 id="final-str-mod">
-            + ---
+            ---
         </h4>
-        </br>
         <h3>
             DEX
         </h3>
@@ -334,9 +337,8 @@
             ---
         </h4>
         <h4 id="final-dex-mod">
-            + ---
+            ---
         </h4>
-        </br>
         <h3>
             CON
         </h3>
@@ -344,9 +346,8 @@
             ---
         </h4>
         <h4 id="final-con-mod">
-            + ---
+            ---
         </h4>
-        </br>
         <h3>
             WIS
         </h3>
@@ -354,9 +355,8 @@
             ---
         </h4>
         <h4 id="final-wis-mod">
-            + ---
+            ---
         </h4>
-        </br>
         <h3>
             INT
         </h3>
@@ -364,9 +364,8 @@
             ---
         </h4>
         <h4 id="final-int-mod">
-            + ---
+            ---
         </h4>
-        </br>
         <h3>
             CHA
         </h3>
@@ -374,12 +373,9 @@
             ---
         </h4>
         <h4 id="final-cha-mod">
-            + ---
+            ---
         </h4>
-
         <div class="final-attr-spacer"></div>
-
-
     </section>
 
     <section id="handle-level-adv" class="menu menu-wide menu-tall">
@@ -406,7 +402,8 @@
                 <option class="int-option" value="int">INT</option>
                 <option class="cha-option" value="cha">CHA</option>
             </select>
-            <input type="button" class="button" value="Apply" onclick="generator.character.addAbilityScore(1);">
+            <input type="button" class="button" value="Apply"
+                   onclick="generator.character.addAbilityScore(1);">
         </form>
         <form id="handle-ability-score-2">
             <p>
@@ -421,8 +418,8 @@
                 <option class="int-option" value="int">INT</option>
                 <option class="cha-option" value="cha">CHA</option>
             </select>
-            <input type="button" class="button" value="Apply" onclick="generator.character.addAbilityScore(2);">
-
+            <input type="button" class="button" value="Apply"
+                   onclick="generator.character.addAbilityScore(2);">
         </form>
         <form id="handle-ability-score-3">
             <p>
@@ -437,7 +434,8 @@
                 <option class="int-option" value="int">INT</option>
                 <option class="cha-option" value="cha">CHA</option>
             </select>
-            <input type="button" class="button" value="Apply" onclick="generator.character.addAbilityScore(3);">
+            <input type="button" class="button" value="Apply"
+                   onclick="generator.character.addAbilityScore(3);">
         </form>
         <form id="handle-ability-score-4">
             <p>
@@ -452,7 +450,8 @@
                 <option class="int-option" value="int">INT</option>
                 <option class="cha-option" value="cha">CHA</option>
             </select>
-            <input type="button" class="button" value="Apply" onclick="generator.character.addAbilityScore(4);">
+            <input type="button" class="button" value="Apply"
+                   onclick="generator.character.addAbilityScore(4);">
         </form>
         <form id="handle-ability-score-5">
             <p>
@@ -467,18 +466,15 @@
                 <option class="int-option" value="int">INT</option>
                 <option class="cha-option" value="cha">CHA</option>
             </select>
-            <input type="button" class="button" value="Apply" onclick="generator.character.addAbilityScore(5);">
-
+            <input type="button" class="button" value="Apply"
+                   onclick="generator.character.addAbilityScore(5);">
         </form>
-
         <div class="bottom-buffer"></div>
-
-        <input type="button" class="button" value="Next &#8594;" onclick="generator.character.doneAdvLvl();">
-
+        <input type="button" class="button" value="Next &#8594;"
+               onclick="generator.character.doneAdvLvl();">
         <div class="bottom-buffer"></div>
         <div class="bottom-buffer"></div>
     </section>
-
 
     <section id="select-skills" class="menu menu-wide menu-tall">
         <input class="button forward-button" type="button" value="Feats &#8594;"
@@ -490,28 +486,20 @@
             Skill ranks purchased will be calculated automatically based on class skills. Write
             in skills are at the bottom.
         </p>
-
         <p id="sk-points-starting" class="important">
             Skill Points:
         </p>
-
         <!--
 			<div class="skill-button-top">
 				<input id="dev-load-skills" form="skPtsInp" type="button" name="button" Value="Load" onclick="generator.loadSkills();">
-				<input id="log-ab-modifiers" type="button" name="button" value="Log Ab Mods" onclick="generator.addAbModifiers();">
+				<input id="log-ab-modifiers" type="button" name="button" value="Log Ab Mods" onclick="generator.addAbilityModifiers();">
 				<input id="accept-skills" type="button" name="button" value="Accept Skills" onclick="generator.acceptSkills();">
 			</div>
 			<input id="update-skills" form="skPtsInp" type="button" class="button" Value="Update Skills" onclick="generator.calcPoints(this.form);">
 			<div id="skills-finish">
 				<input id="accept-skills" type="button" name="button" value="Accept Skills" onclick="generator.acceptSkills();">
-
-
-
-
 			</div>
 			-->
-
-
         <div class="skills class-sk">
             <p>[MAX]</p>
             <p id="c-appr">[]</p>
@@ -596,79 +584,113 @@
         </div>
 
         <div class="skills input-points">
-
             <p>Points</p>
             <form id="skPtsInp">
-                <div class="sk-input-wr"><input type="number" id="in_appr" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_bala" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_bluf" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_clim" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_conc" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_craf" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_deci" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_dipl" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_disa" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_disg" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_esca" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_forg" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_gath" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_hand" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_heal" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_hide" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_inti" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_jump" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_know" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_list" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_move" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_open" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_perf" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_prof" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_ride" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_sear" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_sens" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_slei" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_spel" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_spot" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_surv" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_swim" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_tumb" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_usem" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
-                <div class="sk-input-wr"><input type="number" id="in_user" value="0" placeholder="0" max="4" min="0"
-                                                class="sk-input"></div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_appr" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_bala" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_bluf" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_clim" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_conc" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_craf" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_deci" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_dipl" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_disa" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_disg" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_esca" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_forg" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_gath" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_hand" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_heal" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_hide" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_inti" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_jump" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_know" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_list" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_move" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_open" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_perf" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_prof" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_ride" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_sear" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_sens" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_slei" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_spel" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_spot" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_surv" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_swim" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_tumb" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_usem" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
+                <div class="sk-input-wr">
+                    <input type="number" id="in_user" value="0" placeholder="0" max="4" min="0" class="sk-input">
+                </div>
                 <!--
 					<div class="sk-input-wr"><input  type="number" id="in_bla1" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
 					<div class="sk-input-wr"><input  type="number" id="in_bla2" value="0" placeholder="0" max="4" min="0" class="sk-input"></div>
@@ -677,10 +699,9 @@
             </form>
             <script type="text/javascript">
                 $('#skPtsInp').keyup(function () {
-                    generator.character.calcPoints();
+                    generator.skills.calcPoints();
                 });
             </script>
-
         </div>
 
         <div class="skills ab-mod">
@@ -805,27 +826,26 @@
             <p id="t-user">-</p>
         </div>
 
-
         <div class="add-skills">
             <form>
                 <p>
                     Add Additional Craft, Knowledge, Perform, Profession, and Write-in skills here.
                 </p>
                 <div class="add-skill-labels">
-                    <p>Class Skill</p>
-                    <p>Skill Type</p>
+                    <p>Class</p>
+                    <p>Type</p>
                     <p>Name/Subtype</p>
-                    <p>Skill Points</p>
-                    <p>Ability Modifier</p>
-                    <p>Misc. Modifier</p><br>
+                    <p>Points</p>
+                    <p>Ability MOD</p>
+                    <p>Misc. MOD</p><br>
                 </div>
                 <select id="wrin-inclass-1" class="user-added-skill" value="">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
                 <select id="wrin-skill-select-1" class="user-added-skill">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option class="all-wrin-craft" value="craft">Craft:</option>
                     <option class="all-wrin-knowledge" value="knowledge">Knowledge:</option>
                     <option class="all-wrin-perform" value="perform">Perform:</option>
@@ -836,30 +856,28 @@
                 <input id="bla36" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-abmod-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
-
-
-                <input id="wrin-skill-submit-1" type="button" value="Submit" onclick="generator.character.addSkill();">
-
+                <input id="wrin-skill-submit-1" type="button" value="Submit"
+                       onclick="generator.skills.addSkill();">
             </form>
             <form id="wrin-2">
                 <p>
                     Add Additional Craft, Knowledge, Perform, and Profession skills here.
                 </p>
                 <div class="add-skill-labels">
-                    <p>Class Skill</p>
-                    <p>Skill Type</p>
+                    <p>Class</p>
+                    <p>Type</p>
                     <p>Name/Subtype</p>
-                    <p>Skill Points</p>
-                    <p>Ability Modifier</p>
-                    <p>Misc. Modifier</p><br>
+                    <p>Points</p>
+                    <p>Ability MOD</p>
+                    <p>Misc. MOD</p><br>
                 </div>
                 <select id="wrin-inclass-2" class="user-added-skill" value="">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
                 <select id="wrin-skill-select-2" class="user-added-skill">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option class="all-wrin-craft" value="craft">Craft:</option>
                     <option class="all-wrin-knowledge" value="knowledge">Knowledge:</option>
                     <option class="all-wrin-perform" value="perform">Perform:</option>
@@ -870,29 +888,28 @@
                 <input id="bla37" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-abmod-2" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-2" type="number" class="user-added-skill" value="" placeholder="0" min="0">
-
-
-                <input id="wrin-skill-submit-2" type="button" value="Submit" onclick="generator.character.addSkill();">
+                <input id="wrin-skill-submit-2" type="button" value="Submit"
+                       onclick="generator.skills.addSkill();">
             </form>
             <form id="wrin-3">
                 <p>
                     Add Additional Craft, Knowledge, Perform, and Profession skills here.
                 </p>
                 <div class="add-skill-labels">
-                    <p>Class Skill</p>
-                    <p>Skill Type</p>
+                    <p>Class</p>
+                    <p>Type</p>
                     <p>Name/Subtype</p>
-                    <p>Skill Points</p>
-                    <p>Ability Modifier</p>
-                    <p>Misc. Modifier</p><br>
+                    <p>Points</p>
+                    <p>Ability MOD</p>
+                    <p>Misc. MOD</p><br>
                 </div>
                 <select id="wrin-inclass-3" class="user-added-skill" value="">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
                 <select id="wrin-skill-select-3" class="user-added-skill">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option class="all-wrin-craft" value="craft">Craft:</option>
                     <option class="all-wrin-knowledge" value="knowledge">Knowledge:</option>
                     <option class="all-wrin-perform" value="perform">Perform:</option>
@@ -903,27 +920,28 @@
                 <input id="bla38" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-abmod-3" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-3" type="number" class="user-added-skill" value="" placeholder="0" min="0">
-                <input id="wrin-skill-submit-3" type="button" value="Submit" onclick="generator.character.addSkill();">
+                <input id="wrin-skill-submit-3" type="button" value="Submit"
+                       onclick="generator.skills.addSkill();">
             </form>
             <form id="wrin-4">
                 <p>
                     Add Additional Craft, Knowledge, Perform, and Profession skills here.
                 </p>
                 <div class="add-skill-labels">
-                    <p>Class Skill</p>
-                    <p>Skill Type</p>
+                    <p>Class</p>
+                    <p>Type</p>
                     <p>Name/Subtype</p>
-                    <p>Skill Points</p>
-                    <p>Ability Modifier</p>
-                    <p>Misc. Modifier</p><br>
+                    <p>Points</p>
+                    <p>Ability MOD</p>
+                    <p>Misc. MOD</p><br>
                 </div>
                 <select id="wrin-inclass-4" class="user-added-skill" value="">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
                 <select id="wrin-skill-select-4" class="user-added-skill">
-                    <option selected="selected" disabled="disabled" value="blank"> - select -</option>
+                    <option selected="selected" disabled="disabled" value="blank">- select -</option>
                     <option class="all-wrin-craft" value="craft">Craft:</option>
                     <option class="all-wrin-knowledge" value="knowledge">Knowledge:</option>
                     <option class="all-wrin-perform" value="perform">Perform:</option>
@@ -934,16 +952,14 @@
                 <input id="bla39" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-abmod-4" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-4" type="number" class="user-added-skill" value="" placeholder="0" min="0">
-                <input id="wrin-skill-submit-4" type="button" value="Submit" onclick="generator.character.addSkill();">
+                <input id="wrin-skill-submit-4" type="button" value="Submit"
+                       onclick="generator.skills.addSkill();">
             </form>
         </div>
 
         <div class="bottom-buffer">
-
         </div>
-
     </section>
-
 
     <section id="select-feats" class="menu menuspeed" data-scrollSpeed="-1">
         <input class="button back-button" type="button" value="&#8592; Skills"
@@ -969,29 +985,33 @@
         <p id="feat-name-4" class="feat-name-list"></p>
         <p id="feat-name-5" class="feat-name-list"></p>
 
-
         <p id="feats-starting">
             Feats Remaining:
         </p>
         <p id="feats-remaining">1</p>
 
-        <input class="button" type="button" value="Combat Feats" onclick="generator.feats.featsSubMenu('combat');">
-        <input class="button" type="button" value="Skill Feats" onclick="generator.feats.featsSubMenu('skill');">
-        <input class="button" type="button" value="Other Bonus" onclick="generator.feats.featsSubMenu('other');">
-        <input class="button" type="button" value="Proficiency" onclick="generatorfeats.featsSubMenu('proficiency');">
-        <input class="button" type="button" value="Item Creation" onclick="generator.feats.featsSubMenu('creation');">
-        <input class="button" type="button" value="Casting" onclick="generator.feats.featsSubMenu('casting');">
-        <input class="button" type="button" value="Metamagic" onclick="generator.feats.featsSubMenu('metamagic');">
-
+        <input class="button" type="button" value="Combat Feats"
+               onclick="generator.feats.featsSubMenu('combat');">
+        <input class="button" type="button" value="Skill Feats"
+               onclick="generator.feats.featsSubMenu('skill');">
+        <input class="button" type="button" value="Other Bonus"
+               onclick="generator.feats.featsSubMenu('other');">
+        <input class="button" type="button" value="Proficiency"
+               onclick="generatorfeats.featsSubMenu('proficiency');">
+        <input class="button" type="button" value="Item Creation"
+               onclick="generator.feats.featsSubMenu('creation');">
+        <input class="button" type="button" value="Casting"
+               onclick="generator.feats.featsSubMenu('casting');">
+        <input class="button" type="button" value="Metamagic"
+               onclick="generator.feats.featsSubMenu('metamagic');">
     </section>
-
 
     <div id="feats-combat" class="menu menu-tall">
         <h2>
             Combat Feats
         </h2>
-
-        <input class="button" type="button" value="Blind Fight" onclick="generator.feats.selectFeat('Blind Fight');">
+        <input class="button" type="button" value="Blind Fight"
+               onclick="generator.feats.selectFeat('Blind Fight');">
         <input class="button" type="button" value="&Dagger; Combat Expertise"
                onclick="generator.feats.selectFeat('Combat Expertise');">
         <input class="button" type="button" value="&Dagger; Improved Disarm"
@@ -1004,16 +1024,16 @@
                onclick="generator.feats.selectFeat('Whirlwind Attack');">
         <input class="button" type="button" value="Combat Reflexes"
                onclick="generator.feats.selectFeat('Combat Reflexes');">
-        <input class="button" type="button" value="&Dagger; Dodge" onclick="generator.feats.selectFeat('Dodge');">
-        <input class="button" type="button" value="&Dagger; Mobility" onclick="generator.feats.selectFeat('Mobility');">
+        <input class="button" type="button" value="&Dagger; Dodge"
+               onclick="generator.feats.selectFeat('Dodge');">
+        <input class="button" type="button" value="&Dagger; Mobility"
+               onclick="generator.feats.selectFeat('Mobility');">
         <input class="button" type="button" value="&Dagger; Sprint Attack"
                onclick="generator.feats.selectFeat('Sprint Attack');">
         <input class="button" type="button" value="&Dagger; Improved Critical"
                onclick="generator.feats.weaponFeat('Improved Critical');">
         <input class="button" type="button" value="Improved Unarmed Strike"
                onclick="generator.feats.selectFeat('Improved Unarmed Strike');">
-
-
         <input class="button" type="button" value="&Dagger; Improved Grapple"
                onclick="generator.feats.selectFeat('Improved Grapple');">
         <input class="button" type="button" value="&Dagger; Deflect Arrows"
@@ -1022,7 +1042,8 @@
                onclick="generator.feats.selectFeat('Snatch Arrows');">
         <input class="button" type="button" value="&Dagger; Stunning Fist"
                onclick="generator.feats.selectFeat('Stunning Fist');">
-        <input class="button" type="button" value="&Dagger; Dodge" onclick="generator.feats.selectFeat('Dodge');">
+        <input class="button" type="button" value="&Dagger; Dodge"
+               onclick="generator.feats.selectFeat('Dodge');">
         <input class="button" type="button" value="&Dagger; Mounted Combat"
                onclick="generator.feats.selectFeat('Mounted Combat');">
         <input class="button" type="button" value="&Dagger; Mounted Archery"
@@ -1031,12 +1052,12 @@
                onclick="generator.feats.selectFeat('Ride-By Attack');">
         <input class="button" type="button" value="&Dagger; Spirited Charge"
                onclick="generator.feats.selectFeat('Spirited Charge');">
-        <input class="button" type="button" value="&Dagger; Trample" onclick="generator.feats.selectFeat('Trample');">
+        <input class="button" type="button" value="&Dagger; Trample"
+               onclick="generator.feats.selectFeat('Trample');">
         <input class="button" type="button" value="Point Blank Shot"
                onclick="generator.feats.selectFeat('Point Blank Shot');">
-        <input class="button" type="button" value="&Dagger; Far Shot" onclick="generator.feats.selectFeat('Far Shot');">
-
-
+        <input class="button" type="button" value="&Dagger; Far Shot"
+               onclick="generator.feats.selectFeat('Far Shot');">
         <input class="button" type="button" value="&Dagger; Precise Shot"
                onclick="generator.feats.selectFeat('Precise Shot');">
         <input class="button" type="button" value="&Dagger; Rapid Shot"
@@ -1049,7 +1070,8 @@
                onclick="generator.feats.selectFeat('Improved Precise Shot');">
         <input class="button" type="button" value="&Dagger; Power Attack"
                onclick="generator.feats.selectFeat('Power Attack');">
-        <input class="button" type="button" value="&Dagger; Cleave" onclick="generator.feats.selectFeat('Cleave');">
+        <input class="button" type="button" value="&Dagger; Cleave"
+               onclick="generator.feats.selectFeat('Cleave');">
         <input class="button" type="button" value="&Dagger; Great Cleave"
                onclick="generator.feats.selectFeat('Great Cleave');">
         <input class="button" type="button" value="&Dagger; Improved Bull Rush"
@@ -1060,8 +1082,6 @@
                onclick="generator.feats.selectFeat('Improved Sunder');">
         <input class="button" type="button" value="&Dagger; Rapid Reload"
                onclick="generator.feats.selectFeat('Rapid Reload');">
-
-
         <input class="button" type="button" value="&Dagger; Two-Weapon Defense"
                onclick="generator.feats.selectFeat('Two-Weapon Defense');">
         <input class="button" type="button" value="&Dagger; Imp. Two-Weapon Fighting"
@@ -1078,9 +1098,7 @@
                onclick="generator.feats.weaponFeat('Greater Weapon Focus');">
         <input class="button" type="button" value="&Dagger; Gr. Weapon Specialization"
                onclick="generator.feats.weaponFeat('Greater Weapon Specialization');">
-
         <div class="bottom-buffer">
-
         </div>
     </div>
 
@@ -1088,35 +1106,39 @@
         <h2>
             Universal Skill Bonus
         </h2>
-
-        <input class="button" type="button" value="Acrobatic" onclick="generator.feats.featUpdateSkill('Acrobatic');">
-        <input class="button" type="button" value="Agile" onclick="generator.feats.featUpdateSkill('Agile');">
-        <input class="button" type="button" value="Alertness" onclick="generator.feats.featUpdateSkill('Alertness');">
+        <input class="button" type="button" value="Acrobatic"
+               onclick="generator.feats.featUpdateSkill('Acrobatic');">
+        <input class="button" type="button" value="Agile"
+               onclick="generator.feats.featUpdateSkill('Agile');">
+        <input class="button" type="button" value="Alertness"
+               onclick="generator.feats.featUpdateSkill('Alertness');">
         <input class="button" type="button" value="Animal Affinity"
                onclick="generator.feats.featUpdateSkill('Animal Affinity');">
-
-        <input class="button" type="button" value="Athletic" onclick="generator.feats.featUpdateSkill('Athletic');">
-        <input class="button" type="button" value="Deceitful" onclick="generator.feats.featUpdateSkill('Deceitful');">
-        <input class="button" type="button" value="Deft Hands" onclick="generator.feats.featUpdateSkill('Deft Hands');">
-        <input class="button" type="button" value="Diligent" onclick="generator.feats.featUpdateSkill('Diligent');">
-
+        <input class="button" type="button" value="Athletic"
+               onclick="generator.feats.featUpdateSkill('Athletic');">
+        <input class="button" type="button" value="Deceitful"
+               onclick="generator.feats.featUpdateSkill('Deceitful');">
+        <input class="button" type="button" value="Deft Hands"
+               onclick="generator.feats.featUpdateSkill('Deft Hands');">
+        <input class="button" type="button" value="Diligent"
+               onclick="generator.feats.featUpdateSkill('Diligent');">
         <input class="button" type="button" value="Investigator"
                onclick="generator.feats.featUpdateSkill('Investigator');">
         <input class="button" type="button" value="Magical Aptitude"
                onclick="generator.feats.featUpdateSkill('Magical Aptitude');">
-        <input class="button" type="button" value="Negotiator" onclick="generator.feats.featUpdateSkill('Negotiator');">
+        <input class="button" type="button" value="Negotiator"
+               onclick="generator.feats.featUpdateSkill('Negotiator');">
         <input class="button" type="button" value="Nimble Fingers"
                onclick="generator.feats.featUpdateSkill('Nimble Fingers');">
-
-        <input class="button" type="button" value="Persuasive" onclick="generator.feats.featUpdateSkill('Persuasive');">
+        <input class="button" type="button" value="Persuasive"
+               onclick="generator.feats.featUpdateSkill('Persuasive');">
         <input class="button" type="button" value="Self-Sufficient"
                onclick="generator.feats.featUpdateSkill('Self-Sufficient');">
-        <input class="button" type="button" value="Skill Focus" onclick="generator.skills.skillFocus('Skill Focus');">
-        <input class="button" type="button" value="Stealthy" onclick="generator.feats.featUpdateSkill('Stealthy');">
-
-
+        <input class="button" type="button" value="Skill Focus"
+               onclick="generator.skills.skillFocus('Skill Focus');">
+        <input class="button" type="button" value="Stealthy"
+               onclick="generator.feats.featUpdateSkill('Stealthy');">
         <div class="bottom-buffer">
-
         </div>
     </div>
 
@@ -1124,27 +1146,30 @@
         <h2>
             Other Bonus
         </h2>
-
         <input class="button" type="button" value="Great Fortitude"
                onclick="generator.feats.featUpdateSkill('Great Fortitude');">
-        <input class="button" type="button" value="Iron Will" onclick="generator.feats.featUpdateSkill('Iron Will');">
+        <input class="button" type="button" value="Iron Will"
+               onclick="generator.feats.featUpdateSkill('Iron Will');">
         <input class="button" type="button" value="Lightening Reflexes"
                onclick="generator.feats.featUpdateSkill('Lightening Reflexes');">
         <input class="button" type="button" value="Improved Initiative"
                onclick="generator.feats.featUpdateSkill('Improved Initiative');">
-        <input class="button" type="button" value="Endurance" onclick="generator.feats.selectFeat('Endurance');">
-        <input class="button" type="button" value="&Dagger; Diehard" onclick="generator.feats.selectFeat('Diehard');">
+        <input class="button" type="button" value="Endurance"
+               onclick="generator.feats.selectFeat('Endurance');">
+        <input class="button" type="button" value="&Dagger; Diehard"
+               onclick="generator.feats.selectFeat('Diehard');">
         <input class="button" type="button" value="&Dagger; Leadership"
                onclick="generator.feats.selectFeat('Leadership');">
-        <input class="button" type="button" value="Run" onclick="generator.feats.selectFeat('Run');">
-        <input class="button" type="button" value="Toughness" onclick="generator.feats.featUpdateSkill('Toughness');">
+        <input class="button" type="button" value="Run"
+               onclick="generator.feats.selectFeat('Run');">
+        <input class="button" type="button" value="Toughness"
+               onclick="generator.feats.featUpdateSkill('Toughness');">
     </div>
 
     <div id="feats-proficiency" class="menu menu-tall">
         <h2>
             Combat Proficiency
         </h2>
-
         <input class="button" type="button" value="Armor Proficiency (Light)"
                onclick="generator.feats.selectFeat('Armor Proficiency (Light)');">
         <input class="button" type="button" value="&Dagger; Armor Proficiency (Medium)"
@@ -1163,7 +1188,8 @@
                onclick="generator.feats.selectFeat('Simple Weapon Proficiency');">
         <input class="button" type="button" value="&Dagger; Two Weapon Fighting"
                onclick="generator.feats.selectFeat('Two Weapon Fighting');">
-        <input class="button" type="button" value="Track" onclick="generator.feats.selectFeat('Track');">
+        <input class="button" type="button" value="Track"
+               onclick="generator.feats.selectFeat('Track');">
     </div>
 
     <div id="feats-creation" class="menu menu-tall">
@@ -1192,7 +1218,6 @@
         <h2>
             Casting Feats
         </h2>
-
         <input class="button" type="button" value="Combat Casting"
                onclick="generator.feats.selectFeat('Combat Casting');">
         <input class="button" type="button" value="Eschew Materials"
@@ -1205,7 +1230,8 @@
                onclick="generator.feats.selectFeat('Improved Turning');">
         <input class="button" type="button" value="&Dagger; Natural Spell"
                onclick="generator.feats.selectFeat('Natural Spell');">
-        <input class="button" type="button" value="Spell Focus" onclick="generator.feats.selectFeat('Spell Focus');">
+        <input class="button" type="button" value="Spell Focus"
+               onclick="generator.feats.selectFeat('Spell Focus');">
         <input class="button" type="button" value="Greater Spell Focus"
                onclick="generator.feats.selectFeat('Greater Spell Focus');">
         <input class="button" type="button" value="&Dagger; Spell Mastery"
@@ -1224,16 +1250,20 @@
                onclick="generator.feats.selectFeat('Empower Spell');">
         <input class="button" type="button" value="Enlarge Spell"
                onclick="generator.feats.selectFeat('Enlarge Spell');">
-        <input class="button" type="button" value="Extend Spell" onclick="generator.feats.selectFeat('Extend Spell');">
+        <input class="button" type="button" value="Extend Spell"
+               onclick="generator.feats.selectFeat('Extend Spell');">
         <input class="button" type="button" value="Heighten Spell"
                onclick="generator.feats.selectFeat('Heighten Spell');">
         <input class="button" type="button" value="Maximize Spell"
                onclick="generator.feats.selectFeat('Maximize Spell');">
         <input class="button" type="button" value="Quicken Spell"
                onclick="generator.feats.selectFeat('Quicken Spell');">
-        <input class="button" type="button" value="Silent Spell" onclick="generator.feats.selectFeat('Silent Spell');">
-        <input class="button" type="button" value="Still Spell" onclick="generator.feats.selectFeat('Still Spell');">
-        <input class="button" type="button" value="Widen Spell" onclick="generator.feats.selectFeat('Widen Spell');">
+        <input class="button" type="button" value="Silent Spell"
+               onclick="generator.feats.selectFeat('Silent Spell');">
+        <input class="button" type="button" value="Still Spell"
+               onclick="generator.feats.selectFeat('Still Spell');">
+        <input class="button" type="button" value="Widen Spell"
+               onclick="generator.feats.selectFeat('Widen Spell');">
     </div>
 
     <div id="roll-starting-gold" class="menu menu-narrow menuspeed" data-scrollSpeed="-1">
@@ -1247,17 +1277,13 @@
         <input type="number" class="button narrow-button top-button-10" placeholder="Another Amount" id="gold-input">
         <input type="button" class="button narrow-button" value="Apply"
                onclick="generator.inventory.rollStartingGold('input');">
-
     </div>
 
     <div id="inventory" class="equip-list-item menu menu-tall menu-narrow">
-
         <div id="equip-variable-buffer"></div>
-
         <h3 class="consumables">
             Consumables
         </h3>
-
         <p class="item-stack" id="item-Arrows"></p>
         <p class="item-qty" id="qty-Arrows"></p>
         <p class="item-stack" id="item-Bolts"></p>
@@ -1286,7 +1312,6 @@
         <h3 class="button-top-20">
             Inventory
         </h3>
-
         <!--
 			artisan’s outfit,
 			entertainer’s outfit,
@@ -1296,7 +1321,6 @@
 			scholar’s outfit, or
 			traveler’s outfit.
 			-->
-
         <p class="item" id="item-purchase-no-0"></p>
         <p class="item" id="item-purchase-no-1"></p>
         <p class="item" id="item-purchase-no-2"></p>
@@ -1358,7 +1382,6 @@
         <p class="item" id="item-purchase-no-58"></p>
         <p class="item" id="item-purchase-no-59"></p>
         <p class="item" id="item-purchase-no-60"></p>
-
     </div>
     <!-- Bad inventory Bug Fix for people who buy lots of items, but still breaks
 		for people who write in long names for items.
@@ -1413,7 +1436,6 @@
                onclick="generator.navigate('select-feats');">
         <input class="button forward-button" type="button" value="Character &#8594;"
                onclick="generator.navigate('roll-playing');">
-
         <h2>
             Select Equipment
         </h2>
@@ -1432,22 +1454,22 @@
         <p>
             All prices in COPPER.
         </p>
-
-
         <input class="button top-button-20" type="button" value="Simple Weapons"
                onclick="generator.inventory.equipSubMenu('simpweap');">
         <input class="button" type="button" value="Martial Weapons"
                onclick="generator.inventory.equipSubMenu('martweap');">
         <input class="button" type="button" value="Exotic Weapons"
                onclick="generator.inventory.equipSubMenu('exotweap');">
-        <input class="button" type="button" value="Armor" onclick="generator.inventory.equipSubMenu('armor');">
-        <input class="button" type="button" value="Gear" onclick="generator.inventory.equipSubMenu('gear');">
+        <input class="button" type="button" value="Armor"
+               onclick="generator.inventory.equipSubMenu('armor');">
+        <input class="button" type="button" value="Gear"
+               onclick="generator.inventory.equipSubMenu('gear');">
         <input class="button" type="button" value="Alchemical"
                onclick="generator.inventory.equipSubMenu('substances');">
-        <input class="button" type="button" value="Tools & Kits" onclick="generator.inventory.equipSubMenu('tools');">
-        <input class="button" type="button" value="Custom Item" onclick="generator.inventory.equipSubMenu('custom');">
-
-
+        <input class="button" type="button" value="Tools & Kits"
+               onclick="generator.inventory.equipSubMenu('tools');">
+        <input class="button" type="button" value="Custom Item"
+               onclick="generator.inventory.equipSubMenu('custom');">
         <div class="equip-inv-stat">
             <!--
 				<p>Copper Coins: </p>
@@ -1460,9 +1482,7 @@
 
     <!-- Begin old item system -->
     <section id="equip-simpweap" class="menu menu-tall">
-
         <div class="bottom-buffer"></div>
-
         <!-- Simple Weapons -->
         <div class="item-list">
             <div class="buy-item">
@@ -1571,9 +1591,7 @@
                        onclick="generator.inventory.buyItemStack( 10, 'Bullets', 50, 5 );">
             </div>
         </div>
-
         <div class="bottom-buffer"></div>
-
     </section>
 
     <section id="equip-martweap" class="menu menu-tall">
@@ -1589,7 +1607,7 @@
                 <!--   weaponName,	  itemCost, 	itemWeight, 	dmg, 	crit, 	rang, 	type, 	size, 	reach, 	hardness, hp, 	saves -->
                 <p>Throwing Axe</p>
                 <input class="buy-item-button" type="button" value="800"
-                       onclick="generator.inventory.buyWeapon('Throwing Axe', 800, 		2, 			'1d6', 	'20/x2', '10ft', 	'slsh', 	'MED', 	'No', 	'-', 	'-', '-' );">
+                       onclick="generator.inventory.buyWeapon('Throwing Axe', 800, 2, '1d6', '20/x2', '10ft', 'slsh', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Light Hammer</p>
@@ -1742,10 +1760,8 @@
                 <input class="buy-item-button" type="button" value="100"
                        onclick="generator.inventory.buyItemStack( 20, 'Arrows', 100, 3 );">
             </div>
-
         </div>
         <div class="bottom-buffer"></div>
-
     </section>
 
     <section id="equip-exotweap" class="menu menu-tall">
@@ -1861,7 +1877,6 @@
         <div class="bottom-buffer"></div>
     </section>
 
-
     <section id="equip-armor" class="menu menu-tall">
         <div class="bottom-buffer"></div>
         <div class="item-list sm-text-list">
@@ -1971,13 +1986,11 @@
                 <input class="buy-item-button" type="button" value="800"
                        onclick="generator.inventory.buyItem( 'Locked Gauntlet', 800, 5 );">
             </div>
-
             <div class="buy-item">
                 <h3>
                     Armor & Shields
                 </h3>
             </div>
-
             <div class="buy-item">
                 <p>Shield Spikes</p>
                 <input class="buy-item-button" type="button" value="1000"
@@ -2095,7 +2108,6 @@
                 <input class="buy-item-button" type="button" value="200"
                        onclick="generator.inventory.buyItem( 'Crowbar', 200, 5 );">
             </div>
-
             <div class="buy-item">
                 <p class="consumables">Firewood (25lb)</p>
                 <input class="buy-item-button" type="button" value="1"
@@ -2413,7 +2425,6 @@
                 <input class="buy-item-button" type="button" value="&mdash;"
                        onclick="generator.inventory.buyItem( 'Masterwork', 5000, 2 );">
             </div>
-
         </div>
         <div class="bottom-buffer"></div>
     </section>
@@ -2506,7 +2517,6 @@
                 <input class="buy-item-button" type="button" value="100000"
                        onclick="generator.inventory.buyItem( 'Water Clock', 100000, 200 );">
             </div>
-
         </div>
         <div class="bottom-buffer"></div>
     </section>
@@ -2514,8 +2524,6 @@
     <!-- End old item system -->
 
     <section id="equip-custom" class="menu menu-tall">
-
-
         <form id="custom-kind">
             <p>Kind of Item</p>
             <select id="custom-select" class="button">
@@ -2524,11 +2532,11 @@
                 <option value="armor">Armor</option>
                 <option value="consumable">Consumable</option>
             </select>
-            <input class="button" type="button" value="Next &#8594;" onclick="generator.inventory.customItemSubMenu();">
-
+            <input class="button" type="button" value="Next &#8594;"
+                   onclick="generator.inventory.customItemSubMenu();">
         </form>
-
     </section>
+
     <section id="custom-weapon" class="menu menu-tall">
         <p>
             Custom Weapon
@@ -2536,15 +2544,11 @@
         <p>
             Any parameter without user input will print either as blank, or as a dash.
         </p>
-
         <form id="custom-weapon-form">
-
-
             <p>
                 Unique Name (or base weapon name)
             </p>
             <input id="cu-w-name" class="button" type="text" placeholder="Weapon Name">
-
             <p>
                 First, input data about the base weapon before enhancements. Copy this information
                 directly from the desired source book or the DnD wiki <a href="http://www.dandwiki.com/wiki/SRD:Weapons"
@@ -2593,7 +2597,6 @@
                 <option value="Steel">Steel</option>
                 <option value="Wood">Wood</option>
             </select>
-
 
             <input id="cu-w-hard" class="button" type="number" min="0" placeholder="Hardness">
             <input id="cu-w-hitp" class="button" type="number" min="0" placeholder="HP">
@@ -2762,7 +2765,6 @@
 
                 <option value="vorp">Vorpal</option>
             </select>
-
             <input class="button" type="button" value="Submit"
                    onclick="generator.inventory.createCustomItem('weapon');">
 
@@ -2773,8 +2775,6 @@
                 generator.inventory.updateCustomForm('weapon');
             });
         </script>
-
-
         <div class="bottom-buffer"></div>
     </section>
 
@@ -2795,10 +2795,8 @@
 
     <section id="custom-armor" class="menu menu-tall">
         <form id="custom-armor-form">
-
             <input class="button" type="text" placeholder="Armor Name">
             <input class="button" type="number" placeholder="Cost (CP)">
-
             <input class="button" type="text" placeholder="Bonus">
             <input class="button" type="text" placeholder="Max Dex">
             <input class="button" type="text" placeholder="Check">
@@ -2821,9 +2819,7 @@
             (Blank Wizards Spellbook full o' maps, Masterwork, 65gp, 3lb., +2 Knowledge(local) )
         </p>
 
-
         <form id="custom-item-form">
-
             <input id="cu-i-name" class="button" type="text" placeholder="Item Name">
             <input id="cu-i-cost" class="button" type="number" min="0" placeholder="Base Cost (copper)">
             <input id="cu-i-weig" class="button" type="number" min="0" placeholder="Weight (lbs)">
@@ -2832,7 +2828,6 @@
             <p>
                 Quality
             </p>
-
             <select id="cu-i-qual" class="button">
                 <option value="0" selected="selected">Normal</option>
                 <option value="1">Masterwork</option>
@@ -2885,11 +2880,9 @@
                     <option value="write">Write In</option>
                 </select>
                 <input id="cu-i-writein" class="button" type="text" placeholder="Skill Name">
-
             </div>
-
-            <input class="button" type="button" value="Submit" onclick="generator.inventory.createCustomItem('item');">
-
+            <input class="button" type="button" value="Submit"
+                   onclick="generator.inventory.createCustomItem('item');">
         </form>
 
         <script type="text/javascript">
@@ -2897,26 +2890,19 @@
                 generator.inventory.updateCustomForm('item');
             });
         </script>
-
     </section>
-
-
 </section>
-
 
 <section id="roll-playing" class="menu menu-tall">
     <input class="button back-button" type="button" value="&#8592; Equipment"
            onclick="generator.navigate('equipment');">
     <input class="button forward-button" type="button" value="Print &#8594;"
            onclick="generator.populateCharacterSheet();">
-
-
     <section id="describe">
         <form>
             <h2>
                 Character Description
             </h2>
-
 
             <input class="form-input" id="form-name" type="text" placeholder="Character Name">
             <input class="form-input" id="form-player" type="text" placeholder="Player Name">
@@ -2934,7 +2920,6 @@
                 Appearance
             </h3>
             <textarea class="text-area" maxlength="1500" id="form-appearance"></textarea>
-
 
             <h3>
                 Personality
@@ -2973,11 +2958,7 @@
 
             <input type="button" class="button form-button" value="Populate Sheet"
                    onclick="generator.populateCharacterSheet();">
-
-
         </form>
-
-
         <div class="hard-break-space"></div>
     </section>
 </section>
@@ -3000,14 +2981,11 @@
 </div>
 
 <section id="print-page-four">
-
     <div class="paper">
-
         <div class="width-100 tall-namebox">
             <div class="quarter">
                 <div class="quarter">
                     <div class="print-name print-fill fill-space half print-name">
-
                     </div>
                     <p class="label">
                         NAME
@@ -3015,7 +2993,6 @@
                 </div>
                 <div class="quarter">
                     <div class="print-player print-fill fill-space half print-player">
-
                     </div>
                     <p class="label">
                         PLAYER
@@ -3025,7 +3002,6 @@
             <div class="quarter">
                 <div class="quarter">
                     <div class="print-race print-fill fill-space half">
-
                     </div>
                     <p class="label right-label">
                         RACE
@@ -3033,7 +3009,6 @@
                 </div>
                 <div class="quarter">
                     <div class="print-class print-fill fill-space half">
-
                     </div>
                     <p class="label right-label">
                         CLASS
@@ -3053,11 +3028,7 @@
                 </p>
             </div>
         </div>
-
-
         <!-- RIGHT TEXT AREAS -->
-
-
         <div class="quarter left-text-areas">
             <div class="box blackbox dragongrog width-100">
                 <h1>
@@ -3076,7 +3047,6 @@
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-eyes" class="print-fill fill-space half">
-
                         </div>
                         <p class="label">
                             EYES
@@ -3084,7 +3054,6 @@
                     </div>
                     <div class="quarter">
                         <div id="print-hair" class="print-fill fill-space half">
-
                         </div>
                         <p class="label">
                             HAIR
@@ -3094,7 +3063,6 @@
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-height" class="print-fill fill-space half">
-
                         </div>
                         <p class="label">
                             HEIGHT
@@ -3102,7 +3070,6 @@
                     </div>
                     <div class="quarter">
                         <div id="print-weight" class="print-fill fill-space half">
-
                         </div>
                         <p class="label label-width-100">
                             WEIGHT
@@ -3112,7 +3079,6 @@
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-skin" class="print-fill fill-space half">
-
                         </div>
                         <p class="label">
                             SKIN
@@ -3120,7 +3086,6 @@
                     </div>
                     <div class="quarter">
                         <div id="print-handedness" class="print-fill fill-space half">
-
                         </div>
                         <p class="label">
                             HANDEDNESS
@@ -3130,7 +3095,6 @@
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-age" class="print-fill fill-space half">
-
                         </div>
                         <p class="label">
                             AGE
@@ -3138,7 +3102,6 @@
                     </div>
                     <div class="quarter">
                         <div id="print-gender" class="print-fill fill-space half">
-
                         </div>
                         <p class="label label-width-100">
                             GENDER
@@ -3146,9 +3109,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
 
         <div class="right-text-areas pad-top">
             <div class="box blackbox dragongrog width-100">
@@ -3164,16 +3125,13 @@
         <div class="right-text-areas">
             <div class="print-text-area-sm">
                 <div id="print-appearance" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
             </div>
-
         </div>
-
 
         <div class="right-text-areas pad-top">
             <div class="box blackbox dragongrog width-100">
@@ -3189,7 +3147,6 @@
         <div class="right-text-areas">
             <div class="print-text-area-personality">
                 <div id="print-personality" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
@@ -3198,7 +3155,6 @@
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
             </div>
-
         </div>
 
         <div class="right-text-areas pad-top">
@@ -3215,12 +3171,10 @@
         <div class="right-text-areas">
             <div class="print-text-area-quote">
                 <div id="print-quote" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
             </div>
-
         </div>
 
         <div class="right-text-areas pad-top">
@@ -3237,17 +3191,13 @@
         <div class="right-text-areas">
             <div class="print-text-area-sm">
                 <div id="print-objective" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
             </div>
-
         </div>
-
-
         <!-- RIGHT TEXT AREAS -->
 
         <div class="quarter clear-left pad-top left-text-areas">
@@ -3261,10 +3211,8 @@
             </div>
         </div>
 
-
         <div class="quarter clear-left print-text-area left-text-areas">
             <div id="print-other-info" class="character-content">
-
             </div>
             <div class="text-area-line the-top-one"></div>
             <div class="text-area-line"></div>
@@ -3290,7 +3238,6 @@
             <div class="text-area-line"></div>
             <div class="text-area-line"></div>
             <div class="text-area-line"></div>
-
         </div>
 
         <div class="right-text-areas pad-top">
@@ -3307,14 +3254,12 @@
         <div class="right-text-areas">
             <div class="print-text-area-sm">
                 <div id="print-history" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
                 <div class="text-area-line"></div>
             </div>
-
         </div>
 
         <div class="right-text-areas pad-top">
@@ -3331,7 +3276,6 @@
         <div class="right-text-areas">
             <div class="print-text-area-sm">
                 <div id="print-allies-enemies" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
@@ -3354,7 +3298,6 @@
         <div class="right-text-areas">
             <div class="print-text-area-home">
                 <div id="print-ancestry" class="character-content">
-
                 </div>
                 <div class="text-area-line the-top-one"></div>
                 <div class="text-area-line"></div>
@@ -3365,7 +3308,6 @@
                 <div class="text-area-line"></div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -3373,7 +3315,6 @@
 
 <section id="print">
     <div class="paper">
-
         <!-- SKILLS SECTION FLOAT RIGHT HALFS -->
         <div class="half float-right">
             <div class="box blackbox dragongrog">
@@ -3414,8 +3355,6 @@
                     NOTES
                 </p>
             </div>
-
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     appraise
@@ -3436,7 +3375,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     balance
@@ -3457,7 +3395,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     bluff
@@ -3478,7 +3415,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     climb
@@ -3499,7 +3435,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     concentration
@@ -3520,7 +3455,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p id="print-craft-title" class="form-skill-form">
                     craft:
@@ -3541,7 +3475,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div id="wrin-craft-1">
                 <div class="twelfth">
                     <p id="print-wrin-craft-1" class="form-skill-form">
@@ -3630,8 +3563,6 @@
                     <div class="box skill-box"></div>
                 </div>
             </div>
-
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     decipher script
@@ -3652,7 +3583,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     diplomacy
@@ -3673,7 +3603,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     disable device
@@ -3694,7 +3623,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     disguise
@@ -3715,7 +3643,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     escape artist
@@ -3736,7 +3663,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     forgery
@@ -3757,7 +3683,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     gather information
@@ -3778,7 +3703,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     handle animal
@@ -3799,7 +3723,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     heal
@@ -3820,7 +3743,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     hide
@@ -3841,7 +3763,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     intimidate
@@ -3862,7 +3783,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     jump
@@ -3883,7 +3803,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p id="print-knowledge-title" class="form-skill-form faint-background">
                     knowledge:
@@ -3904,7 +3823,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div id="wrin-knowledge-1">
                 <div class="twelfth">
                     <p id="print-wrin-knowledge-1" class="form-skill-form">
@@ -3993,8 +3911,6 @@
                     <div class="box skill-box"></div>
                 </div>
             </div>
-
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     listen
@@ -4015,7 +3931,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     move silently
@@ -4036,7 +3951,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     open lock
@@ -4057,7 +3971,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p id="print-perform-title" class="form-skill-form faint-background">
                     perform:
@@ -4078,7 +3991,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div id="wrin-perform-1">
                 <div class="twelfth">
                     <p id="print-wrin-perform-1" class="form-skill-form">
@@ -4167,8 +4079,6 @@
                     <div class="box skill-box"></div>
                 </div>
             </div>
-
-
             <div class="twelfth">
                 <p id="print-profession-title" class="form-skill-form">
                     profession
@@ -4189,7 +4099,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div id="wrin-profession-1">
                 <div class="twelfth">
                     <p id="print-wrin-profession-1" class="form-skill-form">
@@ -4212,8 +4121,6 @@
                     <div class="box skill-box"></div>
                 </div>
             </div>
-
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     ride
@@ -4234,7 +4141,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     search
@@ -4255,7 +4161,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     sense motive
@@ -4276,7 +4181,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     sleight of hand
@@ -4297,7 +4201,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     spellcraft
@@ -4318,7 +4221,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     spot
@@ -4339,7 +4241,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     survival
@@ -4360,7 +4261,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     swim
@@ -4381,7 +4281,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     tumble
@@ -4402,7 +4301,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     use magic device
@@ -4423,7 +4321,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     use rope
@@ -4444,7 +4341,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     ________________________________
@@ -4465,7 +4361,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form faint-background">
                     ________________________________
@@ -4486,7 +4381,6 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box faint-background"></div>
             </div>
-
             <div class="twelfth">
                 <p class="form-skill-form">
                     ________________________________
@@ -4507,16 +4401,12 @@
             <div class="sixteenth-blackbox">
                 <div class="box skill-box"></div>
             </div>
-
-
         </div>
-
 
         <!-- NAME, PLAYER, ETC BLOCK TOP -->
         <div class="half">
             <div class="quarter">
                 <div class="print-name print-fill print-fill fill-space half">
-
                 </div>
                 <p class="label">
                     NAME
@@ -4524,7 +4414,6 @@
             </div>
             <div class="quarter">
                 <div class="print-player print-fill print-fill fill-space half">
-
                 </div>
                 <p class="label">
                     PLAYER
@@ -4532,7 +4421,6 @@
             </div>
             <div class="quarter">
                 <div id="print-alignment" class="print-fill print-fill fill-space half">
-
                 </div>
                 <p class="label">
                     ALIGNMENT
@@ -4540,7 +4428,6 @@
             </div>
             <div class="quarter">
                 <div id="print-experience" class="print-fill print-fill fill-space half">
-
                 </div>
                 <p class="label">
                     EXPERIENCE
@@ -4548,7 +4435,6 @@
             </div>
             <div class="quarter">
                 <div id="print-class" class="print-fill print-fill fill-space half">
-
                 </div>
                 <p class="label">
                     CLASS
@@ -4557,7 +4443,6 @@
             <div class="quarter">
                 <div class="eighth">
                     <div id="print-level" class="print-fill print-fill fill-space half">
-
                     </div>
                     <p class="label">
                         LEVEL
@@ -4565,7 +4450,6 @@
                 </div>
                 <div class="eighth">
                     <div id="print-levelup" class="print-fill print-fill fill-space half">
-
                     </div>
                     <p class="label">
                         LEVEL UP AT XP
@@ -4574,7 +4458,6 @@
             </div>
             <div class="quarter">
                 <div class="print-fill fill-space half">
-
                 </div>
                 <p class="label">
                     MULTI-CLASS
@@ -4583,7 +4466,6 @@
             <div class="quarter">
                 <div class="eighth">
                     <div class="print-fill fill-space half">
-
                     </div>
                     <p class="label">
                         LEVEL
@@ -4591,7 +4473,6 @@
                 </div>
                 <div class="eighth">
                     <div class="print-fill fill-space half">
-
                     </div>
                     <p class="label">
                         LEVEL UP AT XP
@@ -4599,11 +4480,8 @@
                 </div>
             </div>
         </div>
-
-
         <!-- DRAGONGROG BLOCK. ABILITY SCORES. HIT POINTS -->
         <div class="half">
-
             <div class="print-fill fill-space"></div>
             <div class="box blackbox dragongrog">
                 <h1>
@@ -4614,7 +4492,6 @@
                 </p>
             </div>
             <div class="print-fill fill-space"></div>
-
             <div class="quarter">
                 <div class="twelfth">
                     <p class="mini-title">
@@ -4750,7 +4627,6 @@
                 </div>
             </div>
         </div>
-
         <!-- SAVING THROWS -->
         <div class="half">
             <div class="print-fill med-fill-space"></div>
@@ -4813,7 +4689,6 @@
                         MISC.<br>MODIFIER
                     </p>
                 </div>
-
                 <div class="twelfth with-operator">
                     <div class="print-mod-con box op-box"></div>
                 </div>
@@ -4825,7 +4700,6 @@
                 <div class="twelfth with-operator">
                     <div id="print-sav-for-misc" class="print-sav-for-misc box op-box"></div>
                 </div>
-
             </div>
             <div class="sm-print-fill fill-space"></div>
             <div class="quarter">
@@ -4853,7 +4727,6 @@
                 </div>
             </div>
             <div class="quarter">
-
                 <div class="twelfth with-operator">
                     <div class="print-mod-dex box op-box"></div>
                 </div>
@@ -4865,7 +4738,6 @@
                 <div class="twelfth with-operator">
                     <div id="print-sav-ref-misc" class="print-sav-ref-misc box op-box"></div>
                 </div>
-
             </div>
             <div class="sm-print-fill fill-space"></div>
             <div class="quarter">
@@ -4893,7 +4765,6 @@
                 </div>
             </div>
             <div class="quarter">
-
                 <div class="twelfth with-operator">
                     <div class="print-mod-wis box op-box"></div>
                 </div>
@@ -4905,11 +4776,9 @@
                 <div class="twelfth with-operator">
                     <div id="print-sav-wil-misc" class="box op-box"></div>
                 </div>
-
             </div>
             <div class="sm-print-fill fill-space"></div>
         </div>
-
 
         <!-- ARMOR CLASS MINI TITLES-->
         <div class="half">
@@ -5102,11 +4971,9 @@
             </div>
         </div>
 
-
         <!-- MELEE ATTACK MINI TITLES -->
         <div class="half">
             <div class="print-fill fill-space"></div>
-
             <div class="sixteenth-blackbox">
                 <p class="mini-title">
                     MELEE<br>ATTACK
@@ -5147,13 +5014,10 @@
                     TOTAL 2nd<br>ATTACK
                 </p>
             </div>
-
-
         </div>
 
         <!-- MELEE ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box blackbox">
                     <h1>
@@ -5193,10 +5057,8 @@
 
         <!-- MELEE ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box emptybox">
-
                 </div>
             </div>
             <div class="sixteenth">
@@ -5228,10 +5090,8 @@
 
         <!-- MELEE ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box emptybox">
-
                 </div>
             </div>
             <div class="sixteenth">
@@ -5263,10 +5123,8 @@
 
         <!-- MELEE ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box emptybox">
-
                 </div>
             </div>
             <div class="sixteenth">
@@ -5296,11 +5154,9 @@
             </div>
         </div>
 
-
         <!-- RANGED ATTACK MINI TITLES -->
         <div class="half">
             <div class="print-fill med-fill-space"></div>
-
             <div class="sixteenth-blackbox">
                 <p class="mini-title">
                     RANGED<br>ATTACK
@@ -5341,13 +5197,10 @@
                     TOTAL 2nd<br>ATTACK
                 </p>
             </div>
-
-
         </div>
 
         <!-- RANGED ATTACK TOP ROW (1ST BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box blackbox">
                     <h2>
@@ -5387,10 +5240,8 @@
 
         <!-- RANGED ATTACK TOP ROW (2nd BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box emptybox">
-
                 </div>
             </div>
             <div class="sixteenth">
@@ -5422,10 +5273,8 @@
 
         <!-- RANGED ATTACK TOP ROW (3rd BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box emptybox">
-
                 </div>
             </div>
             <div class="sixteenth">
@@ -5457,10 +5306,8 @@
 
         <!-- RANGED ATTACK TOP ROW (4th BASE ATTACK BONUS) -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <div class="box emptybox">
-
                 </div>
             </div>
             <div class="sixteenth">
@@ -5490,10 +5337,8 @@
             </div>
         </div>
 
-
         <!-- GRAPPLE AND INITIATIVE -->
         <div class="half">
-
             <div class="sixteenth-blackbox">
                 <p class="mini-title">
                     <br><br>GRAPPLE
@@ -5577,7 +5422,6 @@
             <div class="operator">
                 <p></p>
             </div>
-
             <div class="twentieth">
                 <div class="print-mod-dex box"></div>
             </div>
@@ -5598,8 +5442,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- INITIATIVE
 			<div class="half">
 
@@ -5646,8 +5488,6 @@
 				</div>
 			</div>
 		-->
-
-
         <!-- RACIAL ABILITIES -->
         <div class="half">
             <div class="print-fill fill-space"></div>
@@ -5667,30 +5507,22 @@
             <p class="label half-wider">
                 HIDDEN WALL SENSING?
             </p>
-
             <div class="print-fill fill-space"></div>
             <p class="label half-wider">
                 FLATULANT?
             </p>
-
         </div>
-
-
     </div>
-
-
 </section>
 
 <div class="page-space"></div>
 
 <section id="print-page-three">
     <div class="paper">
-
         <div class="width-100 tall-namebox">
             <div class="quarter">
                 <div class="quarter">
                     <div class="print-name print-fill fill-space half print-name">
-
                     </div>
                     <p class="label">
                         NAME
@@ -5698,7 +5530,6 @@
                 </div>
                 <div class="quarter">
                     <div class="print-player print-fill fill-space half print-player">
-
                     </div>
                     <p class="label">
                         PLAYER
@@ -5708,7 +5539,6 @@
             <div class="quarter">
                 <div class="quarter">
                     <div class="print-race print-fill fill-space half">
-
                     </div>
                     <p class="label right-label">
                         RACE
@@ -5716,7 +5546,6 @@
                 </div>
                 <div class="quarter">
                     <div class="print-class print-fill fill-space half">
-
                     </div>
                     <p class="label right-label">
                         CLASS
@@ -5802,16 +5631,13 @@
             <div class="quarter">
                 <div class="eighth">
                     <div id="pr-w-s1-name" class="print-fill-weapon fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         WEAPON
                     </p>
                 </div>
                 <div class="eighth">
-
                     <div id="pr-w-s1-atkbonus" class="fill-space print-list tall-weapon">
-
                     </div>
                     <p class="label">
                         ATTACK BONUS
@@ -5864,7 +5690,6 @@
             <!-- Notes -->
             <div class="quarter">
                 <div id="pr-w-s1-notes" class="fill-space print-list tall-weapon">
-
                 </div>
                 <p class="label">
                     NOTES
@@ -5873,7 +5698,6 @@
             <!-- Ammo -->
             <div class="quarter">
                 <div id="pr-w-s1-ammo" class="fill-space print-list tall-weapon">
-
                 </div>
                 <p class="label full-width">
                     AMMUNITION & CHARGES
@@ -5947,16 +5771,13 @@
             <div class="quarter">
                 <div class="eighth">
                     <div id="pr-w-s2-name" class="print-fill-weapon fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         WEAPON
                     </p>
                 </div>
                 <div class="eighth">
-
                     <div id="pr-w-s2-atkbonus" class="fill-space print-list tall-weapon">
-
                     </div>
                     <p class="label">
                         ATTACK BONUS
@@ -6009,7 +5830,6 @@
             <!-- Notes -->
             <div class="quarter">
                 <div id="pr-w-s2-notes" class="fill-space print-list tall-weapon">
-
                 </div>
                 <p class="label">
                     NOTES
@@ -6018,7 +5838,6 @@
             <!-- Ammo -->
             <div class="quarter">
                 <div id="pr-w-s2-ammo" class="fill-space print-list tall-weapon">
-
                 </div>
                 <p class="label full-width">
                     AMMUNITION & CHARGES
@@ -6092,16 +5911,13 @@
             <div class="quarter">
                 <div class="eighth">
                     <div id="pr-w-s3-name" class="print-fill-weapon fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         WEAPON
                     </p>
                 </div>
                 <div class="eighth">
-
                     <div id="pr-w-s3-atkbonus" class="fill-space print-list tall-weapon">
-
                     </div>
                     <p class="label">
                         ATTACK BONUS
@@ -6154,7 +5970,6 @@
             <!-- Notes -->
             <div class="quarter">
                 <div id="pr-w-s3-notes" class="fill-space print-list tall-weapon">
-
                 </div>
                 <p class="label">
                     NOTES
@@ -6163,14 +5978,12 @@
             <!-- Ammo -->
             <div class="quarter">
                 <div id="pr-w-s3-ammo" class="fill-space print-list tall-weapon">
-
                 </div>
                 <p class="label full-width">
                     AMMUNITION & CHARGES
                 </p>
             </div>
         </div>
-
 
         <div class="print-fill fill-space"></div>
 
@@ -6182,7 +5995,6 @@
                 KEEPING THE GUSHY PARTS IN
             </p>
         </div>
-
 
         <div id="armor-slot-one" class="slot">
             <!-- Name and Bonus titles -->
@@ -6250,7 +6062,6 @@
             <div class="quarter">
                 <div class="eighth">
                     <div id="pr-armor-name" class="print-fill-weapon fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         ITEM
@@ -6258,7 +6069,6 @@
                 </div>
                 <div class="eighth">
                     <div id="pr-w-s1-atkbonus" class="fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         WEIGHT CATEGORY
@@ -6382,7 +6192,6 @@
             <div class="quarter">
                 <div class="eighth">
                     <div id="pr-shield-name" class="print-fill-weapon fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         ITEM
@@ -6390,7 +6199,6 @@
                 </div>
                 <div class="eighth">
                     <div id="pr-shield-weight-category" class="fill-space tall-weapon">
-
                     </div>
                     <p class="label">
                         WEIGHT CATEGORY
@@ -6448,7 +6256,6 @@
             </div>
         </div>
 
-
         <!-- Equipment -->
         <div class="fill-space">
 
@@ -6464,7 +6271,6 @@
 
         <!-- Gear List Left Column -->
         <div class="gear-left">
-
             <div id="print-item-1" class="print-fill print-list fill-space fill-space-gear"></div>
             <p class="label item-name">
                 ITEM
@@ -6563,15 +6369,11 @@
             <p class="label item-notes">
                 LOCATION ON PERSON
             </p>
-
         </div>
 
         <!-- Gear List Right Column WITH ENCUMBERANCE TABLE and COIN TABLE -->
         <div class="gear-right">
-
             <div class="encumberance">
-
-
                 <div class="box blackbox dragongrog width-100">
                     <h1>
                         ENCUMBERANCE / CARRYING CAPACITY
@@ -6580,7 +6382,6 @@
                         YEAH, WE'RE DOING THAT
                     </p>
                 </div>
-
                 <div class="quarter">
                     <div class="quarter">
                         <p class="mini-title">
@@ -6593,7 +6394,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="quarter">
                     <div class="quarter">
                         <div class="quarter">
@@ -6620,16 +6420,13 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-total-weight" class="box encumberance-box">
-
                         </div>
                     </div>
                     <div class="quarter">
                         <div id="print-light-load" class="box encumberance-box">
-
                         </div>
                     </div>
                 </div>
@@ -6637,24 +6434,20 @@
                     <div class="quarter">
                         <div class="quarter">
                             <div id="print-medium-load" class="box encumberance-box">
-
                             </div>
                         </div>
                         <div class="quarter">
                             <div id="print-heavy-load" class="box encumberance-box">
-
                             </div>
                         </div>
                     </div>
                     <div class="quarter">
                         <div class="quarter">
                             <div id="print-lift-load" class="box encumberance-box">
-
                             </div>
                         </div>
                         <div class="quarter">
                             <div id="print-push-load" class="box encumberance-box">
-
                             </div>
                         </div>
                     </div>
@@ -6662,7 +6455,6 @@
             </div>
 
             <div class="encumberance">
-
                 <div class="box blackbox dragongrog width-100">
                     <h1>
                         MONEY
@@ -6671,7 +6463,6 @@
                         50 COINS = 1LB | THIS TUNIC BROUGHT TO YOU BY CAPITALISM
                     </p>
                 </div>
-
                 <div class="quarter">
                     <div class="quarter">
                         <p class="mini-title">
@@ -6684,7 +6475,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="quarter">
                     <div class="quarter">
                         <p class="mini-title">
@@ -6697,34 +6487,27 @@
                         </p>
                     </div>
                 </div>
-
-
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-coins-copper" class="box encumberance-box">
-
                         </div>
                     </div>
                     <div class="quarter">
                         <div id="print-coins-silver" class="box encumberance-box">
-
                         </div>
                     </div>
                 </div>
                 <div class="quarter">
                     <div class="quarter">
                         <div id="print-coins-gold" class="box encumberance-box">
-
                         </div>
                     </div>
                     <div class="quarter">
                         <div id="print-coins-platinum" class="box encumberance-box">
-
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div id="print-item-15" class="print-fill gear-right-print-list fill-space fill-space-gear"></div>
             <p class="label item-name gear-item-name-right">
@@ -6782,13 +6565,11 @@
             <p class="label item-notes">
                 LOCATION ON PERSON
             </p>
-
         </div>
 
         <!-- Consumables -->
-        <div class="fill-space">
+        <div class="fill-space"></div>
 
-        </div>
         <div class="box blackbox dragongrog width-100">
             <h1>
                 CONSUMABLES
@@ -6842,10 +6623,7 @@
                     QTY
                 </p>
             </div>
-
-
         </div>
-
 
         <div class="gear-right">
             <div class="quarter">
@@ -6892,14 +6670,9 @@
                     QTY
                 </p>
             </div>
-
-
         </div>
-
-
     </div>
 </section>
-
 
 <div class="page-space"></div>
 
@@ -6909,7 +6682,6 @@
             <div class="quarter">
                 <div class="quarter">
                     <div class="print-name print-fill fill-space half print-name">
-
                     </div>
                     <p class="label">
                         NAME
@@ -6917,7 +6689,6 @@
                 </div>
                 <div class="quarter">
                     <div class="print-player print-fill fill-space half print-player">
-
                     </div>
                     <p class="label">
                         PLAYER
@@ -6927,7 +6698,6 @@
             <div class="quarter">
                 <div class="quarter">
                     <div class="print-race print-fill fill-space half">
-
                     </div>
                     <p class="label right-label">
                         RACE
@@ -6935,7 +6705,6 @@
                 </div>
                 <div class="quarter">
                     <div class="print-class print-fill fill-space half">
-
                     </div>
                     <p class="label right-label">
                         CLASS
@@ -7030,15 +6799,11 @@
             <p class="label item-notes">
                 LOCATION ON PERSON
             </p>
-
-
         </div>
-
 
         <!-- FEATS -->
         <div class="half">
             <div class="print-fill fill-space">
-
             </div>
             <div class="box blackbox dragongrog">
                 <h1>
@@ -7052,7 +6817,6 @@
 
         <div class="half">
             <div id="print-feat-1" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7063,7 +6827,6 @@
         </div>
         <div class="half">
             <div id="print-feat-2" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7074,7 +6837,6 @@
         </div>
         <div class="half">
             <div id="print-feat-3" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7085,7 +6847,6 @@
         </div>
         <div class="half">
             <div id="print-feat-4" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7096,7 +6857,6 @@
         </div>
         <div class="half">
             <div id="print-feat-5" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7107,7 +6867,6 @@
         </div>
         <div class="half">
             <div id="print-feat-6" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7118,7 +6877,6 @@
         </div>
         <div class="half">
             <div id="print-feat-7" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7129,7 +6887,6 @@
         </div>
         <div class="half">
             <div id="print-feat-8" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7140,7 +6897,6 @@
         </div>
         <div class="half">
             <div id="print-feat-9" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7151,7 +6907,6 @@
         </div>
         <div class="half">
             <div id="print-feat-10" class="print-fill fill-space print-list fill-space-feats">
-
             </div>
             <p class="label feat-name">
                 FEAT NAME
@@ -7161,11 +6916,9 @@
             </p>
         </div>
 
-
         <!-- SPECIAL ABILITIES -->
         <div class="half">
             <div class="print-fill fill-space">
-
             </div>
             <div class="box blackbox dragongrog">
                 <h1>
@@ -7178,127 +6931,106 @@
         </div>
         <div class="half">
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
             </p>
             <div class="print-fill fill-space print-fill fill-space-feats">
-
             </div>
             <p class="label full-width">
                 ABILITY
