@@ -2,46 +2,46 @@
  * Shield
  * @class
  *
- * @property {String} shieldName
- * @property {String} iWeight
- * @property {String} arBonus
- * @property {String} mDex
- * @property {String} check
- * @property {String} spFail
- * @property {String} maxSp
- * @property {String} hardness
+ * @property {String} name     
+ * @property {String} weight   
+ * @property {String} bonus    
+ * @property {String} dex      
+ * @property {String} check    
+ * @property {String} spellFail
+ * @property {String} maxSp    
+ * @property {String} hardness 
  * @property {String} hitPoints
- * @property {String} shieldSaves
- * @property {String} donning
+ * @property {String} saves    
+ * @property {String} donning  
  */
 class Shield {
 
     /**
      *
-     * @param {String} shieldName
-     * @param {String} iWeight
-     * @param {String} arBonus
-     * @param {String} mDex
+     * @param {String} name
+     * @param {String} weight
+     * @param {String} bonus
+     * @param {String} dex
      * @param {String} check
-     * @param {String} spFail
+     * @param {String} spellFail
      * @param {String} maxSp
      * @param {String} hardness
      * @param {String} hitPoints
-     * @param {String} shieldSaves
+     * @param {String} saves
      * @param {String} donning
      * @returns {Shield}
      */
-    constructor(shieldName, iWeight, arBonus, mDex, check, spFail, maxSp, hardness, hitPoints, shieldSaves, donning) {
-        this.shieldName = shieldName;
-        this.iWeight = iWeight;
-        this.arBonus = arBonus;
-        this.mDex = mDex;
+    constructor(name, weight, bonus, dex, check, spellFail, maxSp, hardness, hitPoints, saves, donning) {
+        this.name = name;
+        this.weight = weight;
+        this.bonus = bonus;
+        this.dex = dex;
         this.check = check;
-        this.spFail = spFail;
+        this.spellFail = spellFail;
         this.maxSp = maxSp;
         this.hardness = hardness;
         this.hitPoints = hitPoints;
-        this.shieldSaves = shieldSaves;
+        this.shieldSaves = saves;
         this.donning = donning;
 
         return this;

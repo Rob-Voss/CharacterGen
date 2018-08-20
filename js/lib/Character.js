@@ -1,3 +1,11 @@
+/**
+ *
+ * @property {number} blankCounter
+ * @property {number} blankCraftCounter
+ * @property {number} blankKnowledgeCounter
+ * @property {number} blankPerformCounter
+ * @property {number} blankProfessionCounter
+ */
 class Character {
 
     /**
@@ -11,6 +19,12 @@ class Character {
         //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
         this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
         this.allSkillsString = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user"];
+
+        this.blankCounter = 0;
+        this.blankCraftCounter = 0;
+        this.blankKnowledgeCounter = 0;
+        this.blankPerformCounter = 0;
+        this.blankProfessionCounter = 0;
 
         this.class = 0;
         this.race = 0;
@@ -156,9 +170,9 @@ class Character {
             }
         }
 
-        document.getElementById("final-" + whichAbility).innerHTML = window[whichAbility + "Attr"];
+        document.getElementById("final-" + whichAbility).innerHTML = this[whichAbility + "Attr"];
         this.updateAllModifiers();
-        document.getElementById("final-" + whichAbility + "-mod").innerHTML = "+ " + window[whichAbility + "Mod"];
+        document.getElementById("final-" + whichAbility + "-mod").innerHTML = "+ " + this[whichAbility + "Mod"];
         document.getElementById("handle-ability-score-" + Number(whichLevel)).style.display = "none";
     }
 
@@ -401,9 +415,9 @@ class Character {
 
         this.attributeOne = statValue[0];
         this.attributeTwo = statValue[1];
-        this.attrThr = statValue[2];
-        this.attrFou = statValue[3];
-        this.attrFiv = statValue[4];
+        this.attributeThree = statValue[2];
+        this.attributeFour = statValue[3];
+        this.attributeFive = statValue[4];
         this.attributeSix = statValue[5];
 
         // Displays total points
@@ -511,17 +525,17 @@ class Character {
 
         // Now that the switch is done, and every score is in its final state, let's show them.
         document.getElementById("final-str").innerHTML = this.strAttr;
-        document.getElementById("final-str-mod").innerHTML = (this.strMod < 0 ? "- " : "+ ") + this.strMod;
+        document.getElementById("final-str-mod").innerHTML = (this.strMod < 0 ? "" : "+ ") + this.strMod;
         document.getElementById("final-dex").innerHTML = this.dexAttr;
-        document.getElementById("final-dex-mod").innerHTML = (this.dexMod < 0 ? "- " : "+ ") + this.dexMod;
+        document.getElementById("final-dex-mod").innerHTML = (this.dexMod < 0 ? "" : "+ ") + this.dexMod;
         document.getElementById("final-con").innerHTML = this.conAttr;
-        document.getElementById("final-con-mod").innerHTML = (this.conMod < 0 ? "- " : "+ ") + this.conMod;
+        document.getElementById("final-con-mod").innerHTML = (this.conMod < 0 ? "" : "+ ") + this.conMod;
         document.getElementById("final-wis").innerHTML = this.wisAttr;
-        document.getElementById("final-wis-mod").innerHTML = (this.wisMod < 0 ? "- " : "+ ") + this.wisMod;
+        document.getElementById("final-wis-mod").innerHTML = (this.wisMod < 0 ? "" : "+ ") + this.wisMod;
         document.getElementById("final-int").innerHTML = this.intAttr;
-        document.getElementById("final-int-mod").innerHTML = (this.intMod < 0 ? "- " : "+ ") + this.intMod;
+        document.getElementById("final-int-mod").innerHTML = (this.intMod < 0 ? "" : "+ ") + this.intMod;
         document.getElementById("final-cha").innerHTML = this.chaAttr;
-        document.getElementById("final-cha-mod").innerHTML = (this.chaMod < 0 ? "- " : "+ ") + this.chaMod;
+        document.getElementById("final-cha-mod").innerHTML = (this.chaMod < 0 ? "" : "+ ") + this.chaMod;
     }
 
     /**

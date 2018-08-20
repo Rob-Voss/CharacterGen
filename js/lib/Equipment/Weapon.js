@@ -1,55 +1,54 @@
 /**
  *
- * @property {String} wName
- * @property {String} iWeight
+ * @property {String} name
+ * @property {String} weight
  * @property {String} damage
  * @property {String} critical
  * @property {String} range
- * @property {String} wType
- * @property {String} wSize
- * @property {String} wReach
+ * @property {String} type
+ * @property {String} size
+ * @property {String} reach
  * @property {String} hardness
  * @property {String} hitPoints
- * @property {String} wSaves
- * @property {String} wNotes
- * @property {String} wBonus
+ * @property {String} saves
+ * @property {String} notes
+ * @property {String} bonus
  */
 class Weapon {
 
     /**
      *
-     * @param {String} wName
-     * @param {String} iWeight
+     * @param {String} name
+     * @param {number} weight
      * @param {String} damage
      * @param {String} critical
      * @param {String} range
-     * @param {String} wType
-     * @param {String} wSize
-     * @param {String} wReach
+     * @param {String} type
+     * @param {String} size
+     * @param {String} reach
      * @param {String} hardness
      * @param {String} hitPoints
-     * @param {String} wSaves
-     * @param {String} wNotes
-     * @param {String} wBonus
+     * @param {String} saves
+     * @param {String} notes
+     * @param {String} bonus
      * @returns {Weapon}
      */
-    constructor(wName, iWeight, damage, critical, range, wType, wSize, wReach, hardness, hitPoints, wSaves, wNotes, wBonus) {
-        this.wName = wName;
-        this.iWeight = iWeight;
+    constructor(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus) {
+        this.name = name;
+        this.weight = weight;
         this.damage = damage;
         this.critical = critical;
         this.range = range;
-        this.wType = wType;
-        this.wSize = wSize;
-        this.wReach = wReach;
+        this.type = type;
+        this.size = size;
+        this.reach = reach;
         this.hardness = hardness;
         this.hitPoints = hitPoints;
-        this.wSaves = wSaves;
-        this.wNotes = wNotes;
-        this.wBonus = wBonus;
+        this.saves = saves;
+        this.notes = notes;
+        this.bonus = bonus;
 
         return this;
     }
-
 
 }

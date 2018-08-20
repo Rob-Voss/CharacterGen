@@ -1,46 +1,46 @@
 /**
  *
- * @property {String} wName
- * @property {String} iWeight
+ * @property {String} name
+ * @property {number} weight
  * @property {String} damage
  * @property {String} critical
  * @property {String} range
- * @property {String} wType
- * @property {String} wSize
- * @property {String} wReach
+ * @property {String} type
+ * @property {String} size
+ * @property {String} reach
  * @property {String} hardness
  * @property {String} hitPoints
- * @property {String} wSaves
+ * @property {String} saves
  */
 class Custom {
 
     /**
      *
-     * @param {String} wName
-     * @param {String} iWeight
+     * @param {String} name
+     * @param {number} weight
      * @param {String} damage
      * @param {String} critical
      * @param {String} range
-     * @param {String} wType
-     * @param {String} wSize
-     * @param {String} wReach
+     * @param {String} type
+     * @param {String} size
+     * @param {String} reach
      * @param {String} hardness
      * @param {String} hitPoints
-     * @param {String} wSaves
+     * @param {String} saves
      * @returns {Custom}
      */
-    constructor(wName, iWeight, damage, critical, range, wType, wSize, wReach, hardness, hitPoints, wSaves) {
-        this.wName = wName;
-        this.iWeight = iWeight;
+    constructor(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves) {
+        this.name = name;
+        this.weight = weight;
         this.damage = damage;
         this.critical = critical;
         this.range = range;
-        this.wType = wType;
-        this.wSize = wSize;
-        this.wReach = wReach;
+        this.type = type;
+        this.size = size;
+        this.reach = reach;
         this.hardness = hardness;
         this.hitPoints = hitPoints;
-        this.wSaves = wSaves;
+        this.saves = saves;
 
         return this;
     }

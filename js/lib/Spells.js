@@ -2,12 +2,11 @@
 class Spells {
 
     /**
-     *
-     * @param {CharacterGen} characterGen
+     * @param {CharacterGen} generator
      * @returns {Spells}
      */
-    constructor(characterGen) {
-        this.generator = characterGen;
+    constructor(generator) {
+        this.character = generator.character;
 
         return this;
     }

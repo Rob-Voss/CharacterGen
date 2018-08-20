@@ -1,15 +1,6 @@
 
-const whichModList = ["int", "dex", "cha", "str", "con", "int", "int", "cha", "int", "cha", "dex", "int", "cha", "cha", "wis", "dex", "cha", "str", "int", "wis", "dex", "dex", "cha", "wis", "dex", "int", "wis", "dex", "int", "wis", "wis", "str", "dex", "cha", "dex", "none"];  // 	,		"none",		"none"
-const skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user", "bla1"]; // 	, 	"bla2", 	"bla3"
-
 /**
  *
- * @property {number} blankCounter
- * @property {number} blankCraftCounter
- * @property {number} blankKnowledgeCounter
- * @property {number} blankPerformCounter
- * @property {number} blankProfessionCounter
- * @property {number} customItemNo
  * @property {Core35} generator
  * @property {Character} character
  * @property {Feats} feats
@@ -24,16 +15,10 @@ class CharacterGen {
      * @returns {CharacterGen}
      */
     constructor() {
-        this.blankCounter = 0;
-        this.blankCraftCounter = 0;
-        this.blankKnowledgeCounter = 0;
-        this.blankPerformCounter = 0;
-        this.blankProfessionCounter = 0;
-
         this.rules = new Core35(this);
+        this.character = new Character(this);
         this.skills = new Skills(this);
         this.spells = new Spells(this);
-        this.character = new Character(this);
         this.feats = new Feats(this);
         this.inventory = new Inventory(this);
 
@@ -55,6 +40,7 @@ class CharacterGen {
      * @param {String} idCalled
      */
     navigate(idCalled) {
+        let list = document.getElementsByClassName("page-space");
         switch (idCalled) {
             case "race-source":
                 document.getElementById(idCalled).style.display = "block";
@@ -99,7 +85,6 @@ class CharacterGen {
                 document.getElementById("build").style.display = "none";
                 document.getElementById("roll-playing").style.display = "none";
                 document.getElementsByTagName("body")[0].style.backgroundImage = "none";
-                var list = document.getElementsByClassName("page-space");
                 for (let i = 0; i < list.length; i++) {
                     list[i].style.display = "block";
                 }
@@ -114,8 +99,6 @@ class CharacterGen {
                 document.getElementsByTagName("body")[0].style.backgroundImage = "url('images/dnd-wp.jpg')";
                 document.getElementById("roll-playing").style.display = "block";
                 document.getElementById("build").style.display = "block";
-
-                var list = document.getElementsByClassName("page-space");
                 for (let i = 0; i < list.length; i++) {
                     list[i].style.display = "none";
                 }
@@ -131,9 +114,9 @@ class CharacterGen {
      */
     populateCharacterSheet() {
         this.navigate("print-sheets");
-        var formName = document.getElementById("form-name").value;
-        var formPlayer = document.getElementById("form-player").value;
-        var formAlignment = document.getElementById("form-alignment").value;
+        let formName = document.getElementById("form-name").value,
+            formPlayer = document.getElementById("form-player").value,
+            formAlignment = document.getElementById("form-alignment").value;
 
         document.getElementById("print-eyes").innerHTML = document.getElementById("form-eyes").value;
         document.getElementById("print-hair").innerHTML = document.getElementById("form-hair").value;
@@ -161,9 +144,9 @@ class CharacterGen {
             }
         }
 
-        if (window.itemPurchaseNo > 0) {
-            if (window.itemPurchaseNo !== 0) {
-                for (let i = 1; i < (window.itemPurchaseNo + 1); i++) {
+        if (this.inventory.itemPurchaseNo > 0) {
+            if (this.inventory.itemPurchaseNo !== 0) {
+                for (let i = 1; i < (this.inventory.itemPurchaseNo + 1); i++) {
                     document.getElementById("print-item-" + i).innerHTML = document.getElementById("item-purchase-no-" + i).innerHTML;
                 }
             }
@@ -177,23 +160,19 @@ class CharacterGen {
         // document.getElementById("print-name").innerHTML = formName ;
         // document.getElementById("print-player").innerHTML = formPlayer ;
 
-        var list = document.getElementsByClassName("print-name");
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 0, list = document.getElementsByClassName("print-name"); i < list.length; i++) {
             list[i].innerHTML = (formName);
         }
 
-        var list = document.getElementsByClassName("print-player");
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 0, list = document.getElementsByClassName("print-player"); i < list.length; i++) {
             list[i].innerHTML = (formPlayer);
         }
 
-        var list = document.getElementsByClassName("print-race");
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 0, list = document.getElementsByClassName("print-race"); i < list.length; i++) {
             list[i].innerHTML = (this.character.race);
         }
 
-        var list = document.getElementsByClassName("print-class");
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 0, list = document.getElementsByClassName("print-class"); i < list.length; i++) {
             list[i].innerHTML = (this.character.class);
         }
 
@@ -239,53 +218,42 @@ class CharacterGen {
             document.getElementById("hit-points").innerHTML = this.character.hitPoints;
         }
 
-        var listStr = document.getElementsByClassName("print-mod-str");
-        for (let i = 0; i < listStr.length; i++) {
+        for (let i = 0, listStr = document.getElementsByClassName("print-mod-str"); i < listStr.length; i++) {
             listStr[i].innerHTML = (this.character.strMod < 0 ? "-" + this.character.strMod : "+" + this.character.strMod);
         }
-        var listDex = document.getElementsByClassName("print-mod-dex");
-        for (let i = 0; i < listDex.length; i++) {
+        for (let i = 0, listDex = document.getElementsByClassName("print-mod-dex"); i < listDex.length; i++) {
             listDex[i].innerHTML = (this.character.dexMod < 0 ? "-" + this.character.dexMod : "+" + this.character.dexMod);
         }
-        var listCon = document.getElementsByClassName("print-mod-con");
-        for (let i = 0; i < listCon.length; i++) {
+        for (let i = 0, listCon = document.getElementsByClassName("print-mod-con"); i < listCon.length; i++) {
             listCon[i].innerHTML = (this.character.conMod < 0 ? "-" + this.character.conMod : "+" + this.character.conMod);
         }
-        var listWis = document.getElementsByClassName("print-mod-wis");
-        for (let i = 0; i < listWis.length; i++) {
+        for (let i = 0, listWis = document.getElementsByClassName("print-mod-wis"); i < listWis.length; i++) {
             listWis[i].innerHTML = (this.character.wisMod < 0 ? "-" + this.character.wisMod : "+" + this.character.wisMod);
         }
-        var listInt = document.getElementsByClassName("print-mod-int");
-        for (let i = 0; i < listInt.length; i++) {
+        for (let i = 0, listInt = document.getElementsByClassName("print-mod-int"); i < listInt.length; i++) {
             listInt[i].innerHTML = (this.character.intMod < 0 ? "-" + this.character.intMod : "+" + this.character.intMod);
         }
-        var listCha = document.getElementsByClassName("print-mod-cha");
-        for (let i = 0; i < listCha.length; i++) {
+        for (let i = 0, listCha = document.getElementsByClassName("print-mod-cha"); i < listCha.length; i++) {
             listCha[i].innerHTML = (this.character.chaMod < 0 ? "-" + this.character.chaMod : "+" + this.character.chaMod);
         }
-        var listBab = document.getElementsByClassName("print-bab-one");
-        for (let i = 0; i < listBab.length; i++) {
+        for (let i = 0, listBab = document.getElementsByClassName("print-bab-one"); i < listBab.length; i++) {
             listBab[i].innerHTML = ("+" + this.character.baseAttackBonus);
         }
         if (this.character.levelAdvance > 5) {
-            var listBab = document.getElementsByClassName("print-bab-two");
-            for (let i = 0; i < listBab.length; i++) {
+            for (let i = 0, listBab = document.getElementsByClassName("print-bab-two"); i < listBab.length; i++) {
                 listBab[i].innerHTML = ("+" + this.character.baseAttackBonus2);
             }
         }
-        if (this.levelAdvance > 10) {
-            var listBab = document.getElementsByClassName("print-bab-three");
-            for (let i = 0; i < listBab.length; i++) {
+        if (this.character.levelAdvance > 10) {
+            for (let i = 0, listBab = document.getElementsByClassName("print-bab-three"); i < listBab.length; i++) {
                 listBab[i].innerHTML = ("+" + this.character.baseAttackBonus3);
             }
         }
         if (this.character.levelAdvance > 15) {
-            var listBab = document.getElementsByClassName("print-bab-four");
-            for (let i = 0; i < listBab.length; i++) {
+            for (let i = 0, listBab = document.getElementsByClassName("print-bab-four"); i < listBab.length; i++) {
                 listBab[i].innerHTML = ("+" + this.character.baseAttackBonus4);
             }
         }
-
 
         if (this.character.weaponFinesse === true) {
             document.getElementById("melee-attack-mod-title").innerHTML = ("DEX<br>MODIFIER");
@@ -319,7 +287,7 @@ class CharacterGen {
         }
 
         // Now watch as I print all the skill totals
-        var untrained = [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true];
+        let untrained = [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true];
         for (let i = 0; i < skillsList.length; i++) {
             if (untrained[i] === true) {
                 document.getElementById("pr-" + skillsList[i]).innerHTML = document.getElementById("t-" + skillsList[i]).innerHTML;
@@ -347,111 +315,106 @@ class CharacterGen {
 
         if (this.inventory.weaponSlotOne) {
             // alert("it found it true");
-            document.getElementById("pr-w-s1-name").innerHTML = this.inventory.wSlotOne.wName;
-            document.getElementById("pr-w-s1-weight").innerHTML = this.inventory.wSlotOne.iWeight;
+            document.getElementById("pr-w-s1-name").innerHTML = this.inventory.wSlotOne.name;
+            document.getElementById("pr-w-s1-weight").innerHTML = this.inventory.wSlotOne.weight;
             document.getElementById("pr-w-s1-dmg").innerHTML = this.inventory.wSlotOne.damage;
             document.getElementById("pr-w-s1-crit").innerHTML = this.inventory.wSlotOne.critical;
             document.getElementById("pr-w-s1-rang").innerHTML = this.inventory.wSlotOne.range;
-            document.getElementById("pr-w-s1-type").innerHTML = this.inventory.wSlotOne.wType;
-            document.getElementById("pr-w-s1-size").innerHTML = this.inventory.wSlotOne.wSize;
-            document.getElementById("pr-w-s1-reach").innerHTML = this.inventory.wSlotOne.wReach;
+            document.getElementById("pr-w-s1-type").innerHTML = this.inventory.wSlotOne.type;
+            document.getElementById("pr-w-s1-size").innerHTML = this.inventory.wSlotOne.size;
+            document.getElementById("pr-w-s1-reach").innerHTML = this.inventory.wSlotOne.reach;
             document.getElementById("pr-w-s1-hardn").innerHTML = this.inventory.wSlotOne.hardness;
             document.getElementById("pr-w-s1-hp").innerHTML = this.inventory.wSlotOne.hitPoints;
-            document.getElementById("pr-w-s1-saves").innerHTML = this.inventory.wSlotOne.wSaves;
-            document.getElementById("pr-w-s1-notes").innerHTML = this.inventory.wSlotOne.wNotes;
-            document.getElementById("pr-w-s1-atkbonus").innerHTML = this.inventory.wSlotOne.wBonus;
+            document.getElementById("pr-w-s1-saves").innerHTML = this.inventory.wSlotOne.saves;
+            document.getElementById("pr-w-s1-notes").innerHTML = this.inventory.wSlotOne.notes;
+            document.getElementById("pr-w-s1-atkbonus").innerHTML = this.inventory.wSlotOne.bonus;
         }
 
         if (this.inventory.weaponSlotTwo) {
             // alert("it found TWO true");
             document.getElementById("weapon-slot-two").style.display = "block";
-            document.getElementById("pr-w-s2-name").innerHTML = this.inventory.wSlotTwo.wName;
-            document.getElementById("pr-w-s2-weight").innerHTML = this.inventory.wSlotTwo.iWeight;
+            document.getElementById("pr-w-s2-name").innerHTML = this.inventory.wSlotTwo.name;
+            document.getElementById("pr-w-s2-weight").innerHTML = this.inventory.wSlotTwo.weight;
             document.getElementById("pr-w-s2-dmg").innerHTML = this.inventory.wSlotTwo.damage;
             document.getElementById("pr-w-s2-crit").innerHTML = this.inventory.wSlotTwo.critical;
             document.getElementById("pr-w-s2-rang").innerHTML = this.inventory.wSlotTwo.range;
-            document.getElementById("pr-w-s2-type").innerHTML = this.inventory.wSlotTwo.wType;
-            document.getElementById("pr-w-s2-size").innerHTML = this.inventory.wSlotTwo.wSize;
-            document.getElementById("pr-w-s2-reach").innerHTML = this.inventory.wSlotTwo.wReach;
+            document.getElementById("pr-w-s2-type").innerHTML = this.inventory.wSlotTwo.type;
+            document.getElementById("pr-w-s2-size").innerHTML = this.inventory.wSlotTwo.size;
+            document.getElementById("pr-w-s2-reach").innerHTML = this.inventory.wSlotTwo.reach;
             document.getElementById("pr-w-s2-hardn").innerHTML = this.inventory.wSlotTwo.hardness;
             document.getElementById("pr-w-s2-hp").innerHTML = this.inventory.wSlotTwo.hitPoints;
-            document.getElementById("pr-w-s2-saves").innerHTML = this.inventory.wSlotTwo.wSaves;
-            document.getElementById("pr-w-s2-notes").innerHTML = this.inventory.wSlotTwo.wNotes;
-            document.getElementById("pr-w-s2-atkbonus").innerHTML = this.inventory.wSlotTwo.wBonus;
+            document.getElementById("pr-w-s2-saves").innerHTML = this.inventory.wSlotTwo.saves;
+            document.getElementById("pr-w-s2-notes").innerHTML = this.inventory.wSlotTwo.notes;
+            document.getElementById("pr-w-s2-atkbonus").innerHTML = this.inventory.wSlotTwo.bonus;
         }
 
         if (this.inventory.weaponSlotThree) {
             // alert("it found Three true");
             document.getElementById("weapon-slot-thr").style.display = "block";
-            document.getElementById("pr-w-s3-name").innerHTML = this.inventory.wSlotThree.wName;
-            document.getElementById("pr-w-s3-weight").innerHTML = this.inventory.wSlotThree.iWeight;
+            document.getElementById("pr-w-s3-name").innerHTML = this.inventory.wSlotThree.name;
+            document.getElementById("pr-w-s3-weight").innerHTML = this.inventory.wSlotThree.weight;
             document.getElementById("pr-w-s3-dmg").innerHTML = this.inventory.wSlotThree.damage;
             document.getElementById("pr-w-s3-crit").innerHTML = this.inventory.wSlotThree.critical;
             document.getElementById("pr-w-s3-rang").innerHTML = this.inventory.wSlotThree.range;
-            document.getElementById("pr-w-s3-type").innerHTML = this.inventory.wSlotThree.wType;
-            document.getElementById("pr-w-s3-size").innerHTML = this.inventory.wSlotThree.wSize;
+            document.getElementById("pr-w-s3-type").innerHTML = this.inventory.wSlotThree.type;
+            document.getElementById("pr-w-s3-size").innerHTML = this.inventory.wSlotThree.size;
             document.getElementById("pr-w-s3-reach").innerHTML = this.inventory.wSlotThree.wReach;
             document.getElementById("pr-w-s3-hardn").innerHTML = this.inventory.wSlotThree.hardness;
             document.getElementById("pr-w-s3-hp").innerHTML = this.inventory.wSlotThree.hitPoints;
-            document.getElementById("pr-w-s3-saves").innerHTML = this.inventory.wSlotThree.wSaves;
-            document.getElementById("pr-w-s3-notes").innerHTML = this.inventory.wSlotThree.wNotes;
-            document.getElementById("pr-w-s3-atkbonus").innerHTML = this.inventory.wSlotThree.wBonus;
+            document.getElementById("pr-w-s3-saves").innerHTML = this.inventory.wSlotThree.saves;
+            document.getElementById("pr-w-s3-notes").innerHTML = this.inventory.wSlotThree.notes;
+            document.getElementById("pr-w-s3-atkbonus").innerHTML = this.inventory.wSlotThree.bonus;
         }
 
         if (this.inventory.armorSlot) {
-            document.getElementById("pr-armor-name").innerHTML = this.inventory.aSlot.aName;
-            document.getElementById("pr-armor-weight").innerHTML = this.inventory.aSlot.iWeight;
-            document.getElementById("pr-armor-ar-bonus").innerHTML = this.inventory.aSlot.arBonus;
-            document.getElementById("pr-armor-m-dex").innerHTML = this.inventory.aSlot.mDex;
+            document.getElementById("pr-armor-name").innerHTML = this.inventory.aSlot.name;
+            document.getElementById("pr-armor-weight").innerHTML = this.inventory.aSlot.weight;
+            document.getElementById("pr-armor-ar-bonus").innerHTML = this.inventory.aSlot.bonus;
+            document.getElementById("pr-armor-m-dex").innerHTML = this.inventory.aSlot.dex;
             document.getElementById("pr-armor-check").innerHTML = this.inventory.aSlot.check;
-            document.getElementById("pr-armor-sp-fail").innerHTML = this.inventory.aSlot.spFail;
+            document.getElementById("pr-armor-sp-fail").innerHTML = this.inventory.aSlot.spellFail;
             document.getElementById("pr-armor-max-sp").innerHTML = this.inventory.aSlot.maxSp;
             document.getElementById("pr-armor-hardness").innerHTML = this.inventory.aSlot.hardness;
             document.getElementById("pr-armor-hit-points").innerHTML = this.inventory.aSlot.hitPoints;
-            document.getElementById("pr-armor-a-saves").innerHTML = this.inventory.aSlot.aSaves;
+            document.getElementById("pr-armor-a-saves").innerHTML = this.inventory.aSlot.saves;
             document.getElementById("pr-armor-donning").innerHTML = this.inventory.aSlot.donning;
         }
 
         if (this.inventory.sSlot) {
             document.getElementById("armor-slot-two").style.display = "block";
-            document.getElementById("pr-shield-name").innerHTML = this.inventory.sSlot.shieldName;
-            document.getElementById("pr-shield-weight").innerHTML = this.inventory.sSlot.iWeight;
-            document.getElementById("pr-shield-ar-bonus").innerHTML = this.inventory.sSlot.arBonus;
-            document.getElementById("pr-shield-m-dex").innerHTML = this.inventory.sSlot.mDex;
+            document.getElementById("pr-shield-name").innerHTML = this.inventory.sSlot.name;
+            document.getElementById("pr-shield-weight").innerHTML = this.inventory.sSlot.weight;
+            document.getElementById("pr-shield-ar-bonus").innerHTML = this.inventory.sSlot.bonus;
+            document.getElementById("pr-shield-m-dex").innerHTML = this.inventory.sSlot.dex;
             document.getElementById("pr-shield-check").innerHTML = this.inventory.sSlot.check;
-            document.getElementById("pr-shield-sp-fail").innerHTML = this.inventory.sSlot.spFail;
+            document.getElementById("pr-shield-sp-fail").innerHTML = this.inventory.sSlot.spellFail;
             document.getElementById("pr-shield-max-sp").innerHTML = this.inventory.sSlot.maxSp;
             document.getElementById("pr-shield-hardness").innerHTML = this.inventory.sSlot.hardness;
             document.getElementById("pr-shield-hit-points").innerHTML = this.inventory.sSlot.hitPoints;
-            document.getElementById("pr-shield-saves").innerHTML = this.inventory.sSlot.shieldSaves;
+            document.getElementById("pr-shield-saves").innerHTML = this.inventory.sSlot.saves;
             document.getElementById("pr-shield-donning").innerHTML = this.inventory.sSlot.donning;
         }
 
         // Now Look in the weapons slots for ranged weapons, and print the appropriate ammo in the box, along with Qty purchased.
         // alert( Number(document.getElementById("qty-Arrows").innerHTML) );
+        let nameWeapon = document.getElementById("pr-w-s" + i + "-name").innerHTML;
         for (let i = 1; i < 4; i++) {
-            var nameWeapon = document.getElementById("pr-w-s" + i + "-name").innerHTML;
             if (nameWeapon === "Longbow" || nameWeapon === "Shortbow" || nameWeapon === "Composite Longbow" || nameWeapon === "Composite Shortbow") {
                 document.getElementById("pr-w-s" + i + "-ammo").innerHTML = "Arrows | QTY: " + document.getElementById("qty-Arrows").innerHTML;
-            }
-        }
-
-        for (let i = 1; i < 4; i++) {
-            var nameWeapon = document.getElementById("pr-w-s" + i + "-name").innerHTML;
-            if (nameWeapon === "Heavy Crossbow" || nameWeapon === "Light Crossbow" || nameWeapon === "Hand Crossbow" || nameWeapon === "Heavy Repeating Crossbow" || nameWeapon === "Light Repeating Crossbow") {
+            } else if (nameWeapon === "Heavy Crossbow" || nameWeapon === "Light Crossbow" || nameWeapon === "Hand Crossbow" || nameWeapon === "Heavy Repeating Crossbow" || nameWeapon === "Light Repeating Crossbow") {
                 document.getElementById("pr-w-s" + i + "-ammo").innerHTML = "Bolts | QTY: " + document.getElementById("qty-Bolts").innerHTML;
             }
         }
 
-        var whichCons = ["Ration", "Caltrops", "Canvas", "Firewood", "Rope-Hemp", "Rope-Silk", "Arrows", "Bolts", "Bullets", "Torch"];
-        var whichUnit = [" Day", " Bag", " Sqyd", "lb", "ft", "ft", " ", " ", " ", " "];
-        var whichName = ["Trail Ration", "Caltrops", "Canvas", "Firewood", "Hemp Rope", "Silk Rope", "Arrows", "Bolts", "Sling Bullets", "Torch"];
-        var skipper = 0;
+        let whichCons = ["Ration", "Caltrops", "Canvas", "Firewood", "Rope-Hemp", "Rope-Silk", "Arrows", "Bolts", "Bullets", "Torch"],
+            whichUnit = [" Day", " Bag", " Sqyd", "lb", "ft", "ft", " ", " ", " ", " "],
+            whichName = ["Trail Ration", "Caltrops", "Canvas", "Firewood", "Hemp Rope", "Silk Rope", "Arrows", "Bolts", "Sling Bullets", "Torch"],
+            skipper = 0;
 
         for (let i = 0; i < whichCons.length; i++) {
-            var active = 0;
+            let active = 0;
             if (Number(document.getElementById("qty-" + whichCons[i]).innerHTML) > 0) {
-                var active = "-Active";
+                active = "-Active";
             }
 
             switch (whichCons[i] + active) {
@@ -484,7 +447,7 @@ class CharacterGen {
      *
      */
     printLeftoverMoney() {
-        var money = document.getElementById("copper-remaining").innerHTML,
+        let money = document.getElementById("copper-remaining").innerHTML,
             gold = Math.floor(money * 0.01),
             silver = (Math.floor(money * 0.1)) - (gold * 10),
             copper = (money) - (gold * 100) - (silver * 10);
@@ -497,8 +460,7 @@ class CharacterGen {
      *
      */
     removeDieRollButtons() {
-        var list = document.getElementsByClassName("roll-attribute");
-        for (let i = 0; i < list.length; i++) {
+        for (let i = 0, list = document.getElementsByClassName("roll-attribute"); i < list.length; i++) {
             list[i].style.display = "none";
         }
         document.getElementById("roll-allocate").style.display = "block";
