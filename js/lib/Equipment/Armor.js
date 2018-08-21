@@ -5,7 +5,7 @@
  * @property {String} name     
  * @property {String} weight   
  * @property {String} bonus    
- * @property {String} dex      
+ * @property {String} maxDex
  * @property {String} check    
  * @property {String} spellFail
  * @property {String} maxSp    
@@ -20,12 +20,12 @@ class Armor {
     /**
      *
      * @param {String} name
-     * @param {String} weight
-     * @param {String} bonus
-     * @param {String} dex
-     * @param {String} check
-     * @param {String} spellFail
-     * @param {String} maxSp
+     * @param {number} weight
+     * @param {number} armorBonus
+     * @param {number} maxDex
+     * @param {number} check
+     * @param {number} spellFail
+     * @param {number} maxSp
      * @param {String} hardness
      * @param {String} hitPoints
      * @param {String} saves
@@ -33,11 +33,11 @@ class Armor {
      * @param {String} exists
      * @returns {Armor}
      */
-    constructor(name, weight, bonus, dex, check, spellFail, maxSp, hardness, hitPoints, saves, donning, exists) {
+    constructor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning, exists) {
         this.name = name;
         this.weight = weight;
-        this.bonus = bonus;
-        this.dex = dex;
+        this.armorBonus = armorBonus;
+        this.maxDex = maxDex;
         this.check = check;
         this.spellFail = spellFail;
         this.maxSp = maxSp;
@@ -46,6 +46,7 @@ class Armor {
         this.saves = saves;
         this.donning = donning;
         this.exists = exists;
+
         return this;
     }
 

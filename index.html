@@ -311,10 +311,14 @@
             <h2 id="show-level">1</h2>
             <h3>HP:</h3>
             <h2 id="show-hp">0</h2>
-            <h3>Money:</h3>
-            <h2 id="copper-remaining">-</h2>
-            <h3>Weight:</h3>
-            <h2 id="total-weight">0</h2>
+            <div class="equip-inv-stat">
+                <p>Starting Gold:</p>
+                <p id="copper-start">-</p>
+                <p>remaining Gold: </p>
+                <p id="copper-remaining">-</p>
+                <p>Total Weight: </p>
+                <p id="total-weight">0</p>
+            </div>
         </div>
 
         <h2>
@@ -990,22 +994,22 @@
         <p id="feats-remaining">1</p>
 
         <input class="button" type="button" value="Combat Feats"
-               onclick="generator.feats.featsSubMenu('combat');">
+               onclick="generator.feats.featsSubMenu('Combat');">
         <input class="button" type="button" value="Skill Feats"
-               onclick="generator.feats.featsSubMenu('skill');">
+               onclick="generator.feats.featsSubMenu('Skill');">
         <input class="button" type="button" value="Other Bonus"
-               onclick="generator.feats.featsSubMenu('other');">
+               onclick="generator.feats.featsSubMenu('Other');">
         <input class="button" type="button" value="Proficiency"
-               onclick="generatorfeats.featsSubMenu('proficiency');">
+               onclick="generator.feats.featsSubMenu('Proficiency');">
         <input class="button" type="button" value="Item Creation"
-               onclick="generator.feats.featsSubMenu('creation');">
+               onclick="generator.feats.featsSubMenu('Creation');">
         <input class="button" type="button" value="Casting"
-               onclick="generator.feats.featsSubMenu('casting');">
+               onclick="generator.feats.featsSubMenu('Casting');">
         <input class="button" type="button" value="Metamagic"
-               onclick="generator.feats.featsSubMenu('metamagic');">
+               onclick="generator.feats.featsSubMenu('MetaMagic');">
     </section>
 
-    <div id="feats-combat" class="menu menu-tall">
+    <div id="feats-Combat" class="menu menu-tall">
         <h2>
             Combat Feats
         </h2>
@@ -1101,7 +1105,7 @@
         </div>
     </div>
 
-    <div id="feats-skill" class="menu menu-tall">
+    <div id="feats-Skill" class="menu menu-tall">
         <h2>
             Universal Skill Bonus
         </h2>
@@ -1141,7 +1145,7 @@
         </div>
     </div>
 
-    <div id="feats-other" class="menu menu-tall">
+    <div id="feats-Other" class="menu menu-tall">
         <h2>
             Other Bonus
         </h2>
@@ -1165,7 +1169,7 @@
                onclick="generator.feats.featUpdateSkill('Toughness');">
     </div>
 
-    <div id="feats-proficiency" class="menu menu-tall">
+    <div id="feats-Proficiency" class="menu menu-tall">
         <h2>
             Combat Proficiency
         </h2>
@@ -1191,7 +1195,7 @@
                onclick="generator.feats.selectFeat('Track');">
     </div>
 
-    <div id="feats-creation" class="menu menu-tall">
+    <div id="feats-Creation" class="menu menu-tall">
         <h2>
             Item <br>Creation
         </h2>
@@ -1213,7 +1217,7 @@
                onclick="generator.feats.selectFeat('Forge Ring');">
     </div>
 
-    <div id="feats-casting" class="menu menu-tall">
+    <div id="feats-Casting" class="menu menu-tall">
         <h2>
             Casting Feats
         </h2>
@@ -1241,7 +1245,7 @@
                onclick="generator.feats.selectFeat('Greater Spell Penetration');">
     </div>
 
-    <div id="feats-metamagic" class="menu menu-tall">
+    <div id="feats-MetaMagic" class="menu menu-tall">
         <h2>
             Metamagic
         </h2>
@@ -1454,29 +1458,21 @@
             All prices in COPPER.
         </p>
         <input class="button top-button-20" type="button" value="Simple Weapons"
-               onclick="generator.inventory.equipSubMenu('simpweap');">
+               onclick="generator.inventory.equipSubMenu('SimpleWeapon');">
         <input class="button" type="button" value="Martial Weapons"
-               onclick="generator.inventory.equipSubMenu('martweap');">
+               onclick="generator.inventory.equipSubMenu('MartialWeapon');">
         <input class="button" type="button" value="Exotic Weapons"
-               onclick="generator.inventory.equipSubMenu('exotweap');">
+               onclick="generator.inventory.equipSubMenu('ExoticWeapon');">
         <input class="button" type="button" value="Armor"
-               onclick="generator.inventory.equipSubMenu('armor');">
+               onclick="generator.inventory.equipSubMenu('Armor');">
         <input class="button" type="button" value="Gear"
-               onclick="generator.inventory.equipSubMenu('gear');">
+               onclick="generator.inventory.equipSubMenu('Gear');">
         <input class="button" type="button" value="Alchemical"
-               onclick="generator.inventory.equipSubMenu('substances');">
+               onclick="generator.inventory.equipSubMenu('Substances');">
         <input class="button" type="button" value="Tools & Kits"
-               onclick="generator.inventory.equipSubMenu('tools');">
+               onclick="generator.inventory.equipSubMenu('Tools');">
         <input class="button" type="button" value="Custom Item"
-               onclick="generator.inventory.equipSubMenu('custom');">
-        <div class="equip-inv-stat">
-            <!--
-				<p>Copper Coins: </p>
-				<p id="copper-remaining">10000000</p>
-				<p>Total Weight: </p>
-				<p id="total-weight">0</p>
-				-->
-        </div>
+               onclick="generator.inventory.equipSubMenu('Custom');">
     </section>
 
     <!-- Begin old item system -->

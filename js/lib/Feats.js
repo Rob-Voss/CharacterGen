@@ -19,8 +19,10 @@ class Feats {
      */
     featsSubMenu(whichSubMenu) {
         for (let i = 0; i < this.allSubMenus.length; i++) {
-            let isMenu = this.allSubMenus[i] === whichSubMenu;
-            document.getElementById("feats-" + (isMenu) ? whichSubMenu : this.allSubMenus[i]).style.display = (isMenu) ? "block" : "none";
+            let isMenu = this.allSubMenus[i] === whichSubMenu,
+                featName = "feats-" + ((isMenu) ? whichSubMenu : this.allSubMenus[i]),
+                display = (isMenu) ? "block" : "none";
+            document.getElementById(featName).style.display = display;
         }
         window.scrollTo(0, 0);
     }

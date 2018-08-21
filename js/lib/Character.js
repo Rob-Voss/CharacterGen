@@ -47,6 +47,7 @@ class Character {
 
         this.weaponFinesse = false;
         this.improvedInitiative = false;
+        this.iniMiscMod = 0;
         this.greatFortitude = false;
         this.ironWill = false;
         this.lighteningReflexes = false;
@@ -111,27 +112,27 @@ class Character {
     addAbilityModifiers() {
         let listStr = document.getElementsByClassName("am-str");
         for (let i = 0; i < listStr.length; i++) {
-            listStr[i].innerHTML = (this.strMod < 0 ? "- " : "+ ") + this.strMod;
+            listStr[i].innerHTML = (this.strMod < 0 ? "" : "+ ") + this.strMod;
         }
         let listDex = document.getElementsByClassName("am-dex");
         for (let i = 0; i < listDex.length; i++) {
-            listDex[i].innerHTML = (this.dexMod < 0 ? "- " : "+ ") + this.dexMod;
+            listDex[i].innerHTML = (this.dexMod < 0 ? "" : "+ ") + this.dexMod;
         }
         let listCon = document.getElementsByClassName("am-con");
         for (let i = 0; i < listCon.length; i++) {
-            listCon[i].innerHTML = (this.conMod < 0 ? "- " : "+ ") + this.conMod;
+            listCon[i].innerHTML = (this.conMod < 0 ? "" : "+ ") + this.conMod;
         }
         let listWis = document.getElementsByClassName("am-wis");
         for (let i = 0; i < listWis.length; i++) {
-            listWis[i].innerHTML = (this.wisMod < 0 ? "- " : "+ ") + this.wisMod;
+            listWis[i].innerHTML = (this.wisMod < 0 ? "" : "+ ") + this.wisMod;
         }
         let listInt = document.getElementsByClassName("am-int");
         for (let i = 0; i < listInt.length; i++) {
-            listInt[i].innerHTML = (this.intMod < 0 ? "- " : "+ ") + this.intMod;
+            listInt[i].innerHTML = (this.intMod < 0 ? "" : "+ ") + this.intMod;
         }
         let listCha = document.getElementsByClassName("am-cha");
         for (let i = 0; i < listCha.length; i++) {
-            listCha[i].innerHTML = (this.chaMod < 0 ? "- " : "+ ") + this.chaMod;
+            listCha[i].innerHTML = (this.chaMod < 0 ? "" : "+ ") + this.chaMod;
         }
     }
 
@@ -446,6 +447,7 @@ class Character {
         this.addAbilityModifiers();
         this.generator.skills.showClassSkills();
         this.initiatePhaseTwo();
+        this.updateFinalAttributes();
         this.updateAllSavingThrows();
     }
 
@@ -522,20 +524,7 @@ class Character {
                 break;
         }
         this.updateAllModifiers();
-
-        // Now that the switch is done, and every score is in its final state, let's show them.
-        document.getElementById("final-str").innerHTML = this.strAttr;
-        document.getElementById("final-str-mod").innerHTML = (this.strMod < 0 ? "" : "+ ") + this.strMod;
-        document.getElementById("final-dex").innerHTML = this.dexAttr;
-        document.getElementById("final-dex-mod").innerHTML = (this.dexMod < 0 ? "" : "+ ") + this.dexMod;
-        document.getElementById("final-con").innerHTML = this.conAttr;
-        document.getElementById("final-con-mod").innerHTML = (this.conMod < 0 ? "" : "+ ") + this.conMod;
-        document.getElementById("final-wis").innerHTML = this.wisAttr;
-        document.getElementById("final-wis-mod").innerHTML = (this.wisMod < 0 ? "" : "+ ") + this.wisMod;
-        document.getElementById("final-int").innerHTML = this.intAttr;
-        document.getElementById("final-int-mod").innerHTML = (this.intMod < 0 ? "" : "+ ") + this.intMod;
-        document.getElementById("final-cha").innerHTML = this.chaAttr;
-        document.getElementById("final-cha-mod").innerHTML = (this.chaMod < 0 ? "" : "+ ") + this.chaMod;
+        this.updateFinalAttributes();
     }
 
     /**
@@ -576,6 +565,22 @@ class Character {
                 // affects subsequent calculations.
                 break;
         }
+    }
+
+    updateFinalAttributes() {
+        // Now that the switch is done, and every score is in its final state, let's show them.
+        document.getElementById("final-str").innerHTML = this.strAttr;
+        document.getElementById("final-str-mod").innerHTML = (this.strMod < 0 ? "" : "+ ") + this.strMod;
+        document.getElementById("final-dex").innerHTML = this.dexAttr;
+        document.getElementById("final-dex-mod").innerHTML = (this.dexMod < 0 ? "" : "+ ") + this.dexMod;
+        document.getElementById("final-con").innerHTML = this.conAttr;
+        document.getElementById("final-con-mod").innerHTML = (this.conMod < 0 ? "" : "+ ") + this.conMod;
+        document.getElementById("final-wis").innerHTML = this.wisAttr;
+        document.getElementById("final-wis-mod").innerHTML = (this.wisMod < 0 ? "" : "+ ") + this.wisMod;
+        document.getElementById("final-int").innerHTML = this.intAttr;
+        document.getElementById("final-int-mod").innerHTML = (this.intMod < 0 ? "" : "+ ") + this.intMod;
+        document.getElementById("final-cha").innerHTML = this.chaAttr;
+        document.getElementById("final-cha-mod").innerHTML = (this.chaMod < 0 ? "" : "+ ") + this.chaMod;
     }
 
     /**

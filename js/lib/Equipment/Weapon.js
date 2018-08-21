@@ -1,7 +1,7 @@
 /**
  *
  * @property {String} name
- * @property {String} weight
+ * @property {number} weight
  * @property {String} damage
  * @property {String} critical
  * @property {String} range

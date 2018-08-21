@@ -7,22 +7,26 @@ class Inventory {
      * @returns {Inventory}
      */
     constructor(generator) {
-        this.character = generator.character;
+        this.generator = generator;
+        this.character = this.generator.character;
 
-        this.armorSlot = {};
-        this.aSlot = {};
-
-        this.weaponSlotOne = {};
-        this.weaponSlotTwo = {};
-        this.weaponSlotThree = {};
-
-        this.wSlotOne = {};
-        this.wSlotTwo = {};
-        this.wSlotThree = {};
-
-        this.customItemNo = 0;
         this.allSubMenus = ["SimpleWeapon", "MartialWeapon", "ExoticWeapon", "Armor", "Gear", "Substances", "Tools", "Custom"];
         this.noteIndex = ["One", "Two", "Three", "Four", "Five"];
+        this.itemPurchaseNo = 0;
+
+        this.armorSlot = undefined;
+        this.aSlot = undefined;
+        this.shieldSlot = undefined;
+        this.sSlot = undefined;
+
+        this.weaponSlotOne = undefined;
+        this.wSlotOne = undefined;
+        this.weaponSlotTwo = undefined;
+        this.wSlotTwo = undefined;
+        this.weaponSlotThree = undefined;
+        this.wSlotThree = undefined;
+
+        this.startingGold = 0;
         this.goldRemaining = 0;
         this.totalWeight = 0;
 
@@ -34,18 +38,18 @@ class Inventory {
      * @param {String} name
      * @param {number} cost
      * @param {number} weight
-     * @param armorBonus
-     * @param maxDex
-     * @param check
-     * @param spellFail
-     * @param maxSp
-     * @param hardness
-     * @param hp
-     * @param saves
-     * @param donning
-     * @param exs
+     * @param {number} armorBonus
+     * @param {number} maxDex
+     * @param {number} check
+     * @param {number} spellFail
+     * @param {number} maxSp
+     * @param {String} hardness
+     * @param {String} hitPoints
+     * @param {String} saves
+     * @param {String} donning
+     * @param {String} exists
      */
-    buyArmor(name, cost, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning, exs) {
+    buyArmor(name, cost, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning, exists) {
         let changeArmor,
             confirmAr;
         if (cost <= this.goldRemaining) {
@@ -58,19 +62,19 @@ class Inventory {
             if (this.armorSlot) {
                 changeArmor = confirm("You already have armor equipped. Replace " + this.aSlot.name + " with this?");
                 if (changeArmor) {
-                    this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning, exs);
+                    this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning, exists);
                 }
             } else if (this.armorSlot === undefined) {
                 confirmAr = confirm("Do you want to equip this armor?");
             }
 
             if (confirmAr) {
-                this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning, exs);
+                this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning, exists);
                 this.armorSlot = true;
             }
 
             if (this.armorSlot) {
-                document.getElementById("print-armor-bonus").innerHTML = this.aSlot.bonus;
+                document.getElementById("print-armor-bonus").innerHTML = this.aSlot.armorBonus;
                 // Update AC on character sheet. So it ca be relied upon later for calculations during population.
             }
             this.invDisplay();
@@ -129,17 +133,17 @@ class Inventory {
      * @param {String} name
      * @param {number} cost
      * @param {number} weight
-     * @param armorBonus
-     * @param maxDex
-     * @param check
-     * @param spellFail
-     * @param maxSp
-     * @param hardness
-     * @param hp
-     * @param saves
-     * @param donning
+     * @param {number} armorBonus
+     * @param {number} maxDex
+     * @param {number} check
+     * @param {number} spellFail
+     * @param {number} maxSp
+     * @param {String} hardness
+     * @param {String} hitPoints
+     * @param {String} saves
+     * @param {String} donning
      */
-    buyShield(name, cost, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning) {
+    buyShield(name, cost, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning) {
         let changeArmor,
             confirmSh;
         if (cost <= this.goldRemaining) {
@@ -152,19 +156,19 @@ class Inventory {
             if (this.shieldSlot) {
                 changeArmor = confirm("You already have a shield equipped. Replace " + this.sSlot.name + " with this?");
                 if (changeArmor) {
-                    this.sSlot = new Shield(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning);
+                    this.sSlot = new Shield(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning);
                 }
             } else if (this.shieldSlot === undefined) {
                 confirmSh = confirm("Do you want to equip this shield?");
             }
 
             if (confirmSh) {
-                this.sSlot = new Shield(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hp, saves, donning);
+                this.sSlot = new Shield(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning);
                 this.shieldSlot = true;
             }
 
             if (this.sSlot) {
-                document.getElementById("print-shield-bonus").innerHTML = this.sSlot.bonus;
+                document.getElementById("print-shield-bonus").innerHTML = this.sSlot.armorBonus;
                 // Update AC on character sheet.
             }
             this.invDisplay();
@@ -199,17 +203,17 @@ class Inventory {
      * @param {String} name
      * @param {number} cost
      * @param {number} weight
-     * @param damage
-     * @param critical
-     * @param range
-     * @param type
-     * @param size
-     * @param reach
-     * @param hardness
-     * @param hp
-     * @param saves
+     * @param {String} damage
+     * @param {String} critical
+     * @param {String} range
+     * @param {String} type
+     * @param {String} size
+     * @param {String} reach
+     * @param {String} hardness
+     * @param {String} hitPoints
+     * @param {String} saves
      */
-    buyWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hp, saves) {
+    buyWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves) {
         if (cost <= this.goldRemaining) {
             this.itemPurchaseNo += 1;
             this.updateGoldRemaining(cost);
@@ -217,7 +221,7 @@ class Inventory {
             document.getElementById("item-purchase-no-" + this.itemPurchaseNo).innerHTML = name;
             document.getElementById("item-purchase-no-" + this.itemPurchaseNo).style.display = "block";
 
-            this.equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hp, saves, " ", " ");
+            this.equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, " ", " ");
             this.invDisplay();
         } else {
             alert("You cannot afford this item.");
@@ -230,11 +234,10 @@ class Inventory {
      * @param {number} fMonks
      */
     calculateGold(mxFactor, fMonks) {
-        let startingGold = 0;
         for (let i = 0; i < mxFactor; i++) {	// Roll a d4 [mxFactor] times.
-            startingGold += (Math.floor(Math.random() * 4 + 1) * fMonks) * 100; // Calculate Number of Coppers in Possession.
+            this.startingGold += (Math.floor(Math.random() * 4 + 1) * fMonks) * 100; // Calculate Number of Coppers in Possession.
         }
-        document.getElementById("copper-remaining").innerHTML = startingGold; // Display.
+        document.getElementById("copper-remaining").innerHTML = this.startingGold; // Display.
         document.getElementById("roll-starting-gold").style.display = "none"; // Remove button to prevent repeats.
         document.getElementById("inventory").style.display = "block";
         document.getElementById("equip-variable-buffer").style.display = "block";
@@ -389,8 +392,9 @@ class Inventory {
     equipSubMenu(whichSubMenu) {
         for (let i = 0; i < this.allSubMenus.length; i++) {
             let isSubMenu = this.allSubMenus[i] === whichSubMenu,
-                id = (isSubMenu) ? whichSubMenu : this.allSubMenus[i];
-            document.getElementById("equip-" + id).style.display = (isSubMenu) ? "block" : "none";
+                equipName = "equip-" + ((isSubMenu) ? whichSubMenu : this.allSubMenus[i]),
+                display = (isSubMenu) ? "block" : "none";
+            document.getElementById(equipName).style.display = display;
         }
         document.getElementById("custom-weapon").style.display = "none";
         document.getElementById("custom-weapon-display").style.display = "none";
@@ -404,36 +408,36 @@ class Inventory {
      * @param {String} name
      * @param {number} cost
      * @param {number} weight
-     * @param damage
-     * @param critical
-     * @param range
-     * @param type
-     * @param size
-     * @param reach
-     * @param hardness
-     * @param hp
-     * @param saves
-     * @param notes
-     * @param bonus
+     * @param {String} damage
+     * @param {String} critical
+     * @param {String} range
+     * @param {String} type
+     * @param {String} size
+     * @param {String} reach
+     * @param {String} hardness
+     * @param {String} hitPoints
+     * @param {String} saves
+     * @param {String} notes
+     * @param {String} bonus
      */
-    equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus) {
+    equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus) {
         if (this.weaponSlotOne === undefined) {
             let confirmWa = confirm("Do you want to equip this weapon in slot one?");
             if (confirmWa) {
                 this.weaponSlotOne = true;
-                this.wSlotOne = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
+                this.wSlotOne = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus);
             }
         } else if (this.weaponSlotTwo === undefined) {
             let confirmWb = confirm("Do you want to equip this weapon in slot two?");
             if (confirmWb) {
                 this.weaponSlotTwo = true;
-                this.wSlotTwo = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
+                this.wSlotTwo = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus);
             }
         } else if (this.weaponSlotThree === undefined) {
             let confirmWc = confirm("Do you want to equip this weapon in slot three?");
             if (confirmWc) {
                 this.weaponSlotThree = true;
-                this.wSlotThree = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hp, saves, notes, bonus);
+                this.wSlotThree = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus);
             }
         } else {
             alert("You have no more open weapon slots. User-added weapon slots are not supported in this version.");
@@ -449,6 +453,7 @@ class Inventory {
         } else {
             alert("Capacity Reached");
         }
+        document.getElementById("copper-remaining").innerHTML = this.goldRemaining;
     }
 
     /**
@@ -488,79 +493,82 @@ class Inventory {
         }
 
         if (input === "leveled") {
-            let gold;
             switch (Number(this.character.levelAdvance)) {
                 case 2:
-                    gold = 900;
+                    this.startingGold = 900;
                     break;
                 case 3:
-                    gold = 2700;
+                    this.startingGold = 2700;
                     break;
                 case 4:
-                    gold = 5400;
+                    this.startingGold = 5400;
                     break;
                 case 5:
-                    gold = 9000;
+                    this.startingGold = 9000;
                     break;
                 case 6:
-                    gold = 13000;
+                    this.startingGold = 13000;
                     break;
                 case 7:
-                    gold = 19000;
+                    this.startingGold = 19000;
                     break;
                 case 8:
-                    gold = 27000;
+                    this.startingGold = 27000;
                     break;
                 case 9:
-                    gold = 36000;
+                    this.startingGold = 36000;
                     break;
                 case 10:
-                    gold = 49000;
+                    this.startingGold = 49000;
                     break;
                 case 11:
-                    gold = 66000;
+                    this.startingGold = 66000;
                     break;
                 case 12:
-                    gold = 88000;
+                    this.startingGold = 88000;
                     break;
                 case 13:
-                    gold = 110000;
+                    this.startingGold = 110000;
                     break;
                 case 14:
-                    gold = 150000;
+                    this.startingGold = 150000;
                     break;
                 case 15:
-                    gold = 200000;
+                    this.startingGold = 200000;
                     break;
                 case 16:
-                    gold = 260000;
+                    this.startingGold = 260000;
                     break;
                 case 17:
-                    gold = 340000;
+                    this.startingGold = 340000;
                     break;
                 case 18:
-                    gold = 440000;
+                    this.startingGold = 440000;
                     break;
                 case 19:
-                    gold = 580000;
+                    this.startingGold = 580000;
                     break;
                 case 20:
-                    gold = 760000;
+                    this.startingGold = 760000;
                     break;
             }
 
-            document.getElementById("copper-remaining").innerHTML = (gold * 100);
+            document.getElementById("copper-remaining").innerHTML = (this.startingGold * 100);
             document.getElementById("roll-starting-gold").style.display = "none"; // Remove button to prevent repeats.
             document.getElementById("inventory").style.display = "block";
             document.getElementById("equip-variable-buffer").style.display = "block";
         }
 
         if (input === "input") {
-            document.getElementById("copper-remaining").innerHTML = document.getElementById("gold-input").value;
+            this.startingGold = document.getElementById("gold-input").value;
+            document.getElementById("copper-remaining").innerHTML = this.startingGold;
             document.getElementById("roll-starting-gold").style.display = "none"; // Remove button to prevent repeats.
             document.getElementById("inventory").style.display = "block";
             document.getElementById("equip-variable-buffer").style.display = "block";
         }
+        this.goldRemaining = this.startingGold;
+        document.getElementById("copper-start").innerHTML = this.startingGold;
+        document.getElementById("copper-remaining").innerHTML = this.goldRemaining;
     }
 
     /**
@@ -803,9 +811,8 @@ class Inventory {
      * @param {number} weight
      */
     updateTotalWeight(weight) {
-        this.totalWeight = Number(document.getElementById("total-weight").innerHTML) + weight;
+        this.totalWeight += weight;
         document.getElementById("total-weight").innerHTML = this.totalWeight;
-
     }
 
     /**
@@ -813,9 +820,8 @@ class Inventory {
      * @param {number} cost
      */
     updateGoldRemaining(cost) {
-        this.goldRemaining = Number(document.getElementById("copper-remaining").innerHTML) - cost;
+        this.goldRemaining -= cost;
         document.getElementById("copper-remaining").innerHTML = this.goldRemaining;
-
     }
 
 }

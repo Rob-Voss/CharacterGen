@@ -219,22 +219,22 @@ class CharacterGen {
         }
 
         for (let i = 0, listStr = document.getElementsByClassName("print-mod-str"); i < listStr.length; i++) {
-            listStr[i].innerHTML = (this.character.strMod < 0 ? "-" + this.character.strMod : "+" + this.character.strMod);
+            listStr[i].innerHTML = (this.character.strMod < 0 ? "" + this.character.strMod : "+" + this.character.strMod);
         }
         for (let i = 0, listDex = document.getElementsByClassName("print-mod-dex"); i < listDex.length; i++) {
-            listDex[i].innerHTML = (this.character.dexMod < 0 ? "-" + this.character.dexMod : "+" + this.character.dexMod);
+            listDex[i].innerHTML = (this.character.dexMod < 0 ? "" + this.character.dexMod : "+" + this.character.dexMod);
         }
         for (let i = 0, listCon = document.getElementsByClassName("print-mod-con"); i < listCon.length; i++) {
-            listCon[i].innerHTML = (this.character.conMod < 0 ? "-" + this.character.conMod : "+" + this.character.conMod);
+            listCon[i].innerHTML = (this.character.conMod < 0 ? "" + this.character.conMod : "+" + this.character.conMod);
         }
         for (let i = 0, listWis = document.getElementsByClassName("print-mod-wis"); i < listWis.length; i++) {
-            listWis[i].innerHTML = (this.character.wisMod < 0 ? "-" + this.character.wisMod : "+" + this.character.wisMod);
+            listWis[i].innerHTML = (this.character.wisMod < 0 ? "" + this.character.wisMod : "+" + this.character.wisMod);
         }
         for (let i = 0, listInt = document.getElementsByClassName("print-mod-int"); i < listInt.length; i++) {
-            listInt[i].innerHTML = (this.character.intMod < 0 ? "-" + this.character.intMod : "+" + this.character.intMod);
+            listInt[i].innerHTML = (this.character.intMod < 0 ? "" + this.character.intMod : "+" + this.character.intMod);
         }
         for (let i = 0, listCha = document.getElementsByClassName("print-mod-cha"); i < listCha.length; i++) {
-            listCha[i].innerHTML = (this.character.chaMod < 0 ? "-" + this.character.chaMod : "+" + this.character.chaMod);
+            listCha[i].innerHTML = (this.character.chaMod < 0 ? "" + this.character.chaMod : "+" + this.character.chaMod);
         }
         for (let i = 0, listBab = document.getElementsByClassName("print-bab-one"); i < listBab.length; i++) {
             listBab[i].innerHTML = ("+" + this.character.baseAttackBonus);
@@ -279,9 +279,9 @@ class CharacterGen {
         }
 
         if (this.character.improvedInitiative === true) {
-            window.iniMiscMod = 4; // This is so it can be modified later if need be.
-            document.getElementById("print-ini-misc").innerHTML = window.iniMiscMod;
-            document.getElementById("print-ini-tot").innerHTML = (window.iniMiscMod + this.character.dexMod);
+            this.character.iniMiscMod = 4; // This is so it can be modified later if need be.
+            document.getElementById("print-ini-misc").innerHTML = this.character.iniMiscMod;
+            document.getElementById("print-ini-tot").innerHTML = (this.character.iniMiscMod + this.character.dexMod);
         } else {
             document.getElementById("print-ini-tot").innerHTML = this.character.dexMod;
         }
@@ -358,7 +358,7 @@ class CharacterGen {
             document.getElementById("pr-w-s3-rang").innerHTML = this.inventory.wSlotThree.range;
             document.getElementById("pr-w-s3-type").innerHTML = this.inventory.wSlotThree.type;
             document.getElementById("pr-w-s3-size").innerHTML = this.inventory.wSlotThree.size;
-            document.getElementById("pr-w-s3-reach").innerHTML = this.inventory.wSlotThree.wReach;
+            document.getElementById("pr-w-s3-reach").innerHTML = this.inventory.wSlotThree.reach;
             document.getElementById("pr-w-s3-hardn").innerHTML = this.inventory.wSlotThree.hardness;
             document.getElementById("pr-w-s3-hp").innerHTML = this.inventory.wSlotThree.hitPoints;
             document.getElementById("pr-w-s3-saves").innerHTML = this.inventory.wSlotThree.saves;
@@ -369,8 +369,8 @@ class CharacterGen {
         if (this.inventory.armorSlot) {
             document.getElementById("pr-armor-name").innerHTML = this.inventory.aSlot.name;
             document.getElementById("pr-armor-weight").innerHTML = this.inventory.aSlot.weight;
-            document.getElementById("pr-armor-ar-bonus").innerHTML = this.inventory.aSlot.bonus;
-            document.getElementById("pr-armor-m-dex").innerHTML = this.inventory.aSlot.dex;
+            document.getElementById("pr-armor-ar-bonus").innerHTML = this.inventory.aSlot.armorBonus;
+            document.getElementById("pr-armor-m-dex").innerHTML = this.inventory.aSlot.maxDex;
             document.getElementById("pr-armor-check").innerHTML = this.inventory.aSlot.check;
             document.getElementById("pr-armor-sp-fail").innerHTML = this.inventory.aSlot.spellFail;
             document.getElementById("pr-armor-max-sp").innerHTML = this.inventory.aSlot.maxSp;
@@ -384,8 +384,8 @@ class CharacterGen {
             document.getElementById("armor-slot-two").style.display = "block";
             document.getElementById("pr-shield-name").innerHTML = this.inventory.sSlot.name;
             document.getElementById("pr-shield-weight").innerHTML = this.inventory.sSlot.weight;
-            document.getElementById("pr-shield-ar-bonus").innerHTML = this.inventory.sSlot.bonus;
-            document.getElementById("pr-shield-m-dex").innerHTML = this.inventory.sSlot.dex;
+            document.getElementById("pr-shield-ar-bonus").innerHTML = this.inventory.sSlot.armorBonus;
+            document.getElementById("pr-shield-m-dex").innerHTML = this.inventory.sSlot.maxDex;
             document.getElementById("pr-shield-check").innerHTML = this.inventory.sSlot.check;
             document.getElementById("pr-shield-sp-fail").innerHTML = this.inventory.sSlot.spellFail;
             document.getElementById("pr-shield-max-sp").innerHTML = this.inventory.sSlot.maxSp;
