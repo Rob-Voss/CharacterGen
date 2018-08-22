@@ -16,10 +16,6 @@ class Character {
     constructor(characterGen) {
         this.generator = characterGen;
 
-        //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
-        this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
-        this.allSkillsString = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user"];
-
         this.blankCounter = 0;
         this.blankCraftCounter = 0;
         this.blankKnowledgeCounter = 0;
@@ -41,6 +37,7 @@ class Character {
         this.baseSkillPoints = 0;
         this.skillPoints = 0;
         this.skillPointsSpent = 0;
+        this.skillPointsRemaining = 0;
 
         this.startingFeats = 1;
         this.numberOfFeats = 0;
@@ -480,8 +477,8 @@ class Character {
                 this.dexAttr += 2;
                 this.conAttr -= 2;
                 this.lowLight = true;
-                document.getElementById("ms-list").innerHTML = 2;
-                document.getElementById("ms-sear").innerHTML = 2;
+                document.getElementById("ms-listen").innerHTML = 2;
+                document.getElementById("ms-search").innerHTML = 2;
                 document.getElementById("ms-spot").innerHTML = 2;
                 break;
             case "GNOME":
@@ -489,17 +486,17 @@ class Character {
                 this.strAttr -= 2;
                 this.small = true;
                 this.lowLight = true;
-                document.getElementById("ms-list").innerHTML = 2;
-                document.getElementById("ms-craf").innerHTML = 2;
+                document.getElementById("ms-listen").innerHTML = 2;
+                document.getElementById("ms-craft").innerHTML = 2;
                 document.getElementById("ms-hide").innerHTML = 4;
                 break;
             case "HALF-ELF":
                 this.lowLight = true;
-                document.getElementById("ms-list").innerHTML = 1;
-                document.getElementById("ms-sear").innerHTML = 1;
+                document.getElementById("ms-listen").innerHTML = 1;
+                document.getElementById("ms-search").innerHTML = 1;
                 document.getElementById("ms-spot").innerHTML = 1;
-                document.getElementById("ms-dipl").innerHTML = 2;
-                document.getElementById("ms-gath").innerHTML = 2;
+                document.getElementById("ms-diplomacy").innerHTML = 2;
+                document.getElementById("ms-gatherinformation").innerHTML = 2;
                 break;
             case "HALF-ORC":
                 this.strAttr += 2;
@@ -511,10 +508,10 @@ class Character {
                 this.dexAttr += 2;
                 this.strAttr -= 2;
                 this.small = true;
-                document.getElementById("ms-clim").innerHTML = 2;
+                document.getElementById("ms-climb").innerHTML = 2;
                 document.getElementById("ms-jump").innerHTML = 2;
-                document.getElementById("ms-move").innerHTML = 2;
-                document.getElementById("ms-list").innerHTML = 2;
+                document.getElementById("ms-movesilently").innerHTML = 2;
+                document.getElementById("ms-listen").innerHTML = 2;
                 document.getElementById("ms-hide").innerHTML = 4;
                 break;
             case "NewBlankRace":

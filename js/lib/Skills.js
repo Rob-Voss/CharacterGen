@@ -1,7 +1,4 @@
 
-const whichModList = ["int", "dex", "cha", "str", "con", "int", "int", "cha", "int", "cha", "dex", "int", "cha", "cha", "wis", "dex", "cha", "str", "int", "wis", "dex", "dex", "cha", "wis", "dex", "int", "wis", "dex", "int", "wis", "wis", "str", "dex", "cha", "dex", "none"];  // 	,		"none",		"none"
-const skillsList = ["appr", "bala", "bluf", "clim", "conc", "craf", "deci", "dipl", "disa", "disg", "esca", "forg", "gath", "hand", "heal", "hide", "inti", "jump", "know", "list", "move", "open", "perf", "prof", "ride", "sear", "sens", "slei", "spel", "spot", "surv", "swim", "tumb", "usem", "user", "bla1"]; // 	, 	"bla2", 	"bla3"
-
 class Skills {
 
     /**
@@ -10,43 +7,51 @@ class Skills {
      */
     constructor(generator) {
         this.character = generator.character;
-        this.skillRanks = {
-            "in_appr": 0,
-            "in_bala": 0,
-            "in_bluf": 0,
-            "in_clim": 0,
-            "in_conc": 0,
-            "in_craf": 0,
-            "in_deci": 0,
-            "in_dipl": 0,
-            "in_disa": 0,
-            "in_disg": 0,
-            "in_esca": 0,
-            "in_forg": 0,
-            "in_gath": 0,
-            "in_hand": 0,
-            "in_heal": 0,
-            "in_hide": 0,
-            "in_inti": 0,
-            "in_jump": 0,
-            "in_know": 0,
-            "in_list": 0,
-            "in_move": 0,
-            "in_open": 0,
-            "in_perf": 0,
-            "in_prof": 0,
-            "in_ride": 0,
-            "in_sear": 0,
-            "in_sens": 0,
-            "in_slei": 0,
-            "in_spel": 0,
-            "in_spot": 0,
-            "in_surv": 0,
-            "in_swim": 0,
-            "in_tumb": 0,
-            "in_usem": 0,
-            "in_user": 0,
-            "bla36": 0
+
+        //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
+        this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
+        this.allSkillsString = ["appraise", "balance", "bluff", "climb", "concentration", "craft", "decipherscript",
+            "diplomacy", "disabledevice", "disguise", "escapeartist", "forgery", "gatherinformation", "handleanimal",
+            "heal", "hide", "intimidate", "jump", "knowledge", "listen", "movesilently", "openlock", "perform",
+            "profession", "ride", "search", "sensemotive", "sleight", "spellcraft", "spot", "survival", "swim", "tumble",
+            "usemagicdevice", "userope"];
+
+        this.skills = {
+            "appraise": {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "balance":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "bluff":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "climb":  {"rank": 0, "mod": "str", "misc-mod": "", "notes": ""},
+            "concentration":  {"rank": 0, "mod": "con", "misc-mod": "", "notes": ""},
+            "craft":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "decipherscript":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "diplomacy":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "disabledevice":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "disguise":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "escapeartist":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "forgery":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "gatherinformation":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "handleanimal":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "heal":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
+            "hide":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "intimidate":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "jump":  {"rank": 0, "mod": "str", "misc-mod": "", "notes": ""},
+            "knowledge":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "listen":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
+            "movesilently":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "openlock":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "perform":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "profession":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
+            "ride":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "search":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "sensemotive":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
+            "sleight":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "spellcraft":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
+            "spot":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
+            "survival":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
+            "swim":  {"rank": 0, "mod": "str", "misc-mod": "", "notes": ""},
+            "tumble":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
+            "usemagicdevice":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
+            "userope":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""}
         };
 
         return this;
@@ -56,16 +61,16 @@ class Skills {
      *
      */
     acceptSkills() {
-        let confirmAccSk;
-        if (this.character.skPtsRemaining === 0) {
-            confirmAccSk = confirm("Are you sure you are finished allocating skill points?");
-        } else if (this.character.skPtsRemaining > 0) {
-            confirmAccSk = confirm("You have unused skill points\nAre you sure you want to proceed?");
+        let confirmAcceptSkills;
+        if (this.character.skillPointsRemaining === 0) {
+            confirmAcceptSkills = confirm("Are you sure you are finished allocating skill points?");
+        } else if (this.character.skillPointsRemaining > 0) {
+            confirmAcceptSkills = confirm("You have unused skill points\nAre you sure you want to proceed?");
         } else {
-            confirmAccSk = confirm("You have used too many skill points\nAre you sure you want to proceed?");
+            confirmAcceptSkills = confirm("You have used too many skill points\nAre you sure you want to proceed?");
         }
 
-        if (confirmAccSk) {
+        if (confirmAcceptSkills) {
             // Move on to next section.
         }
     }
@@ -75,33 +80,41 @@ class Skills {
      */
     addSkill() {
         this.character.blankCounter += 1;
-        let abilityMod = Number(document.getElementById("wrin-skill-abmod-" + this.character.blankCounter).value),
-            rankPoints = Number(document.getElementById("bla" + Number(35 + this.character.blankCounter)).value),
-            miscMod = Number(document.getElementById("wrin-skill-misc-" + this.character.blankCounter).value),
-            skill = document.getElementById("blank-subtype-" + this.character.blankCounter).value,
+        let abilityMod = Number(document.getElementById("wrin-skill-ab-mod-" + this.character.blankCounter).value),
+            rankPoints = Number(document.getElementById("wrin-skill-rank-" + Number(35 + this.character.blankCounter)).value),
+            miscMod = Number(document.getElementById("wrin-skill-misc-mod-" + this.character.blankCounter).value),
+            skill = document.getElementById("wrin-skill-subtype-" + this.character.blankCounter).value,
             isClass = document.getElementById("wrin-inclass-" + this.character.blankCounter).value === "true";
-        // functionality that references the input relies on this.character.blankCounter.
-        // functionality that defines the output relies on this.character.blank[whatever]counter
+
         switch (document.getElementById("wrin-skill-select-" + this.character.blankCounter).value) {
             case "craft":
                 this.character.blankCraftCounter += 1;
                 document.getElementById("wrin-craft-" + this.character.blankCraftCounter).style.display = "block";
-                document.getElementById("print-wrin-craft-" + this.character.blankCraftCounter).innerHTML = "Craft: " + skill;
+                document.getElementById("print-wrin-craft-title-" + this.character.blankCraftCounter).innerHTML = "Craft: " + skill;
                 rankPoints = (isClass) ? rankPoints : rankPoints / 2;
+                document.getElementById("print-wrin-craft-rank-" + this.character.blankCraftCounter).innerHTML = rankPoints;
+                document.getElementById("print-wrin-craft-ab-mod-" + this.character.blankCraftCounter).innerHTML = abilityMod;
+                document.getElementById("print-wrin-craft-misc-mod-" + this.character.blankCraftCounter).innerHTML = miscMod;
                 document.getElementById("print-wrin-craft-total-" + this.character.blankCraftCounter).innerHTML = "+ " + Number(rankPoints + abilityMod + miscMod);
                 break;
             case "knowledge":
                 this.character.blankKnowledgeCounter += 1;
                 document.getElementById("wrin-knowledge-" + this.character.blankKnowledgeCounter).style.display = "block";
-                document.getElementById("print-wrin-knowledge-" + this.character.blankKnowledgeCounter).innerHTML = "Knowledge: " + skill;
+                document.getElementById("print-wrin-knowledge-title-" + this.character.blankKnowledgeCounter).innerHTML = "Knowledge: " + skill;
                 rankPoints = (isClass) ? rankPoints : rankPoints / 2;
+                document.getElementById("print-wrin-knowledge-rank-" + this.character.blankCraftCounter).innerHTML = rankPoints;
+                document.getElementById("print-wrin-knowledge-ab-mod-" + this.character.blankCraftCounter).innerHTML = abilityMod;
+                document.getElementById("print-wrin-knowledge-misc-mod-" + this.character.blankCraftCounter).innerHTML = miscMod;
                 document.getElementById("print-wrin-knowledge-total-" + this.character.blankKnowledgeCounter).innerHTML = "+ " + Number(rankPoints + abilityMod + miscMod);
                 break;
             case "perform":
                 this.character.blankPerformCounter += 1;
                 document.getElementById("wrin-perform-" + this.character.blankPerformCounter).style.display = "block";
-                document.getElementById("print-wrin-perform-" + this.character.blankPerformCounter).innerHTML = "Perform: " + skill;
+                document.getElementById("print-wrin-perform-title-" + this.character.blankPerformCounter).innerHTML = "Perform: " + skill;
                 rankPoints = (isClass) ? rankPoints : rankPoints / 2;
+                document.getElementById("print-wrin-perform-rank-" + this.character.blankCraftCounter).innerHTML = rankPoints;
+                document.getElementById("print-wrin-perform-ab-mod-" + this.character.blankCraftCounter).innerHTML = abilityMod;
+                document.getElementById("print-wrin-perform-misc-mod-" + this.character.blankCraftCounter).innerHTML = miscMod;
                 document.getElementById("print-wrin-perform-total-" + this.character.blankPerformCounter).innerHTML = "+ " + Number(rankPoints + abilityMod + miscMod);
                 break;
             case "profession":
@@ -109,6 +122,9 @@ class Skills {
                 document.getElementById("wrin-profession-" + this.character.blankProfessionCounter).style.display = "block";
                 document.getElementById("print-wrin-profession-" + this.character.blankProfessionCounter).innerHTML = "Profession: " + skill;
                 rankPoints = (isClass) ? rankPoints : rankPoints / 2;
+                document.getElementById("print-wrin-profession-rank-" + this.character.blankCraftCounter).innerHTML = rankPoints;
+                document.getElementById("print-wrin-profession-ab-mod-" + this.character.blankCraftCounter).innerHTML = abilityMod;
+                document.getElementById("print-wrin-profession-misc-mod-" + this.character.blankCraftCounter).innerHTML = miscMod;
                 document.getElementById("print-wrin-profession-total-" + this.character.blankProfessionCounter).innerHTML = "+ " + Number(rankPoints + abilityMod + miscMod);
                 break;
             case "writein":
@@ -141,7 +157,8 @@ class Skills {
         }
 
         document.getElementById("wrin-skill-submit-" + this.character.blankCounter).style.display = "none";
-        document.getElementById("wrin-" + (this.character.blankCounter + 1)).style.display = "block"; // This will ultimately fail to execute if the user exhausts the forms.
+        // This will ultimately fail to execute if the user exhausts the forms.
+        document.getElementById("wrin-" + (this.character.blankCounter + 1)).style.display = "block";
     }
 
     /**
@@ -150,23 +167,27 @@ class Skills {
     calcPoints() {
         let mod, misc, maths;
         this.character.skillPointsSpent = 0;
-        for (let element in this.skillRanks) {
-            if (this.skillRanks.hasOwnProperty(element)) {
-                this.skillRanks[element] = Number(document.getElementById(element).value);
+        for (let element in this.skills) {
+            if (this.skills.hasOwnProperty(element)) {
+                this.skills[element].rank = Number(document.getElementById("input_" + element).value);
             }
         }
 
-        for (let i = 0; i < skillsList.length; i++) {
-            mod = (whichModList[i] !== "none") ? this.character[whichModList[i] + "Mod"] : "none";
-            if (mod !== "none") {
-                misc = (document.getElementById("ms-" + skillsList[i]).innerHTML === "-") ? 0 : Number(document.getElementById("ms-" + skillsList[i]).innerHTML);
-                let skillRank = Number(this.skillRanks["in_" + skillsList[i]]),
-                    total = Number(mod) + Number(misc) + skillRank;
-                maths = (this.character.allSkillsBool[i]) ? total : total / 2;
-                document.getElementById("t-" + skillsList[i]).innerHTML = (maths > 0) ? "+" + maths : maths;
-                this.character.skillPointsSpent += skillRank;
-            } else {
-                this.character.skillPointsSpent += Number(document.getElementById("bla" + (i + 1)).value);
+        let i = 0;
+        for (let element in this.skills) {
+            if (this.skills.hasOwnProperty(element)) {
+                mod = (this.skills[element].mod !== "none") ? this.character[this.skills[element].mod + "Mod"] : "none";
+                if (mod !== "none") {
+                    misc = (document.getElementById("ms-" + element).innerHTML === "-") ? 0 : Number(document.getElementById("ms-" + element).innerHTML);
+                    let skillRank = Number(this.skills[element].rank),
+                        total = Number(mod) + Number(misc) + skillRank;
+                    maths = (this.allSkillsBool[i]) ? total : total / 2;
+                    document.getElementById("t-" + element).innerHTML = (maths > 0) ? "+" + maths : maths;
+                    this.character.skillPointsSpent += skillRank;
+                } else {
+                    this.character.skillPointsSpent += Number(document.getElementById("wrin-skill-rank-" + (i + 1)).value);
+                }
+                i++;
             }
         }
         document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + (this.character.skillPoints - this.character.skillPointsSpent);
@@ -210,8 +231,8 @@ class Skills {
      * @param {String} featTarget
      */
     decodeSkillFocus(featTarget) {
-        let skName = featTarget.toLowerCase().substring(0, 4);
-        if (skName === "appr" || skName === "bala" || skName === "bluf" || skName === "clim" || skName === "conc" || skName === "craf" || skName === "deci" || skName === "dipl" || skName === "disa" || skName === "disg" || skName === "esca" || skName === "forg" || skName === "gath" || skName === "hand" || skName === "heal" || skName === "hide" || skName === "inti" || skName === "jump" || skName === "know" || skName === "list" || skName === "move" || skName === "open" || skName === "perf" || skName === "prof" || skName === "ride" || skName === "sear" || skName === "sens" || skName === "slei" || skName === "spel" || skName === "spot" || skName === "surv" || skName === "swim" || skName === "tumb" || skName === "usem" || skName === "user") {
+        let skName = featTarget.toLowerCase();
+        if (this.skills.hasOwnProperty(skName)) {
             let msVariable = document.getElementById("ms-" + skName),
                 skillMisc = Number(document.getElementById("ms-" + skName).innerHTML);
             if (msVariable.innerHTML === "-") {
@@ -251,37 +272,37 @@ class Skills {
         switch (this.character.class) {
             case "BARBARIAN":
                 //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
-                this.character.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
+                this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
                 break;
             case "BARD":
-                this.character.allSkillsBool = [true, true, true, true, true, true, true, true, false, true, true, true, true, false, false, true, false, true, true, true, true, false, true, true, false, false, true, true, true, false, false, true, true, true, false];
+                this.allSkillsBool = [true, true, true, true, true, true, true, true, false, true, true, true, true, false, false, true, false, true, true, true, true, false, true, true, false, false, true, true, true, false, false, true, true, true, false];
                 break;
             case "CLERIC":
-                this.character.allSkillsBool = [false, false, false, false, true, true, false, true, false, false, false, false, false, false, true, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false];
+                this.allSkillsBool = [false, false, false, false, true, true, false, true, false, false, false, false, false, false, true, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false];
                 break;
             case "DRUID":
-                this.character.allSkillsBool = [false, false, false, false, true, true, false, true, false, false, false, false, false, true, true, false, false, false, true, false, false, false, false, true, true, false, false, false, true, true, true, true, false, false, false];
+                this.allSkillsBool = [false, false, false, false, true, true, false, true, false, false, false, false, false, true, true, false, false, false, true, false, false, false, false, true, true, false, false, false, true, true, true, true, false, false, false];
                 break;
             case "FIGHTER":
-                this.character.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, false, false, false, false, false, true, false, false, false, false, false, false, true, false, false, false];
+                this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, false, false, false, false, false, true, false, false, false, false, false, false, true, false, false, false];
                 break;
             case "MONK":
-                this.character.allSkillsBool = [false, true, false, true, true, true, false, true, false, false, true, false, false, false, false, true, false, true, true, true, true, false, true, true, false, false, true, false, false, true, false, true, true, false, false];
+                this.allSkillsBool = [false, true, false, true, true, true, false, true, false, false, true, false, false, false, false, true, false, true, true, true, true, false, true, true, false, false, true, false, false, true, false, true, true, false, false];
                 break;
             case "PALADIN":
-                this.character.allSkillsBool = [false, false, false, false, true, true, false, true, false, false, false, false, false, true, true, false, false, false, true, false, false, false, false, true, true, false, true, false, false, false, false, false, false, false, false];
+                this.allSkillsBool = [false, false, false, false, true, true, false, true, false, false, false, false, false, true, true, false, false, false, true, false, false, false, false, true, true, false, true, false, false, false, false, false, false, false, false];
                 break;
             case "RANGER":
-                this.character.allSkillsBool = [false, false, false, true, true, true, false, true, false, false, false, false, false, true, true, true, false, true, true, true, true, false, false, true, true, true, false, false, false, true, true, true, false, false, true];
+                this.allSkillsBool = [false, false, false, true, true, true, false, true, false, false, false, false, false, true, true, true, false, true, true, true, true, false, false, true, true, true, false, false, false, true, true, true, false, false, true];
                 break;
             case "ROGUE":
-                this.character.allSkillsBool = [true, true, true, true, false, true, true, true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, false, true, true, true, false, true, false, true, true, true, true];
+                this.allSkillsBool = [true, true, true, true, false, true, true, true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, false, true, true, true, false, true, false, true, true, true, true];
                 break;
             case "SORCERER":
-                this.character.allSkillsBool = [false, false, true, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false];
+                this.allSkillsBool = [false, false, true, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false];
                 break;
             case "WIZARD":
-                this.character.allSkillsBool = [false, false, false, false, true, true, true, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false];
+                this.allSkillsBool = [false, false, false, false, true, true, true, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false];
                 break;
             case "NewBlankClass":
                 // A placeholder for future class additions.
@@ -290,7 +311,7 @@ class Skills {
         }
 
         for (let i = 0; i < 35; i++) {
-            document.getElementById("c-" + this.character.allSkillsString[i]).innerHTML = (this.character.allSkillsBool[i]) ? "CLASS" : "-";
+            document.getElementById("c-" + this.allSkillsString[i]).innerHTML = (this.allSkillsBool[i]) ? "CLASS" : "-";
         }
     }
 

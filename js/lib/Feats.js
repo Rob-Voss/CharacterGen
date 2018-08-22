@@ -38,49 +38,49 @@ class Feats {
         if (confirms.confirmR === true && confirms.confirmR === true) {
             switch (featName) {
                 case "Acrobatic":
-                    featShortCodes = ["jump", "tumb"];
+                    featShortCodes = ["jump", "tumble"];
                     break;
                 case "Agile":
-                    featShortCodes = ["bala", "esca"];
+                    featShortCodes = ["balance", "escapeartist"];
                     break;
                 case "Alertness":
-                    featShortCodes = ["list", "spot"];
+                    featShortCodes = ["listen", "spot"];
                     break;
                 case "Animal Affinity":
-                    featShortCodes = ["hand", "ride"];
+                    featShortCodes = ["handleanimal", "ride"];
                     break;
                 case "Athletic":
-                    featShortCodes = ["clim", "swim"];
+                    featShortCodes = ["climb", "swim"];
                     break;
                 case "Deceitful":
-                    featShortCodes = ["disg", "forg"];
+                    featShortCodes = ["disguise", "forgery"];
                     break;
                 case "Deft Hands":
-                    featShortCodes = ["slei", "user"];
+                    featShortCodes = ["sleight", "userope"];
                     break;
                 case "Diligent":
-                    featShortCodes = ["appr", "deci"];
+                    featShortCodes = ["appraise", "decipherscript"];
                     break;
                 case "Investigator":
-                    featShortCodes = ["gath", "sear"];
+                    featShortCodes = ["gatherinformation", "search"];
                     break;
                 case "Magical Aptitude":
-                    featShortCodes = ["spel", "usem"];
+                    featShortCodes = ["spellcraft", "usemagicdevice"];
                     break;
                 case "Negotiator":
-                    featShortCodes = ["dipl", "sens"];
+                    featShortCodes = ["diplomacy", "sensemotive"];
                     break;
                 case "Nimble Fingers":
-                    featShortCodes = ["disa", "open"];
+                    featShortCodes = ["disabledevice", "openlock"];
                     break;
                 case "Persuasive":
-                    featShortCodes = ["bluf", "inti"];
+                    featShortCodes = ["bluff", "intimidate"];
                     break;
                 case "Self-Sufficient":
-                    featShortCodes = ["heal", "surv"];
+                    featShortCodes = ["heal", "survival"];
                     break;
                 case "Stealthy":
-                    featShortCodes = ["hide", "move"];
+                    featShortCodes = ["hide", "movesilently"];
                     break;
             }
             this.featUpdateSkillTwin(featShortCodes);

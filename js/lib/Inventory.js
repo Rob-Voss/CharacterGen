@@ -14,17 +14,17 @@ class Inventory {
         this.noteIndex = ["One", "Two", "Three", "Four", "Five"];
         this.itemPurchaseNo = 0;
 
-        this.armorSlot = undefined;
-        this.aSlot = undefined;
-        this.shieldSlot = undefined;
-        this.sSlot = undefined;
+        this.armorSlot = false;
+        this.aSlot = false;
+        this.shieldSlot = false;
+        this.sSlot = false;
 
-        this.weaponSlotOne = undefined;
-        this.wSlotOne = undefined;
-        this.weaponSlotTwo = undefined;
-        this.wSlotTwo = undefined;
-        this.weaponSlotThree = undefined;
-        this.wSlotThree = undefined;
+        this.weaponSlotOne = false;
+        this.wSlotOne = false;
+        this.weaponSlotTwo = false;
+        this.wSlotTwo = false;
+        this.weaponSlotThree = false;
+        this.wSlotThree = false;
 
         this.startingGold = 0;
         this.goldRemaining = 0;
@@ -64,7 +64,7 @@ class Inventory {
                 if (changeArmor) {
                     this.aSlot = new Armor(name, weight, armorBonus, maxDex, check, spellFail, maxSp, hardness, hitPoints, saves, donning, exists);
                 }
-            } else if (this.armorSlot === undefined) {
+            } else {
                 confirmAr = confirm("Do you want to equip this armor?");
             }
 
@@ -421,19 +421,19 @@ class Inventory {
      * @param {String} bonus
      */
     equipWeapon(name, cost, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus) {
-        if (this.weaponSlotOne === undefined) {
+        if (this.weaponSlotOne === false) {
             let confirmWa = confirm("Do you want to equip this weapon in slot one?");
             if (confirmWa) {
                 this.weaponSlotOne = true;
                 this.wSlotOne = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus);
             }
-        } else if (this.weaponSlotTwo === undefined) {
+        } else if (this.weaponSlotTwo === false) {
             let confirmWb = confirm("Do you want to equip this weapon in slot two?");
             if (confirmWb) {
                 this.weaponSlotTwo = true;
                 this.wSlotTwo = new Weapon(name, weight, damage, critical, range, type, size, reach, hardness, hitPoints, saves, notes, bonus);
             }
-        } else if (this.weaponSlotThree === undefined) {
+        } else if (this.weaponSlotThree === false) {
             let confirmWc = confirm("Do you want to equip this weapon in slot three?");
             if (confirmWc) {
                 this.weaponSlotThree = true;
