@@ -59,7 +59,7 @@
 
             $('.sk-input').change(
                 function () {
-                    generator.skills.calcPoints();
+                    generator.character.skills.calcPoints();
                 }
             );
         });
@@ -177,7 +177,7 @@
         <h2>
             Monk
         </h2>
-        <h2 id="show-class">
+        <h2 id="show-feat">
             Select your Bonus Feat
         </h2>
         <input class="button top-button-15" type="button" value="Imp. Grapple"
@@ -702,7 +702,7 @@
             </form>
             <script type="text/javascript">
                 $('#skPtsInp').keyup(function () {
-                    generator.skills.calcPoints();
+                    generator.character.skills.calcPoints();
                 });
             </script>
         </div>
@@ -860,7 +860,7 @@
                 <input id="wrin-skill-ab-mod-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-mod-1" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-submit-1" type="button" value="Submit"
-                       onclick="generator.skills.addSkill();">
+                       onclick="generator.character.skills.addSkill();">
             </form>
             <form id="wrin-2">
                 <p>
@@ -892,7 +892,7 @@
                 <input id="wrin-skill-ab-mod-2" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-mod-2" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-submit-2" type="button" value="Submit"
-                       onclick="generator.skills.addSkill();">
+                       onclick="generator.character.skills.addSkill();">
             </form>
             <form id="wrin-3">
                 <p>
@@ -924,7 +924,7 @@
                 <input id="wrin-skill-ab-mod-3" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-mod-3" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-submit-3" type="button" value="Submit"
-                       onclick="generator.skills.addSkill();">
+                       onclick="generator.character.skills.addSkill();">
             </form>
             <form id="wrin-4">
                 <p>
@@ -956,7 +956,7 @@
                 <input id="wrin-skill-ab-mod-4" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-misc-mod-4" type="number" class="user-added-skill" value="" placeholder="0" min="0">
                 <input id="wrin-skill-submit-4" type="button" value="Submit"
-                       onclick="generator.skills.addSkill();">
+                       onclick="generator.character.skills.addSkill();">
             </form>
         </div>
 
@@ -994,19 +994,19 @@
         <p id="feats-remaining">1</p>
 
         <input class="button" type="button" value="Combat Feats"
-               onclick="generator.feats.featsSubMenu('Combat');">
+               onclick="generator.featsSubMenu('Combat');">
         <input class="button" type="button" value="Skill Feats"
-               onclick="generator.feats.featsSubMenu('Skill');">
+               onclick="generator.featsSubMenu('Skill');">
         <input class="button" type="button" value="Other Bonus"
-               onclick="generator.feats.featsSubMenu('Other');">
+               onclick="generator.featsSubMenu('Other');">
         <input class="button" type="button" value="Proficiency"
-               onclick="generator.feats.featsSubMenu('Proficiency');">
+               onclick="generator.featsSubMenu('Proficiency');">
         <input class="button" type="button" value="Item Creation"
-               onclick="generator.feats.featsSubMenu('Creation');">
+               onclick="generator.featsSubMenu('Creation');">
         <input class="button" type="button" value="Casting"
-               onclick="generator.feats.featsSubMenu('Casting');">
+               onclick="generator.featsSubMenu('Casting');">
         <input class="button" type="button" value="Metamagic"
-               onclick="generator.feats.featsSubMenu('MetaMagic');">
+               onclick="generator.featsSubMenu('MetaMagic');">
     </section>
 
     <div id="feats-Combat" class="menu menu-tall">
@@ -1014,93 +1014,93 @@
             Combat Feats
         </h2>
         <input class="button" type="button" value="Blind Fight"
-               onclick="generator.feats.selectFeat('Blind Fight');">
+               onclick="generator.character.feats.updateFeats('Blind Fight');">
         <input class="button" type="button" value="&Dagger; Combat Expertise"
-               onclick="generator.feats.selectFeat('Combat Expertise');">
+               onclick="generator.character.feats.updateFeats('Combat Expertise');">
         <input class="button" type="button" value="&Dagger; Improved Disarm"
-               onclick="generator.feats.selectFeat('Improved Disarm');">
+               onclick="generator.character.feats.updateFeats('Improved Disarm');">
         <input class="button" type="button" value="&Dagger; Improved Feint"
-               onclick="generator.feats.selectFeat('Improved Feint');">
+               onclick="generator.character.feats.updateFeats('Improved Feint');">
         <input class="button" type="button" value="&Dagger; Improved Trip"
-               onclick="generator.feats.selectFeat('Improved Trip');">
+               onclick="generator.character.feats.updateFeats('Improved Trip');">
         <input class="button" type="button" value="&Dagger; Whirlwind Attack"
-               onclick="generator.feats.selectFeat('Whirlwind Attack');">
+               onclick="generator.character.feats.updateFeats('Whirlwind Attack');">
         <input class="button" type="button" value="Combat Reflexes"
-               onclick="generator.feats.selectFeat('Combat Reflexes');">
+               onclick="generator.character.feats.updateFeats('Combat Reflexes');">
         <input class="button" type="button" value="&Dagger; Dodge"
-               onclick="generator.feats.selectFeat('Dodge');">
+               onclick="generator.character.feats.updateFeats('Dodge');">
         <input class="button" type="button" value="&Dagger; Mobility"
-               onclick="generator.feats.selectFeat('Mobility');">
+               onclick="generator.character.feats.updateFeats('Mobility');">
         <input class="button" type="button" value="&Dagger; Sprint Attack"
-               onclick="generator.feats.selectFeat('Sprint Attack');">
+               onclick="generator.character.feats.updateFeats('Sprint Attack');">
         <input class="button" type="button" value="&Dagger; Improved Critical"
-               onclick="generator.feats.weaponFeat('Improved Critical');">
+               onclick="generator.character.feats.weaponFeat('Improved Critical');">
         <input class="button" type="button" value="Improved Unarmed Strike"
-               onclick="generator.feats.selectFeat('Improved Unarmed Strike');">
+               onclick="generator.character.feats.updateFeats('Improved Unarmed Strike');">
         <input class="button" type="button" value="&Dagger; Improved Grapple"
-               onclick="generator.feats.selectFeat('Improved Grapple');">
+               onclick="generator.character.feats.updateFeats('Improved Grapple');">
         <input class="button" type="button" value="&Dagger; Deflect Arrows"
-               onclick="generator.feats.selectFeat('Deflect Arrows');">
+               onclick="generator.character.feats.updateFeats('Deflect Arrows');">
         <input class="button" type="button" value="&Dagger; Snatch Arrows"
-               onclick="generator.feats.selectFeat('Snatch Arrows');">
+               onclick="generator.character.feats.updateFeats('Snatch Arrows');">
         <input class="button" type="button" value="&Dagger; Stunning Fist"
-               onclick="generator.feats.selectFeat('Stunning Fist');">
+               onclick="generator.character.feats.updateFeats('Stunning Fist');">
         <input class="button" type="button" value="&Dagger; Dodge"
-               onclick="generator.feats.selectFeat('Dodge');">
+               onclick="generator.character.feats.updateFeats('Dodge');">
         <input class="button" type="button" value="&Dagger; Mounted Combat"
-               onclick="generator.feats.selectFeat('Mounted Combat');">
+               onclick="generator.character.feats.updateFeats('Mounted Combat');">
         <input class="button" type="button" value="&Dagger; Mounted Archery"
-               onclick="generator.feats.selectFeat('Mounted Archery');">
+               onclick="generator.character.feats.updateFeats('Mounted Archery');">
         <input class="button" type="button" value="&Dagger; Ride-By Attack"
-               onclick="generator.feats.selectFeat('Ride-By Attack');">
+               onclick="generator.character.feats.updateFeats('Ride-By Attack');">
         <input class="button" type="button" value="&Dagger; Spirited Charge"
-               onclick="generator.feats.selectFeat('Spirited Charge');">
+               onclick="generator.character.feats.updateFeats('Spirited Charge');">
         <input class="button" type="button" value="&Dagger; Trample"
-               onclick="generator.feats.selectFeat('Trample');">
+               onclick="generator.character.feats.updateFeats('Trample');">
         <input class="button" type="button" value="Point Blank Shot"
-               onclick="generator.feats.selectFeat('Point Blank Shot');">
+               onclick="generator.character.feats.updateFeats('Point Blank Shot');">
         <input class="button" type="button" value="&Dagger; Far Shot"
-               onclick="generator.feats.selectFeat('Far Shot');">
+               onclick="generator.character.feats.updateFeats('Far Shot');">
         <input class="button" type="button" value="&Dagger; Precise Shot"
-               onclick="generator.feats.selectFeat('Precise Shot');">
+               onclick="generator.character.feats.updateFeats('Precise Shot');">
         <input class="button" type="button" value="&Dagger; Rapid Shot"
-               onclick="generator.feats.selectFeat('Rapid Shot');">
+               onclick="generator.character.feats.updateFeats('Rapid Shot');">
         <input class="button" type="button" value="&Dagger; Manyshot"
-               onclick="generator.feats.selectFeat('Many Shot');">
+               onclick="generator.character.feats.updateFeats('Many Shot');">
         <input class="button" type="button" value="&Dagger; Shot on the Run"
-               onclick="generator.feats.selectFeat('Shot on the Run');">
+               onclick="generator.character.feats.updateFeats('Shot on the Run');">
         <input class="button" type="button" value="&Dagger; Improved Precise Shot"
-               onclick="generator.feats.selectFeat('Improved Precise Shot');">
+               onclick="generator.character.feats.updateFeats('Improved Precise Shot');">
         <input class="button" type="button" value="&Dagger; Power Attack"
-               onclick="generator.feats.selectFeat('Power Attack');">
+               onclick="generator.character.feats.updateFeats('Power Attack');">
         <input class="button" type="button" value="&Dagger; Cleave"
-               onclick="generator.feats.selectFeat('Cleave');">
+               onclick="generator.character.feats.updateFeats('Cleave');">
         <input class="button" type="button" value="&Dagger; Great Cleave"
-               onclick="generator.feats.selectFeat('Great Cleave');">
+               onclick="generator.character.feats.updateFeats('Great Cleave');">
         <input class="button" type="button" value="&Dagger; Improved Bull Rush"
-               onclick="generator.feats.selectFeat('Improved Bull Rush');">
+               onclick="generator.character.feats.updateFeats('Improved Bull Rush');">
         <input class="button" type="button" value="&Dagger; Improved Overrun"
-               onclick="generator.feats.selectFeat('Improved Overrun');">
+               onclick="generator.character.feats.updateFeats('Improved Overrun');">
         <input class="button" type="button" value="&Dagger; Improved Sunder"
-               onclick="generator.feats.selectFeat('Improved Sunder');">
+               onclick="generator.character.feats.updateFeats('Improved Sunder');">
         <input class="button" type="button" value="&Dagger; Rapid Reload"
-               onclick="generator.feats.selectFeat('Rapid Reload');">
+               onclick="generator.character.feats.updateFeats('Rapid Reload');">
         <input class="button" type="button" value="&Dagger; Two-Weapon Defense"
-               onclick="generator.feats.selectFeat('Two-Weapon Defense');">
+               onclick="generator.character.feats.updateFeats('Two-Weapon Defense');">
         <input class="button" type="button" value="&Dagger; Imp. Two-Weapon Fighting"
-               onclick="generator.feats.selectFeat('Improved Two-Weapon Fighting');">
+               onclick="generator.character.feats.updateFeats('Improved Two-Weapon Fighting');">
         <input class="button" type="button" value="&Dagger; Gr. Two-Weapon Fighting"
-               onclick="generator.feats.selectFeat('Greater Two-Weapon Fighting');">
+               onclick="generator.character.feats.updateFeats('Greater Two-Weapon Fighting');">
         <input class="button" type="button" value="&Dagger; Weapon Finesse"
-               onclick="generator.feats.featUpdateSkill('Weapon Finesse');">
+               onclick="generator.character.feats.featUpdateSkill('Weapon Finesse');">
         <input class="button" type="button" value="&Dagger; Weapon Focus"
-               onclick="generator.feats.weaponFeat('Weapon Focus');">
+               onclick="generator.character.feats.weaponFeat('Weapon Focus');">
         <input class="button" type="button" value="&Dagger; Weapon Sepcialization"
-               onclick="generator.feats.weaponFeat('Weapon Specialization');">
+               onclick="generator.character.feats.weaponFeat('Weapon Specialization');">
         <input class="button" type="button" value="&Dagger; Greater Weapon Focus"
-               onclick="generator.feats.weaponFeat('Greater Weapon Focus');">
+               onclick="generator.character.feats.weaponFeat('Greater Weapon Focus');">
         <input class="button" type="button" value="&Dagger; Gr. Weapon Specialization"
-               onclick="generator.feats.weaponFeat('Greater Weapon Specialization');">
+               onclick="generator.character.feats.weaponFeat('Greater Weapon Specialization');">
         <div class="bottom-buffer">
         </div>
     </div>
@@ -1110,37 +1110,37 @@
             Universal Skill Bonus
         </h2>
         <input class="button" type="button" value="Acrobatic"
-               onclick="generator.feats.featUpdateSkill('Acrobatic');">
+               onclick="generator.character.feats.featUpdateSkill('Acrobatic');">
         <input class="button" type="button" value="Agile"
-               onclick="generator.feats.featUpdateSkill('Agile');">
+               onclick="generator.character.feats.featUpdateSkill('Agile');">
         <input class="button" type="button" value="Alertness"
-               onclick="generator.feats.featUpdateSkill('Alertness');">
+               onclick="generator.character.feats.featUpdateSkill('Alertness');">
         <input class="button" type="button" value="Animal Affinity"
-               onclick="generator.feats.featUpdateSkill('Animal Affinity');">
+               onclick="generator.character.feats.featUpdateSkill('Animal Affinity');">
         <input class="button" type="button" value="Athletic"
-               onclick="generator.feats.featUpdateSkill('Athletic');">
+               onclick="generator.character.feats.featUpdateSkill('Athletic');">
         <input class="button" type="button" value="Deceitful"
-               onclick="generator.feats.featUpdateSkill('Deceitful');">
+               onclick="generator.character.feats.featUpdateSkill('Deceitful');">
         <input class="button" type="button" value="Deft Hands"
-               onclick="generator.feats.featUpdateSkill('Deft Hands');">
+               onclick="generator.character.feats.featUpdateSkill('Deft Hands');">
         <input class="button" type="button" value="Diligent"
-               onclick="generator.feats.featUpdateSkill('Diligent');">
+               onclick="generator.character.feats.featUpdateSkill('Diligent');">
         <input class="button" type="button" value="Investigator"
-               onclick="generator.feats.featUpdateSkill('Investigator');">
+               onclick="generator.character.feats.featUpdateSkill('Investigator');">
         <input class="button" type="button" value="Magical Aptitude"
-               onclick="generator.feats.featUpdateSkill('Magical Aptitude');">
+               onclick="generator.character.feats.featUpdateSkill('Magical Aptitude');">
         <input class="button" type="button" value="Negotiator"
-               onclick="generator.feats.featUpdateSkill('Negotiator');">
+               onclick="generator.character.feats.featUpdateSkill('Negotiator');">
         <input class="button" type="button" value="Nimble Fingers"
-               onclick="generator.feats.featUpdateSkill('Nimble Fingers');">
+               onclick="generator.character.feats.featUpdateSkill('Nimble Fingers');">
         <input class="button" type="button" value="Persuasive"
-               onclick="generator.feats.featUpdateSkill('Persuasive');">
+               onclick="generator.character.feats.featUpdateSkill('Persuasive');">
         <input class="button" type="button" value="Self-Sufficient"
-               onclick="generator.feats.featUpdateSkill('Self-Sufficient');">
+               onclick="generator.character.feats.featUpdateSkill('Self-Sufficient');">
         <input class="button" type="button" value="Skill Focus"
-               onclick="generator.skills.skillFocus('Skill Focus');">
+               onclick="generator.character.skills.skillFocus('Skill Focus');">
         <input class="button" type="button" value="Stealthy"
-               onclick="generator.feats.featUpdateSkill('Stealthy');">
+               onclick="generator.character.feats.featUpdateSkill('Stealthy');">
         <div class="bottom-buffer">
         </div>
     </div>
@@ -1150,23 +1150,23 @@
             Other Bonus
         </h2>
         <input class="button" type="button" value="Great Fortitude"
-               onclick="generator.feats.featUpdateSkill('Great Fortitude');">
+               onclick="generator.character.feats.featUpdateSkill('Great Fortitude');">
         <input class="button" type="button" value="Iron Will"
-               onclick="generator.feats.featUpdateSkill('Iron Will');">
+               onclick="generator.character.feats.featUpdateSkill('Iron Will');">
         <input class="button" type="button" value="Lightening Reflexes"
-               onclick="generator.feats.featUpdateSkill('Lightening Reflexes');">
+               onclick="generator.character.feats.featUpdateSkill('Lightening Reflexes');">
         <input class="button" type="button" value="Improved Initiative"
-               onclick="generator.feats.featUpdateSkill('Improved Initiative');">
+               onclick="generator.character.feats.featUpdateSkill('Improved Initiative');">
         <input class="button" type="button" value="Endurance"
-               onclick="generator.feats.selectFeat('Endurance');">
+               onclick="generator.character.feats.updateFeats('Endurance');">
         <input class="button" type="button" value="&Dagger; Diehard"
-               onclick="generator.feats.selectFeat('Diehard');">
+               onclick="generator.character.feats.updateFeats('Diehard');">
         <input class="button" type="button" value="&Dagger; Leadership"
-               onclick="generator.feats.selectFeat('Leadership');">
+               onclick="generator.character.feats.updateFeats('Leadership');">
         <input class="button" type="button" value="Run"
-               onclick="generator.feats.selectFeat('Run');">
+               onclick="generator.character.feats.updateFeats('Run');">
         <input class="button" type="button" value="Toughness"
-               onclick="generator.feats.featUpdateSkill('Toughness');">
+               onclick="generator.character.feats.featUpdateSkill('Toughness');">
     </div>
 
     <div id="feats-Proficiency" class="menu menu-tall">
@@ -1174,25 +1174,25 @@
             Combat Proficiency
         </h2>
         <input class="button" type="button" value="Armor Proficiency (Light)"
-               onclick="generator.feats.selectFeat('Armor Proficiency (Light)');">
+               onclick="generator.character.feats.updateFeats('Armor Proficiency (Light)');">
         <input class="button" type="button" value="&Dagger; Armor Proficiency (Medium)"
-               onclick="generator.feats.selectFeat('Armor Proficiency (Medium)');">
+               onclick="generator.character.feats.updateFeats('Armor Proficiency (Medium)');">
         <input class="button" type="button" value="&Dagger; Armor Proficiency (Heavy)"
-               onclick="generator.feats.selectFeat('Armor Proficiency (Heavy)');">
+               onclick="generator.character.feats.updateFeats('Armor Proficiency (Heavy)');">
         <input class="button" type="button" value="&Dagger; Exotic Weapon Proficiency"
-               onclick="generator.feats.weaponFeat('Exotic Weapon Proficiency');">
+               onclick="generator.character.feats.weaponFeat('Exotic Weapon Proficiency');">
         <input class="button" type="button" value="Martial Weapon Proficiency"
-               onclick="generator.feats.weaponFeat('Martial Weapon Proficiency');">
+               onclick="generator.character.feats.weaponFeat('Martial Weapon Proficiency');">
         <input class="button" type="button" value="Shield Proficiency"
-               onclick="generator.feats.selectFeat('Shield Proficiency');">
+               onclick="generator.character.feats.updateFeats('Shield Proficiency');">
         <input class="button" type="button" value="&Dagger; Tower Shield Proficiency"
-               onclick="generator.feats.selectFeat('Tower Shield Proficiency');">
+               onclick="generator.character.feats.updateFeats('Tower Shield Proficiency');">
         <input class="button" type="button" value="Simple Weapon Proficiency"
-               onclick="generator.feats.selectFeat('Simple Weapon Proficiency');">
+               onclick="generator.character.feats.updateFeats('Simple Weapon Proficiency');">
         <input class="button" type="button" value="&Dagger; Two Weapon Fighting"
-               onclick="generator.feats.selectFeat('Two Weapon Fighting');">
+               onclick="generator.character.feats.updateFeats('Two Weapon Fighting');">
         <input class="button" type="button" value="Track"
-               onclick="generator.feats.selectFeat('Track');">
+               onclick="generator.character.feats.updateFeats('Track');">
     </div>
 
     <div id="feats-Creation" class="menu menu-tall">
@@ -1200,21 +1200,21 @@
             Item <br>Creation
         </h2>
         <input class="button" type="button" value="&Dagger; Scribe Scroll"
-               onclick="generator.feats.selectFeat('Scribe Scroll');">
+               onclick="generator.character.feats.updateFeats('Scribe Scroll');">
         <input class="button" type="button" value="&Dagger; Craft Wondrous Item"
-               onclick="generator.feats.selectFeat('Craft Wondrous Item');">
+               onclick="generator.character.feats.updateFeats('Craft Wondrous Item');">
         <input class="button" type="button" value="&Dagger; Brew Potion"
-               onclick="generator.feats.selectFeat('Brew Potion');">
+               onclick="generator.character.feats.updateFeats('Brew Potion');">
         <input class="button" type="button" value="&Dagger; Craft Magic Arms and Armor"
-               onclick="generator.feats.selectFeat('Craft Magic Arms & Armor');">
+               onclick="generator.character.feats.updateFeats('Craft Magic Arms & Armor');">
         <input class="button" type="button" value="&Dagger; Craft Wand"
-               onclick="generator.feats.selectFeat('Craft Wand');">
+               onclick="generator.character.feats.updateFeats('Craft Wand');">
         <input class="button" type="button" value="&Dagger; Craft Rod"
-               onclick="generator.feats.selectFeat('Craft Rod');">
+               onclick="generator.character.feats.updateFeats('Craft Rod');">
         <input class="button" type="button" value="&Dagger; Craft Staff"
-               onclick="generator.feats.selectFeat('Craft Staff');">
+               onclick="generator.character.feats.updateFeats('Craft Staff');">
         <input class="button" type="button" value="&Dagger; Forge Ring"
-               onclick="generator.feats.selectFeat('Forge Ring');">
+               onclick="generator.character.feats.updateFeats('Forge Ring');">
     </div>
 
     <div id="feats-Casting" class="menu menu-tall">
@@ -1222,27 +1222,27 @@
             Casting Feats
         </h2>
         <input class="button" type="button" value="Combat Casting"
-               onclick="generator.feats.selectFeat('Combat Casting');">
+               onclick="generator.character.feats.updateFeats('Combat Casting');">
         <input class="button" type="button" value="Eschew Materials"
-               onclick="generator.feats.selectFeat('Eschew Materials');">
+               onclick="generator.character.feats.updateFeats('Eschew Materials');">
         <input class="button" type="button" value="&Dagger; Extra Turning"
-               onclick="generator.feats.selectFeat('Extra Turning');">
+               onclick="generator.character.feats.updateFeats('Extra Turning');">
         <input class="button" type="button" value="Improved Counterspell"
-               onclick="generator.feats.selectFeat('Improved Counterspell');">
+               onclick="generator.character.feats.updateFeats('Improved Counterspell');">
         <input class="button" type="button" value="&Dagger; Improved Turning"
-               onclick="generator.feats.selectFeat('Improved Turning');">
+               onclick="generator.character.feats.updateFeats('Improved Turning');">
         <input class="button" type="button" value="&Dagger; Natural Spell"
-               onclick="generator.feats.selectFeat('Natural Spell');">
+               onclick="generator.character.feats.updateFeats('Natural Spell');">
         <input class="button" type="button" value="Spell Focus"
-               onclick="generator.feats.selectFeat('Spell Focus');">
+               onclick="generator.character.feats.updateFeats('Spell Focus');">
         <input class="button" type="button" value="Greater Spell Focus"
-               onclick="generator.feats.selectFeat('Greater Spell Focus');">
+               onclick="generator.character.feats.updateFeats('Greater Spell Focus');">
         <input class="button" type="button" value="&Dagger; Spell Mastery"
-               onclick="generator.feats.selectFeat('Spell Mastery');">
+               onclick="generator.character.feats.updateFeats('Spell Mastery');">
         <input class="button" type="button" value="Spell Penetration"
-               onclick="generator.feats.selectFeat('Spell Penetration');">
+               onclick="generator.character.feats.updateFeats('Spell Penetration');">
         <input class="button" type="button" value="&Dagger; Greater Spell Penetration"
-               onclick="generator.feats.selectFeat('Greater Spell Penetration');">
+               onclick="generator.character.feats.updateFeats('Greater Spell Penetration');">
     </div>
 
     <div id="feats-MetaMagic" class="menu menu-tall">
@@ -1250,23 +1250,23 @@
             Metamagic
         </h2>
         <input class="button" type="button" value="Empower Spell"
-               onclick="generator.feats.selectFeat('Empower Spell');">
+               onclick="generator.character.feats.updateFeats('Empower Spell');">
         <input class="button" type="button" value="Enlarge Spell"
-               onclick="generator.feats.selectFeat('Enlarge Spell');">
+               onclick="generator.character.feats.updateFeats('Enlarge Spell');">
         <input class="button" type="button" value="Extend Spell"
-               onclick="generator.feats.selectFeat('Extend Spell');">
+               onclick="generator.character.feats.updateFeats('Extend Spell');">
         <input class="button" type="button" value="Heighten Spell"
-               onclick="generator.feats.selectFeat('Heighten Spell');">
+               onclick="generator.character.feats.updateFeats('Heighten Spell');">
         <input class="button" type="button" value="Maximize Spell"
-               onclick="generator.feats.selectFeat('Maximize Spell');">
+               onclick="generator.character.feats.updateFeats('Maximize Spell');">
         <input class="button" type="button" value="Quicken Spell"
-               onclick="generator.feats.selectFeat('Quicken Spell');">
+               onclick="generator.character.feats.updateFeats('Quicken Spell');">
         <input class="button" type="button" value="Silent Spell"
-               onclick="generator.feats.selectFeat('Silent Spell');">
+               onclick="generator.character.feats.updateFeats('Silent Spell');">
         <input class="button" type="button" value="Still Spell"
-               onclick="generator.feats.selectFeat('Still Spell');">
+               onclick="generator.character.feats.updateFeats('Still Spell');">
         <input class="button" type="button" value="Widen Spell"
-               onclick="generator.feats.selectFeat('Widen Spell');">
+               onclick="generator.character.feats.updateFeats('Widen Spell');">
     </div>
 
     <div id="roll-starting-gold" class="menu menu-narrow menuspeed" data-scrollSpeed="-1">
@@ -1274,12 +1274,12 @@
             Roll Starting Gold or input a value manually.
         </h4>
         <input type="button" class="button narrow-button top-button-20" value="Roll (1st Level)"
-               onclick="generator.inventory.rollStartingGold('first');">
+               onclick="generator.character.inventory.rollStartingGold('first');">
         <input type="button" class="button narrow-button" value="Wealth by Level"
-               onclick="generator.inventory.rollStartingGold('leveled');">
+               onclick="generator.character.inventory.rollStartingGold('leveled');">
         <input type="number" class="button narrow-button top-button-10" placeholder="Another Amount" id="gold-input">
         <input type="button" class="button narrow-button" value="Apply"
-               onclick="generator.inventory.rollStartingGold('input');">
+               onclick="generator.character.inventory.rollStartingGold('input');">
     </div>
 
     <div id="inventory" class="equip-list-item menu menu-tall menu-narrow">
@@ -1458,21 +1458,21 @@
             All prices in COPPER.
         </p>
         <input class="button top-button-20" type="button" value="Simple Weapons"
-               onclick="generator.inventory.equipSubMenu('SimpleWeapon');">
+               onclick="generator.equipSubMenu('SimpleWeapon');">
         <input class="button" type="button" value="Martial Weapons"
-               onclick="generator.inventory.equipSubMenu('MartialWeapon');">
+               onclick="generator.equipSubMenu('MartialWeapon');">
         <input class="button" type="button" value="Exotic Weapons"
-               onclick="generator.inventory.equipSubMenu('ExoticWeapon');">
+               onclick="generator.equipSubMenu('ExoticWeapon');">
         <input class="button" type="button" value="Armor"
-               onclick="generator.inventory.equipSubMenu('Armor');">
+               onclick="generator.equipSubMenu('Armor');">
         <input class="button" type="button" value="Gear"
-               onclick="generator.inventory.equipSubMenu('Gear');">
+               onclick="generator.equipSubMenu('Gear');">
         <input class="button" type="button" value="Alchemical"
-               onclick="generator.inventory.equipSubMenu('Substances');">
+               onclick="generator.equipSubMenu('Substances');">
         <input class="button" type="button" value="Tools & Kits"
-               onclick="generator.inventory.equipSubMenu('Tools');">
+               onclick="generator.equipSubMenu('Tools');">
         <input class="button" type="button" value="Custom Item"
-               onclick="generator.inventory.equipSubMenu('Custom');">
+               onclick="generator.equipSubMenu('Custom');">
     </section>
 
     <!-- Begin old item system -->
@@ -1488,102 +1488,102 @@
             <div class="buy-item">
                 <p>Gauntlet</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyWeapon( 'Gauntlet', 200, 1, '1d3', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Gauntlet', 200, 1, '1d3', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Dagger</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyWeapon( 'Dagger', 200, 1, '1d4', '19+/x2', '10ft', 'P or S', 'MED', 'No', '10', '2', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Dagger', 200, 1, '1d4', '19+/x2', '10ft', 'P or S', 'MED', 'No', '10', '2', '-' );">
             </div>
             <div class="buy-item">
                 <p>Punching Dagger</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyWeapon( 'Punching Dagger', 200, 1, '1d4', 'x3', '&mdash;', 'pirc', 'MED', 'No', '10', '2', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Punching Dagger', 200, 1, '1d4', 'x3', '&mdash;', 'pirc', 'MED', 'No', '10', '2', '-' );">
             </div>
             <div class="buy-item">
                 <p>Spiked Gauntlet</p>
                 <input class="buy-item-button" type="button" value="500"
-                       onclick="generator.inventory.buyWeapon( 'Spiked Gauntlet', 500, 1, '1d4', 'x2', '&mdash;', 'pirc', 'MED', 'No', '10', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Spiked Gauntlet', 500, 1, '1d4', 'x2', '&mdash;', 'pirc', 'MED', 'No', '10', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Light Mace</p>
                 <input class="buy-item-button" type="button" value="500"
-                       onclick="generator.inventory.buyWeapon( 'Light Mace', 500, 4, '1d6', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '10', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Light Mace', 500, 4, '1d6', 'x2', '&mdash;', 'bldg', 'MED', 'No', '10', '10', '-' );">
             </div>
             <div class="buy-item">
                 <p>Sickle</p>
                 <input class="buy-item-button" type="button" value="600"
-                       onclick="generator.inventory.buyWeapon( 'Sickle', 600, 2, '1d6', 'x2', '&mdash;', 'slsh', 'MED', 'No', '10', '2', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Sickle', 600, 2, '1d6', 'x2', '&mdash;', 'slsh', 'MED', 'No', '10', '2', '-' );">
             </div>
             <div class="buy-item">
                 <p>Club</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyWeapon( 'Club', 1, 3, '1d6', 'x2', '10ft', 'bldg', 'MED', 'No', '5', '5', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Club', 1, 3, '1d6', 'x2', '10ft', 'bldg', 'MED', 'No', '5', '5', '-' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Mace</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Heavy Mace', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Heavy Mace', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Morningstar</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Morningstar', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Morningstar', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Shortspear</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Shortspear', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Shortspear', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Longspear</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Longspear', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Longspear', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Quarterstaff</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Quarterstaff', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Quarterstaff', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Spear</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Spear', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Spear', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Heavy Crossbow</p>
                 <input class="buy-item-button" type="button" value="5000"
-                       onclick="generator.inventory.buyWeapon( 'Heavy Crossbow', 5000, 8, '1d10', '19+/x2', '120ft', 'pirc', 'MED', 'No', '5', '5', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Heavy Crossbow', 5000, 8, '1d10', '19+/x2', '120ft', 'pirc', 'MED', 'No', '5', '5', '-' );">
             </div>
             <div class="buy-item">
                 <p>Light Crossbow</p>
                 <input class="buy-item-button" type="button" value="2500"
-                       onclick="generator.inventory.buyWeapon( 'Light Crossbow', 2500, 4, '1d8', '19+/x2', '80ft', 'pirc', 'MED', 'No', '5', '5', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Light Crossbow', 2500, 4, '1d8', '19+/x2', '80ft', 'pirc', 'MED', 'No', '5', '5', '-' );">
             </div>
             <div class="buy-item">
                 <p class="consumables">20 Bolts</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItemStack( 20, 'Bolts', 100, 1 );">
+                       onclick="generator.character.inventory.buyItemStack( 20, 'Bolts', 100, 1 );">
             </div>
             <div class="buy-item">
                 <p>Dart</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Dart', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Dart', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Javelin</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyWeapon( 'Javelin', 200, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Javelin', 200, 1 );">
             </div>
             <div class="buy-item">
                 <p>Sling</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyWeapon( 'Sling', 1, 0, '1d4', 'x2', '50ft', 'bldg', 'MED', 'No', '-', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Sling', 1, 0, '1d4', 'x2', '50ft', 'bldg', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p class="consumables">10 Sling Bullets</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItemStack( 10, 'Bullets', 50, 5 );">
+                       onclick="generator.character.inventory.buyItemStack( 10, 'Bullets', 50, 5 );">
             </div>
         </div>
         <div class="bottom-buffer"></div>
@@ -1602,158 +1602,158 @@
                 <!--   weaponName,	  itemCost, 	itemWeight, 	dmg, 	crit, 	rang, 	type, 	size, 	reach, 	hardness, hp, 	saves -->
                 <p>Throwing Axe</p>
                 <input class="buy-item-button" type="button" value="800"
-                       onclick="generator.inventory.buyWeapon('Throwing Axe', 800, 2, '1d6', '20/x2', '10ft', 'slsh', 'MED', 'No', '-', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon('Throwing Axe', 800, 2, '1d6', '20/x2', '10ft', 'slsh', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Light Hammer</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyWeapon('Light Hammer', 100, 2, '1d4', '20/x2', '20ft', 'bldg', 'MED', 'No', '-', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon('Light Hammer', 100, 2, '1d4', '20/x2', '20ft', 'bldg', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Handaxe</p>
                 <input class="buy-item-button" type="button" value="600"
-                       onclick="generator.inventory.buyWeapon( 'Handaxe', 600, 3, '1d6', '20/x3', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Handaxe', 600, 3, '1d6', '20/x3', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Kukri</p>
                 <input class="buy-item-button" type="button" value="800"
-                       onclick="generator.inventory.buyWeapon( 'Kukri', 800, 2, '1d4', '18+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Kukri', 800, 2, '1d4', '18+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Light Pick</p>
                 <input class="buy-item-button" type="button" value="400"
-                       onclick="generator.inventory.buyWeapon( 'Light Pick', 400, 3, '1d4', '20/x4', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-'  );">
+                       onclick="generator.character.inventory.buyWeapon( 'Light Pick', 400, 3, '1d4', '20/x4', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-'  );">
             </div>
             <div class="buy-item">
                 <p>Sap</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyWeapon( 'Sap', 100, 2, '1d6', '20/x2', '&mdash;', 'bldg', 'MED', 'No', '-', '-', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Sap', 100, 2, '1d6', '20/x2', '&mdash;', 'bldg', 'MED', 'No', '-', '-', '-' );">
             </div>
             <div class="buy-item">
                 <p>Short Sword</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyWeapon( 'Short Sword', 1000, 2, '1d6', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '10', '2', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Short Sword', 1000, 2, '1d6', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '10', '2', '-' );">
             </div>
             <div class="buy-item">
                 <p>Battleaxe</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyWeapon( 'Battleaxe', 1000, 6, '1d6', '20/x3', '&mdash;', 'slsh', 'MED', 'No', '5', '5', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Battleaxe', 1000, 6, '1d6', '20/x3', '&mdash;', 'slsh', 'MED', 'No', '5', '5', '-' );">
             </div>
             <div class="buy-item">
                 <p>Flail</p>
                 <input class="buy-item-button" type="button" value="&mdash;800"
-                       onclick="generator.inventory.buyWeapon( 'Flail', 800, 5 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Flail', 800, 5 );">
             </div>
             <div class="buy-item">
                 <p>Longsword</p>
                 <input class="buy-item-button" type="button" value="1500"
-                       onclick="generator.inventory.buyWeapon( 'Longsword', 1500, 4, '1d8', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '10', '5', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Longsword', 1500, 4, '1d8', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '10', '5', '-' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Pick</p>
                 <input class="buy-item-button" type="button" value="&mdash;800"
-                       onclick="generator.inventory.buyWeapon( 'Heavy Pick', 800, 6 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Heavy Pick', 800, 6 );">
             </div>
             <div class="buy-item">
                 <p>Rapier</p>
                 <input class="buy-item-button" type="button" value="2000"
-                       onclick="generator.inventory.buyWeapon( 'Rapier', 2000, 2, '1d6', '18+/x2', '&mdash;', 'pirc', 'MED', 'No', '10', '5', '-' );">
+                       onclick="generator.character.inventory.buyWeapon( 'Rapier', 2000, 2, '1d6', '18+/x2', '&mdash;', 'pirc', 'MED', 'No', '10', '5', '-' );">
             </div>
             <div class="buy-item">
                 <p>Scimitar</p>
                 <input class="buy-item-button" type="button" value="&mdash;1500"
-                       onclick="generator.inventory.buyWeapon( 'Scimitar', 1500, 4 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Scimitar', 1500, 4 );">
             </div>
             <div class="buy-item">
                 <p>Trident</p>
                 <input class="buy-item-button" type="button" value="&mdash;1500"
-                       onclick="generator.inventory.buyWeapon( 'Trident', 1500, 4 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Trident', 1500, 4 );">
             </div>
             <div class="buy-item">
                 <p>Warhammer</p>
                 <input class="buy-item-button" type="button" value="&mdash;1200"
-                       onclick="generator.inventory.buyWeapon( 'Warhammer', 1200, 5 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Warhammer', 1200, 5 );">
             </div>
             <div class="buy-item">
                 <p>Falchion</p>
                 <input class="buy-item-button" type="button" value="&mdash;7500"
-                       onclick="generator.inventory.buyWeapon( 'Falchion', 7500, 8 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Falchion', 7500, 8 );">
             </div>
             <div class="buy-item">
                 <p>Glaive</p>
                 <input class="buy-item-button" type="button" value="&mdash;800"
-                       onclick="generator.inventory.buyWeapon( 'Glaive', 800, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Glaive', 800, 10 );">
             </div>
             <div class="buy-item">
                 <p>Greataxe</p>
                 <input class="buy-item-button" type="button" value="2000"
-                       onclick="generator.inventory.buyWeapon( 'Greataxe', 2000, 12, '1d12', 'x3', '&mdash;', 'slsh', 'MED', 'No', '5', '10', '-', true );">
+                       onclick="generator.character.inventory.buyWeapon( 'Greataxe', 2000, 12, '1d12', 'x3', '&mdash;', 'slsh', 'MED', 'No', '5', '10', '-', true );">
             </div>
             <div class="buy-item">
                 <p>Greatclub</p>
                 <input class="buy-item-button" type="button" value="&mdash;500"
-                       onclick="generator.inventory.buyWeapon( 'Greatclub', 500, 8 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Greatclub', 500, 8 );">
             </div>
             <div class="buy-item">
                 <p>Heavy Flail</p>
                 <input class="buy-item-button" type="button" value="&mdash;1500"
-                       onclick="generator.inventory.buyWeapon( 'Heavy Flail', 1500, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Heavy Flail', 1500, 10 );">
             </div>
 
             <div class="buy-item">
                 <p>Greatsword</p>
                 <input class="buy-item-button" type="button" value="5000"
-                       onclick="generator.inventory.buyWeapon( 'Greatsword', 5000, 8, '2d6', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-', true );">
+                       onclick="generator.character.inventory.buyWeapon( 'Greatsword', 5000, 8, '2d6', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-', true );">
             </div>
             <div class="buy-item">
                 <p>Guisarme</p>
                 <input class="buy-item-button" type="button" value="&mdash;900"
-                       onclick="generator.inventory.buyWeapon( 'Guisarme', 900, 12 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Guisarme', 900, 12 );">
             </div>
             <div class="buy-item">
                 <p>Halberd</p>
                 <input class="buy-item-button" type="button" value="&mdash;1000"
-                       onclick="generator.inventory.buyWeapon( 'Halberd', 1000, 12 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Halberd', 1000, 12 );">
             </div>
             <div class="buy-item">
                 <p>Lance</p>
                 <input class="buy-item-button" type="button" value="&mdash;1000"
-                       onclick="generator.inventory.buyWeapon( 'Lance', 1000, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Lance', 1000, 10 );">
             </div>
             <div class="buy-item">
                 <p>Ranseur</p>
                 <input class="buy-item-button" type="button" value="&mdash;1000"
-                       onclick="generator.inventory.buyWeapon( 'Ranseur', 1000, 12 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Ranseur', 1000, 12 );">
             </div>
             <div class="buy-item">
                 <p>Scythe</p>
                 <input class="buy-item-button" type="button" value="&mdash;1800"
-                       onclick="generator.inventory.buyWeapon( 'Scythe', 1800, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Scythe', 1800, 10 );">
             </div>
             <div class="buy-item">
                 <p>Longbow</p>
                 <input class="buy-item-button" type="button" value="7500"
-                       onclick="generator.inventory.buyWeapon( 'Longbow', 7500, 3, '1d8', 'x3', '100ft', 'pirc', 'MED', 'No', '-', '-', '-', true );">
+                       onclick="generator.character.inventory.buyWeapon( 'Longbow', 7500, 3, '1d8', 'x3', '100ft', 'pirc', 'MED', 'No', '-', '-', '-', true );">
             </div>
             <div class="buy-item">
                 <p>Composite Longbow</p>
                 <input class="buy-item-button" type="button" value="&mdash;10k+"
-                       onclick="generator.inventory.buyWeapon( 'Composite Longbow', 10000, 3 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Composite Longbow', 10000, 3 );">
             </div>
             <div class="buy-item">
                 <p>Shortbow</p>
                 <input class="buy-item-button" type="button" value="3000"
-                       onclick="generator.inventory.buyWeapon( 'Shortbow', 3000, 2, '1d6', 'x3', '60ft', 'pirc', 'MED', 'No', '5', '5', '-', true );">
+                       onclick="generator.character.inventory.buyWeapon( 'Shortbow', 3000, 2, '1d6', 'x3', '60ft', 'pirc', 'MED', 'No', '5', '5', '-', true );">
             </div>
             <div class="buy-item">
                 <p>Composite Shortbow</p>
                 <input class="buy-item-button" type="button" value="&mdash;7500"
-                       onclick="generator.inventory.buyWeapon( 'Composite Shortbow', 7500, 2 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Composite Shortbow', 7500, 2 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">20 Arrows</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItemStack( 20, 'Arrows', 100, 3 );">
+                       onclick="generator.character.inventory.buyItemStack( 20, 'Arrows', 100, 3 );">
             </div>
         </div>
         <div class="bottom-buffer"></div>
@@ -1771,102 +1771,102 @@
             <div class="buy-item">
                 <p>Kama</p>
                 <input class="buy-item-button" type="button" value="&mdash;200"
-                       onclick="generator.inventory.buyWeapon( 'Kama', 200, 2 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Kama', 200, 2 );">
             </div>
             <div class="buy-item">
                 <p>Nunchaku</p>
                 <input class="buy-item-button" type="button" value="&mdash;200"
-                       onclick="generator.inventory.buyWeapon( 'Nunchaku', 200, 2 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Nunchaku', 200, 2 );">
             </div>
             <div class="buy-item">
                 <p>Sai</p>
                 <input class="buy-item-button" type="button" value="&mdash;100"
-                       onclick="generator.inventory.buyWeapon( 'Sai', 100, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Sai', 100, 1 );">
             </div>
             <div class="buy-item">
                 <p>Siangham</p>
                 <input class="buy-item-button" type="button" value="&mdash;300"
-                       onclick="generator.inventory.buyWeapon( 'Siangham', 300, 1 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Siangham', 300, 1 );">
             </div>
             <div class="buy-item">
                 <p>Bastard Sword</p>
                 <input class="buy-item-button" type="button" value="3500"
-                       onclick="generator.inventory.buyWeapon( 'Bastard Sword', 3500, 6, '1d10', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-', true );">
+                       onclick="generator.character.inventory.buyWeapon( 'Bastard Sword', 3500, 6, '1d10', '19+/x2', '&mdash;', 'slsh', 'MED', 'No', '-', '-', '-', true );">
             </div>
             <div class="buy-item">
                 <p>Dwarven Waraxe</p>
                 <input class="buy-item-button" type="button" value="&mdash;3000"
-                       onclick="generator.inventory.buyWeapon( 'Dwarven Waraxe', 3000, 8 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Dwarven Waraxe', 3000, 8 );">
             </div>
             <div class="buy-item">
                 <p>Whip</p>
                 <input class="buy-item-button" type="button" value="&mdash;100"
-                       onclick="generator.inventory.buyWeapon( 'Whip', 100, 2 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Whip', 100, 2 );">
             </div>
             <div class="buy-item">
                 <p>Orc Double Axe</p>
                 <input class="buy-item-button" type="button" value="&mdash;6000"
-                       onclick="generator.inventory.buyWeapon( 'Orc Double Axe', 6000, 15 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Orc Double Axe', 6000, 15 );">
             </div>
             <div class="buy-item">
                 <p>Spiked Chain</p>
                 <input class="buy-item-button" type="button" value="&mdash;2500"
-                       onclick="generator.inventory.buyWeapon( 'Spiked Chain', 2500, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Spiked Chain', 2500, 10 );">
             </div>
             <div class="buy-item">
                 <p>Dire Flail</p>
                 <input class="buy-item-button" type="button" value="&mdash;9000"
-                       onclick="generator.inventory.buyWeapon( 'Dire Flail', 9000, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Dire Flail', 9000, 10 );">
             </div>
             <div class="buy-item">
                 <p>Gnome Hooked Hammer</p>
                 <input class="buy-item-button" type="button" value="&mdash;2000"
-                       onclick="generator.inventory.buyWeapon( 'Gnome Hooked Hammer', 2000, 6 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Gnome Hooked Hammer', 2000, 6 );">
             </div>
             <div class="buy-item">
                 <p>Two-Bladed Sword</p>
                 <input class="buy-item-button" type="button" value="&mdash;10000"
-                       onclick="generator.inventory.buyWeapon( 'Two-Bladed Sword', 10000, 10 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Two-Bladed Sword', 10000, 10 );">
             </div>
             <div class="buy-item">
                 <p>Dwarven Urgrosh</p>
                 <input class="buy-item-button" type="button" value="&mdash;5000"
-                       onclick="generator.inventory.buyWeapon( 'Dwarven Urgrosh', 5000, 12 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Dwarven Urgrosh', 5000, 12 );">
             </div>
             <div class="buy-item">
                 <p>Bolas</p>
                 <input class="buy-item-button" type="button" value="&mdash;500"
-                       onclick="generator.inventory.buyWeapon( 'Bolas', 500, 2 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Bolas', 500, 2 );">
             </div>
             <div class="buy-item">
                 <p>Net</p>
                 <input class="buy-item-button" type="button" value="&mdash;2000"
-                       onclick="generator.inventory.buyWeapon( 'Net', 2000, 6 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Net', 2000, 6 );">
             </div>
             <div class="buy-item">
                 <p>Hand Crossbow</p>
                 <input class="buy-item-button" type="button" value="&mdash;10000"
-                       onclick="generator.inventory.buyWeapon( 'Hand Crossbow', 10000, 2 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Hand Crossbow', 10000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Heavy Repeating Crossbow</p>
                 <input class="buy-item-button" type="button" value="&mdash;40000"
-                       onclick="generator.inventory.buyWeapon( 'Heavy Repeating Crossbow', 40000, 12 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Heavy Repeating Crossbow', 40000, 12 );">
             </div>
             <div class="buy-item">
                 <p>Light Repeating Crossbow</p>
                 <input class="buy-item-button" type="button" value="&mdash;25000"
-                       onclick="generator.inventory.buyWeapon( 'Light Repeating Crossbow', 25000, 6 );">
+                       onclick="generator.character.inventory.buyWeapon( 'Light Repeating Crossbow', 25000, 6 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">20 Bolts</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItemStack( 20, 'Bolts', 100, 3 );">
+                       onclick="generator.character.inventory.buyItemStack( 20, 'Bolts', 100, 3 );">
             </div>
             <div class="buy-item">
                 <p>5 Shuriken</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItemStack( 5, 'Shuriken', 100, 0.5 );">
+                       onclick="generator.character.inventory.buyItemStack( 5, 'Shuriken', 100, 0.5 );">
             </div>
         </div>
         <div class="bottom-buffer"></div>
@@ -1884,102 +1884,102 @@
                 <p>Lt Padded Armor</p>
                 <!-- armorName, itemCost, itemWeight, armorBonus, maxDex, check, spFail, maxSp, hardn, hp, saves, donning, exs -->
                 <input class="buy-item-button" type="button" value="500"
-                       onclick="generator.inventory.buyArmor( 'Lt Padded Armor', 500, 10, 1, 8, 0, 0.05, 30, '2', '5', '-', '1/5/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Lt Padded Armor', 500, 10, 1, 8, 0, 0.05, 30, '2', '5', '-', '1/5/1' );">
             </div>
             <div class="buy-item">
                 <p>Lt Leather Armor</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyArmor( 'Lt Leather Armor', 1000, 15, 2, 6, 0, 0.1, 30, '2', '10', '-', '1/5/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Lt Leather Armor', 1000, 15, 2, 6, 0, 0.1, 30, '2', '10', '-', '1/5/1' );">
             </div>
             <div class="buy-item">
                 <p>Lt Studded Leather Armor</p>
                 <input class="buy-item-button" type="button" value="2500"
-                       onclick="generator.inventory.buyArmor( 'Lt Studded Leather Armor', 2500, 20, 3, 5, -1, 0.15, 30, '2', '15', '-', '1/5/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Lt Studded Leather Armor', 2500, 20, 3, 5, -1, 0.15, 30, '2', '15', '-', '1/5/1' );">
             </div>
             <div class="buy-item">
                 <p>Lt Chain Shirt</p>
                 <input class="buy-item-button" type="button" value="10000"
-                       onclick="generator.inventory.buyArmor( 'Lt Chain Shirt', 10000, 25, 4, 4, -2, 0.2, 30, '10', '20', '-', '1/5/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Lt Chain Shirt', 10000, 25, 4, 4, -2, 0.2, 30, '10', '20', '-', '1/5/1' );">
             </div>
             <div class="buy-item">
                 <p>Med Hide Armor</p>
                 <input class="buy-item-button" type="button" value="1500"
-                       onclick="generator.inventory.buyArmor( 'Med Hide Armor', 1500, 25, 3, 4, -3, 0.2, 20, '-', '-', '-', '1/5/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Med Hide Armor', 1500, 25, 3, 4, -3, 0.2, 20, '-', '-', '-', '1/5/1' );">
             </div>
             <div class="buy-item">
                 <p>Med Scale Mail</p>
                 <input class="buy-item-button" type="button" value="5000"
-                       onclick="generator.inventory.buyArmor( 'Med Scale Mail', 5000, 30, 4, 3, -4, 0.25, 20, '-', '-', '-', '4/1/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Med Scale Mail', 5000, 30, 4, 3, -4, 0.25, 20, '-', '-', '-', '4/1/1' );">
             </div>
             <div class="buy-item">
                 <p>Med Chain Mail</p>
                 <input class="buy-item-button" type="button" value="15000"
-                       onclick="generator.inventory.buyArmor( 'Med Chain Mail', 15000, 40, 5, 2, -5, 0.3, 20, '-', '-', '-', '4/1/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Med Chain Mail', 15000, 40, 5, 2, -5, 0.3, 20, '-', '-', '-', '4/1/1' );">
             </div>
             <div class="buy-item">
                 <p>Med Breastplate</p>
                 <input class="buy-item-button" type="button" value="20000"
-                       onclick="generator.inventory.buyArmor( 'Med Breastplate', 20000, 30, 5, 3, -4, 0.25, 20, '-', '-', '-', '4/1/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Med Breastplate', 20000, 30, 5, 3, -4, 0.25, 20, '-', '-', '-', '4/1/1' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Splint Mail</p>
                 <input class="buy-item-button" type="button" value="20000"
-                       onclick="generator.inventory.buyArmor( 'Heavy Splint Mail', 20000, 45, 6, 0, -7, 0.4, 20, '-', '-', '-', '4/1/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Heavy Splint Mail', 20000, 45, 6, 0, -7, 0.4, 20, '-', '-', '-', '4/1/1' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Banded Mail</p>
                 <input class="buy-item-button" type="button" value="25000"
-                       onclick="generator.inventory.buyArmor( 'Heavy Banded Mail', 25000, 35, 6, 1, -6, 0.35, 20, '-', '-', '-', '4/1/1' );">
+                       onclick="generator.character.inventory.buyArmor( 'Heavy Banded Mail', 25000, 35, 6, 1, -6, 0.35, 20, '-', '-', '-', '4/1/1' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Half-Plate</p>
                 <input class="buy-item-button" type="button" value="60000"
-                       onclick="generator.inventory.buyArmor( 'Heavy Half-Plate', 60000, 50, 7, 0, -7, 0.4, 20, '-', '-', '-', '4/4/*' );">
+                       onclick="generator.character.inventory.buyArmor( 'Heavy Half-Plate', 60000, 50, 7, 0, -7, 0.4, 20, '-', '-', '-', '4/4/*' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Full-Plate</p>
                 <input class="buy-item-button" type="button" value="150000"
-                       onclick="generator.inventory.buyArmor( 'Heavy Full-Plate', 150000, 50, 8, 1, -6, 0.35, 20, '-', '-', '-', '4/4/*' );">
+                       onclick="generator.character.inventory.buyArmor( 'Heavy Full-Plate', 150000, 50, 8, 1, -6, 0.35, 20, '-', '-', '-', '4/4/*' );">
             </div>
             <div class="buy-item">
                 <p>Buckler</p>
                 <input class="buy-item-button" type="button" value="1500"
-                       onclick="generator.inventory.buyShield( 'Buckler', 1500, 5, 1, '-', -1, 0.05, '-', '10', '5', '-', '1ma' );">
+                       onclick="generator.character.inventory.buyShield( 'Buckler', 1500, 5, 1, '-', -1, 0.05, '-', '10', '5', '-', '1ma' );">
             </div>
             <div class="buy-item">
                 <p>Light Wooden Shield</p>
                 <input class="buy-item-button" type="button" value="300"
-                       onclick="generator.inventory.buyShield( 'Light Wooden Shield', 300, 5, 1, '-', -1, 0.05, '-', '5', '7', '-', '1ma' );">
+                       onclick="generator.character.inventory.buyShield( 'Light Wooden Shield', 300, 5, 1, '-', -1, 0.05, '-', '5', '7', '-', '1ma' );">
             </div>
             <div class="buy-item">
                 <p>Light Steel Shield</p>
                 <input class="buy-item-button" type="button" value="900"
-                       onclick="generator.inventory.buyShield( 'Light Steel Shield', 900, 6, 1, '-', -1, 0.05, '-', '-', '-', '-', '1ma' );">
+                       onclick="generator.character.inventory.buyShield( 'Light Steel Shield', 900, 6, 1, '-', -1, 0.05, '-', '-', '-', '-', '1ma' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Wooden Shield</p>
                 <input class="buy-item-button" type="button" value="700"
-                       onclick="generator.inventory.buyShield( 'Heavy Wooden Shield', 700, 10, 2, '-', -2, 0.15, '-', '-', '-', '-', '1ma' );">
+                       onclick="generator.character.inventory.buyShield( 'Heavy Wooden Shield', 700, 10, 2, '-', -2, 0.15, '-', '-', '-', '-', '1ma' );">
             </div>
             <div class="buy-item">
                 <p>Heavy Steel Shield</p>
                 <input class="buy-item-button" type="button" value="2000"
-                       onclick="generator.inventory.buyShield( 'Heavy Steel Shield', 2000, 15, 2, '-', -2, 0.15, '-', '-', '-', '-', '1ma' );">
+                       onclick="generator.character.inventory.buyShield( 'Heavy Steel Shield', 2000, 15, 2, '-', -2, 0.15, '-', '-', '-', '-', '1ma' );">
             </div>
             <div class="buy-item">
                 <p>Tower Shield</p>
                 <input class="buy-item-button" type="button" value="3000"
-                       onclick="generator.inventory.buyShield( 'Tower Shield', 3000, 45, 4, '2', -10, 0.5, '-', '-', '-', '-', '1ma' );">
+                       onclick="generator.character.inventory.buyShield( 'Tower Shield', 3000, 45, 4, '2', -10, 0.5, '-', '-', '-', '-', '1ma' );">
             </div>
             <div class="buy-item">
                 <p>Armor Spikes</p>
                 <input class="buy-item-button" type="button" value="5000"
-                       onclick="generator.inventory.buyItem( 'Armor Spikes', 5000, 10 );">
+                       onclick="generator.character.inventory.buyItem( 'Armor Spikes', 5000, 10 );">
             </div>
             <div class="buy-item">
                 <p>Locked Gauntlet</p>
                 <input class="buy-item-button" type="button" value="800"
-                       onclick="generator.inventory.buyItem( 'Locked Gauntlet', 800, 5 );">
+                       onclick="generator.character.inventory.buyItem( 'Locked Gauntlet', 800, 5 );">
             </div>
             <div class="buy-item">
                 <h3>
@@ -1989,7 +1989,7 @@
             <div class="buy-item">
                 <p>Shield Spikes</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyItem( 'Shield Spikes', 1000, 5 );">
+                       onclick="generator.character.inventory.buyItem( 'Shield Spikes', 1000, 5 );">
             </div>
         </div>
         <div class="bottom-buffer"></div>
@@ -2006,354 +2006,354 @@
             <div class="buy-item">
                 <p>Backpack</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyItem( 'Backpack', 200, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Backpack', 200, 2 );">
             </div>
             <div class="buy-item">
                 <p>Small Backpack</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyItem( 'Small Backpack', 200, 0.5 );">
+                       onclick="generator.character.inventory.buyItem( 'Small Backpack', 200, 0.5 );">
             </div>
             <div class="buy-item">
                 <p>Barrel</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyItem( 'Barrel', 200, 30 );">
+                       onclick="generator.character.inventory.buyItem( 'Barrel', 200, 30 );">
             </div>
             <div class="buy-item">
                 <p>Basket</p>
                 <input class="buy-item-button" type="button" value="40"
-                       onclick="generator.inventory.buyItem( 'Basket', 40, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Basket', 40, 1 );">
             </div>
             <div class="buy-item">
                 <p>Bedroll</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Bedroll', 10, 5 );">
+                       onclick="generator.character.inventory.buyItem( 'Bedroll', 10, 5 );">
             </div>
             <div class="buy-item">
                 <p>Small Bedroll</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Small Bedroll', 10, 1.25 );">
+                       onclick="generator.character.inventory.buyItem( 'Small Bedroll', 10, 1.25 );">
             </div>
             <div class="buy-item">
                 <p>Bell</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Bell', 10, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Bell', 10, 0 );">
             </div>
             <div class="buy-item">
                 <p>Winter Blanket</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItem( 'Winter Blanket', 50, 3 );">
+                       onclick="generator.character.inventory.buyItem( 'Winter Blanket', 50, 3 );">
             </div>
             <div class="buy-item">
                 <p>Small Winter Blanket</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItem( 'Small Winter Blanket', 50, 1.25 );">
+                       onclick="generator.character.inventory.buyItem( 'Small Winter Blanket', 50, 1.25 );">
             </div>
             <div class="buy-item">
                 <p>Block and Tackle</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Block and Tackle', 50, 5 );">
+                       onclick="generator.character.inventory.buyItem( 'Block and Tackle', 50, 5 );">
             </div>
             <div class="buy-item">
                 <p>Wine Bottle & Glass</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Wine Bottle & Glass', 200, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Wine Bottle & Glass', 200, 0 );">
             </div>
             <div class="buy-item">
                 <p>Bucket</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItem( 'Bucket', 50, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Bucket', 50, 2 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Caltrops (bag)</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItemStack( 1, 'Caltrops', 100, 2 );">
+                       onclick="generator.character.inventory.buyItemStack( 1, 'Caltrops', 100, 2 );">
             </div>
             <div class="buy-item">
                 <p>Candle</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyItem( 'Candle', 1, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Candle', 1, 0 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Canvas (per sq-yd)</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItemStack( 1, 'Canvas', 10, 1 );">
+                       onclick="generator.character.inventory.buyItemStack( 1, 'Canvas', 10, 1 );">
             </div>
             <div class="buy-item">
                 <p>ServerMap Case</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItem( 'ServerMap Case', 100, 0.5 );">
+                       onclick="generator.character.inventory.buyItem( 'ServerMap Case', 100, 0.5 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Chain (per 10ft)</p>
                 <input class="buy-item-button" type="button" value="3000"
-                       onclick="generator.inventory.buyItemStack( 10, 'Chain', 3000, 2 );">
+                       onclick="generator.character.inventory.buyItemStack( 10, 'Chain', 3000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Chalk</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyItem( 'Chalk', 1, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Chalk', 1, 0 );">
             </div>
             <div class="buy-item">
                 <p>Chest</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyItem( 'Chest', 200, 25 );">
+                       onclick="generator.character.inventory.buyItem( 'Chest', 200, 25 );">
             </div>
             <div class="buy-item">
                 <p>Crowbar</p>
                 <input class="buy-item-button" type="button" value="200"
-                       onclick="generator.inventory.buyItem( 'Crowbar', 200, 5 );">
+                       onclick="generator.character.inventory.buyItem( 'Crowbar', 200, 5 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Firewood (25lb)</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyItemStack( 25, 'Firewood', 1, 25 );">
+                       onclick="generator.character.inventory.buyItemStack( 25, 'Firewood', 1, 25 );">
             </div>
             <div class="buy-item">
                 <p>Fishhook</p>
                 <input class="buy-item-button" type="button" value="20"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Fishing Net</p>
                 <input class="buy-item-button" type="button" value="400"
-                       onclick="generator.inventory.buyItem( 'Fishing Net', 400, 5 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishing Net', 400, 5 );">
             </div>
             <div class="buy-item">
                 <p>Flask</p>
                 <input class="buy-item-button" type="button" value="3"
-                       onclick="generator.inventory.buyItem( 'Flask', 3, 1.5 );">
+                       onclick="generator.character.inventory.buyItem( 'Flask', 3, 1.5 );">
             </div>
             <div class="buy-item">
                 <p>Flint & Steel</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyItem( 'Flint and Steel', 1, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Flint and Steel', 1, 0 );">
             </div>
             <div class="buy-item">
                 <p>Grappling Hook</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItem( 'Grappling Hook', 100, 4 );">
+                       onclick="generator.character.inventory.buyItem( 'Grappling Hook', 100, 4 );">
             </div>
             <div class="buy-item">
                 <p>Hammer</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItem( 'Hammer', 50, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Hammer', 50, 2 );">
             </div>
             <div class="buy-item">
                 <p>Ink</p>
                 <input class="buy-item-button" type="button" value="800"
-                       onclick="generator.inventory.buyItem( 'Ink', 800, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Ink', 800, 0 );">
             </div>
             <div class="buy-item">
                 <p>Inkpen</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItem( 'Inkpen', 50, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Inkpen', 50, 0 );">
             </div>
             <div class="buy-item">
                 <p>Chalk</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyItem( 'Chalk', 1, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Chalk', 1, 0 );">
             </div>
             <div class="buy-item">
                 <p>Clay Jug</p>
                 <input class="buy-item-button" type="button" value="3"
-                       onclick="generator.inventory.buyItem( 'Clay Jug', 3, 9 );">
+                       onclick="generator.character.inventory.buyItem( 'Clay Jug', 3, 9 );">
             </div>
             <div class="buy-item">
                 <p>10-Foot Ladder</p>
                 <input class="buy-item-button" type="button" value="5"
-                       onclick="generator.inventory.buyItem( '10-Foot Ladder', 5, 20 );">
+                       onclick="generator.character.inventory.buyItem( '10-Foot Ladder', 5, 20 );">
             </div>
             <div class="buy-item">
                 <p>Common Lamp</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Common Lamp', 10, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Common Lamp', 10, 1 );">
             </div>
             <div class="buy-item">
                 <p>Bullseye Lantern</p>
                 <input class="buy-item-button" type="button" value="1200"
-                       onclick="generator.inventory.buyItem( 'Bullseye Lantern', 1200, 3 );">
+                       onclick="generator.character.inventory.buyItem( 'Bullseye Lantern', 1200, 3 );">
             </div>
             <div class="buy-item">
                 <p>Hooded Lantern</p>
                 <input class="buy-item-button" type="button" value="700"
-                       onclick="generator.inventory.buyItem( 'Hooded Lantern', 700, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Hooded Lantern', 700, 2 );">
             </div>
             <div class="buy-item">
                 <p>Simple Lock</p>
                 <input class="buy-item-button" type="button" value="2000"
-                       onclick="generator.inventory.buyItem( 'Simple Lock', 2000, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Simple Lock', 2000, 1 );">
             </div>
             <div class="buy-item">
                 <p>Average Lock</p>
                 <input class="buy-item-button" type="button" value="4000"
-                       onclick="generator.inventory.buyItem( 'Average Lock', 4000, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Average Lock', 4000, 1 );">
             </div>
             <div class="buy-item">
                 <p>Good Lock</p>
                 <input class="buy-item-button" type="button" value="8000"
-                       onclick="generator.inventory.buyItem( 'Good Lock', 8000, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Good Lock', 8000, 1 );">
             </div>
             <div class="buy-item">
                 <p>Amazing Lock</p>
                 <input class="buy-item-button" type="button" value="15000"
-                       onclick="generator.inventory.buyItem( 'Simple Lock', 15000, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Simple Lock', 15000, 1 );">
             </div>
             <div class="buy-item">
                 <p>Manacles</p>
                 <input class="buy-item-button" type="button" value="1500"
-                       onclick="generator.inventory.buyItem( 'Manacles', 1500, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Manacles', 1500, 2 );">
             </div>
 
             <div class="buy-item">
                 <p>Masterwork Manacles</p>
                 <input class="buy-item-button" type="button" value="5000"
-                       onclick="generator.inventory.buyItem( 'Masterwork Manacles', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Masterwork Manacles', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Small Steel Mirror</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyItem( 'Small Steel Mirror', 1000, 0.5 );">
+                       onclick="generator.character.inventory.buyItem( 'Small Steel Mirror', 1000, 0.5 );">
             </div>
             <div class="buy-item">
                 <p>Clay Tankard</p>
                 <input class="buy-item-button" type="button" value="2"
-                       onclick="generator.inventory.buyItem( 'Clay Tankard', 2, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Clay Tankard', 2, 1 );">
             </div>
             <div class="buy-item">
                 <p>Oil (1 pint flask)</p>
                 <input class="buy-item-button" type="button" value="10"
-                       onclick="generator.inventory.buyItem( 'Oil (1 pint flask)', 10, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Oil (1 pint flask)', 10, 1 );">
             </div>
             <div class="buy-item">
                 <p>Paper (sheet)</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Parchment (sheet)</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Miner's Pick</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Clay Pitcher</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Piton</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>10-foot Pole</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Iron Pot</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Belt Pouch</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Portable Ram</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Trail Ration (1 day)</p>
                 <input class="buy-item-button" type="button" value="50"
-                       onclick="generator.inventory.buyItemStack( 1, 'Ration', 50, 1 );">
+                       onclick="generator.character.inventory.buyItemStack( 1, 'Ration', 50, 1 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Hempen Rope (50ft)</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItemStack( 50, 'Rope-Hemp', 100, 10 );">
+                       onclick="generator.character.inventory.buyItemStack( 50, 'Rope-Hemp', 100, 10 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Silken Rope (50ft)</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyItemStack( 50, 'Rope-Silk', 1000, 5 );">
+                       onclick="generator.character.inventory.buyItemStack( 50, 'Rope-Silk', 1000, 5 );">
             </div>
             <div class="buy-item">
                 <p>Sack</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Sealing Wax</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Sewing Needle</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
             <div class="buy-item">
                 <p>Signal Whistle</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Fishhook', 20, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Fishhook', 20, 0 );">
             </div>
 
             <div class="buy-item">
                 <p>Signet Ring</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Masterwork', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Masterwork', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Sledge</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Masterwork', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Masterwork', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Soap</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Masterwork', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Masterwork', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Shovel</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Masterwork', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Masterwork', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Spyglass</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Masterwork', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Masterwork', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Tent</p>
                 <input class="buy-item-button" type="button" value="1000"
-                       onclick="generator.inventory.buyItem( 'Tent', 1000, 20 );">
+                       onclick="generator.character.inventory.buyItem( 'Tent', 1000, 20 );">
             </div>
             <div class="buy-item">
                 <p class="consumables">Torch</p>
                 <input class="buy-item-button" type="button" value="1"
-                       onclick="generator.inventory.buyItemStack( 1, 'Torch', 1, 1 );">
+                       onclick="generator.character.inventory.buyItemStack( 1, 'Torch', 1, 1 );">
             </div>
             <div class="buy-item">
                 <p>Vial (1oz.)</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItem( 'Vial', 100, 0 );">
+                       onclick="generator.character.inventory.buyItem( 'Vial', 100, 0 );">
             </div>
             <div class="buy-item">
                 <p>Waterskin</p>
                 <input class="buy-item-button" type="button" value="100"
-                       onclick="generator.inventory.buyItem( 'Waterskin', 100, 4 );">
+                       onclick="generator.character.inventory.buyItem( 'Waterskin', 100, 4 );">
             </div>
             <div class="buy-item">
                 <p>Whet Stone</p>
                 <input class="buy-item-button" type="button" value="2"
-                       onclick="generator.inventory.buyItem( 'Whetstone', 2, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Whetstone', 2, 1 );">
             </div>
             <div class="buy-item-float-10">
 
@@ -2373,52 +2373,52 @@
             <div class="buy-item">
                 <p>Acid (flask)</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Acid (flask)', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Acid (flask)', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Alchemist's Fire (flask)</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Alchemist\'s Fire (flask)', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Alchemist\'s Fire (flask)', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Antitoxin (vial)</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Antitoxin (vial)', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Antitoxin (vial)', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Everburning Torch</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Everburning Torch', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Everburning Torch', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Holy Water (flask)</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Holy Water (flask)', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Holy Water (flask)', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Smokestick</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Smokestick', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Smokestick', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Sunrod</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Sunrod', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Sunrod', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Tanglefoot Bag</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Tanglefoot Bag', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Tanglefoot Bag', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Thunderstone</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Thunderstone', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Thunderstone', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Tindertwig</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Tindertwig', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Tindertwig', 5000, 2 );">
             </div>
         </div>
         <div class="bottom-buffer"></div>
@@ -2435,82 +2435,82 @@
             <div class="buy-item">
                 <p>Alchemist's Lab</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Alchemist\'s Lab', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Alchemist\'s Lab', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Artisan's Tools</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Artisan\'s Tools', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Artisan\'s Tools', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Climber's Kit</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Climber\'s Kit', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Climber\'s Kit', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Disguise Kit</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Disguise Kit', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Disguise Kit', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Healer's Kit</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Healer\'s Kit', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Healer\'s Kit', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Holly and Mistletoe</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Holly and Mistletoe', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Holly and Mistletoe', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Wooden Holy Symbol</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Wooden Holy Symbol', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Wooden Holy Symbol', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Silver Holy Symbol</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Silver Holy Symbol', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Silver Holy Symbol', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Hourglass</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Hourglass', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Hourglass', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Magnifying Glass</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Magnifying Glass', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Magnifying Glass', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Musical Instrument</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Musical Instrument', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Musical Instrument', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Merchant's Scale</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Merchant\'s Scale', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Merchant\'s Scale', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Spell Component Pouch</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Spell Component Pouch', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Spell Component Pouch', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Wizard's Spellbook</p>
                 <input class="buy-item-button" type="button" value="&mdash;"
-                       onclick="generator.inventory.buyItem( 'Wizard\'s Spellbook', 5000, 2 );">
+                       onclick="generator.character.inventory.buyItem( 'Wizard\'s Spellbook', 5000, 2 );">
             </div>
             <div class="buy-item">
                 <p>Thieves' Tools</p>
                 <input class="buy-item-button" type="button" value="3000"
-                       onclick="generator.inventory.buyItem( 'Thieves Tools', 3000, 1 );">
+                       onclick="generator.character.inventory.buyItem( 'Thieves Tools', 3000, 1 );">
             </div>
             <div class="buy-item">
                 <p>Water Clock</p>
                 <input class="buy-item-button" type="button" value="100000"
-                       onclick="generator.inventory.buyItem( 'Water Clock', 100000, 200 );">
+                       onclick="generator.character.inventory.buyItem( 'Water Clock', 100000, 200 );">
             </div>
         </div>
         <div class="bottom-buffer"></div>
@@ -2528,7 +2528,7 @@
                 <option value="consumable">Consumable</option>
             </select>
             <input class="button" type="button" value="Next &#8594;"
-                   onclick="generator.inventory.customItemSubMenu();">
+                   onclick="generator.character.inventory.customItemSubMenu();">
         </form>
     </section>
 
@@ -2761,13 +2761,13 @@
                 <option value="vorp">Vorpal</option>
             </select>
             <input class="button" type="button" value="Submit"
-                   onclick="generator.inventory.createCustomItem('weapon');">
+                   onclick="generator.character.inventory.createCustomItem('weapon');">
 
         </form>
 
         <script type="text/javascript">
             $('#custom-weapon').on('change', function () {
-                generator.inventory.updateCustomForm('weapon');
+                generator.character.inventory.updateCustomForm('weapon');
             });
         </script>
         <div class="bottom-buffer"></div>
@@ -2877,12 +2877,12 @@
                 <input id="cu-i-writein" class="button" type="text" placeholder="Skill Name">
             </div>
             <input class="button" type="button" value="Submit"
-                   onclick="generator.inventory.createCustomItem('item');">
+                   onclick="generator.character.inventory.createCustomItem('item');">
         </form>
 
         <script type="text/javascript">
             $('#custom-item').on('change', function () {
-                generator.inventory.updateCustomForm('item');
+                generator.character.inventory.updateCustomForm('item');
             });
         </script>
     </section>
@@ -3679,24 +3679,24 @@
                 <div id="print-skill-forgery-notes" class="box skill-box"></div>
             </div>
             <div class="twelfth">
-                <p id="print-gatherinformation-title" class="form-skill-form faint-background">
+                <p id="print-skill-gatherinformation-title" class="form-skill-form faint-background">
                     gather information
                 </p>
             </div>
             <div class="sixteenth">
-                <div id="print-gatherinformation-total" class="box skill-box faint-background"></div>
+                <div id="print-skill-gatherinformation-total" class="box skill-box faint-background"></div>
             </div>
             <div class="sixteenth">
-                <div id="print-gatherinformation-rank" class="box skill-box faint-background"></div>
+                <div id="print-skill-gatherinformation-rank" class="box skill-box faint-background"></div>
             </div>
             <div class="sixteenth">
-                <div id="print-gatherinformation-ab-mod" class="box skill-box faint-background"></div>
+                <div id="print-skill-gatherinformation-ab-mod" class="box skill-box faint-background"></div>
             </div>
             <div class="sixteenth">
-                <div id="print-gatherinformation-misc-mod" class="box skill-box faint-background"></div>
+                <div id="print-skill-gatherinformation-misc-mod" class="box skill-box faint-background"></div>
             </div>
             <div class="sixteenth-blackbox">
-                <div id="print-gatherinformation-notes" class="box skill-box faint-background"></div>
+                <div id="print-skill-gatherinformation-notes" class="box skill-box faint-background"></div>
             </div>
             <div class="twelfth">
                 <p id="print-skill-handleanimal-title" class="form-skill-form">
@@ -4271,7 +4271,7 @@
                 <div id="print-skill-swim-ab-mod" class="box skill-box"></div>
             </div>
             <div class="sixteenth">
-                <div id="print-skill-swim-mis-mod" class="box skill-box"></div>
+                <div id="print-skill-swim-misc-mod" class="box skill-box"></div>
             </div>
             <div class="sixteenth-blackbox">
                 <div id="print-skill-swim-notes" class="box skill-box"></div>
@@ -4842,7 +4842,7 @@
                 </div>
             </div>
             <div class="twentieth">
-                <div id="print-ac-total" class="box"></div>
+                <div id="print-armor-total" class="box"></div>
             </div>
             <div class="twentieth">
                 <p class="twentieth-fixed-value">
@@ -4853,10 +4853,10 @@
                 <div class="print-mod-dex box"></div>
             </div>
             <div class="twentieth">
-                <div id="print-armor-bonus" class="box"></div>
+                <div class="print-armor-bonus box"></div>
             </div>
             <div class="twentieth">
-                <div id="print-shield-bonus" class="box"></div>
+                <div class="print-shield-bonus box"></div>
             </div>
             <div class="twentieth">
                 <div class="box"></div>
@@ -4898,16 +4898,16 @@
                 </p>
             </div>
             <div class="twentieth">
+                <div class="print-armor-bonus box"></div>
+            </div>
+            <div class="twentieth">
+                <div class="print-shield-bonus box"></div>
+            </div>
+            <div class="twentieth">
+                <div class="box"></div>
+            </div>
+            <div class="twentieth">
                 <div class="print-mod-size box"></div>
-            </div>
-            <div class="twentieth">
-                <div class="box"></div>
-            </div>
-            <div class="twentieth">
-                <div class="box"></div>
-            </div>
-            <div class="twentieth">
-                <div class="box"></div>
             </div>
             <div class="twentieth">
                 <div class="box"></div>
@@ -4925,12 +4925,12 @@
                         TOUCH
                     </h1>
                     <p>
-                        CUZ... MAGIC
+
                     </p>
                 </div>
             </div>
             <div class="twentieth">
-                <div id="print-to-total" class="box"></div>
+                <div id="print-touch-total" class="box"></div>
             </div>
             <div class="twentieth">
                 <p class="twentieth-fixed-value">
@@ -5046,7 +5046,7 @@
                 <div id="print-attack-first-one" class="box"></div>
             </div>
             <div class="sixteenth">
-                <div class="box"></div>
+                <div id="print-attack-first-two" class="box"></div>
             </div>
         </div>
 
@@ -5213,7 +5213,7 @@
                 <div class="print-mod-size box"></div>
             </div>
             <div class="sixteenth">
-                <div class="box"></div>
+                <div class="print-mod-misc box"></div>
             </div>
             <div class="sixteenth">
                 <div class="box"></div>
@@ -5341,6 +5341,11 @@
             </div>
             <div class="twentieth">
                 <p class="mini-title">
+                    <br><br>TOTAL
+                </p>
+            </div>
+            <div class="twentieth">
+                <p class="mini-title">
                     <br>STR<br>MOD.
                 </p>
             </div>
@@ -5359,13 +5364,18 @@
                     BASE<br>ATTACK BONUS
                 </p>
             </div>
+            <div class="operator">
+                <p></p>
+            </div>
+            <div class="twentieth">
+                <p class="mini-title">
+                    <br><br>INIT
+                </p>
+            </div>
             <div class="twentieth">
                 <p class="mini-title">
                     <br><br>TOTAL
                 </p>
-            </div>
-            <div class="operator">
-                <p></p>
             </div>
             <div class="twentieth">
                 <p class="mini-title">
@@ -5375,16 +5385,6 @@
             <div class="twentieth">
                 <p class="mini-title">
                     <br>MISC.<br>MOD.
-                </p>
-            </div>
-            <div class="twentieth">
-                <p class="mini-title">
-                    <br><br>TOTAL
-                </p>
-            </div>
-            <div class="twentieth">
-                <p class="mini-title">
-                    <br><br>
                 </p>
             </div>
         </div>
@@ -5400,6 +5400,9 @@
                 </div>
             </div>
             <div class="twentieth">
+                <div id="print-grapple-total" class="box"></div>
+            </div>
+            <div class="twentieth">
                 <div class="print-mod-str box"></div>
             </div>
             <div class="twentieth">
@@ -5410,9 +5413,6 @@
             </div>
             <div class="twentieth">
                 <div class="print-bab-one box"></div>
-            </div>
-            <div class="twentieth">
-                <div id="print-grapple-total" class="box"></div>
             </div>
             <div class="operator">
                 <p></p>
@@ -5428,59 +5428,15 @@
                 </div>
             </div>
             <div class="twentieth">
+                <div id="print-ini-total" class="box"></div>
+            </div>
+            <div class="twentieth">
                 <div class="print-mod-dex box"></div>
             </div>
             <div class="twentieth">
                 <div id="print-ini-misc" class="box"></div>
             </div>
-            <div class="twentieth">
-                <div id="print-ini-total" class="box"></div>
-            </div>
         </div>
-        <!-- INITIATIVE -->
-			<div class="half">
-				<div class="sixteenth-blackbox">
-					<p class="mini-title">
-						<br>INITIATIVE
-					</p>
-				</div>
-				<div class="twentieth">
-					<p class="mini-title">
-						<br>TOTAL
-					</p>
-				</div>
-				<div class="twentieth">
-					<p class="mini-title">
-						DEX<br>MOD.
-					</p>
-				</div>
-				<div class="twentieth">
-					<p class="mini-title">
-						MISC.<br>MOD.
-					</p>
-				</div>
-			</div>
-			<div class="half clear-left">
-				<div class="sixteenth-blackbox">
-					<div class="box blackbox">
-						<h1>
-							INI
-						</h1>
-						<p>
-							INITIATIVE
-						</p>
-					</div>
-				</div>
-				<div class="twentieth">
-					<div class="box"></div>
-				</div>
-				<div class="twentieth">
-					<div class="box"></div>
-				</div>
-				<div class="twentieth">
-					<div class="box"></div>
-				</div>
-			</div>
         <!-- RACIAL ABILITIES -->
         <div class="half">
             <div class="print-fill fill-space"></div>
@@ -5630,7 +5586,7 @@
                     </p>
                 </div>
                 <div class="eighth">
-                    <div id="print-weapon-slot1-atkbonus" class="fill-space print-list tall-weapon">
+                    <div id="print-weapon-slot1-bonus" class="fill-space print-list tall-weapon">
                     </div>
                     <p class="label">
                         ATTACK BONUS
@@ -5640,15 +5596,15 @@
             <!-- 10 boxes -->
             <div class="quarter">
                 <div class="tenth w-marg-bot">
-                    <div id="print-weapon-slot1-dmg" class="box weapon-box-sm">
+                    <div id="print-weapon-slot1-damage" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot1-crit" class="box weapon-box-sm">
+                    <div id="print-weapon-slot1-critical" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot1-rang" class="box weapon-box-sm">
+                    <div id="print-weapon-slot1-range" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
@@ -5668,11 +5624,11 @@
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot1-hardn" class="box weapon-box-sm">
+                    <div id="print-weapon-slot1-hardness" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot1-hp" class="box weapon-box-sm">
+                    <div id="print-weapon-slot1-hitPoints" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
@@ -5770,7 +5726,7 @@
                     </p>
                 </div>
                 <div class="eighth">
-                    <div id="print-weapon-slot2-atkbonus" class="fill-space print-list tall-weapon">
+                    <div id="print-weapon-slot2-bonus" class="fill-space print-list tall-weapon">
                     </div>
                     <p class="label">
                         ATTACK BONUS
@@ -5780,15 +5736,15 @@
             <!-- 10 boxes -->
             <div class="quarter">
                 <div class="tenth w-marg-bot">
-                    <div id="print-weapon-slot2-dmg" class="box weapon-box-sm">
+                    <div id="print-weapon-slot2-damage" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot2-crit" class="box weapon-box-sm">
+                    <div id="print-weapon-slot2-critical" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot2-rang" class="box weapon-box-sm">
+                    <div id="print-weapon-slot2-range" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
@@ -5808,11 +5764,11 @@
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot2-hardn" class="box weapon-box-sm">
+                    <div id="print-weapon-slot2-hardness" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot2-hp" class="box weapon-box-sm">
+                    <div id="print-weapon-slot2-hitPoints" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
@@ -5910,7 +5866,7 @@
                     </p>
                 </div>
                 <div class="eighth">
-                    <div id="print-weapon-slot3-atkbonus" class="fill-space print-list tall-weapon">
+                    <div id="print-weapon-slot3-bonus" class="fill-space print-list tall-weapon">
                     </div>
                     <p class="label">
                         ATTACK BONUS
@@ -5920,15 +5876,15 @@
             <!-- 10 boxes -->
             <div class="quarter">
                 <div class="tenth w-marg-bot">
-                    <div id="print-weapon-slot3-dmg" class="box weapon-box-sm">
+                    <div id="print-weapon-slot3-damage" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot3-crit" class="box weapon-box-sm">
+                    <div id="print-weapon-slot3-critical" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot3-rang" class="box weapon-box-sm">
+                    <div id="print-weapon-slot3-range" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
@@ -5948,11 +5904,11 @@
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot3-hardn" class="box weapon-box-sm">
+                    <div id="print-weapon-slot3-hardness" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-weapon-slot3-hp" class="box weapon-box-sm">
+                    <div id="print-weapon-slot3-hitPoints" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">
@@ -6213,7 +6169,7 @@
                     </div>
                 </div>
                 <div class="tenth">
-                    <div id="print-shield-spFail" class="box weapon-box-sm">
+                    <div id="print-shield-spellFail" class="box weapon-box-sm">
                     </div>
                 </div>
                 <div class="tenth">

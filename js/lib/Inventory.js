@@ -3,12 +3,11 @@ class Inventory {
 
     /**
      *
-     * @param {CharacterGen} generator
+     * @param {Character} character
      * @returns {Inventory}
      */
-    constructor(generator) {
-        this.generator = generator;
-        this.character = this.generator.character;
+    constructor(character) {
+        this.character = character;
 
         this.allSubMenus = ["SimpleWeapon", "MartialWeapon", "ExoticWeapon", "Armor", "Gear", "Substances", "Tools", "Custom"];
         this.noteIndex = ["One", "Two", "Three", "Four", "Five"];
@@ -74,8 +73,9 @@ class Inventory {
             }
 
             if (this.armorSlot) {
-                document.getElementById("print-armor-bonus").innerHTML = this.aSlot.armorBonus;
-                // Update AC on character sheet. So it ca be relied upon later for calculations during population.
+              for (let i = 0, listArmor = document.getElementsByClassName("print-armor-bonus"); i < listArmor.length; i++) {
+                listArmor[i].innerHTML = (this.aSlot.armorBonus);
+              }
             }
             this.invDisplay();
         } else {
@@ -168,8 +168,9 @@ class Inventory {
             }
 
             if (this.sSlot) {
-                document.getElementById("print-shield-bonus").innerHTML = this.sSlot.armorBonus;
-                // Update AC on character sheet.
+                for (let i = 0, listShield = document.getElementsByClassName("print-shield-bonus"); i < listShield.length; i++) {
+                  listShield[i].innerHTML = (this.sSlot.armorBonus);
+                }
             }
             this.invDisplay();
         } else {
@@ -250,8 +251,6 @@ class Inventory {
     createCustomItem(itemKind) {
         switch (itemKind) {
             case "weapon":
-                // this.generator.customItemNo += 1;
-                // var currentItemNo = this.generator.customItemNo;
                 let weaponName = document.getElementById("cu-w-name").value,
                     weaponWeight = Number(document.getElementById("cu-w-weig").value),
                     weaponCost = Number(document.getElementById("cu-w-cost").innerHTML),
@@ -326,8 +325,8 @@ class Inventory {
                 if (masterwork) {
                     itemCost += 5000;
                     if (skill !== "write") {
-                        this.generator.feats.featUpdateSkillTwin(skill);
-                        this.generator.calcPoints();
+                        this.character.feats.featUpdateSkillTwin(skill);
+                        this.character.skills.calcPoints();
                     }
                 }
 
@@ -338,18 +337,6 @@ class Inventory {
                 document.getElementById("custom-item-form").reset();
                 break;
         }
-    }
-
-    /**
-     *
-     */
-    customItemSubMenu() {
-        let kind = document.getElementById("custom-select").value;
-        document.getElementById("custom-" + kind).style.display = "block";
-        if (kind === "weapon" || kind === "armor") {
-            document.getElementById("custom-" + kind + "-display").style.display = "block";
-        }
-        document.getElementById("equip-custom").style.display = "none";
     }
 
     /**
@@ -383,24 +370,6 @@ class Inventory {
                 // alert("Outside if Statement");
             }
         }
-    }
-
-    /**
-     *
-     * @param {String} whichSubMenu
-     */
-    equipSubMenu(whichSubMenu) {
-        for (let i = 0; i < this.allSubMenus.length; i++) {
-            let isSubMenu = this.allSubMenus[i] === whichSubMenu,
-                equipName = "equip-" + ((isSubMenu) ? whichSubMenu : this.allSubMenus[i]),
-                display = (isSubMenu) ? "block" : "none";
-            document.getElementById(equipName).style.display = display;
-        }
-        document.getElementById("custom-weapon").style.display = "none";
-        document.getElementById("custom-weapon-display").style.display = "none";
-        document.getElementById("custom-armor").style.display = "none";
-        document.getElementById("custom-item").style.display = "none";
-        window.scrollTo(0, 0);
     }
 
     /**
@@ -493,7 +462,7 @@ class Inventory {
         }
 
         if (input === "leveled") {
-            switch (Number(this.character.levelAdvance)) {
+            switch (Number(this.character.level)) {
                 case 2:
                     this.startingGold = 900;
                     break;

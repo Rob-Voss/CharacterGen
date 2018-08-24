@@ -2,11 +2,11 @@
 class Skills {
 
     /**
-     * @param {CharacterGen} generator
+     * @param {Character} character
      * @returns {Skills}
      */
-    constructor(generator) {
-        this.character = generator.character;
+    constructor(character) {
+        this.character = character;
 
         //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
         this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
@@ -16,63 +16,45 @@ class Skills {
             "profession", "ride", "search", "sensemotive", "sleight", "spellcraft", "spot", "survival", "swim", "tumble",
             "usemagicdevice", "userope"];
 
-        this.skills = {
-            "appraise": {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "balance":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "bluff":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "climb":  {"rank": 0, "mod": "str", "misc-mod": "", "notes": ""},
-            "concentration":  {"rank": 0, "mod": "con", "misc-mod": "", "notes": ""},
-            "craft":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "decipherscript":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "diplomacy":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "disabledevice":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "disguise":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "escapeartist":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "forgery":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "gatherinformation":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "handleanimal":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "heal":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
-            "hide":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "intimidate":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "jump":  {"rank": 0, "mod": "str", "misc-mod": "", "notes": ""},
-            "knowledge":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "listen":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
-            "movesilently":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "openlock":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "perform":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "profession":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
-            "ride":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "search":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "sensemotive":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
-            "sleight":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "spellcraft":  {"rank": 0, "mod": "int", "misc-mod": "", "notes": ""},
-            "spot":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
-            "survival":  {"rank": 0, "mod": "wis", "misc-mod": "", "notes": ""},
-            "swim":  {"rank": 0, "mod": "str", "misc-mod": "", "notes": ""},
-            "tumble":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""},
-            "usemagicdevice":  {"rank": 0, "mod": "cha", "misc-mod": "", "notes": ""},
-            "userope":  {"rank": 0, "mod": "dex", "misc-mod": "", "notes": ""}
+        this.skillTable = {
+            "appraise": {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "balance":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "bluff":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "climb":  {"rank": 0, "mod": "str", "misc": "", "notes": ""},
+            "concentration":  {"rank": 0, "mod": "con", "misc": "", "notes": ""},
+            "craft":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "decipherscript":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "diplomacy":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "disabledevice":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "disguise":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "escapeartist":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "forgery":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "gatherinformation":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "handleanimal":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "heal":  {"rank": 0, "mod": "wis", "misc": "", "notes": ""},
+            "hide":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "intimidate":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "jump":  {"rank": 0, "mod": "str", "misc": "", "notes": ""},
+            "knowledge":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "listen":  {"rank": 0, "mod": "wis", "misc": "", "notes": ""},
+            "movesilently":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "openlock":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "perform":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "profession":  {"rank": 0, "mod": "wis", "misc": "", "notes": ""},
+            "ride":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "search":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "sensemotive":  {"rank": 0, "mod": "wis", "misc": "", "notes": ""},
+            "sleight":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "spellcraft":  {"rank": 0, "mod": "int", "misc": "", "notes": ""},
+            "spot":  {"rank": 0, "mod": "wis", "misc": "", "notes": ""},
+            "survival":  {"rank": 0, "mod": "wis", "misc": "", "notes": ""},
+            "swim":  {"rank": 0, "mod": "str", "misc": "", "notes": ""},
+            "tumble":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""},
+            "usemagicdevice":  {"rank": 0, "mod": "cha", "misc": "", "notes": ""},
+            "userope":  {"rank": 0, "mod": "dex", "misc": "", "notes": ""}
         };
 
         return this;
-    }
-
-    /**
-     *
-     */
-    acceptSkills() {
-        let confirmAcceptSkills;
-        if (this.character.skillPointsRemaining === 0) {
-            confirmAcceptSkills = confirm("Are you sure you are finished allocating skill points?");
-        } else if (this.character.skillPointsRemaining > 0) {
-            confirmAcceptSkills = confirm("You have unused skill points\nAre you sure you want to proceed?");
-        } else {
-            confirmAcceptSkills = confirm("You have used too many skill points\nAre you sure you want to proceed?");
-        }
-
-        if (confirmAcceptSkills) {
-            // Move on to next section.
-        }
     }
 
     /**
@@ -165,31 +147,26 @@ class Skills {
      *
      */
     calcPoints() {
-        let mod, misc, maths;
+        let mod, misc, maths, i = 0;
         this.character.skillPointsSpent = 0;
-        for (let element in this.skills) {
-            if (this.skills.hasOwnProperty(element)) {
-                this.skills[element].rank = Number(document.getElementById("input_" + element).value);
+        for (let element in this.skillTable) {
+            if (this.skillTable.hasOwnProperty(element)) {
+                this.skillTable[element].rank = Number(document.getElementById("input_" + element).value);
+              mod = (this.skillTable[element].mod !== "none") ? this.character[this.skillTable[element].mod + "Mod"] : "none";
+              if (mod !== "none") {
+                misc = (document.getElementById("ms-" + element).innerHTML === "-") ? 0 : Number(document.getElementById("ms-" + element).innerHTML);
+                let skillRank = Number(this.skillTable[element].rank),
+                    total = Number(mod) + Number(misc) + skillRank;
+                maths = (this.allSkillsBool[i]) ? total : total / 2;
+                document.getElementById("t-" + element).innerHTML = (maths > 0) ? "+" + maths : maths;
+                this.character.skillPointsSpent += skillRank;
+              } else {
+                this.character.skillPointsSpent += Number(document.getElementById("wrin-skill-rank-" + (i + 1)).value);
+              }
+              i++;
             }
         }
 
-        let i = 0;
-        for (let element in this.skills) {
-            if (this.skills.hasOwnProperty(element)) {
-                mod = (this.skills[element].mod !== "none") ? this.character[this.skills[element].mod + "Mod"] : "none";
-                if (mod !== "none") {
-                    misc = (document.getElementById("ms-" + element).innerHTML === "-") ? 0 : Number(document.getElementById("ms-" + element).innerHTML);
-                    let skillRank = Number(this.skills[element].rank),
-                        total = Number(mod) + Number(misc) + skillRank;
-                    maths = (this.allSkillsBool[i]) ? total : total / 2;
-                    document.getElementById("t-" + element).innerHTML = (maths > 0) ? "+" + maths : maths;
-                    this.character.skillPointsSpent += skillRank;
-                } else {
-                    this.character.skillPointsSpent += Number(document.getElementById("wrin-skill-rank-" + (i + 1)).value);
-                }
-                i++;
-            }
-        }
         document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + (this.character.skillPoints - this.character.skillPointsSpent);
     }
 
@@ -219,9 +196,6 @@ class Skills {
                 break;
             case "NewBlankClass":
                 // A placeholder for future class additions.
-                //
-                // This is the SECOND place (in order of execution) where the value of this.character.class affects subsequent calculations.
-                //
                 break;
         }
     }
@@ -231,10 +205,10 @@ class Skills {
      * @param {String} featTarget
      */
     decodeSkillFocus(featTarget) {
-        let skName = featTarget.toLowerCase();
-        if (this.skills.hasOwnProperty(skName)) {
-            let msVariable = document.getElementById("ms-" + skName),
-                skillMisc = Number(document.getElementById("ms-" + skName).innerHTML);
+        let skillName = featTarget.toLowerCase();
+        if (this.skillTable.hasOwnProperty(skillName)) {
+            let msVariable = document.getElementById("ms-" + skillName),
+                skillMisc = Number(document.getElementById("ms-" + skillName).innerHTML);
             if (msVariable.innerHTML === "-") {
                 msVariable.innerHTML = 3;
             } else {
@@ -255,10 +229,7 @@ class Skills {
      *
      */
     levelSkillPointIncrease() {
-        let points = this.character.baseSkillPoints + this.character.intMod;
-        if (this.character.race === "HUMAN") {
-            points += 1;
-        }
+        let points = (this.character.baseSkillPoints + this.character.intMod) + (this.character.race === "HUMAN") ? 1 : 0;
         this.character.skillPoints += (points <= 0) ? 1 : points;
         document.getElementById("sk-points-starting").innerHTML = "Skill Points Remaining: " + this.character.skillPoints
     }
@@ -268,10 +239,9 @@ class Skills {
      */
     showClassSkills() {
         this.calculateSkillPoints();
-        //First, basic data input based on class (first function above)
+
         switch (this.character.class) {
             case "BARBARIAN":
-                //align with booleans below --appr---	bala---	bluf---	clim---	conc---	craf---	deci---	dipl---	disa---	disg---	esca---	forg---	gath---	hand---	heal---	hide---	inti---	jump---	know---	list---	move---	open---	perf---	prof---	ride---	sear---	sens---	slei---	spel---	spot---	surv---	swim---	tumb---	usem---	user
                 this.allSkillsBool = [false, false, false, true, false, true, false, false, false, false, false, false, false, true, false, false, true, true, false, true, false, false, false, false, true, false, false, false, false, false, true, true, false, false, false];
                 break;
             case "BARD":
@@ -306,7 +276,6 @@ class Skills {
                 break;
             case "NewBlankClass":
                 // A placeholder for future class additions.
-                // This is the first place (in order of execution) where the value of this.character.class affects subsequent calculations.
                 break;
         }
 
@@ -353,8 +322,9 @@ class Skills {
      * @param {number} basePoints
      */
     whichSkillFunction(basePoints) {
-        let skillPoints = (this.character.intMod > 0) ? ((basePoints + this.character.intMod) * 4) : (basePoints * 4);
-        this.updateSkillPoints((this.character.race === "HUMAN") ?  skillPoints + 4 : skillPoints);
+        let intMod = this.character.intMod,
+            skillPoints = ((basePoints + (intMod > 0 ? intMod : 0)) * 4) + (this.character.race === "HUMAN" ?  4 : 0);
+        this.updateSkillPoints(skillPoints);
     }
 
     /**

@@ -15,24 +15,46 @@ class Character {
      */
     constructor(characterGen) {
         this.generator = characterGen;
+        this.skills = new Skills(this);
+        this.spells = new Spells(this);
+        this.feats = new Feats(this);
+        this.inventory = new Inventory(this.generator);
+
+        this.eyes = "";
+        this.hair = "";
+        this.height = "";
+        this.weight = "";
+        this.skin = "";
+        this.handedness = "";
+        this.age = "";
+        this.gender = "";
+        this.appearance = "";
+        this.personality = "";
+        this.quote = "";
+        this.objective = "";
+        this.history = "";
+        this.alliesEnemies = "";
+        this.ancestry = "";
+        this.other = "";
+
+        this.class = 0;
+        this.race = 0;
+        this.hitDie = 0;
+        this.hitPoints = 0;
+        this.normAC = 0;
+        this.ffAC = 0;
+        this.touchAC = 0;
+        this.level = 0;
+
+        this.darkVision = false;
+        this.lowLight = false;
+        this.small = false;
 
         this.blankCounter = 0;
         this.blankCraftCounter = 0;
         this.blankKnowledgeCounter = 0;
         this.blankPerformCounter = 0;
         this.blankProfessionCounter = 0;
-
-        this.class = 0;
-        this.race = 0;
-
-        this.hitDie = 0;
-        this.hitPoints = 0;
-
-        this.levelAdvance = 0;
-
-        this.darkVision = false;
-        this.lowLight = false;
-        this.small = false;
 
         this.baseSkillPoints = 0;
         this.skillPoints = 0;
@@ -160,16 +182,16 @@ class Character {
                 break;
         }
 
-        for (let i = (whichLevel * 4); i < this.levelAdvance; i++) {
+        for (let i = (whichLevel * 4); i < this.level; i++) {
             if (i <= (whichLevel * 4 + 3)) { // Only levels affected by THIS (but not SUBSEQUENT) ability score increase
                 let additionalHitPoints = (Math.floor(Math.random() * this.hitDie) + 1) + this.conMod;
                 this.hitPoints += (additionalHitPoints <= 0) ? 1 : additionalHitPoints;
-                this.generator.skills.levelSkillPointIncrease();
+                this.skills.levelSkillPointIncrease();
             }
         }
+        this.updateAllModifiers();
 
         document.getElementById("final-" + whichAbility).innerHTML = this[whichAbility + "Attr"];
-        this.updateAllModifiers();
         document.getElementById("final-" + whichAbility + "-mod").innerHTML = "+ " + this[whichAbility + "Mod"];
         document.getElementById("handle-ability-score-" + Number(whichLevel)).style.display = "none";
     }
@@ -255,16 +277,19 @@ class Character {
      * Calculate the Character's Armor Class
      */
     calculateArmorClass() {
-        let armor = Number(document.getElementById("print-armor-bonus").innerHTML),
-            shield = Number(document.getElementById("print-shield-bonus").innerHTML),
-            natural = 0,
-            size = (this.small) ? 1 : 0,
-            deflect = 0,
-            misc = 0;
+      let armor = Number(this.inventory.aSlot.armorBonus),
+          shield = Number(this.inventory.sSlot.armorBonus),
+          natural = 0,
+          size = (this.small) ? 1 : 0,
+          deflect = 0,
+          misc = 0;
+      this.normAC = 10 + this.dexMod + armor + shield + natural + size + deflect + misc;
+      this.ffAC = 10 + armor + shield + natural + size + deflect + misc;
+      this.touchAC = 10 + this.dexMod + size + deflect + misc;
 
-        document.getElementById("print-ac-tot").innerHTML = 10 + this.dexMod + armor + shield + natural + size + deflect + misc;
-        document.getElementById("print-ff-tot").innerHTML = 10 + armor + shield + natural + size + deflect + misc;
-        document.getElementById("print-to-tot").innerHTML = 10 + this.dexMod + size + deflect + misc;
+      document.getElementById("print-armor-total").innerHTML = this.normAC;
+      document.getElementById("print-ff-total").innerHTML = this.ffAC;
+      document.getElementById("print-touch-total").innerHTML = this.touchAC;
     }
 
     /**
@@ -283,7 +308,7 @@ class Character {
         this.mediumLoad = Math.floor((2 * this.heavyLoad) / 3);
         this.lightLoad = Math.floor(this.heavyLoad / 3);
 
-        document.getElementById("print-total-weight").innerHTML = document.getElementById("total-weight").innerHTML;
+        document.getElementById("print-total-weight").innerHTML = this.inventory.totalWeight;
         document.getElementById("print-heavy-load").innerHTML = this.heavyLoad;
         document.getElementById("print-medium-load").innerHTML = this.mediumLoad;
         document.getElementById("print-light-load").innerHTML = this.lightLoad;
@@ -328,31 +353,31 @@ class Character {
         document.getElementById("race-select").style.display = "none";
         document.getElementById("class-select").style.display = "none";
         document.getElementById("dice-sys").style.display = "none";
-        this.levelAdvance = Number(document.getElementById("level-input").value);
-        if (this.levelAdvance === 1) {
+        this.level = Number(document.getElementById("level-input").value);
+        if (this.level === 1) {
             document.getElementById("final-base-attributes").style.display = "block";
             document.getElementById("select-skills").style.display = "block";
         } else {
             document.getElementById("final-base-attributes").style.display = "block";
             document.getElementById("handle-level-adv").style.display = "block";
-            document.getElementById("show-level").innerHTML = this.levelAdvance;
+            document.getElementById("show-level").innerHTML = this.level;
 
             let list = document.getElementsByClassName("sk-input");
             for (let i = 0; i < list.length; i++) {
-                list[i].setAttribute("max", (this.levelAdvance + 3));
+                list[i].setAttribute("max", (this.level + 3));
             }
 
             // This for loop handles everything, and iterates at each 4 level intervals, when ability score increases
             // can affect results.
             // So heads up.
-            for (let i = 2; i < (this.levelAdvance + 1); i++) {
+            for (let i = 2; i < (this.level + 1); i++) {
                 if ((i / 4) === Math.floor(i / 4)) {
                     document.getElementById("handle-ability-score-" + (i / 4)).style.display = "block";
                 }
                 if (i <= 3) { // Only levels unaffected by 1st ability score increase
                     let additionalHitPoints = (Math.floor(Math.random() * this.hitDie) + 1) + this.conMod;
                     this.hitPoints += (additionalHitPoints <= 0) ? 1 : additionalHitPoints;
-                    this.generator.skills.levelSkillPointIncrease();
+                    this.skills.levelSkillPointIncrease();
                 }
 
                 if ((i / 3) === Math.floor(i / 3)) {
@@ -442,9 +467,9 @@ class Character {
         this.updateAllModifiers();
         this.updateMiscSkillModifiers();
         this.addAbilityModifiers();
-        this.generator.skills.showClassSkills();
+        this.skills.showClassSkills();
         this.initiatePhaseTwo();
-        this.updateFinalAttributes();
+        this.generator.showFinalAttributes();
         this.updateAllSavingThrows();
     }
 
@@ -477,26 +502,37 @@ class Character {
                 this.dexAttr += 2;
                 this.conAttr -= 2;
                 this.lowLight = true;
-                document.getElementById("ms-listen").innerHTML = 2;
-                document.getElementById("ms-search").innerHTML = 2;
-                document.getElementById("ms-spot").innerHTML = 2;
+                this.skills.skillTable['listen'].misc = 2;
+                this.skills.skillTable['search'].misc = 2;
+                this.skills.skillTable['spot'].misc = 2;
+                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
+                document.getElementById("ms-search").innerHTML = this.skills.skillTable['search'].misc;
+                document.getElementById("ms-spot").innerHTML = this.skills.skillTable['spot'].misc;
                 break;
             case "GNOME":
                 this.conAttr += 2;
                 this.strAttr -= 2;
                 this.small = true;
                 this.lowLight = true;
-                document.getElementById("ms-listen").innerHTML = 2;
-                document.getElementById("ms-craft").innerHTML = 2;
-                document.getElementById("ms-hide").innerHTML = 4;
+                this.skills.skillTable['listen'].misc = 2;
+                this.skills.skillTable['craft'].misc = 2;
+                this.skills.skillTable['hide'].misc = 4;
+                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
+                document.getElementById("ms-craft").innerHTML = this.skills.skillTable['craft'].misc;
+                document.getElementById("ms-hide").innerHTML = this.skills.skillTable['hide'].misc;
                 break;
             case "HALF-ELF":
                 this.lowLight = true;
-                document.getElementById("ms-listen").innerHTML = 1;
-                document.getElementById("ms-search").innerHTML = 1;
-                document.getElementById("ms-spot").innerHTML = 1;
-                document.getElementById("ms-diplomacy").innerHTML = 2;
-                document.getElementById("ms-gatherinformation").innerHTML = 2;
+                this.skills.skillTable['listen'].misc = 1;
+                this.skills.skillTable['search'].misc = 1;
+                this.skills.skillTable['spot'].misc = 1;
+                this.skills.skillTable['diplomacy'].misc = 2;
+                this.skills.skillTable['gatherinformation'].misc = 2;
+                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
+                document.getElementById("ms-search").innerHTML = this.skills.skillTable['search'].misc;
+                document.getElementById("ms-spot").innerHTML = this.skills.skillTable['spot'].misc;
+                document.getElementById("ms-diplomacy").innerHTML = this.skills.skillTable['diplomacy'].misc;
+                document.getElementById("ms-gatherinformation").innerHTML = this.skills.skillTable['gatherinformation'].misc;
                 break;
             case "HALF-ORC":
                 this.strAttr += 2;
@@ -508,20 +544,23 @@ class Character {
                 this.dexAttr += 2;
                 this.strAttr -= 2;
                 this.small = true;
-                document.getElementById("ms-climb").innerHTML = 2;
-                document.getElementById("ms-jump").innerHTML = 2;
-                document.getElementById("ms-movesilently").innerHTML = 2;
-                document.getElementById("ms-listen").innerHTML = 2;
-                document.getElementById("ms-hide").innerHTML = 4;
+                this.skills.skillTable['climb'].misc = 2;
+                this.skills.skillTable['jump'].misc = 2;
+                this.skills.skillTable['movesilently'].misc = 2;
+                this.skills.skillTable['listen'].misc = 2;
+                this.skills.skillTable['hide'].misc = 4;
+                document.getElementById("ms-climb").innerHTML = this.skills.skillTable['climb'].misc;
+                document.getElementById("ms-jump").innerHTML = this.skills.skillTable['jump'].misc;
+                document.getElementById("ms-movesilently").innerHTML = this.skills.skillTable['movesilently'].misc;
+                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
+                document.getElementById("ms-hide").innerHTML = this.skills.skillTable['hide'].misc;
                 break;
             case "NewBlankRace":
                 // A placeholder for future racial additions.
-                // This is the first place (in order of execution) where the value of this.character.race affects 
-                // subsequent calculations.
                 break;
         }
         this.updateAllModifiers();
-        this.updateFinalAttributes();
+        this.generator.showFinalAttributes();
     }
 
     /**
@@ -558,26 +597,8 @@ class Character {
                 break;
             case "NewBlankClass":
                 // A placeholder for future class additions.
-                // This is the SECOND place (in order of execution) where the value of this.character.class 
-                // affects subsequent calculations.
                 break;
         }
-    }
-
-    updateFinalAttributes() {
-        // Now that the switch is done, and every score is in its final state, let's show them.
-        document.getElementById("final-str").innerHTML = this.strAttr;
-        document.getElementById("final-str-mod").innerHTML = (this.strMod < 0 ? "" : "+ ") + this.strMod;
-        document.getElementById("final-dex").innerHTML = this.dexAttr;
-        document.getElementById("final-dex-mod").innerHTML = (this.dexMod < 0 ? "" : "+ ") + this.dexMod;
-        document.getElementById("final-con").innerHTML = this.conAttr;
-        document.getElementById("final-con-mod").innerHTML = (this.conMod < 0 ? "" : "+ ") + this.conMod;
-        document.getElementById("final-wis").innerHTML = this.wisAttr;
-        document.getElementById("final-wis-mod").innerHTML = (this.wisMod < 0 ? "" : "+ ") + this.wisMod;
-        document.getElementById("final-int").innerHTML = this.intAttr;
-        document.getElementById("final-int-mod").innerHTML = (this.intMod < 0 ? "" : "+ ") + this.intMod;
-        document.getElementById("final-cha").innerHTML = this.chaAttr;
-        document.getElementById("final-cha-mod").innerHTML = (this.chaMod < 0 ? "" : "+ ") + this.chaMod;
     }
 
     /**
@@ -597,24 +618,46 @@ class Character {
 
         switch (baseAttack) {
             case "G":
-                this.baseAttackBonus = this.levelAdvance;
-                this.baseAttackBonus2 = this.levelAdvance - 5;
-                this.baseAttackBonus3 = this.levelAdvance - 10;
-                this.baseAttackBonus4 = this.levelAdvance - 15;
+                this.baseAttackBonus = this.level;
+                this.baseAttackBonus2 = this.level - 5;
+                this.baseAttackBonus3 = this.level - 10;
+                this.baseAttackBonus4 = this.level - 15;
                 break;
             case "A":
-                this.baseAttackBonus = Math.floor((this.levelAdvance + (this.levelAdvance / 2)) / 2);
+                this.baseAttackBonus = Math.floor((this.level + (this.level / 2)) / 2);
                 this.baseAttackBonus2 = this.baseAttackBonus - 5;
                 this.baseAttackBonus3 = this.baseAttackBonus - 10;
                 this.baseAttackBonus4 = this.baseAttackBonus - 15;
                 break;
             case "P":
-                this.baseAttackBonus = Math.floor(this.levelAdvance / 2);
+                this.baseAttackBonus = Math.floor(this.level / 2);
                 this.baseAttackBonus2 = this.baseAttackBonus - 5;
                 this.baseAttackBonus3 = this.baseAttackBonus - 10;
                 this.baseAttackBonus4 = this.baseAttackBonus - 15;
                 break;
         }
+    }
+
+    updateDescription() {
+        this.name = document.getElementById("form-name").value;
+        this.player = document.getElementById("form-player").value;
+        this.alignment = document.getElementById("form-alignment").value;
+        this.eyes = document.getElementById("form-eyes").value;
+        this.hair = document.getElementById("form-hair").value;
+        this.height = document.getElementById("form-height").value;
+        this.weight = document.getElementById("form-weight").value;
+        this.skin = document.getElementById("form-skin").value;
+        this.handedness = document.getElementById("form-handedness").value;
+        this.age = document.getElementById("form-age").value;
+        this.gender = document.getElementById("form-gender").value;
+        this.appearance = document.getElementById("form-appearance").value;
+        this.personality = document.getElementById("form-personality").value;
+        this.quote = document.getElementById("form-quote").value;
+        this.objective = document.getElementById("form-objective").value;
+        this.history = document.getElementById("form-history").value;
+        this.alliesEnemies = document.getElementById("form-allies-enemies").value;
+        this.ancestry = document.getElementById("form-ancestry").value;
+        this.other = document.getElementById("form-other-info").value;
     }
 
 }

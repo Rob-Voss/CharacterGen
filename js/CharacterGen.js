@@ -1,4 +1,3 @@
-
 /**
  *
  * @property {Core35} generator
@@ -17,12 +16,38 @@ class CharacterGen {
     constructor() {
         this.rules = new Core35(this);
         this.character = new Character(this);
-        this.skills = new Skills(this);
-        this.spells = new Spells(this);
-        this.feats = new Feats(this);
-        this.inventory = new Inventory(this);
 
         return this;
+    }
+
+    /**
+     *
+     */
+    customItemSubMenu() {
+        let kind = document.getElementById("custom-select").value;
+        document.getElementById("custom-" + kind).style.display = "block";
+        if (kind === "weapon" || kind === "armor") {
+            document.getElementById("custom-" + kind + "-display").style.display = "block";
+        }
+        document.getElementById("equip-custom").style.display = "none";
+    }
+
+    /**
+     *
+     * @param {String} whichSubMenu
+     */
+    equipSubMenu(whichSubMenu) {
+        for (let i = 0; i < this.character.inventory.allSubMenus.length; i++) {
+            let isSubMenu = this.character.inventory.allSubMenus[i] === whichSubMenu,
+                equipName = "equip-" + ((isSubMenu) ? whichSubMenu : this.character.inventory.allSubMenus[i]),
+                display = (isSubMenu) ? "block" : "none";
+            document.getElementById(equipName).style.display = display;
+        }
+        document.getElementById("custom-weapon").style.display = "none";
+        document.getElementById("custom-weapon-display").style.display = "none";
+        document.getElementById("custom-armor").style.display = "none";
+        document.getElementById("custom-item").style.display = "none";
+        window.scrollTo(0, 0);
     }
 
     /**
@@ -33,6 +58,20 @@ class CharacterGen {
         document.getElementById("select-skills").style.display = "block";
         document.getElementById("feats-remaining").innerHTML = this.character.startingFeats;
         document.getElementById("show-hp").innerHTML = this.character.hitPoints;
+    }
+
+    /**
+     * Show the appropriate Feat Sub Menu
+     * @param {String} whichSubMenu
+     */
+    featsSubMenu(whichSubMenu) {
+        for (let i = 0; i < this.character.feats.allSubMenus.length; i++) {
+            let isMenu = this.character.feats.allSubMenus[i] === whichSubMenu,
+                featName = "feats-" + ((isMenu) ? whichSubMenu : this.character.feats.allSubMenus[i]),
+                display = (isMenu) ? "block" : "none";
+            document.getElementById(featName).style.display = display;
+        }
+        window.scrollTo(0, 0);
     }
 
     /**
@@ -54,12 +93,12 @@ class CharacterGen {
                 document.getElementById(idCalled).style.display = "block";
                 document.getElementById("select-skills").style.display = "none";
                 document.getElementById("equipment").style.display = "none";
-                this.inventory.equipSubMenu("all-off");
+                this.equipSubMenu("all-off");
                 break;
             case "select-skills":
                 document.getElementById(idCalled).style.display = "block";
                 document.getElementById("select-feats").style.display = "none";
-                this.feats.featsSubMenu("all-off");
+                this.featsSubMenu("all-off");
                 break;
             case "equipment":
                 document.getElementById(idCalled).style.display = "block";
@@ -69,12 +108,12 @@ class CharacterGen {
                 }
                 document.getElementById("select-feats").style.display = "none";
                 document.getElementById("roll-playing").style.display = "none";
-                this.feats.featsSubMenu("all-off");
+                this.featsSubMenu("all-off");
                 break;
             case "roll-playing":
                 document.getElementById(idCalled).style.display = "block";
                 document.getElementById("equipment").style.display = "none";
-                this.inventory.equipSubMenu("all-off");
+                this.equipSubMenu("all-off");
                 break;
             case "print-sheets":
                 document.getElementById("nav-controls").style.display = "block";
@@ -114,16 +153,46 @@ class CharacterGen {
      */
     populateCharacterSheet() {
         this.navigate("print-sheets");
-        let formName = document.getElementById("form-name").value,
-            formPlayer = document.getElementById("form-player").value,
-            formAlignment = document.getElementById("form-alignment").value;
+        this.character.updateDescription();
+
+        document.getElementById("print-alignment").innerHTML = this.character.alignment;
+        document.getElementById("print-class").innerHTML = this.character.class;
+        document.getElementById("print-level").innerHTML = this.character.level;
+        document.getElementById("print-experience").innerHTML = (500 * (this.character.level - 1) * this.character.level);
+        document.getElementById("print-levelup").innerHTML = (500 * (this.character.level) * (this.character.level + 1));
+        document.getElementById("print-attribute-str").innerHTML = this.character.strAttr;
+        document.getElementById("print-attribute-dex").innerHTML = this.character.dexAttr;
+        document.getElementById("print-attribute-con").innerHTML = this.character.conAttr;
+        document.getElementById("print-attribute-wis").innerHTML = this.character.wisAttr;
+        document.getElementById("print-attribute-int").innerHTML = this.character.intAttr;
+        document.getElementById("print-attribute-cha").innerHTML = this.character.chaAttr;
+        document.getElementById("print-save-fortitude").innerHTML = this.character.fortitudeSave;
+        document.getElementById("print-save-reflex").innerHTML = this.character.reflexSave;
+        document.getElementById("print-save-will").innerHTML = this.character.willSave;
+
+        document.getElementById("print-eyes").innerHTML = this.character.eyes;
+        document.getElementById("print-hair").innerHTML = this.character.hair;
+        document.getElementById("print-height").innerHTML = this.character.height;
+        document.getElementById("print-weight").innerHTML = this.character.weight;
+        document.getElementById("print-skin").innerHTML = this.character.skin;
+        document.getElementById("print-handedness").innerHTML = this.character.handedness;
+        document.getElementById("print-age").innerHTML = this.character.age;
+        document.getElementById("print-gender").innerHTML = this.character.gender;
+        document.getElementById("print-appearance").innerHTML = this.character.appearance;
+        document.getElementById("print-personality").innerHTML = this.character.personality;
+        document.getElementById("print-quote").innerHTML = this.character.quote;
+        document.getElementById("print-objective").innerHTML = this.character.objective;
+        document.getElementById("print-history").innerHTML = this.character.history;
+        document.getElementById("print-allies-enemies").innerHTML = this.character.alliesEnemies;
+        document.getElementById("print-ancestry").innerHTML = this.character.ancestry;
+        document.getElementById("print-other-info").innerHTML = this.character.other;
 
         // Set all the header values
         for (let i = 0, list = document.getElementsByClassName("print-name"); i < list.length; i++) {
-            list[i].innerHTML = (formName);
+            list[i].innerHTML = (this.character.name);
         }
         for (let i = 0, list = document.getElementsByClassName("print-player"); i < list.length; i++) {
-            list[i].innerHTML = (formPlayer);
+            list[i].innerHTML = (this.character.player);
         }
         for (let i = 0, list = document.getElementsByClassName("print-race"); i < list.length; i++) {
             list[i].innerHTML = (this.character.race);
@@ -131,24 +200,6 @@ class CharacterGen {
         for (let i = 0, list = document.getElementsByClassName("print-class"); i < list.length; i++) {
             list[i].innerHTML = (this.character.class);
         }
-
-        document.getElementById("print-eyes").innerHTML = document.getElementById("form-eyes").value;
-        document.getElementById("print-hair").innerHTML = document.getElementById("form-hair").value;
-        document.getElementById("print-height").innerHTML = document.getElementById("form-height").value;
-        document.getElementById("print-weight").innerHTML = document.getElementById("form-weight").value;
-        document.getElementById("print-skin").innerHTML = document.getElementById("form-skin").value;
-        document.getElementById("print-handedness").innerHTML = document.getElementById("form-handedness").value;
-        document.getElementById("print-age").innerHTML = document.getElementById("form-age").value;
-        document.getElementById("print-gender").innerHTML = document.getElementById("form-gender").value;
-
-        document.getElementById("print-appearance").innerHTML = document.getElementById("form-appearance").value;
-        document.getElementById("print-personality").innerHTML = document.getElementById("form-personality").value;
-        document.getElementById("print-quote").innerHTML = document.getElementById("form-quote").value;
-        document.getElementById("print-objective").innerHTML = document.getElementById("form-objective").value;
-        document.getElementById("print-history").innerHTML = document.getElementById("form-history").value;
-        document.getElementById("print-allies-enemies").innerHTML = document.getElementById("form-allies-enemies").value;
-        document.getElementById("print-ancestry").innerHTML = document.getElementById("form-ancestry").value;
-        document.getElementById("print-other-info").innerHTML = document.getElementById("form-other-info").value;
 
         // Feats
         if (this.character.numberOfFeats > 0) {
@@ -160,9 +211,9 @@ class CharacterGen {
         }
 
         // Inventory items
-        if (this.inventory.itemPurchaseNo > 0) {
-            if (this.inventory.itemPurchaseNo !== 0) {
-                for (let i = 1; i < (this.inventory.itemPurchaseNo + 1); i++) {
+        if (this.character.inventory.itemPurchaseNo > 0) {
+            if (this.character.inventory.itemPurchaseNo !== 0) {
+                for (let i = 1; i < (this.character.inventory.itemPurchaseNo + 1); i++) {
                     document.getElementById("print-item-" + i).innerHTML = document.getElementById("item-purchase-no-" + i).innerHTML;
                 }
             }
@@ -171,21 +222,6 @@ class CharacterGen {
         for (let i = 0, list = document.getElementsByClassName("print-mod-size"); i < list.length; i++) {
             list[i].innerHTML = (this.character.small) ? "+1" : "";
         }
-
-        document.getElementById("print-alignment").innerHTML = formAlignment;
-        document.getElementById("print-class").innerHTML = this.character.class;
-        document.getElementById("print-level").innerHTML = this.character.levelAdvance;
-        document.getElementById("print-experience").innerHTML = (500 * (this.character.levelAdvance - 1) * this.character.levelAdvance);
-        document.getElementById("print-levelup").innerHTML = (500 * (this.character.levelAdvance) * (this.character.levelAdvance + 1));
-        document.getElementById("print-attribute-str").innerHTML = this.character.strAttr;
-        document.getElementById("print-attribute-dex").innerHTML = this.character.dexAttr;
-        document.getElementById("print-attribute-con").innerHTML = this.character.conAttr;
-        document.getElementById("print-attribute-wis").innerHTML = this.character.wisAttr;
-        document.getElementById("print-attribute-int").innerHTML = this.character.intAttr;
-        document.getElementById("print-attribute-cha").innerHTML = this.character.chaAttr;
-        document.getElementById("print-save-fortitude").innerHTML = this.character.fortitudeSave;
-        document.getElementById("print-save-reflex").innerHTML = this.character.reflexSave;
-        document.getElementById("print-save-will").innerHTML = this.character.willSave;
 
         if (this.character.greatFortitude) {
             document.getElementById("print-save-fortitude-total").innerHTML = (this.character.fortitudeSave + this.character.conMod + 2);
@@ -231,17 +267,17 @@ class CharacterGen {
         for (let i = 0, listBab = document.getElementsByClassName("print-bab-one"); i < listBab.length; i++) {
             listBab[i].innerHTML = ("+" + this.character.baseAttackBonus);
         }
-        if (this.character.levelAdvance > 5) {
+        if (this.character.level > 5) {
             for (let i = 0, listBab = document.getElementsByClassName("print-bab-two"); i < listBab.length; i++) {
                 listBab[i].innerHTML = ("+" + this.character.baseAttackBonus2);
             }
         }
-        if (this.character.levelAdvance > 10) {
+        if (this.character.level > 10) {
             for (let i = 0, listBab = document.getElementsByClassName("print-bab-three"); i < listBab.length; i++) {
                 listBab[i].innerHTML = ("+" + this.character.baseAttackBonus3);
             }
         }
-        if (this.character.levelAdvance > 15) {
+        if (this.character.level > 15) {
             for (let i = 0, listBab = document.getElementsByClassName("print-bab-four"); i < listBab.length; i++) {
                 listBab[i].innerHTML = ("+" + this.character.baseAttackBonus4);
             }
@@ -281,104 +317,111 @@ class CharacterGen {
         // Now watch as I print all the skill totals
         let untrained = [true, true, true, true, true, true, false, true, false, true, true, true, true, false, true, true, true, true, false, true, true, false, false, false, true, true, true, false, false, true, true, true, false, false, true];
         let i = 0;
-        for (let element in this.skills) {
-            if (this.skills.hasOwnProperty(element)) {
-                document.getElementById("print-skill-" + element).innerHTML = (untrained[i] === true || this.character.skills[element].rank > 0) ? document.getElementById("t-" + element).innerHTML : " ";
+        for (let element in this.character.skills.skillTable) {
+            if (this.character.skills.skillTable.hasOwnProperty(element)) {
+                console.log(element);
+                let ranked = this.character.skills.skillTable[element].rank,
+                    temp = (untrained[i] === true || ranked > 0) ? document.getElementById("t-" + element).innerHTML : " "
+                document.getElementById("print-skill-" + element + "-total").innerHTML = temp;
+                document.getElementById("print-skill-" + element + "-rank").innerHTML = this.character.skills.skillTable[element].rank;
+                document.getElementById("print-skill-" + element + "-ab-mod").innerHTML = this.character[this.character.skills.skillTable[element].mod + "Mod"];
+                document.getElementById("print-skill-" + element + "-misc-mod").innerHTML = this.character.skills.skillTable[element].misc;
+                document.getElementById("print-skill-" + element + "-notes").innerHTML = this.character.skills.skillTable[element].notes;
                 i++;
             }
         }
 
-        if (document.getElementById("in_craft").value !== 0) {
+        if (document.getElementById("input_craft").value !== 0) {
             document.getElementById("print-skill-craft-title").innerHTML = ("Craft: " + document.getElementById("wrin-craft").value);
         }
-        if (document.getElementById("in_knowledge").value !== 0) {
+        if (document.getElementById("input_knowledge").value !== 0) {
             document.getElementById("print-skill-knowledge-title").innerHTML = ("Knowledge: " + document.getElementById("wrin-knowledge").value);
         }
-        if (document.getElementById("in_perform").value !== 0) {
+        if (document.getElementById("input_perform").value !== 0) {
             document.getElementById("print-skill-perform-title").innerHTML = ("Perform: " + document.getElementById("wrin-perform").value);
         }
-        if (document.getElementById("in_profession").value !== 0) {
+        if (document.getElementById("input_profession").value !== 0) {
             document.getElementById("print-skill-profession-title").innerHTML = ("Profession: " + document.getElementById("wrin-profession").value);
         }
         this.character.calculateCarryingCapacity(this.character.strAttr);
 
-        if (this.inventory.weaponSlotOne) {
-            document.getElementById("print-weapon-slot1-name").innerHTML = this.inventory.wSlotOne.name;
-            document.getElementById("print-weapon-slot1-weight").innerHTML = this.inventory.wSlotOne.weight;
-            document.getElementById("print-weapon-slot1-damage").innerHTML = this.inventory.wSlotOne.damage;
-            document.getElementById("print-weapon-slot1-critical").innerHTML = this.inventory.wSlotOne.critical;
-            document.getElementById("print-weapon-slot1-range").innerHTML = this.inventory.wSlotOne.range;
-            document.getElementById("print-weapon-slot1-type").innerHTML = this.inventory.wSlotOne.type;
-            document.getElementById("print-weapon-slot1-size").innerHTML = this.inventory.wSlotOne.size;
-            document.getElementById("print-weapon-slot1-reach").innerHTML = this.inventory.wSlotOne.reach;
-            document.getElementById("print-weapon-slot1-hardness").innerHTML = this.inventory.wSlotOne.hardness;
-            document.getElementById("print-weapon-slot1-hitPoints").innerHTML = this.inventory.wSlotOne.hitPoints;
-            document.getElementById("print-weapon-slot1-saves").innerHTML = this.inventory.wSlotOne.saves;
-            document.getElementById("print-weapon-slot1-notes").innerHTML = this.inventory.wSlotOne.notes;
-            document.getElementById("print-weapon-slot1-bonus").innerHTML = this.inventory.wSlotOne.bonus;
+        if (this.character.inventory.weaponSlotOne) {
+            document.getElementById("print-weapon-slot1-name").innerHTML = this.character.inventory.wSlotOne.name;
+            document.getElementById("print-weapon-slot1-weight").innerHTML = this.character.inventory.wSlotOne.weight;
+            document.getElementById("print-weapon-slot1-damage").innerHTML = this.character.inventory.wSlotOne.damage;
+            document.getElementById("print-weapon-slot1-critical").innerHTML = this.character.inventory.wSlotOne.critical;
+            document.getElementById("print-weapon-slot1-range").innerHTML = this.character.inventory.wSlotOne.range;
+            document.getElementById("print-weapon-slot1-type").innerHTML = this.character.inventory.wSlotOne.type;
+            document.getElementById("print-weapon-slot1-size").innerHTML = this.character.inventory.wSlotOne.size;
+            document.getElementById("print-weapon-slot1-reach").innerHTML = this.character.inventory.wSlotOne.reach;
+            document.getElementById("print-weapon-slot1-hardness").innerHTML = this.character.inventory.wSlotOne.hardness;
+            document.getElementById("print-weapon-slot1-hitPoints").innerHTML = this.character.inventory.wSlotOne.hitPoints;
+            document.getElementById("print-weapon-slot1-saves").innerHTML = this.character.inventory.wSlotOne.saves;
+            document.getElementById("print-weapon-slot1-notes").innerHTML = this.character.inventory.wSlotOne.notes;
+            document.getElementById("print-weapon-slot1-bonus").innerHTML = this.character.inventory.wSlotOne.bonus;
         }
 
-        if (this.inventory.weaponSlotTwo) {
+        if (this.character.inventory.weaponSlotTwo) {
             document.getElementById("weapon-slot-two").style.display = "block";
-            document.getElementById("print-weapon-slot2-name").innerHTML = this.inventory.wSlotTwo.name;
-            document.getElementById("print-weapon-slot2-weight").innerHTML = this.inventory.wSlotTwo.weight;
-            document.getElementById("print-weapon-slot2-damage").innerHTML = this.inventory.wSlotTwo.damage;
-            document.getElementById("print-weapon-slot2-critical").innerHTML = this.inventory.wSlotTwo.critical;
-            document.getElementById("print-weapon-slot2-range").innerHTML = this.inventory.wSlotTwo.range;
-            document.getElementById("print-weapon-slot2-type").innerHTML = this.inventory.wSlotTwo.type;
-            document.getElementById("print-weapon-slot2-size").innerHTML = this.inventory.wSlotTwo.size;
-            document.getElementById("print-weapon-slot2-reach").innerHTML = this.inventory.wSlotTwo.reach;
-            document.getElementById("print-weapon-slot2-hardness").innerHTML = this.inventory.wSlotTwo.hardness;
-            document.getElementById("print-weapon-slot2-hitPoints").innerHTML = this.inventory.wSlotTwo.hitPoints;
-            document.getElementById("print-weapon-slot2-saves").innerHTML = this.inventory.wSlotTwo.saves;
-            document.getElementById("print-weapon-slot2-notes").innerHTML = this.inventory.wSlotTwo.notes;
-            document.getElementById("print-weapon-slot2-bonus").innerHTML = this.inventory.wSlotTwo.bonus;
+            document.getElementById("print-weapon-slot2-name").innerHTML = this.character.inventory.wSlotTwo.name;
+            document.getElementById("print-weapon-slot2-weight").innerHTML = this.character.inventory.wSlotTwo.weight;
+            document.getElementById("print-weapon-slot2-damage").innerHTML = this.character.inventory.wSlotTwo.damage;
+            document.getElementById("print-weapon-slot2-critical").innerHTML = this.character.inventory.wSlotTwo.critical;
+            document.getElementById("print-weapon-slot2-range").innerHTML = this.character.inventory.wSlotTwo.range;
+            document.getElementById("print-weapon-slot2-type").innerHTML = this.character.inventory.wSlotTwo.type;
+            document.getElementById("print-weapon-slot2-size").innerHTML = this.character.inventory.wSlotTwo.size;
+            document.getElementById("print-weapon-slot2-reach").innerHTML = this.character.inventory.wSlotTwo.reach;
+            document.getElementById("print-weapon-slot2-hardness").innerHTML = this.character.inventory.wSlotTwo.hardness;
+            document.getElementById("print-weapon-slot2-hitPoints").innerHTML = this.character.inventory.wSlotTwo.hitPoints;
+            document.getElementById("print-weapon-slot2-saves").innerHTML = this.character.inventory.wSlotTwo.saves;
+            document.getElementById("print-weapon-slot2-notes").innerHTML = this.character.inventory.wSlotTwo.notes;
+            document.getElementById("print-weapon-slot2-bonus").innerHTML = this.character.inventory.wSlotTwo.bonus;
         }
 
-        if (this.inventory.weaponSlotThree) {
+        if (this.character.inventory.weaponSlotThree) {
             document.getElementById("weapon-slot-thr").style.display = "block";
-            document.getElementById("print-weapon-slot3-name").innerHTML = this.inventory.wSlotThree.name;
-            document.getElementById("print-weapon-slot3-weight").innerHTML = this.inventory.wSlotThree.weight;
-            document.getElementById("print-weapon-slot3-damage").innerHTML = this.inventory.wSlotThree.damage;
-            document.getElementById("print-weapon-slot3-critical").innerHTML = this.inventory.wSlotThree.critical;
-            document.getElementById("print-weapon-slot3-range").innerHTML = this.inventory.wSlotThree.range;
-            document.getElementById("print-weapon-slot3-type").innerHTML = this.inventory.wSlotThree.type;
-            document.getElementById("print-weapon-slot3-size").innerHTML = this.inventory.wSlotThree.size;
-            document.getElementById("print-weapon-slot3-reach").innerHTML = this.inventory.wSlotThree.reach;
-            document.getElementById("print-weapon-slot3-hardness").innerHTML = this.inventory.wSlotThree.hardness;
-            document.getElementById("print-weapon-slot3-hitPoints").innerHTML = this.inventory.wSlotThree.hitPoints;
-            document.getElementById("print-weapon-slot3-saves").innerHTML = this.inventory.wSlotThree.saves;
-            document.getElementById("print-weapon-slot3-notes").innerHTML = this.inventory.wSlotThree.notes;
-            document.getElementById("print-weapon-slot3-bonus").innerHTML = this.inventory.wSlotThree.bonus;
+            document.getElementById("print-weapon-slot3-name").innerHTML = this.character.inventory.wSlotThree.name;
+            document.getElementById("print-weapon-slot3-weight").innerHTML = this.character.inventory.wSlotThree.weight;
+            document.getElementById("print-weapon-slot3-damage").innerHTML = this.character.inventory.wSlotThree.damage;
+            document.getElementById("print-weapon-slot3-critical").innerHTML = this.character.inventory.wSlotThree.critical;
+            document.getElementById("print-weapon-slot3-range").innerHTML = this.character.inventory.wSlotThree.range;
+            document.getElementById("print-weapon-slot3-type").innerHTML = this.character.inventory.wSlotThree.type;
+            document.getElementById("print-weapon-slot3-size").innerHTML = this.character.inventory.wSlotThree.size;
+            document.getElementById("print-weapon-slot3-reach").innerHTML = this.character.inventory.wSlotThree.reach;
+            document.getElementById("print-weapon-slot3-hardness").innerHTML = this.character.inventory.wSlotThree.hardness;
+            document.getElementById("print-weapon-slot3-hitPoints").innerHTML = this.character.inventory.wSlotThree.hitPoints;
+            document.getElementById("print-weapon-slot3-saves").innerHTML = this.character.inventory.wSlotThree.saves;
+            document.getElementById("print-weapon-slot3-notes").innerHTML = this.character.inventory.wSlotThree.notes;
+            document.getElementById("print-weapon-slot3-bonus").innerHTML = this.character.inventory.wSlotThree.bonus;
         }
 
-        if (this.inventory.armorSlot) {
-            document.getElementById("print-armor-name").innerHTML = this.inventory.aSlot.name;
-            document.getElementById("print-armor-weight").innerHTML = this.inventory.aSlot.weight;
-            document.getElementById("print-armor-armorBonus").innerHTML = this.inventory.aSlot.armorBonus;
-            document.getElementById("print-armor-maxDex").innerHTML = this.inventory.aSlot.maxDex;
-            document.getElementById("print-armor-check").innerHTML = this.inventory.aSlot.check;
-            document.getElementById("print-armor-spellFail").innerHTML = this.inventory.aSlot.spellFail;
-            document.getElementById("print-armor-maxSp").innerHTML = this.inventory.aSlot.maxSp;
-            document.getElementById("print-armor-hardness").innerHTML = this.inventory.aSlot.hardness;
-            document.getElementById("print-armor-hitPoints").innerHTML = this.inventory.aSlot.hitPoints;
-            document.getElementById("print-armor-saves").innerHTML = this.inventory.aSlot.saves;
-            document.getElementById("print-armor-donning").innerHTML = this.inventory.aSlot.donning;
+        if (this.character.inventory.armorSlot) {
+            document.getElementById("print-armor-name").innerHTML = this.character.inventory.aSlot.name;
+            document.getElementById("print-armor-weight").innerHTML = this.character.inventory.aSlot.weight;
+            document.getElementById("print-armor-armorBonus").innerHTML = this.character.inventory.aSlot.armorBonus;
+            document.getElementById("print-armor-maxDex").innerHTML = this.character.inventory.aSlot.maxDex;
+            document.getElementById("print-armor-check").innerHTML = this.character.inventory.aSlot.check;
+            document.getElementById("print-armor-spellFail").innerHTML = this.character.inventory.aSlot.spellFail;
+            document.getElementById("print-armor-maxSp").innerHTML = this.character.inventory.aSlot.maxSp;
+            document.getElementById("print-armor-hardness").innerHTML = this.character.inventory.aSlot.hardness;
+            document.getElementById("print-armor-hitPoints").innerHTML = this.character.inventory.aSlot.hitPoints;
+            document.getElementById("print-armor-saves").innerHTML = this.character.inventory.aSlot.saves;
+            document.getElementById("print-armor-donning").innerHTML = this.character.inventory.aSlot.donning;
         }
 
-        if (this.inventory.sSlot) {
+        if (this.character.inventory.sSlot) {
             document.getElementById("armor-slot-two").style.display = "block";
-            document.getElementById("print-shield-name").innerHTML = this.inventory.sSlot.name;
-            document.getElementById("print-shield-weight").innerHTML = this.inventory.sSlot.weight;
-            document.getElementById("print-shield-armorBonus").innerHTML = this.inventory.sSlot.armorBonus;
-            document.getElementById("print-shield-maxDex").innerHTML = this.inventory.sSlot.maxDex;
-            document.getElementById("print-shield-check").innerHTML = this.inventory.sSlot.check;
-            document.getElementById("print-shield-spellFail").innerHTML = this.inventory.sSlot.spellFail;
-            document.getElementById("print-shield-maxSp").innerHTML = this.inventory.sSlot.maxSp;
-            document.getElementById("print-shield-hardness").innerHTML = this.inventory.sSlot.hardness;
-            document.getElementById("print-shield-hitPoints").innerHTML = this.inventory.sSlot.hitPoints;
-            document.getElementById("print-shield-saves").innerHTML = this.inventory.sSlot.saves;
-            document.getElementById("print-shield-donning").innerHTML = this.inventory.sSlot.donning;
+            document.getElementById("print-shield-name").innerHTML = this.character.inventory.sSlot.name;
+            document.getElementById("print-shield-weight").innerHTML = this.character.inventory.sSlot.weight;
+            document.getElementById("print-shield-armorBonus").innerHTML = this.character.inventory.sSlot.armorBonus;
+            document.getElementById("print-shield-maxDex").innerHTML = this.character.inventory.sSlot.maxDex;
+            document.getElementById("print-shield-check").innerHTML = this.character.inventory.sSlot.check;
+            document.getElementById("print-shield-spellFail").innerHTML = this.character.inventory.sSlot.spellFail;
+            document.getElementById("print-shield-maxSp").innerHTML = this.character.inventory.sSlot.maxSp;
+            document.getElementById("print-shield-hardness").innerHTML = this.character.inventory.sSlot.hardness;
+            document.getElementById("print-shield-hitPoints").innerHTML = this.character.inventory.sSlot.hitPoints;
+            document.getElementById("print-shield-saves").innerHTML = this.character.inventory.sSlot.saves;
+            document.getElementById("print-shield-donning").innerHTML = this.character.inventory.sSlot.donning;
         }
 
         // Now Look in the weapons slots for ranged weapons, and print the appropriate ammo in the box,
@@ -414,8 +457,8 @@ class CharacterGen {
                 case "Bolts-Active":
                 case "Bullets-Active":
                 case "Torch-Active":
-                    document.getElementById("pr-cons-name-" + (i + 1 + skipper)).innerHTML = whichName[i];
-                    document.getElementById("pr-cons-qty-" + (i + 1 + skipper)).innerHTML = Number(document.getElementById("qty-" + whichCons[i]).innerHTML) + whichUnit[i];
+                    document.getElementById("print-consumable-name-" + (i + 1 + skipper)).innerHTML = whichName[i];
+                    document.getElementById("print-consumable-qty-" + (i + 1 + skipper)).innerHTML = Number(document.getElementById("qty-" + whichCons[i]).innerHTML) + whichUnit[i];
                     break;
                 default:
                     // Yeah, this is weird, but it basically tells the loop to skip blank cases, instead of printing blank values onto the sheet.
@@ -468,6 +511,22 @@ class CharacterGen {
                 document.getElementById("class-select").style.display = "block";
                 break;
         }
+    }
+
+    showFinalAttributes() {
+        // Now that the switch is done, and every score is in its final state, let's show them.
+        document.getElementById("final-str").innerHTML = this.character.strAttr;
+        document.getElementById("final-str-mod").innerHTML = this.character.strMod;
+        document.getElementById("final-dex").innerHTML = this.character.dexAttr;
+        document.getElementById("final-dex-mod").innerHTML = this.character.dexMod;
+        document.getElementById("final-con").innerHTML = this.character.conAttr;
+        document.getElementById("final-con-mod").innerHTML = this.character.conMod;
+        document.getElementById("final-wis").innerHTML = this.character.wisAttr;
+        document.getElementById("final-wis-mod").innerHTML = this.character.wisMod;
+        document.getElementById("final-int").innerHTML = this.character.intAttr;
+        document.getElementById("final-int-mod").innerHTML = this.character.intMod;
+        document.getElementById("final-cha").innerHTML = this.character.chaAttr;
+        document.getElementById("final-cha-mod").innerHTML = this.character.chaMod;
     }
 
 }

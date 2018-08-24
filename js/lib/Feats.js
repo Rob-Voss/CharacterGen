@@ -3,28 +3,14 @@ class Feats {
 
     /**
      *
-     * @param {CharacterGen} generator
+     * @param {Character} character
      * @returns {Feats}
      */
-    constructor(generator) {
-        this.character = generator.character;
+    constructor(character) {
+        this.character = character;
         this.allSubMenus = ["Combat", "Skill", "Other", "Proficiency", "Creation", "Casting", "MetaMagic"];
 
         return this;
-    }
-
-    /**
-     * Show the appropriate Feat Sub Menu
-     * @param {String} whichSubMenu
-     */
-    featsSubMenu(whichSubMenu) {
-        for (let i = 0; i < this.allSubMenus.length; i++) {
-            let isMenu = this.allSubMenus[i] === whichSubMenu,
-                featName = "feats-" + ((isMenu) ? whichSubMenu : this.allSubMenus[i]),
-                display = (isMenu) ? "block" : "none";
-            document.getElementById(featName).style.display = display;
-        }
-        window.scrollTo(0, 0);
     }
 
     /**
@@ -113,14 +99,6 @@ class Feats {
     /**
      *
      * @param {String} featName
-     */
-    selectFeat(featName) {
-        this.updateFeats(featName);
-    }
-
-    /**
-     *
-     * @param {String} featName
      * @param {String} featTarget
      * @returns {{confirmW: boolean, confirmR: boolean}}
      */
@@ -137,8 +115,8 @@ class Feats {
                     featsRemaining -= 1;
                 }
             }
+          this.character.numberOfFeats += 1;
             document.getElementById("feats-remaining").innerHTML = featsRemaining;
-            this.character.numberOfFeats += 1;
             document.getElementById("feat-name-" + this.character.numberOfFeats).innerHTML = (featTarget !== undefined) ? featName + " (" + featTarget + ") " : featName;
         }
 
