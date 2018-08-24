@@ -1,0 +1,62 @@
+Skills: Appraise (Int), Autohypnosis (Wis), Balance (Dex), Bluff (Cha), Climb (Str), Concentration (Con), Control Shape (Wis), Craft (Int), Decipher Script (Int), Diplomacy (Cha), Disable Device (Int), Disguise (Cha), Escape Artist (Dex), Forgery (Int), Gather Information (Cha), Handle Animal (Cha), Heal (Wis), Hide (Dex), Intimidate (Cha), Jump (Str), Knowledge (Int), Listen (Wis), Move Silently (Dex), Open Lock (Dex), Perform (Cha), Psicraft (Int), Profession (Wis), Ride (Dex), Search (Int), Sense Motive (Wis), Sleight of Hand (Dex), Speak Language (none), Spellcraft (Int), Spot (Wis), Survival (Wis), Swim (Str), Tumble (Dex), Use Magic Device (Cha), Use Psionic Device (Cha), Use Rope (Dex)
+
+Skill Synergy:
+It’s possible for a character to have two skills that work well together. In general, having 5 or more ranks in one skill gives the character a +2 bonus on skill checks with each of its synergistic skills, as noted in the skill description. In some cases, this bonus applies only to specific uses of the skill in question, and not to all checks. Some skills provide benefits on other checks made by a character, such as those checks required to use certain class features.
+
+Skill Synergies
+5 or more ranks in ...	gives a +2 bonus on ...
+Autohypnosis	Knowledge (psionics) checks
+Bluff	Diplomacy checks
+Bluff	Disguise checks to act in character
+Bluff	Intimidate checks
+Bluff	Sleight of Hand checks
+Concentration	Autohypnosis checks
+Craft	related Appraise checks
+Decipher Script	Use Magic Device checks involving scrolls
+Escape Artist	Use Rope checks involving bindings
+Handle Animal	Ride checks
+Handle Animal	wild empathy checks
+Jump	Tumble checks
+Knowledge (arcana)	Spellcraft checks
+Knowledge (architecture
+and engineering)	Search checks involving secret doors
+and similar compartments
+Knowledge (dungeoneering)	Survival checks when underground
+Knowledge (geography)	Survival checks to keep from getting
+lost or for avoiding hazards
+Knowledge (history)	bardic knowledge checks
+Knowledge (local)	Gather Information checks
+Knowledge (nature)	Survival checks in above-ground
+natural environments
+Knowledge (nobility
+and royalty)	Diplomacy checks
+Knowledge (psionics)	Psicraft checks
+Knowledge (religion)	checks to turn or rebuke undead
+Knowledge (the planes)	Survival checks when on other planes
+Psicraft	Use Psionic Device checks involving power stones
+Search	Survival checks when following tracks
+Sense Motive	Diplomacy checks
+Spellcraft	Use Magic Device involving scrolls
+Survival	Knowledge (nature) checks
+Tumble	Balance checks
+Tumble	Jump checks
+Use Magic Device	Spellcraft checks to decipher scrolls
+Use Psionic Device	Psicraft checks to address power stones
+Use Rope	Climb checks involving ropes
+Use Rope	Escape Artist checks involving ropes
+
+Skills by Attribute:
+Strength: Climb, Jump, Swim
+Dexterity: Balance, Escape Artist, Hide, Move Silently, Open Lock, Ride, Sleight of Hand, Tumble, Use Rope
+Constitution: Concentration
+Intelligence: Appraise, Craft, Decipher Script, Disable Device, Forgery, Knowledge, Psicraft, Search, Spellcraft
+Wisdom: Autohypnosis, Control Shape, Heal, Listen, Profession, Sense Motive, Spot, Survival
+Charisma: Bluff, Diplomacy, Disguise, Gather Information, Handle Animal, Initimidate, Perform, Use Magic Device, Use Psionic Device
+None: Speak Language
+
+
+Trained Only: Autohypnosis (Wis), Decipher Script (Int), Disable Device (Int), Handle Animal (Cha), Knowledge (Int), Open Lock (Dex), Psicraft (Int), Profession (Wis), Sleight of Hand (Dex), Speak Language (None), Spellcraft (Int), Tumble (Dex), Use Magic Device (Cha), Use Psionic Device (Cha)
+Armor Check Penalty:Balance (Dex), Climb (Str), Escape Artist (Dex), Hide (Dex), Jump (Str), Move Silently (Dex), Sleight of Hand (Dex), Swim (Str), Tumble (Dex)
+Special: Speak Language (none), Control Shape (Wis)
+Magic: Concentration (Con), Knowledge (arcana) (Int), Spellcraft (Int), Use Magic Device (Cha)
+Psionic: Concentration (Con), Knowledge (psionics) (Int), Psicraft (Int), Use Psionic Device (Cha)

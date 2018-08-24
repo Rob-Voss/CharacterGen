@@ -1,0 +1,37 @@
+Armor and Shields
+Armor	Cost	Armor/
+Shield Bonus	Maximum
+Dex Bonus	Armor Check
+Penalty	Arcane Spell
+Failure Chance	Speed	Weight1
+(30 ft.)	(20 ft.)
+Light Armor
+Padded	5 gp	+1	+8	0	5%	30 ft.	20 ft.	10 lb.
+Leather	10 gp	+2	+6	0	10%	30 ft.	20 ft.	15 lb.
+Studded leather	25 gp	+3	+5	–1	15%	30 ft.	20 ft.	20 lb.
+Chain shirt	100 gp	+4	+4	–2	20%	30 ft.	20 ft.	25 lb.
+Medium Armor
+Hide	15 gp	+3	+4	–3	20%	20 ft.	15 ft.	25 lb.
+Scale mail	50 gp	+4	+3	–4	25%	20 ft.	15 ft.	30 lb.
+Chainmail	150 gp	+5	+2	–5	30%	20 ft.	15 ft.	40 lb.
+Breastplate	200 gp	+5	+3	–4	25%	20 ft.	15 ft.	30 lb.
+Heavy Armor
+Splint mail	200 gp	+6	+0	–7	40%	20 ft.2	15 ft.2	45 lb.
+Banded mail	250 gp	+6	+1	–6	35%	20 ft.2	15 ft.2	35 lb.
+Half-plate	600 gp	+7	+0	–7	40%	20 ft.2	15 ft.2	50 lb.
+Full plate	1,500 gp	+8	+1	–6	35%	20 ft.2	15 ft.2	50 lb.
+Shields
+Buckler	15 gp	+1	—	–1	5%	—	—	5 lb.
+Shield, light wooden	3 gp	+1	—	–1	5%	—	—	5 lb.
+Shield, light steel	9 gp	+1	—	–1	5%	—	—	6 lb.
+Shield, heavy wooden	7 gp	+2	—	–2	15%	—	—	10 lb.
+Shield, heavy steel	20 gp	+2	—	–2	15%	—	—	15 lb.
+Shield, tower	30 gp	+43	+2	–10	50%	—	—	45 lb.
+Extras
+Armor spikes	+50 gp	—	—	—	—	—	—	+10 lb.
+Gauntlet, locked	8 gp	—	—	Special	4	—	—	+5 lb.
+Shield Spikes, Light or Heavy	+10 gp	—	—	—	—	—	—	+5 lb.
+Weight figures are for armor sized to fit Medium characters. Armor fitted for Small characters weighs half as much, and armor fitted for Large characters weighs twice as much.
+When running in heavy armor, you move only triple your speed, not quadruple.
+A tower shield can instead grant you cover. See the description.
+Hand not free to cast spells.

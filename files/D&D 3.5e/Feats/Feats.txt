@@ -1,0 +1,388 @@
+List of Feats
+Ability Focus
+Acrobatic
+Additional Magic Item Space
+Agile
+Alertness
+Aligned Attack
+Animal Affinity
+Antipsionic Magic
+Armor Proficiency (Light)
+Armor Proficiency (Medium)
+Armor Proficiency (Heavy)
+Armor Skin
+Athletic
+Augmented Alchemy
+Autonomous
+Bane of Enemies
+Death of Enemies
+Blind-Fight
+Blindsight, 5-ft. Radius
+Blinding Speed
+Body Fuel
+Bonus Domain
+Boost Construct
+Brew Potion
+Bulwark of Defense
+Burrowing Power
+Chain Power
+Chaotic Mind
+Chaotic Rage
+Cloak Dance
+Closed Mind
+Colossal Wild Shape
+Combat Casting
+Improved Combat Casting
+Spell Opportunity
+Combat Expertise
+Improved Disarm
+Improved Feint
+Improved Trip
+Knock-Down
+Superior Expertise
+Combat Manifestation
+Combat Reflexes
+Hold the Line
+Improved Combat Reflexes
+Reactive Countersong
+Spellcasting Harrier
+Craft Cognizance Crystal
+Craft Dorje
+Craft Magic Arms and Armor
+Craft Construct
+Craft Epic Magic Arms and Armor
+Craft Psicrown
+Craft Psionic Arms and Armor
+Craft Psionic Construct
+Craft Rod
+Craft Epic Rod
+Craft Staff
+Craft Epic Staff
+Master Staff
+Craft Universal Item
+Craft Wand
+Master Wand
+Craft Wondrous Item
+Craft Epic Wondrous Item
+Damage Reduction
+Deadly Precision
+Deafening Song
+Hindering Song
+Deceitful
+Deft Hands
+Delay Power
+Dexterous Fortitude
+Dexterous Will
+Diligent
+Diminutive Wild Shape
+Disguise Spell
+Dodge
+Epic Dodge
+Mobility
+Combat Archery
+Shot on the Run
+Spring Attack
+Mobile Defense
+Whirlwind Attack
+Improved Whirlwind Attack
+Psionic Dodge
+Sidestep Charge
+Dragon Wild Shape
+Efficient Item Creation
+Empower Power
+Empower Spell
+Intensify Spell
+Empower Spell-Like Ability
+Endurance
+Diehard
+Epic Endurance
+Energy Resistance
+Energy Substitution
+Enlarge Power
+Enlarge Spell
+Epic Expanded Knowledge
+Epic Fortitude
+Epic Inspiration
+Epic Manifestation
+Epic Prowess
+Epic Psionic Focus
+Epic Reflexes
+Epic Reputation
+Epic Skill Focus
+Epic Spellcasting
+Epic Toughness
+Epic Will
+Eschew Materials
+Ignore Material Components
+Exotic Weapon Proficiency
+Expanded Knowledge
+Extend Power
+Extend Spell
+Persistent Spell
+Extended Life Span
+Extra Music
+Extra Turning
+Divine Vengeance
+Eyes in the Back of Your Head
+Familiar Spell
+Fast Healing
+Fine Wild Shape
+Flyby Attack
+Improved Flyby Attack
+Forge Ring
+Forge Epic Ring
+Gargantuan Wild Shape
+Ghost Attack
+Great Charisma
+Great Constitution
+Great Dexterity
+Great Fortitude
+Perfect Health
+Great Intelligence
+Great Smiting
+Great Strength
+Great Wisdom
+Group Inspiration
+Heighten Spell
+Improved Heighten Spell
+Holy Strike
+Hostile Mind
+Hover
+Imprint Stone
+Improved Alignment-Based Casting
+Improved Aura of Courage
+Improved Aura of Despair
+Improved Counterspell
+Improved Critical
+Overwhelming Critical
+Devastating Critical
+Improved Darkvision
+Improved Death Attack
+Improved Elemental Wild Shape
+Improved Familiar
+Improved Favored Enemy
+Improved Initiative
+Dire Charge
+Superior Initiative
+Improved Ki Strike
+Improved Low-Light Vision
+Improved Manifestation
+Improved Metamagic
+Improved Metapsionics
+Improved Natural Armor
+Improved Natural Attack
+Improved Sneak Attack
+Improved Spell Capacity
+Improved Spell Resistance
+Improved Turning
+Improved Unarmed Strike
+Deflect Arrows
+Exceptional Deflection
+Infinite Deflection
+Reflect Arrows
+Snatch Arrows
+Improved Grapple
+Legendary Wrestler
+Stunning Fist
+Improved Stunning Fist
+Keen Strike
+Vorpal Strike
+Righteous Strike
+Incite Rage
+Inquisitor
+Inspire Excellence
+Intuitive Trapfinding
+Investigator
+Iron Will
+Force of Will
+Jack of All Trades
+Lasting Inspiration
+Leadership
+Epic Leadership
+Legendary Commander
+Legendary Climber
+Legendary Leaper
+Legendary Rider
+Lightning Reflexes
+Lingering Damage
+Magical Aptitude
+Magical Beast Companion
+Magical Beast Wild Shape
+Martial Weapon Proficiency
+Maximize Power
+Maximize Spell
+Enhance Spell
+Mental Leap
+Mental Resistance
+Metamorphic Transfer
+Mighty Rage
+Mind Over Body
+Mounted Combat
+Mounted Archery
+Ride-By Attack
+Spirited Charge
+Trample
+Multiattack
+Improved Multiattack
+Multiweapon Fighting
+Improved Multiweapon Fighting
+Greater Multiweapon Fighting
+Perfect Multiweapon Fighting
+Multiweapon Rend
+Music of the Gods
+Narrow Mind
+Natural Spell
+Negative Energy Burst
+Negotiator
+Nimble Fingers
+Open Minded
+Opportunity Power
+Overchannel
+Talented
+Penetrate Damage Reduction
+Permanent Emanation
+Persuasive
+Planar Turning
+Plant Defiance
+Plant Control
+Plant Wild Shape
+Point Blank Shot
+Far Shot
+Distant Shot
+Precise Shot
+Improved Arrow of Death
+Improved Precise Shot
+Uncanny Accuracy
+Sharp-Shooting
+Psionic Shot
+Fell Shot
+Return Shot
+Greater Psionic Shot
+Rapid Shot
+Manyshot
+Greater Manyshot
+Improved Manyshot
+Storm of Throws
+Swarm of Arrows
+Polyglot
+Positive Energy Aura
+Power Attack
+Cleave
+Great Cleave
+Divine Might
+Improved Bull Rush
+Awesome Blow
+Improved Overrun
+Improved Sunder
+Focused Sunder
+Ruinous Rage
+Power Knowledge
+Power Penetration
+Greater Power Penetration
+Psicrystal Affinity
+Improved Psicrystal
+Psicrystal Containment
+Psicrystal Power
+Psionic Affinity
+Psionic Body
+Psionic Endowment
+Greater Psionic Endowment
+Psionic Fist
+Greater Psionic Fist
+Unavoidable Strike
+Psionic Hole
+Psionic Meditation
+Psionic Talent
+Psionic Weapon
+Deep Impact
+Greater Psionic Weapon
+Quick Draw
+Quicken Power
+Quicken Spell
+Automatic Quicken Spell
+Multispell
+Quicken Spell-Like Ability
+Ranged Inspiration
+Rapid Inspiration
+Rapid Metabolism
+Rapid Reload
+Instant Reload
+Reach Spell
+Repeat Spell
+Reckless Offense
+Run
+Epic Speed
+Fleet of Foot
+Sacred Spell
+Scribe Scroll
+Scribe Epic Scroll
+Scribe Tattoo
+Self-Concealment
+Self-Sufficient
+Shield Proficiency
+Improved Shield Bash
+Tower Shield Proficiency
+Silent Spell
+Automatic Silent Spell
+Simple Weapon Proficiency
+Skill Focus
+Snatch
+Sneak Attack of Opportunity
+Spectral Strike
+Speed of Thought
+Psionic Charge
+Spell Focus
+Augment Summoning
+Greater Spell Focus
+Epic Spell Focus
+Spell Knowledge
+Spell Mastery
+Spell Penetration
+Greater Spell Penetration
+Epic Spell Penetration
+Spell Stowaway
+Split Psionic Ray
+Spontaneous Domain Access
+Spontaneous Spell
+Stand Still
+Stealthy
+Still Spell
+Automatic Still Spell
+Subdual Substitution
+Tenacious Magic
+Terrifying Rage
+Thundering Rage
+Toughness
+Track
+Legendary Tracker
+Twin Power
+Two-Weapon Fighting
+Improved Two-Weapon Fighting
+Greater Two-Weapon Fighting
+Perfect Two-Weapon Fighting
+Two-Weapon Rend
+Two-Weapon Defense
+Unconditional Power
+Undead Mastery
+Zone of Animation
+Unholy Strike
+Up the Walls
+Vermin Wild Shape
+Weapon Finesse
+Weapon Focus
+Epic Weapon Focus
+Shattering Strike
+Greater Weapon Focus
+Power Critical
+Power Specialization
+Greater Power Specialization
+Weapon Specialization
+Epic Weapon Specialization
+Greater Weapon Specialization
+Widen Aura of Courage
+Widen Aura of Despair
+Widen Power
+Widen Spell
+Wild Talent
+Wingover
+Wounding Attack
