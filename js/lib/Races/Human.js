@@ -37,10 +37,8 @@ class Human {
              'size': {},
              'skill': {},
              'skillPoints': {
-                 'level': {
-                     '1': 4,
-                     '+': 1
-                 }
+                 '1': [4, 4],
+                 '+': [1, 0]
              }
          };
          this.carry = 1;

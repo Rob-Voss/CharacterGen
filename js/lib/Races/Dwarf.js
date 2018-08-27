@@ -78,10 +78,8 @@ class Dwarf {
                 }
             },
             'skillPoints': {
-                'level': {
-                    '1': 0,
-                    '+': 0
-                }
+                '1': [0, 0],
+                '+': [0, 0]
             }
         };
         this.carry = 1;

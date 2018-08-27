@@ -52,10 +52,8 @@ class HighElf {
                 'spot': 2
             },
             'skillPoints': {
-                'level': {
-                    '1': 0,
-                    '+': 0
-                }
+                '1': [0, 0],
+                '+': [0, 0]
             }
         };
         this.carry = 1;
