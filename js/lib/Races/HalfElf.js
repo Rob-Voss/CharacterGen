@@ -18,20 +18,16 @@
  * Automatic Languages: Common and Elven. Bonus Languages: Any (other than secret languages, such as Druidic).
  */
 
-class HalfElf {
+class HalfElf extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {HalfElf}
      */
-    constructor() {
-        this.attributes = {
-            'STR': 0,
-            'DEX': 0,
-            'CON': 0,
-            'INT': 0,
-            'WIS': 0,
-            'CHA': 0
-        };
+    constructor(subType = '') {
+        super(subType);
+
         this.bonuses = {
             'attack': {},
             'dc': {},
@@ -56,16 +52,11 @@ class HalfElf {
                 '+': [0, 0]
             }
         };
-        this.carry = 1;
-        this.darkVision = false;
+
         this.description = 'Half-elves are not truly an elf subrace, but they are often mistaken for elves. Half-elves usually inherit ' +
             'a good blend of their parents’ physical characteristics.';
-        this.favoredClass = 'Any';
-        this.levelAdjustment = 0;
+
         this.lowLightVision = true;
-        this.size = 'Medium';
-        this.speed = 30;
-        this.subtype = '';
 
         return this;
     }

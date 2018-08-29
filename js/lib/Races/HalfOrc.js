@@ -20,20 +20,20 @@
  * Automatic Languages: Common and Orc. Bonus Languages: Draconic, Giant, Gnoll, Goblin, and Abyssal.
  */
 
-class HalfOrc {
+class HalfOrc extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {HalfOrc}
      */
-    constructor() {
-        this.attributes = {
-            'STR': 2,
-            'DEX': 0,
-            'CON': 0,
-            'INT': -2,
-            'WIS': 0,
-            'CHA': -2
-        };
+    constructor(subType = '') {
+        super(subType);
+
+        this.abilityAdj.str = 2;
+        this.abilityAdj.int = -2;
+        this.abilityAdj.cha = -2;
+
         this.bonuses = {
             'attack': {},
             'dc': {},
@@ -48,18 +48,16 @@ class HalfOrc {
                 '+': [0, 0]
             }
         };
-        this.carry = 1;
+
         this.darkVision = true;
+
         this.description = 'These orc–human crossbreeds can be found in either orc or human society (where their status varies ' +
             'according to local sentiments), or in communities of their own. Half-orcs usually inherit a good blend of the physical ' +
             'characteristics of their parents. They are as tall as humans and a little heavier, thanks to their muscle. They have ' +
             'greenish pigmentation, sloping foreheads, jutting jaws, prominent teeth, and coarse body hair. Half-orcs who have lived ' +
             'among or near orcs have scars, in keeping with orcish tradition.';
+
         this.favoredClass = 'Barbarian';
-        this.levelAdjustment = 0;
-        this.lowLightVision = false;
-        this.size = 'Medium';
-        this.speed = 30;
 
         return this;
     }

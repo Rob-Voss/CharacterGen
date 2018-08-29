@@ -1,10 +1,5 @@
 /**
  *
- * @property {number} blankCounter
- * @property {number} blankCraftCounter
- * @property {number} blankKnowledgeCounter
- * @property {number} blankPerformCounter
- * @property {number} blankProfessionCounter
  */
 class Character {
 
@@ -14,41 +9,87 @@ class Character {
      * @returns {Character}
      */
     constructor(characterGen) {
+        this.ability = {
+            'str': 0,
+            'dex': 0,
+            'con': 0,
+            'int': 0,
+            'wis': 0,
+            'cha': 0
+        };
+        this.abilityMods = {
+            'str': 0,
+            'dex': 0,
+            'con': 0,
+            'int': 0,
+            'wis': 0,
+            'cha': 0
+        };
+        this.armorClass = {
+            'Normal': 0,
+            'Flat Footed': 0,
+            'Touch': 0
+        };
+        this.baseAttackBonuses = {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0
+        };
+        this.carryingCapacity = {
+            'Heavy': 0,
+            'Medium': 0,
+            'Light': 0
+        };
+        this.characteristics = {
+            'Age': '',
+            'Allies/Enemies': '',
+            'Alignment': '',
+            'Ancestry': '',
+            'Appearance': '',
+            'Eyes': '',
+            'Gender': '',
+            'Hair': '',
+            'Handedness': '',
+            'Height': '',
+            'History': '',
+            'Name': '',
+            'Objective': '',
+            'Other': '',
+            'Personality': '',
+            'Player': '',
+            'Quote': '',
+            'Skin': '',
+            'Weight': ''
+        };
+        this.class = {};
+        this.feats = new Feats(this);
         this.generator = characterGen;
+        this.hitPoints = 0;
+        this.inventory = new Inventory(this.generator);
+        this.level = 0;
+        this.race = new Race();
+        this.savingThrows = {
+            'Fortitude': 0,
+            'Reflex': 0,
+            'Will': 0
+        };
         this.skills = new Skills(this);
         this.spells = new Spells(this);
-        this.feats = new Feats(this);
-        this.inventory = new Inventory(this.generator);
 
-        this.eyes = "";
-        this.hair = "";
-        this.height = "";
-        this.weight = "";
-        this.skin = "";
-        this.handedness = "";
-        this.age = "";
-        this.gender = "";
-        this.appearance = "";
-        this.personality = "";
-        this.quote = "";
-        this.objective = "";
-        this.history = "";
-        this.alliesEnemies = "";
-        this.ancestry = "";
-        this.other = "";
+        this.attributeOne = '';
+        this.attributeTwo = '';
+        this.attributeThree = '';
+        this.attributeFour = '';
+        this.attributeFive = '';
+        this.attributeSix = '';
 
-        this.class = 0;
-        this.race = 0;
-        this.hitDie = 0;
-        this.hitPoints = 0;
-        this.normAC = 0;
-        this.ffAC = 0;
-        this.touchAC = 0;
-        this.level = 0;
-
-        this.darkVision = false;
-        this.lowLight = false;
-        this.small = false;
+        this.nameAttributeOne = '';
+        this.nameAttributeTwo = '';
+        this.nameAttributeThree = '';
+        this.nameAttributeFour = '';
+        this.nameAttributeFive = '';
+        this.nameAttributeSix = '';
 
         this.blankCounter = 0;
         this.blankCraftCounter = 0;
@@ -77,51 +118,6 @@ class Character {
         this.stunningFist = false;
         this.track = false;
 
-        this.heavyLoad = 0;
-        this.mediumLoad = 0;
-        this.lightLoad = 0;
-
-        this.fortitudeSave = 0;
-        this.reflexSave = 0;
-        this.willSave = 0;
-
-        this.baseAttackBonus = 0;
-        this.baseAttackBonus2 = 0;
-        this.baseAttackBonus3 = 0;
-        this.baseAttackBonus4 = 0;
-
-        this.strAttr = 0;
-        this.strMod = 0;
-
-        this.dexAttr = 0;
-        this.dexMod = 0;
-
-        this.conAttr = 0;
-        this.conMod = 0;
-
-        this.wisAttr = 0;
-        this.wisMod = 0;
-
-        this.intAttr = 0;
-        this.intMod = 0;
-
-        this.chaAttr = 0;
-        this.chaMod = 0;
-
-        this.attributeOne = '';
-        this.attributeTwo = '';
-        this.attributeThree = '';
-        this.attributeFour = '';
-        this.attributeFive = '';
-        this.attributeSix = '';
-
-        this.nameAttributeOne = '';
-        this.nameAttributeTwo = '';
-        this.nameAttributeThree = '';
-        this.nameAttributeFour = '';
-        this.nameAttributeFive = '';
-        this.nameAttributeSix = '';
-
         return this;
     }
 
@@ -129,70 +125,33 @@ class Character {
      * Displays all Ability Modifiers in Skills Section
      */
     addAbilityModifiers() {
-        let listStr = document.getElementsByClassName("am-str");
-        for (let i = 0; i < listStr.length; i++) {
-            listStr[i].innerHTML = (this.strMod < 0 ? "" : "+ ") + this.strMod;
-        }
-        let listDex = document.getElementsByClassName("am-dex");
-        for (let i = 0; i < listDex.length; i++) {
-            listDex[i].innerHTML = (this.dexMod < 0 ? "" : "+ ") + this.dexMod;
-        }
-        let listCon = document.getElementsByClassName("am-con");
-        for (let i = 0; i < listCon.length; i++) {
-            listCon[i].innerHTML = (this.conMod < 0 ? "" : "+ ") + this.conMod;
-        }
-        let listWis = document.getElementsByClassName("am-wis");
-        for (let i = 0; i < listWis.length; i++) {
-            listWis[i].innerHTML = (this.wisMod < 0 ? "" : "+ ") + this.wisMod;
-        }
-        let listInt = document.getElementsByClassName("am-int");
-        for (let i = 0; i < listInt.length; i++) {
-            listInt[i].innerHTML = (this.intMod < 0 ? "" : "+ ") + this.intMod;
-        }
-        let listCha = document.getElementsByClassName("am-cha");
-        for (let i = 0; i < listCha.length; i++) {
-            listCha[i].innerHTML = (this.chaMod < 0 ? "" : "+ ") + this.chaMod;
-        }
+        for (let element in this.ability) {
+            let list = document.getElementsByClassName("am-" + element);
+            for (let i = 0; i < list.length; i++) {
+                list[i].innerHTML = (this.abilityMods[element] < 0 ? "" : "+ ") + this.abilityMods[element];
+            }
+        } 
     }
 
     /**
      *
-     * @param {number} whichLevel
+     * @param {String} whichLevel
      */
     addAbilityScore(whichLevel) {
-        let whichAbility = document.getElementById("select-ability-score-" + Number(whichLevel)).value;
-        switch (whichAbility) {
-            case "str":
-                this.strAttr += 1;
-                break;
-            case "dex":
-                this.dexAttr += 1;
-                break;
-            case "con":
-                this.conAttr += 1;
-                break;
-            case "wis":
-                this.wisAttr += 1;
-                break;
-            case "int":
-                this.intAttr += 1;
-                break;
-            case "cha":
-                this.chaAttr += 1;
-                break;
-        }
+        let ability = document.getElementById("select-ability-score-" + Number(whichLevel)).value;
+        this.ability[ability] += 1;
 
         for (let i = (whichLevel * 4); i < this.level; i++) {
             if (i <= (whichLevel * 4 + 3)) { // Only levels affected by THIS (but not SUBSEQUENT) ability score increase
-                let additionalHitPoints = (Math.floor(Math.random() * this.hitDie) + 1) + this.conMod;
+                let additionalHitPoints = (Math.floor(Math.random() * this.class.hitDie) + 1) + this.abilityMods['con'];
                 this.hitPoints += (additionalHitPoints <= 0) ? 1 : additionalHitPoints;
                 this.skills.levelSkillPointIncrease();
             }
         }
-        this.updateAllModifiers();
+        this.updateAbilityModifiers();
 
-        document.getElementById("final-" + whichAbility).innerHTML = this[whichAbility + "Attr"];
-        document.getElementById("final-" + whichAbility + "-mod").innerHTML = "+ " + this[whichAbility + "Mod"];
+        document.getElementById("final-" + ability).innerHTML = this.ability[ability];
+        document.getElementById("final-" + ability + "-mod").innerHTML = "+ " + this.abilityMods[ability];
         document.getElementById("handle-ability-score-" + Number(whichLevel)).style.display = "none";
     }
 
@@ -214,34 +173,42 @@ class Character {
             allAttributeValues = [this.attributeOne, this.attributeTwo, this.attributeThree, this.attributeFour, this.attributeFive, this.attributeSix];
 
         // Set to zero.
-        this.strAttr = 0;
-        this.dexAttr = 0;
-        this.conAttr = 0;
-        this.wisAttr = 0;
-        this.intAttr = 0;
-        this.chaAttr = 0;
+        this.ability = {
+            'str': 0,
+            'dex': 0,
+            'con': 0,
+            'int': 0,
+            'wis': 0,
+            'cha': 0
+        };
+        this.ability['str'] = 0;
+        this.ability['dex'] = 0;
+        this.ability['con'] = 0;
+        this.ability['wis'] = 0;
+        this.ability['int'] = 0;
+        this.ability['cha'] = 0;
 
         // Run through each NAME value and assign it the corresponding NUMBER value,
         // so attributes are variables with number values.
         for (let i = 0; i < 6; i++) {
             switch (allAttributeNames[i]) {
                 case "STR":
-                    this.strAttr = allAttributeValues[i];
+                    this.ability['str'] = allAttributeValues[i];
                     break;
                 case "DEX":
-                    this.dexAttr = allAttributeValues[i];
+                    this.ability['dex'] = allAttributeValues[i];
                     break;
                 case "CON":
-                    this.conAttr = allAttributeValues[i];
-                    break;
-                case "WIS":
-                    this.wisAttr = allAttributeValues[i];
+                    this.ability['con'] = allAttributeValues[i];
                     break;
                 case "INT":
-                    this.intAttr = allAttributeValues[i];
+                    this.ability['int'] = allAttributeValues[i];
+                    break;
+                case "WIS":
+                    this.ability['wis'] = allAttributeValues[i];
                     break;
                 case "CHA":
-                    this.chaAttr = allAttributeValues[i];
+                    this.ability['cha'] = allAttributeValues[i];
                     break;
                 default:
                     alert("An error occurred. Verify that all Attributes are Allocated.");
@@ -251,7 +218,7 @@ class Character {
         }
 
         // Reject Errors, and prompt for confirm, else, throw out of the function to restart.
-        if (this.strAttr !== 0 && this.dexAttr !== 0 && this.conAttr !== 0 && this.wisAttr !== 0 && this.intAttr !== 0 && this.chaAttr !== 0) {
+        if (this.ability['str'] !== 0 && this.ability['dex'] !== 0 && this.ability['con'] !== 0 && this.ability['wis'] !== 0 && this.ability['int'] !== 0 && this.ability['cha'] !== 0) {
             this.update();
         } else {
             alert("An error occurred. Verify that no Attributes are Duplicated.");
@@ -263,12 +230,12 @@ class Character {
      * @param {HTMLFormElement} form
      */
     assignAttributesManually(form) {
-        this.strAttr = Number(form.inpstrAttr.value);
-        this.dexAttr = Number(form.inpdexAttr.value);
-        this.conAttr = Number(form.inpconAttr.value);
-        this.wisAttr = Number(form.inpwisAttr.value);
-        this.intAttr = Number(form.inpintAttr.value);
-        this.chaAttr = Number(form.inpchaAttr.value);
+        this.ability['str'] = Number(form.inpstrAttr.value);
+        this.ability['dex'] = Number(form.inpdexAttr.value);
+        this.ability['con'] = Number(form.inpconAttr.value);
+        this.ability['wis'] = Number(form.inpwisAttr.value);
+        this.ability['int'] = Number(form.inpintAttr.value);
+        this.ability['cha'] = Number(form.inpchaAttr.value);
 
         this.update();
     }
@@ -283,13 +250,13 @@ class Character {
           size = (this.small) ? 1 : 0,
           deflect = 0,
           misc = 0;
-      this.normAC = 10 + this.dexMod + armor + shield + natural + size + deflect + misc;
-      this.ffAC = 10 + armor + shield + natural + size + deflect + misc;
-      this.touchAC = 10 + this.dexMod + size + deflect + misc;
+      this.armorClass['Normal'] = 10 + this.abilityMods['dex'] + armor + shield + natural + size + deflect + misc;
+      this.armorClass['Flat Footed'] = 10 + armor + shield + natural + size + deflect + misc;
+      this.armorClass['Touch'] = 10 + this.abilityMods['dex'] + size + deflect + misc;
 
-      document.getElementById("print-armor-total").innerHTML = this.normAC;
-      document.getElementById("print-ff-total").innerHTML = this.ffAC;
-      document.getElementById("print-touch-total").innerHTML = this.touchAC;
+      document.getElementById("print-armor-total").innerHTML = this.armorClass['Normal'];
+      document.getElementById("print-ff-total").innerHTML = this.armorClass['Flat Footed'];
+      document.getElementById("print-touch-total").innerHTML = this.armorClass['Touch'];
     }
 
     /**
@@ -298,35 +265,22 @@ class Character {
      */
     calculateCarryingCapacity(strengthScore) {
         if (strengthScore <= 10) {
-            this.heavyLoad = Math.floor(strengthScore * 10);
+            this.carryingCapacity['Heavy'] = Math.floor(strengthScore * 10);
         } else if (strengthScore <= 20) {
-            this.heavyLoad = Math.floor(25 * Math.pow(2, (0.2 * strengthScore)));
+            this.carryingCapacity['Heavy'] = Math.floor(25 * Math.pow(2, (0.2 * strengthScore)));
         } else {
             alert("The code for this strength condition has not been written.");
-            this.heavyLoad = 6;
+            this.carryingCapacity['Heavy'] = 6;
         }
-        this.mediumLoad = Math.floor((2 * this.heavyLoad) / 3);
-        this.lightLoad = Math.floor(this.heavyLoad / 3);
+        this.carryingCapacity['Medium'] = Math.floor((2 * this.carryingCapacity['Heavy']) / 3);
+        this.carryingCapacity['Light'] = Math.floor(this.carryingCapacity['Heavy'] / 3);
 
         document.getElementById("print-total-weight").innerHTML = this.inventory.totalWeight;
-        document.getElementById("print-heavy-load").innerHTML = this.heavyLoad;
-        document.getElementById("print-medium-load").innerHTML = this.mediumLoad;
-        document.getElementById("print-light-load").innerHTML = this.lightLoad;
-        document.getElementById("print-lift-load").innerHTML = (this.heavyLoad * 2);
-        document.getElementById("print-push-load").innerHTML = (this.heavyLoad * 5);
-    }
-
-    /**
-     * Set the Character's Class
-     * @param {String} userClass
-     */
-    classSelect(userClass) {
-        this.class = userClass.toUpperCase();
-        if (this.class !== 0) {
-            document.getElementById("show-class").innerHTML = "Current Class: " + this.class;
-            document.getElementById("show-class-2").innerHTML = this.class;
-            document.getElementById("dice-sys").style.display = "block";
-        }
+        document.getElementById("print-heavy-load").innerHTML = this.carryingCapacity['Heavy'];
+        document.getElementById("print-medium-load").innerHTML = this.carryingCapacity['Medium'];
+        document.getElementById("print-light-load").innerHTML = this.carryingCapacity['Light'];
+        document.getElementById("print-lift-load").innerHTML = (this.carryingCapacity['Heavy'] * 2);
+        document.getElementById("print-push-load").innerHTML = (this.carryingCapacity['Heavy'] * 5);
     }
 
     /**
@@ -375,7 +329,7 @@ class Character {
                     document.getElementById("handle-ability-score-" + (i / 4)).style.display = "block";
                 }
                 if (i <= 3) { // Only levels unaffected by 1st ability score increase
-                    let additionalHitPoints = (Math.floor(Math.random() * this.hitDie) + 1) + this.conMod;
+                    let additionalHitPoints = (Math.floor(Math.random() * this.class.hitDie) + 1) + this.abilityMods['con'];
                     this.hitPoints += (additionalHitPoints <= 0) ? 1 : additionalHitPoints;
                     this.skills.levelSkillPointIncrease();
                 }
@@ -384,19 +338,6 @@ class Character {
                     this.startingFeats += 1;
                 }
             }
-        }
-    }
-
-    /**
-     * Set the Characters selected Race
-     * @param {String} userRace
-     */
-    raceSelect(userRace) {
-        this.race = userRace.toUpperCase();
-        if (this.race !== 0) {
-            document.getElementById("show-race").innerHTML = "Current Race: " + this.race;
-            document.getElementById("show-race-2").innerHTML = this.race;
-            document.getElementById("class-source").style.display = "block";
         }
     }
 
@@ -449,6 +390,93 @@ class Character {
     }
 
     /**
+     * Set the Character's Class
+     * @param {String} userClass
+     */
+    selectClass(userClass) {
+        switch (userClass) {
+            case "Barbarian":
+                this.class = new Barbarian();
+                break;
+            case "Bard":
+                this.class = new Bard();
+                break;
+            case "Cleric":
+                this.class = new Cleric();
+                break;
+            case "Druid":
+                this.class = new Druid();
+                break;
+            case "Fighter":
+                this.class = new Fighter();
+                break;
+            case "Monk":
+                this.class = new Monk();
+                break;
+            case "Paladin":
+                this.class = new Paladin();
+                break;
+            case "Ranger":
+                this.class = new Ranger();
+                break;
+            case "Rogue":
+                this.class = new Rogue();
+                break;
+            case "Sorcerer":
+                this.class = new Sorcerer();
+                break;
+            case "Wizard":
+                this.class = new Wizard();
+                break;
+            case "NewBlankRace":
+            // A placeholder for future racial additions.
+            // return new Human();
+        }
+        document.getElementById("show-class").innerHTML = "Current Class: " + this.class;
+        document.getElementById("show-class-2").innerHTML = this.class;
+        document.getElementById("dice-sys").style.display = "block";
+
+    }
+
+    /**
+     * Set the Characters selected Race
+     * @param {String} userRace
+     * @param {String} subRace
+     * @returns {*}
+     */
+    selectRace(userRace, subRace = '') {
+        switch (userRace) {
+            case "Human":
+                this.race = new Human();
+                break;
+            case "Dwarf":
+                this.race = new Dwarf(subRace);
+                break;
+            case "Elf":
+                this.race = new Elf(subRace);
+                break;
+            case "Gnome":
+                this.race = new Gnome(subRace);
+                break;
+            case "Half-Elf":
+                this.race = new HalfElf();
+                break;
+            case "Half-Orc":
+                this.race = new HalfOrc();
+                break;
+            case "Halfling":
+                this.race = new Halfling(subRace);
+                break;
+            case "NewBlankRace":
+            // A placeholder for future racial additions.
+            // return new Human();
+        }
+        document.getElementById("show-race").innerHTML = "Current Race: " + userRace;
+        document.getElementById("show-race-2").innerHTML = userRace;
+        document.getElementById("class-source").style.display = "block";
+    }
+
+    /**
      * Set flags for special cases
      * @param {String} value
      */
@@ -464,7 +492,7 @@ class Character {
      * Update various things
      */
     update() {
-        this.updateAllModifiers();
+        this.updateAbilityModifiers();
         this.updateMiscSkillModifiers();
         this.addAbilityModifiers();
         this.skills.showClassSkills();
@@ -476,13 +504,13 @@ class Character {
     /**
      * Calculates all Ability Modifiers using the Character Attributes
      */
-    updateAllModifiers() {
-        this.strMod = Math.floor((this.strAttr - 10) / 2);
-        this.dexMod = Math.floor((this.dexAttr - 10) / 2);
-        this.conMod = Math.floor((this.conAttr - 10) / 2);
-        this.wisMod = Math.floor((this.wisAttr - 10) / 2);
-        this.intMod = Math.floor((this.intAttr - 10) / 2);
-        this.chaMod = Math.floor((this.chaAttr - 10) / 2);
+    updateAbilityModifiers() {
+        this.abilityMods['str'] = Math.floor((this.ability['str'] - 10) / 2);
+        this.abilityMods['dex'] = Math.floor((this.ability['dex'] - 10) / 2);
+        this.abilityMods['con'] = Math.floor((this.ability['con'] - 10) / 2);
+        this.abilityMods['int'] = Math.floor((this.ability['int'] - 10) / 2);
+        this.abilityMods['wis'] = Math.floor((this.ability['wis'] - 10) / 2);
+        this.abilityMods['cha'] = Math.floor((this.ability['cha'] - 10) / 2);
     }
 
     /**
@@ -490,17 +518,17 @@ class Character {
      */
     updateMiscSkillModifiers() {
         switch (this.race) {
-            case "HUMAN":
+            case "Human":
                 this.startingFeats += 1;
                 break;
-            case "DWARF":
-                this.conAttr += 2;
-                this.chaAttr -= 2;
+            case "Dwarf":
+                this.ability['con'] += 2;
+                this.ability['cha'] -= 2;
                 this.darkVision = true;
                 break;
-            case "ELF":
-                this.dexAttr += 2;
-                this.conAttr -= 2;
+            case "Elf":
+                this.ability['dex'] += 2;
+                this.ability['con'] -= 2;
                 this.lowLight = true;
                 this.skills.skillTable['listen'].misc = 2;
                 this.skills.skillTable['search'].misc = 2;
@@ -509,9 +537,9 @@ class Character {
                 document.getElementById("ms-search").innerHTML = this.skills.skillTable['search'].misc;
                 document.getElementById("ms-spot").innerHTML = this.skills.skillTable['spot'].misc;
                 break;
-            case "GNOME":
-                this.conAttr += 2;
-                this.strAttr -= 2;
+            case "Gnome":
+                this.ability['con'] += 2;
+                this.ability['str'] -= 2;
                 this.small = true;
                 this.lowLight = true;
                 this.skills.skillTable['listen'].misc = 2;
@@ -521,7 +549,7 @@ class Character {
                 document.getElementById("ms-craft").innerHTML = this.skills.skillTable['craft'].misc;
                 document.getElementById("ms-hide").innerHTML = this.skills.skillTable['hide'].misc;
                 break;
-            case "HALF-ELF":
+            case "Half-Elf":
                 this.lowLight = true;
                 this.skills.skillTable['listen'].misc = 1;
                 this.skills.skillTable['search'].misc = 1;
@@ -534,15 +562,15 @@ class Character {
                 document.getElementById("ms-diplomacy").innerHTML = this.skills.skillTable['diplomacy'].misc;
                 document.getElementById("ms-gatherinformation").innerHTML = this.skills.skillTable['gatherinformation'].misc;
                 break;
-            case "HALF-ORC":
-                this.strAttr += 2;
-                this.intAttr -= 2;
-                this.chaAttr -= 2;
+            case "Half-Orc":
+                this.ability['str'] += 2;
+                this.ability['int'] -= 2;
+                this.ability['cha'] -= 2;
                 this.darkVision = true;
                 break;
-            case "HALFLING":
-                this.dexAttr += 2;
-                this.strAttr -= 2;
+            case "Halfling":
+                this.ability['dex'] += 2;
+                this.ability['str'] -= 2;
                 this.small = true;
                 this.skills.skillTable['climb'].misc = 2;
                 this.skills.skillTable['jump'].misc = 2;
@@ -559,7 +587,7 @@ class Character {
                 // A placeholder for future racial additions.
                 break;
         }
-        this.updateAllModifiers();
+        this.updateAbilityModifiers();
         this.generator.showFinalAttributes();
     }
 
@@ -568,31 +596,31 @@ class Character {
      */
     updateAllSavingThrows() {
         switch (this.class) {
-            case "CLERIC":
-            case "DRUID":
+            case "Cleric":
+            case "Druid":
                 this.updateSavingThrows(2, 0, 2, "A", 8);
                 break;
-            case "SORCERER":
-            case "WIZARD":
+            case "Sorcerer":
+            case "Wizard":
                 this.updateSavingThrows(0, 0, 2, "P", 4);
                 break;
-            case "BARBARIAN":
+            case "Barbarian":
                 this.updateSavingThrows(2, 0, 0, "G", 12);
                 break;
-            case "FIGHTER":
-            case "PALADIN":
+            case "Fighter":
+            case "Paladin":
                 this.updateSavingThrows(2, 0, 0, "G", 10);
                 break;
-            case "MONK":
+            case "Monk":
                 this.updateSavingThrows(2, 2, 2, "A", 8);
                 break;
-            case "BARD":
+            case "Bard":
                 this.updateSavingThrows(0, 2, 2, "A", 6);
                 break;
-            case "RANGER":
+            case "Ranger":
                 this.updateSavingThrows(2, 2, 0, "G", 8);
                 break;
-            case "ROGUE":
+            case "Rogue":
                 this.updateSavingThrows(0, 2, 0, "A", 6);
                 break;
             case "NewBlankClass":
@@ -610,54 +638,36 @@ class Character {
      * @param {number} hitDie
      */
     updateSavingThrows(fortSave, reflexSave, willSave, baseAttack, hitDie) {
-        this.fortitudeSave = fortSave;
-        this.reflexSave = reflexSave;
-        this.willSave = willSave;
-        this.hitDie = hitDie;
-        this.hitPoints = (hitDie + this.conMod <= 0) ? 1 : hitDie + this.conMod;
-
-        switch (baseAttack) {
-            case "G":
-                this.baseAttackBonus = this.level;
-                this.baseAttackBonus2 = this.level - 5;
-                this.baseAttackBonus3 = this.level - 10;
-                this.baseAttackBonus4 = this.level - 15;
-                break;
-            case "A":
-                this.baseAttackBonus = Math.floor((this.level + (this.level / 2)) / 2);
-                this.baseAttackBonus2 = this.baseAttackBonus - 5;
-                this.baseAttackBonus3 = this.baseAttackBonus - 10;
-                this.baseAttackBonus4 = this.baseAttackBonus - 15;
-                break;
-            case "P":
-                this.baseAttackBonus = Math.floor(this.level / 2);
-                this.baseAttackBonus2 = this.baseAttackBonus - 5;
-                this.baseAttackBonus3 = this.baseAttackBonus - 10;
-                this.baseAttackBonus4 = this.baseAttackBonus - 15;
-                break;
-        }
+        this.savingThrows['Fortitude'] = fortSave;
+        this.savingThrows['Reflex'] = reflexSave;
+        this.savingThrows['Will'] = willSave;
+        this.hitPoints = (this.class.hitDie + this.abilityMods['con'] <= 0) ? 1 : this.class.hitDie + this.abilityMods['con'];
+        this.class.getBaseAttackBonuses(this.level);
     }
 
+    /**
+     *
+     */
     updateDescription() {
-        this.name = document.getElementById("form-name").value;
-        this.player = document.getElementById("form-player").value;
-        this.alignment = document.getElementById("form-alignment").value;
-        this.eyes = document.getElementById("form-eyes").value;
-        this.hair = document.getElementById("form-hair").value;
-        this.height = document.getElementById("form-height").value;
-        this.weight = document.getElementById("form-weight").value;
-        this.skin = document.getElementById("form-skin").value;
-        this.handedness = document.getElementById("form-handedness").value;
-        this.age = document.getElementById("form-age").value;
-        this.gender = document.getElementById("form-gender").value;
-        this.appearance = document.getElementById("form-appearance").value;
-        this.personality = document.getElementById("form-personality").value;
-        this.quote = document.getElementById("form-quote").value;
-        this.objective = document.getElementById("form-objective").value;
-        this.history = document.getElementById("form-history").value;
-        this.alliesEnemies = document.getElementById("form-allies-enemies").value;
-        this.ancestry = document.getElementById("form-ancestry").value;
-        this.other = document.getElementById("form-other-info").value;
+        this.characteristics['Name'] = document.getElementById("form-name").value;
+        this.characteristics['Player'] = document.getElementById("form-player").value;
+        this.characteristics['Alignment'] = document.getElementById("form-alignment").value;
+        this.characteristics['Eyes'] = document.getElementById("form-eyes").value;
+        this.characteristics['Hair'] = document.getElementById("form-hair").value;
+        this.characteristics['Height'] = document.getElementById("form-height").value;
+        this.characteristics['Weight'] = document.getElementById("form-weight").value;
+        this.characteristics['Skin'] = document.getElementById("form-skin").value;
+        this.characteristics['Handedness'] = document.getElementById("form-handedness").value;
+        this.characteristics['Age'] = document.getElementById("form-age").value;
+        this.characteristics['Gender'] = document.getElementById("form-gender").value;
+        this.characteristics['Appearance'] = document.getElementById("form-appearance").value;
+        this.characteristics['Personality'] = document.getElementById("form-personality").value;
+        this.characteristics['Quote'] = document.getElementById("form-quote").value;
+        this.characteristics['Objective'] = document.getElementById("form-objective").value;
+        this.characteristics['History'] = document.getElementById("form-history").value;
+        this.characteristics['Allies/Enemies'] = document.getElementById("form-allies-enemies").value;
+        this.characteristics['Ancestry'] = document.getElementById("form-ancestry").value;
+        this.characteristics['Other'] = document.getElementById("form-other-info").value;
     }
 
 }

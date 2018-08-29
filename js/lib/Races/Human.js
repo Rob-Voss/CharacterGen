@@ -13,20 +13,16 @@
  *  Language skill.
  */
 
-class Human {
+class Human extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {Human}
      */
-     constructor() {
-         this.attributes = {
-             'STR': 0,
-             'DEX': 0,
-             'CON': 0,
-             'INT': 0,
-             'WIS': 0,
-             'CHA': 0
-         };
+    constructor(subType = '') {
+        super(subType);
+
          this.bonuses = {
              'attack': {},
              'dc': {},
@@ -41,17 +37,14 @@ class Human {
                  '+': [1, 0]
              }
          };
-         this.carry = 1;
-         this.darkVision = false;
+
          this.description = 'The high elf is the most common elf variety. High elves average 5 feet tall and typically weigh just over ' +
              '100 pounds. They live on fruits and grains, though they occasionally hunt for fresh meat. High elves prefer colorful ' +
              'clothes, usually with a green-and-gray cloak that blends well with the colors of the forest.';
+
          this.favoredClass = 'Wizard';
-         this.levelAdjustment = 0;
-         this.lowLightVision = false;
-         this.size = 'Any';
-         this.speed = 30;
 
          return this;
      }
+
 }

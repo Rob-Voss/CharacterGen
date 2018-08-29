@@ -35,20 +35,19 @@
  * Automatic Languages: Common and Dwarven. Bonus Languages: Giant, Gnome, Goblin, Orc, Terran, and Undercommon.
  */
 
-class Dwarf {
+class Dwarf extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {Dwarf}
      */
-    constructor() {
-        this.attributes = {
-            'STR': 0,
-            'DEX': 0,
-            'CON': 2,
-            'INT': 0,
-            'WIS': 0,
-            'CHA': -2
-        };
+    constructor(subType = '') {
+        super(subType);
+
+        this.abilityAdj.con = 2;
+        this.abilityAdj.cha = -2;
+
         this.bonuses = {
             'attack':{
                 'orcs': 1,
@@ -82,16 +81,16 @@ class Dwarf {
                 '+': [0, 0]
             }
         };
-        this.carry = 1;
+
         this.darkVision = true;
+
         this.description = 'Hill dwarves are the most common variety of dwarves. Hill dwarves favor earth tones in their clothing ' +
             'and prefer simple and functional garb. The skin can be very dark, but it is always some shade of tan or brown. ' +
             'Hair color can be black, gray, or brown. Hill dwarves average 4 feet tall and weigh as much as adult humans.';
+
         this.favoredClass = 'Fighter';
-        this.levelAdjustment = 0;
-        this.size = 'Medium';
+
         this.speed = 20;
-        this.subtype = 'Hill';
 
         return this;
     }

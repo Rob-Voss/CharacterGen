@@ -33,20 +33,19 @@
  *  prestidigitation. Caster level 1st; save DC 10 + rock gnome’s Cha modifier + spell level.
  */
 
-class Gnome {
+class Gnome extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {Gnome}
      */
-    constructor() {
-        this.attributes = {
-            'STR': -2,
-            'DEX': 0,
-            'CON': 2,
-            'INT': 0,
-            'WIS': 0,
-            'CHA': 0
-        };
+    constructor(subType = '') {
+        super(subType);
+
+        this.abilityAdj.str = -2;
+        this.abilityAdj.con = 2;
+
         this.bonuses = {
             'attack':{
                 'kobolds': 1,
@@ -82,19 +81,22 @@ class Gnome {
                 '+': [0, 0]
             }
         };
+
         this.carry = 0.75;
-        this.darkVision = false;
+
         this.description = 'Rck gnomes are the most common variety of gnomes. Rock gnomes stand 3 to 3-1/2 feet tall and weigh 40 to 45 pounds. ' +
             'Their skin color ranges from dark tan to woody brown, their hair is fair, and their eyes can be any shade of blue. ' +
             'Rock gnome males prefer short, carefully trimmed beards. Rock gnomes generally wear leather or earth tones, though ' +
             'they decorate their clothes with intricate stitching or fine jewelry. Rock gnomes reach adulthood at about age 40, ' +
             'and they live about 350 years, though some can live almost 500 years.';
+
         this.favoredClass = 'Bard';
-        this.levelAdjustment = 0;
+
         this.lowLightVision = true;
+
         this.size = 'Small';
+
         this.speed = 20;
-        this.subtype = 'Rock';
 
         return this;
     }

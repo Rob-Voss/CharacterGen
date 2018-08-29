@@ -20,20 +20,19 @@
  * Automatic Languages: Common and Elven. Bonus Languages: Draconic, Gnoll, Gnome, Goblin, Orc, and Sylvan
  */
 
-class HighElf {
+class Elf extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {Elf}
      */
-    constructor() {
-        this.attributes = {
-            'STR': 0,
-            'DEX': 2,
-            'CON': -2,
-            'INT': 0,
-            'WIS': 0,
-            'CHA': 0
-        };
+    constructor(subType = '') {
+        super(subType);
+
+        this.abilityAdj.dex = 2;
+        this.abilityAdj.con = -2;
+
         this.bonuses = {
             'attack': {},
             'dc': {},
@@ -56,16 +55,14 @@ class HighElf {
                 '+': [0, 0]
             }
         };
-        this.carry = 1;
-        this.darkVision = false;
+
         this.description = 'The high elf is the most common elf variety. High elves average 5 feet tall and typically weigh just over ' +
             '100 pounds. They live on fruits and grains, though they occasionally hunt for fresh meat. High elves prefer colorful ' +
             'clothes, usually with a green-and-gray cloak that blends well with the colors of the forest.';
+
         this.favoredClass = 'Wizard';
-        this.levelAdjustment = 0;
+
         this.lowLightVision = true;
-        this.size = 'Medium';
-        this.speed = 30;
 
         return this;
     }

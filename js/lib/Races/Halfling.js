@@ -23,20 +23,19 @@
  * Automatic Languages: Common and Halfling. Bonus Languages: Dwarven, Elven, Gnome, Goblin, and Orc.
  */
 
-class Halfling {
+class Halfling extends Race {
 
     /**
      *
+     * @param {String} subType
+     * @returns {Halfling}
      */
-    constructor() {
-        this.attributes = {
-            'STR': -2,
-            'DEX': 2,
-            'CON': 0,
-            'INT': 0,
-            'WIS': 0,
-            'CHA': 0
-        };
+    constructor(subType = '') {
+        super(subType);
+
+        this.abilityAdj.str = -2;
+        this.abilityAdj.dex = 2;
+
         this.bonuses = {
             'attack': {
                 'thrown': 1,
@@ -67,20 +66,21 @@ class Halfling {
                 '+': [0, 0]
             }
         };
+
         this.carry = 0.75;
-        this.darkVision = false;
+
         this.description = 'The lightfoot halfling is the most common halfling variety. Lightfoot halflings stand about ' +
             '3 feet tall and usually weigh between 30 and 35 pounds. They have brown or black eyes. Lightfoot halfling ' +
             'men often have long sideburns, but beards are rare among them and mustaches almost unseen. Lightfoot ' +
             'halflings prefer simple, comfortable, and practical clothes. Unlike members of most races, they prefer ' +
             'actual comfort to shows of wealth. Lightfoot halflings reach adulthood in their early twenties and generally ' +
             'live into the middle of their second century.';
+
         this.favoredClass = 'Rogue';
-        this.levelAdjustment = 0;
-        this.lowLightVision = false;
+
         this.size = 'Small';
+
         this.speed = 20;
-        this.subtype = 'Lightfoot';
 
         return this;
     }

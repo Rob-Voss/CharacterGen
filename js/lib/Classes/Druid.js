@@ -1,33 +1,3 @@
-/**
- * Druid
- * Alignment: Neutral good, lawful neutral, neutral, chaotic neutral, or neutral evil
- * Hit Die: d8
- * Class Skills: Concentration (Con), Craft (Int), Diplomacy (Cha), Handle Animal (Cha), Heal (Wis), Knowledge (nature) (Int),
- *  Listen (Wis), Profession (Wis), Ride (Dex), Spellcraft (Int), Spot (Wis), Survival (Wis), Swim (Str)
- *  Skill Points at 1st Level: (4 + Int modifier) ×4
- *  Skill Points at Each Additional Level: 4 + Int modifier
-
-Level	Base Attack Bonus	Fort Save	Ref Save	Will Save	Special	Spells per Day	0	1st	2nd	3rd	4th	5th	6th	7th	8th	9th
-1st	+0	+2	+0	+2	Animal companion, nature sense, wild empathy	3	1	—	—	—	—	—	—	—	—
-2nd	+1	+3	+0	+3	Woodland stride	4	2	—	—	—	—	—	—	—	—
-3rd	+2	+3	+1	+3	Trackless step	4	2	1	—	—	—	—	—	—	—
-4th	+3	+4	+1	+4	Resist nature’s lure	5	3	2	—	—	—	—	—	—	—
-5th	+3	+4	+1	+4	Wild shape (1/day)	5	3	2	1	—	—	—	—	—	—
-6th	+4	+5	+2	+5	Wild shape (2/day)	5	3	3	2	—	—	—	—	—	—
-7th	+5	+5	+2	+5	Wild shape (3/day)	6	4	3	2	1	—	—	—	—	—
-8th	+6/+1	+6	+2	+6	Wild shape (Large)	6	4	3	3	2	—	—	—	—	—
-9th	+6/+1	+6	+3	+6	Venom immunity	6	4	4	3	2	1	—	—	—	—
-10th	+7/+2	+7	+3	+7	Wild shape (4/day)	6	4	4	3	3	2	—	—	—	—
-11th	+8/+3	+7	+3	+7	Wild shape (Tiny)	6	5	4	4	3	2	1	—	—	—
-12th	+9/+4	+8	+4	+8	Wild shape (plant)	6	5	4	4	3	3	2	—	—	—
-13th	+9/+4	+8	+4	+8	A thousand faces	6	5	5	4	4	3	2	1	—	—
-14th	+10/+5	+9	+4	+9	Wild shape (5/day)	6	5	5	4	4	3	3	2	—	—
-15th	+11/+6/+1	+9	+5	+9	Timeless body, wild shape (Huge)	6	5	5	5	4	4	3	2	1	—
-16th	+12/+7/+2	+10	+5	+10	Wild shape (elemental 1/day)	6	5	5	5	4	4	3	3	2	—
-17th	+12/+7/+2	+10	+5	+10		6	5	5	5	5	4	4	3	2	1
-18th	+13/+8/+3	+11	+6	+11	Wild shape (6/day, elemental 2/day)	6	5	5	5	5	4	4	3	3	2
-19th	+14/+9/+4	+11	+6	+11		6	5	5	5	5	5	4	4	3	3
-20th	+15/+10/+5	+12	+6	+12	Wild shape (elemental 3/day, Huge elemental)	6	5	5	5	5	5	4	4	4	4*/
 
 class Druid {
 
@@ -36,437 +6,444 @@ class Druid {
      */
     constructor() {
         this.alignment = ['Neutral good', 'lawful neutral', 'neutral', 'chaotic neutral', 'neutral evil'];
-        this.hitDie = 'd8';
+        this.hitDie = 8;
         this.skills = ['Concentration', 'Craft', 'Diplomacy', 'Handle Animal', 'Heal', 'Knowledge (nature)',
             'Listen', 'Profession', 'Ride', 'Spellcraft', 'Spot', 'Survival', 'Swim'
         ];
+        this.skillPoints = {
+            0: [4, 4],
+            1: [4, 0]
+        };
         this.classTable = {
             1: {
-                'baseAttackBonus': [0, 0, 0, 0],
-                'feats': 0,
-                'saving': [2, 0, 2],
-                'skillPoints': [4, 4],
-                'specials': {
-                    'animal companion': 0,
-                    'nature sense': 0,
-                    'wild empathy': 0
+                "Base Attack Bonus": 0,
+                "Saving": {
+                    "Fortitude": 2,
+                    "Reflex": 0,
+                    "Will": 2
                 },
-                'spellsPerDay': {
-                    0: 3,
-                    1: 1,
-                    2: 0,
-                    3: 0,
-                    4: 0,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Animal Companion, Nature Sense, Wild Empathy",
+                "Spells Per Day": {
+                    "0": 3,
+                    "1": 1,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             2: {
-                'baseAttackBonus': [1, 0, 0, 0],
-                'feats': 0,
-                'saving': [3, 0, 3],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'woodland stride': 0
+                "Base Attack Bonus": 1,
+                "Saving": {
+                    "Fortitude": 3,
+                    "Reflex": 0,
+                    "Will": 3
                 },
-                'spellsPerDay': {
-                    0: 4,
-                    1: 2,
-                    2: 0,
-                    3: 0,
-                    4: 0,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Woodland Stride",
+                "Spells Per Day": {
+                    "0": 4,
+                    "1": 2,
+                    "2": null,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             3: {
-                'baseAttackBonus': [2, 0, 0, 0],
-                'feats': 0,
-                'saving': [3, 1, 3],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'trackless step': 0
+                "Base Attack Bonus": 2,
+                "Saving": {
+                    "Fortitude": 3,
+                    "Reflex": 1,
+                    "Will": 3
                 },
-                'spellsPerDay': {
-                    0: 4,
-                    1: 2,
-                    2: 1,
-                    3: 0,
-                    4: 0,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Trackless Step",
+                "Spells Per Day": {
+                    "0": 4,
+                    "1": 2,
+                    "2": 1,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             4: {
-                'baseAttackBonus': [3, 0, 0, 0],
-                'feats': 0,
-                'saving': [4, 1, 4],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'resist nature\'s lure': 0
+                "Base Attack Bonus": 3,
+                "Saving": {
+                    "Fortitude": 4,
+                    "Reflex": 1,
+                    "Will": 4
                 },
-                'spellsPerDay': {
-                    0: 5,
-                    1: 3,
-                    2: 2,
-                    3: 0,
-                    4: 0,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Resist Nature’s Lure",
+                "Spells Per Day": {
+                    "0": 5,
+                    "1": 3,
+                    "2": 2,
+                    "3": null,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             5: {
-                'baseAttackBonus': [3, 0, 0, 0],
-                'feats': 0,
-                'saving': [4, 1, 4],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 1
+                "Base Attack Bonus": 3,
+                "Saving": {
+                    "Fortitude": 4,
+                    "Reflex": 1,
+                    "Will": 4
                 },
-                'spellsPerDay': {
-                    0: 5,
-                    1: 3,
-                    2: 2,
-                    3: 1,
-                    4: 0,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (1/day)",
+                "Spells Per Day": {
+                    "0": 5,
+                    "1": 3,
+                    "2": 2,
+                    "3": 1,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             6: {
-                'baseAttackBonus': [4, 0, 0, 0],
-                'feats': 0,
-                'saving': [5, 2, 5],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 2
+                "Base Attack Bonus": 4,
+                "Saving": {
+                    "Fortitude": 5,
+                    "Reflex": 2,
+                    "Will": 5
                 },
-                'spellsPerDay': {
-                    0: 5,
-                    1: 3,
-                    2: 3,
-                    3: 2,
-                    4: 0,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (2/day)",
+                "Spells Per Day": {
+                    "0": 5,
+                    "1": 3,
+                    "2": 3,
+                    "3": 2,
+                    "4": null,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             7: {
-                'baseAttackBonus': [5, 0, 0, 0],
-                'feats': 0,
-                'saving': [5, 2, 5],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 3
+                "Base Attack Bonus": 5,
+                "Saving": {
+                    "Fortitude": 5,
+                    "Reflex": 2,
+                    "Will": 5
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 4,
-                    2: 3,
-                    3: 2,
-                    4: 1,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (3/day)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 3,
+                    "3": 2,
+                    "4": 1,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             8: {
-                'baseAttackBonus': [6, 1, 0, 0],
-                'feats': 0,
-                'saving': [6, 2, 6],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape (large)': 0
+                "Base Attack Bonus": [6, 1],
+                "Saving": {
+                    "Fortitude": 6,
+                    "Reflex": 2,
+                    "Will": 6
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 4,
-                    2: 3,
-                    3: 3,
-                    4: 2,
-                    5: 0,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (Large)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 3,
+                    "3": 3,
+                    "4": 2,
+                    "5": null,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             9: {
-                'baseAttackBonus': [6, 1, 0, 0],
-                'feats': 0,
-                'saving': [6, 3, 6],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'venom immunity': 0
+                "Base Attack Bonus": [6, 1],
+                "Saving": {
+                    "Fortitude": 6,
+                    "Reflex": 3,
+                    "Will": 6
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 4,
-                    2: 4,
-                    3: 3,
-                    4: 2,
-                    5: 1,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Venom Immunity",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 4,
+                    "3": 3,
+                    "4": 2,
+                    "5": 1,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             10: {
-                'baseAttackBonus': [7, 2, 0, 0],
-                'feats': 0,
-                'saving': [7, 3, 7],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 4
+                "Base Attack Bonus": [7, 2],
+                "Saving": {
+                    "Fortitude": 7,
+                    "Reflex": 3,
+                    "Will": 7
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 4,
-                    2: 4,
-                    3: 3,
-                    4: 3,
-                    5: 2,
-                    6: 0,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (4/day)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 4,
+                    "2": 4,
+                    "3": 3,
+                    "4": 3,
+                    "5": 2,
+                    "6": null,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             11: {
-                'baseAttackBonus': [8, 3, 0, 0],
-                'feats': 0,
-                'saving': [7, 3, 7],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape (tiny)': 0
+                "Base Attack Bonus": [8, 3],
+                "Saving": {
+                    "Fortitude": 7,
+                    "Reflex": 3,
+                    "Will": 7
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 4,
-                    3: 4,
-                    4: 3,
-                    5: 2,
-                    6: 1,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (Tiny)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 4,
+                    "3": 4,
+                    "4": 3,
+                    "5": 2,
+                    "6": 1,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             12: {
-                'baseAttackBonus': [9, 4, 0, 0],
-                'feats': 0,
-                'saving': [8, 4, 8],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape (plant)': 0
+                "Base Attack Bonus": [9, 4],
+                "Saving": {
+                    "Fortitude": 8,
+                    "Reflex": 4,
+                    "Will": 8
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 4,
-                    3: 4,
-                    4: 3,
-                    5: 3,
-                    6: 2,
-                    7: 0,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (plant)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 4,
+                    "3": 4,
+                    "4": 3,
+                    "5": 3,
+                    "6": 2,
+                    "7": null,
+                    "8": null,
+                    "9": null
                 }
             },
             13: {
-                'baseAttackBonus': [9, 4, 0, 0],
-                'feats': 0,
-                'saving': [8, 4, 8],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'a thousand faces': 0
+                "Base Attack Bonus": [9, 4],
+                "Saving": {
+                    "Fortitude": 8,
+                    "Reflex": 4,
+                    "Will": 8
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 4,
-                    4: 4,
-                    5: 3,
-                    6: 2,
-                    7: 1,
-                    8: 0,
-                    9: 0
+                "Special": "A Thousand Faces",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 4,
+                    "4": 4,
+                    "5": 3,
+                    "6": 2,
+                    "7": 1,
+                    "8": null,
+                    "9": null
                 }
             },
             14: {
-                'baseAttackBonus': [10, 5, 0, 0],
-                'feats': 0,
-                'saving': [9, 4, 9],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 5
+                "Base Attack Bonus": [10, 5],
+                "Saving": {
+                    "Fortitude": 9,
+                    "Reflex": 4,
+                    "Will": 9
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 4,
-                    4: 4,
-                    5: 3,
-                    6: 3,
-                    7: 2,
-                    8: 0,
-                    9: 0
+                "Special": "Wild Shape (5/day)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 4,
+                    "4": 4,
+                    "5": 3,
+                    "6": 3,
+                    "7": 2,
+                    "8": null,
+                    "9": null
                 }
             },
             15: {
-                'baseAttackBonus': [11, 6, 1, 0],
-                'feats': 0,
-                'saving': [9, 5, 90],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'timeless body': 0,
-                    'wild shape (huge)': 0
+                "Base Attack Bonus": [11, 6, 1],
+                "Saving": {
+                    "Fortitude": 9,
+                    "Reflex": 5,
+                    "Will": 9
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 5,
-                    4: 4,
-                    5: 4,
-                    6: 3,
-                    7: 2,
-                    8: 1,
-                    9: 0
+                "Special": "Timeless Body, Wild Shape (Huge)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 4,
+                    "5": 4,
+                    "6": 3,
+                    "7": 2,
+                    "8": 1,
+                    "9": null
                 }
             },
             16: {
-                'baseAttackBonus': [12, 7, 2, 0],
-                'feats': 0,
-                'saving': [10, 5, 10],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape (elemental)': 1
+                "Base Attack Bonus": [12, 7, 2],
+                "Saving": {
+                    "Fortitude": 10,
+                    "Reflex": 5,
+                    "Will": 10
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 5,
-                    4: 5,
-                    5: 4,
-                    6: 4,
-                    7: 3,
-                    8: 3,
-                    9: 2
+                "Special": "Wild Shape (elemental 1/day)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 4,
+                    "5": 4,
+                    "6": 3,
+                    "7": 3,
+                    "8": 2,
+                    "9": null
                 }
             },
             17: {
-                'baseAttackBonus': [12, 7, 2, 0],
-                'feats': 0,
-                'saving': [10, 5, 10],
-                'skillPoints': [4, 0],
-                'specials': {
-                    '': 0
+                "Base Attack Bonus": [12, 7, 2],
+                "Saving": {
+                    "Fortitude": 10,
+                    "Reflex": 5,
+                    "Will": 10
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 5,
-                    4: 5,
-                    5: 4,
-                    6: 4,
-                    7: 3,
-                    8: 2,
-                    9: 1
+                "Special": null,
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 4,
+                    "6": 4,
+                    "7": 3,
+                    "8": 2,
+                    "9": 1
                 }
             },
             18: {
-                'baseAttackBonus': [13, 8, 3, 0],
-                'feats': 0,
-                'saving': [11, 6, 11],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 6,
-                    'wild shape (elemental)': 2
+                "Base Attack Bonus": [13, 8, 3],
+                "Saving": {
+                    "Fortitude": 11,
+                    "Reflex": 6,
+                    "Will": 11
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 5,
-                    4: 5,
-                    5: 4,
-                    6: 4,
-                    7: 3,
-                    8: 3,
-                    9: 2
+                "Special": "Wild Shape (6/day, elemental 2/day)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 4,
+                    "6": 4,
+                    "7": 3,
+                    "8": 3,
+                    "9": 2
                 }
             },
             19: {
-                'baseAttackBonus': [14, 9, 4, 0],
-                'feats': 0,
-                'saving': [11, 6, 11],
-                'skillPoints': [4, 0],
-                'specials': {
-                    '': 0
+                "Base Attack Bonus": [14, 9, 4],
+                "Saving": {
+                    "Fortitude": 11,
+                    "Reflex": 6,
+                    "Will": 11
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 5,
-                    4: 5,
-                    5: 5,
-                    6: 4,
-                    7: 4,
-                    8: 3,
-                    9: 3
+                "Special": null,
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 5,
+                    "6": 4,
+                    "7": 4,
+                    "8": 3,
+                    "9": 3
                 }
             },
             20: {
-                'baseAttackBonus': [15, 10, 5, 0],
-                'feats': 0,
-                'saving': [12, 6, 12],
-                'skillPoints': [4, 0],
-                'specials': {
-                    'wild shape': 6,
-                    'wild shape (elemental)': 3,
-                    'wild shape (huge elemental)': 3
+                "Base Attack Bonus": [15, 10, 5],
+                "Saving": {
+                    "Fortitude": 12,
+                    "Reflex": 6,
+                    "Will": 12
                 },
-                'spellsPerDay': {
-                    0: 6,
-                    1: 5,
-                    2: 5,
-                    3: 5,
-                    4: 5,
-                    5: 5,
-                    6: 4,
-                    7: 4,
-                    8: 4,
-                    9: 4
+                "Special": "Wild Shape (elemental 3/day, Huge elemental)",
+                "Spells Per Day": {
+                    "0": 6,
+                    "1": 5,
+                    "2": 5,
+                    "3": 5,
+                    "4": 5,
+                    "5": 5,
+                    "6": 4,
+                    "7": 4,
+                    "8": 4,
+                    "9": 4
                 }
             }
         };
+    }
+
+    /**
+     *
+     * @param level
+     * @returns {*}
+     */
+    getLevelStats(level) {
+        return this.classTable[level];
     }
 }

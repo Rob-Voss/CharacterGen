@@ -24,6 +24,26 @@
     <script src="js/lib/Inventory.js"></script>
     <script src="js/lib/Skills.js"></script>
     <script src="js/lib/Spells.js"></script>
+    <script src="js/lib/Race.js"></script>
+    <script src="js/lib/Races/Dwarf.js"></script>
+    <script src="js/lib/Races/Elf.js"></script>
+    <script src="js/lib/Races/Gnome.js"></script>
+    <script src="js/lib/Races/HalfElf.js"></script>
+    <script src="js/lib/Races/Halfling.js"></script>
+    <script src="js/lib/Races/HalfOrc.js"></script>
+    <script src="js/lib/Races/Human.js"></script>
+    <script src="js/lib/Class.js"></script>
+    <script src="js/lib/Classes/Barbarian.js"></script>
+    <script src="js/lib/Classes/Bard.js"></script>
+    <script src="js/lib/Classes/Cleric.js"></script>
+    <script src="js/lib/Classes/Druid.js"></script>
+    <script src="js/lib/Classes/Fighter.js"></script>
+    <script src="js/lib/Classes/Monk.js"></script>
+    <script src="js/lib/Classes/Paladin.js"></script>
+    <script src="js/lib/Classes/Ranger.js"></script>
+    <script src="js/lib/Classes/Rogue.js"></script>
+    <script src="js/lib/Classes/Sorcerer.js"></script>
+    <script src="js/lib/Classes/Wizard.js"></script>
     <script src="js/lib/Equipment/Armor.js"></script>
     <script src="js/lib/Equipment/Custom.js"></script>
     <script src="js/lib/Equipment/Shield.js"></script>
@@ -118,19 +138,19 @@
             Select Your Race
         </h2>
         <input id="human" class="button top-button-20" type="button" value="Human"
-               onclick="generator.character.raceSelect('Human');">
+               onclick="generator.character.selectRace('Human');">
         <input id="dwarf" class="button" type="button" value="Dwarf"
-               onclick="generator.character.raceSelect('Dwarf');">
+               onclick="generator.character.selectRace('Dwarf');">
         <input id="elf" class="button" type="button" value="Elf"
-               onclick="generator.character.raceSelect('Elf');">
+               onclick="generator.character.selectRace('Elf');">
         <input id="gnome" class="button" type="button" value="Gnome"
-               onclick="generator.character.raceSelect('Gnome');">
+               onclick="generator.character.selectRace('Gnome');">
         <input id="Half-elf" class="button" type="button" value="Half-elf"
-               onclick="generator.character.raceSelect('Half-elf');">
+               onclick="generator.character.selectRace('Half-Elf');">
         <input id="Half-orc" class="button" type="button" value="Half-orc"
-               onclick="generator.character.raceSelect('Half-orc');">
+               onclick="generator.character.selectRace('Half-Orc');">
         <input id="Halfling" class="button" type="button" value="Halfling"
-               onclick="generator.character.raceSelect('Halfling');">
+               onclick="generator.character.selectRace('Halfling');">
         <!-- Adding new races: search for string "NewBlankRace" in script.js and add javascript accordingly based on new race perameters. -->
     </section>
 
@@ -150,27 +170,27 @@
             Select your Class
         </h2>
         <input class="button top-button-15" type="button" value="Barbarian"
-               onclick="generator.character.classSelect('Barbarian'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Barbarian'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Bard"
-               onclick="generator.character.classSelect('Bard'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Bard'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Cleric"
-               onclick="generator.character.classSelect('Cleric'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Cleric'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Druid"
-               onclick="generator.character.classSelect('Druid'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Druid'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Fighter"
-               onclick="generator.character.classSelect('Fighter'); generator.character.specialCases('fighterBonusFeat'); ">
+               onclick="generator.character.selectClass('Fighter'); generator.character.specialCases('fighterBonusFeat'); ">
         <input class="button" type="button" value="Monk"
-               onclick="generator.character.specialCases('monk-option');">
+               onclick="generator.character.selectClass('Monk'); generator.character.specialCases('monk-option');">
         <input class="button" type="button" value="Paladin"
-               onclick="generator.character.classSelect('Paladin'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Paladin'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Ranger"
-               onclick="generator.character.classSelect('Ranger'); generator.character.specialCases('track')">
+               onclick="generator.character.selectClass('Ranger'); generator.character.specialCases('track')">
         <input class="button" type="button" value="Rogue"
-               onclick="generator.character.classSelect('Rogue'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Rogue'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Sorcerer"
-               onclick="generator.character.classSelect('Sorcerer'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Sorcerer'); generator.character.specialCases('none');">
         <input class="button" type="button" value="Wizard"
-               onclick="generator.character.classSelect('Wizard'); generator.character.specialCases('none');">
+               onclick="generator.character.selectClass('Wizard'); generator.character.specialCases('none');">
     </section>
 
     <section id="class-monk" class="menu">
