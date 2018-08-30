@@ -17,7 +17,7 @@ class Character {
             'wis': 0,
             'cha': 0
         };
-        this.abilityMods = {
+        this.abilityMod = {
             'str': 0,
             'dex': 0,
             'con': 0,
@@ -30,12 +30,7 @@ class Character {
             'Flat Footed': 0,
             'Touch': 0
         };
-        this.baseAttackBonuses = {
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0
-        };
+        this.baseAttackBonuses = [];
         this.carryingCapacity = {
             'Heavy': 0,
             'Medium': 0,
@@ -62,6 +57,11 @@ class Character {
             'Skin': '',
             'Weight': ''
         };
+        this.savingThrowBonuses = {
+            'Fortitude': 0,
+            'Reflex': 0,
+            'Will': 0
+        };
         this.class = {};
         this.feats = new Feats(this);
         this.generator = characterGen;
@@ -69,11 +69,6 @@ class Character {
         this.inventory = new Inventory(this.generator);
         this.level = 0;
         this.race = new Race();
-        this.savingThrows = {
-            'Fortitude': 0,
-            'Reflex': 0,
-            'Will': 0
-        };
         this.skills = new Skills(this);
         this.spells = new Spells(this);
 
@@ -122,18 +117,6 @@ class Character {
     }
 
     /**
-     * Displays all Ability Modifiers in Skills Section
-     */
-    addAbilityModifiers() {
-        for (let element in this.ability) {
-            let list = document.getElementsByClassName("am-" + element);
-            for (let i = 0; i < list.length; i++) {
-                list[i].innerHTML = (this.abilityMods[element] < 0 ? "" : "+ ") + this.abilityMods[element];
-            }
-        } 
-    }
-
-    /**
      *
      * @param {String} whichLevel
      */
@@ -143,7 +126,7 @@ class Character {
 
         for (let i = (whichLevel * 4); i < this.level; i++) {
             if (i <= (whichLevel * 4 + 3)) { // Only levels affected by THIS (but not SUBSEQUENT) ability score increase
-                let additionalHitPoints = (Math.floor(Math.random() * this.class.hitDie) + 1) + this.abilityMods['con'];
+                let additionalHitPoints = (Math.floor(Math.random() * this.class.hitDie) + 1) + this.abilityMod['con'];
                 this.hitPoints += (additionalHitPoints <= 0) ? 1 : additionalHitPoints;
                 this.skills.levelSkillPointIncrease();
             }
@@ -151,7 +134,7 @@ class Character {
         this.updateAbilityModifiers();
 
         document.getElementById("final-" + ability).innerHTML = this.ability[ability];
-        document.getElementById("final-" + ability + "-mod").innerHTML = "+ " + this.abilityMods[ability];
+        document.getElementById("final-" + ability + "-mod").innerHTML = "+ " + this.abilityMod[ability];
         document.getElementById("handle-ability-score-" + Number(whichLevel)).style.display = "none";
     }
 
@@ -250,9 +233,9 @@ class Character {
           size = (this.small) ? 1 : 0,
           deflect = 0,
           misc = 0;
-      this.armorClass['Normal'] = 10 + this.abilityMods['dex'] + armor + shield + natural + size + deflect + misc;
+      this.armorClass['Normal'] = 10 + this.abilityMod['dex'] + armor + shield + natural + size + deflect + misc;
       this.armorClass['Flat Footed'] = 10 + armor + shield + natural + size + deflect + misc;
-      this.armorClass['Touch'] = 10 + this.abilityMods['dex'] + size + deflect + misc;
+      this.armorClass['Touch'] = 10 + this.abilityMod['dex'] + size + deflect + misc;
 
       document.getElementById("print-armor-total").innerHTML = this.armorClass['Normal'];
       document.getElementById("print-ff-total").innerHTML = this.armorClass['Flat Footed'];
@@ -329,7 +312,7 @@ class Character {
                     document.getElementById("handle-ability-score-" + (i / 4)).style.display = "block";
                 }
                 if (i <= 3) { // Only levels unaffected by 1st ability score increase
-                    let additionalHitPoints = (Math.floor(Math.random() * this.class.hitDie) + 1) + this.abilityMods['con'];
+                    let additionalHitPoints = (Math.floor(Math.random() * this.class.hitDie) + 1) + this.abilityMod['con'];
                     this.hitPoints += (additionalHitPoints <= 0) ? 1 : additionalHitPoints;
                     this.skills.levelSkillPointIncrease();
                 }
@@ -339,6 +322,7 @@ class Character {
                 }
             }
         }
+        this.generator.showFinalAttributes();
     }
 
     /**
@@ -432,10 +416,11 @@ class Character {
             // A placeholder for future racial additions.
             // return new Human();
         }
-        document.getElementById("show-class").innerHTML = "Current Class: " + this.class;
-        document.getElementById("show-class-2").innerHTML = this.class;
+        document.getElementById("show-class").innerHTML = "Current Class: " + userClass;
+        document.getElementById("show-class-2").innerHTML = userClass;
         document.getElementById("dice-sys").style.display = "block";
 
+        this.updateClassBonuses();
     }
 
     /**
@@ -474,6 +459,8 @@ class Character {
         document.getElementById("show-race").innerHTML = "Current Race: " + userRace;
         document.getElementById("show-race-2").innerHTML = userRace;
         document.getElementById("class-source").style.display = "block";
+
+        this.updateRacialBonuses();
     }
 
     /**
@@ -492,157 +479,46 @@ class Character {
      * Update various things
      */
     update() {
+        this.updateClassBonuses();
+        this.updateRacialBonuses();
         this.updateAbilityModifiers();
-        this.updateMiscSkillModifiers();
-        this.addAbilityModifiers();
         this.skills.showClassSkills();
         this.initiatePhaseTwo();
-        this.generator.showFinalAttributes();
-        this.updateAllSavingThrows();
     }
 
     /**
      * Calculates all Ability Modifiers using the Character Attributes
      */
     updateAbilityModifiers() {
-        this.abilityMods['str'] = Math.floor((this.ability['str'] - 10) / 2);
-        this.abilityMods['dex'] = Math.floor((this.ability['dex'] - 10) / 2);
-        this.abilityMods['con'] = Math.floor((this.ability['con'] - 10) / 2);
-        this.abilityMods['int'] = Math.floor((this.ability['int'] - 10) / 2);
-        this.abilityMods['wis'] = Math.floor((this.ability['wis'] - 10) / 2);
-        this.abilityMods['cha'] = Math.floor((this.ability['cha'] - 10) / 2);
-    }
-
-    /**
-     * Shows all Racial Skill Misc Modifiers (and other racial bonuses) and re-calculates ability modifiers.
-     */
-    updateMiscSkillModifiers() {
-        switch (this.race) {
-            case "Human":
-                this.startingFeats += 1;
-                break;
-            case "Dwarf":
-                this.ability['con'] += 2;
-                this.ability['cha'] -= 2;
-                this.darkVision = true;
-                break;
-            case "Elf":
-                this.ability['dex'] += 2;
-                this.ability['con'] -= 2;
-                this.lowLight = true;
-                this.skills.skillTable['listen'].misc = 2;
-                this.skills.skillTable['search'].misc = 2;
-                this.skills.skillTable['spot'].misc = 2;
-                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
-                document.getElementById("ms-search").innerHTML = this.skills.skillTable['search'].misc;
-                document.getElementById("ms-spot").innerHTML = this.skills.skillTable['spot'].misc;
-                break;
-            case "Gnome":
-                this.ability['con'] += 2;
-                this.ability['str'] -= 2;
-                this.small = true;
-                this.lowLight = true;
-                this.skills.skillTable['listen'].misc = 2;
-                this.skills.skillTable['craft'].misc = 2;
-                this.skills.skillTable['hide'].misc = 4;
-                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
-                document.getElementById("ms-craft").innerHTML = this.skills.skillTable['craft'].misc;
-                document.getElementById("ms-hide").innerHTML = this.skills.skillTable['hide'].misc;
-                break;
-            case "Half-Elf":
-                this.lowLight = true;
-                this.skills.skillTable['listen'].misc = 1;
-                this.skills.skillTable['search'].misc = 1;
-                this.skills.skillTable['spot'].misc = 1;
-                this.skills.skillTable['diplomacy'].misc = 2;
-                this.skills.skillTable['gatherinformation'].misc = 2;
-                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
-                document.getElementById("ms-search").innerHTML = this.skills.skillTable['search'].misc;
-                document.getElementById("ms-spot").innerHTML = this.skills.skillTable['spot'].misc;
-                document.getElementById("ms-diplomacy").innerHTML = this.skills.skillTable['diplomacy'].misc;
-                document.getElementById("ms-gatherinformation").innerHTML = this.skills.skillTable['gatherinformation'].misc;
-                break;
-            case "Half-Orc":
-                this.ability['str'] += 2;
-                this.ability['int'] -= 2;
-                this.ability['cha'] -= 2;
-                this.darkVision = true;
-                break;
-            case "Halfling":
-                this.ability['dex'] += 2;
-                this.ability['str'] -= 2;
-                this.small = true;
-                this.skills.skillTable['climb'].misc = 2;
-                this.skills.skillTable['jump'].misc = 2;
-                this.skills.skillTable['movesilently'].misc = 2;
-                this.skills.skillTable['listen'].misc = 2;
-                this.skills.skillTable['hide'].misc = 4;
-                document.getElementById("ms-climb").innerHTML = this.skills.skillTable['climb'].misc;
-                document.getElementById("ms-jump").innerHTML = this.skills.skillTable['jump'].misc;
-                document.getElementById("ms-movesilently").innerHTML = this.skills.skillTable['movesilently'].misc;
-                document.getElementById("ms-listen").innerHTML = this.skills.skillTable['listen'].misc;
-                document.getElementById("ms-hide").innerHTML = this.skills.skillTable['hide'].misc;
-                break;
-            case "NewBlankRace":
-                // A placeholder for future racial additions.
-                break;
-        }
-        this.updateAbilityModifiers();
-        this.generator.showFinalAttributes();
-    }
-
-    /**
-     * Calculate Saving Throws and Base Attack Bonus. They Don't Display immediately.
-     */
-    updateAllSavingThrows() {
-        switch (this.class) {
-            case "Cleric":
-            case "Druid":
-                this.updateSavingThrows(2, 0, 2, "A", 8);
-                break;
-            case "Sorcerer":
-            case "Wizard":
-                this.updateSavingThrows(0, 0, 2, "P", 4);
-                break;
-            case "Barbarian":
-                this.updateSavingThrows(2, 0, 0, "G", 12);
-                break;
-            case "Fighter":
-            case "Paladin":
-                this.updateSavingThrows(2, 0, 0, "G", 10);
-                break;
-            case "Monk":
-                this.updateSavingThrows(2, 2, 2, "A", 8);
-                break;
-            case "Bard":
-                this.updateSavingThrows(0, 2, 2, "A", 6);
-                break;
-            case "Ranger":
-                this.updateSavingThrows(2, 2, 0, "G", 8);
-                break;
-            case "Rogue":
-                this.updateSavingThrows(0, 2, 0, "A", 6);
-                break;
-            case "NewBlankClass":
-                // A placeholder for future class additions.
-                break;
+        for (let element in this.ability) {
+            this.abilityMod[element] = Math.floor((this.ability[element] - 10) / 2);
+            for (let i = 0, list = document.getElementsByClassName("am-" + element); i < list.length; i++) {
+                list[i].innerHTML = this.abilityMod[element];
+            }
         }
     }
 
     /**
      *
-     * @param {number} fortSave
-     * @param {number} reflexSave
-     * @param {number} willSave
-     * @param {String} baseAttack
-     * @param {number} hitDie
      */
-    updateSavingThrows(fortSave, reflexSave, willSave, baseAttack, hitDie) {
-        this.savingThrows['Fortitude'] = fortSave;
-        this.savingThrows['Reflex'] = reflexSave;
-        this.savingThrows['Will'] = willSave;
-        this.hitPoints = (this.class.hitDie + this.abilityMods['con'] <= 0) ? 1 : this.class.hitDie + this.abilityMods['con'];
-        this.class.getBaseAttackBonuses(this.level);
+    updateClassBonuses() {
+        this.hitPoints = (this.class.hitDie + this.abilityMod.con <= 0) ? 1 : this.class.hitDie + this.abilityMod.con;
+        this.baseAttackBonuses = this.class.getBaseAttackBonuses(this.level);
+        this.savingThrowBonuses = this.class.getSavingThrowBonuses(this.level);
+    }
+
+    /**
+     *
+     */
+    updateRacialBonuses() {
+        this.startingFeats += this.race.bonuses.feat;
+        for (let ability in this.race.abilityAdj) {
+            this.ability[ability] += this.race.abilityAdj[ability];
+        }
+        for (let skill in this.race.bonuses.skill) {
+            this.skills.skillTable[skill].misc = this.race.bonuses.skill[skill];
+            document.getElementById("ms-" + skill).innerHTML = this.skills.skillTable[skill].misc;
+        }
     }
 
     /**

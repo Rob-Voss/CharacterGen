@@ -42,6 +42,7 @@ class Gnome extends Race {
      */
     constructor(subType = '') {
         super(subType);
+        this.name = this.constructor.name;
 
         this.abilityAdj.str = -2;
         this.abilityAdj.con = 2;
@@ -57,7 +58,7 @@ class Gnome extends Race {
             'dodge': {
                 'giants': 4
             },
-            'feats': 0,
+            'feat': 0,
             'immunity': {},
             'saving': {
                 'illusion': 2,

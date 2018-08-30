@@ -44,6 +44,7 @@ class Dwarf extends Race {
      */
     constructor(subType = '') {
         super(subType);
+        this.name = this.constructor.name;
 
         this.abilityAdj.con = 2;
         this.abilityAdj.cha = -2;
@@ -57,7 +58,7 @@ class Dwarf extends Race {
             'dodge': {
                 'giants': 4
             },
-            'feats': 0,
+            'feat': 0,
             'immunity': {},
             'saving': {
                 'poison': 2,

@@ -1,10 +1,12 @@
 
-class Paladin {
+class Paladin extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Paladin');
+
         this.alignment = ['Lawful good'];
         this.hitDie = 10;
         this.skills = [
@@ -16,6 +18,14 @@ class Paladin {
             1: [2, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
                 "Base Attack Bonus": 1,
                 "Saving": {

@@ -32,7 +32,7 @@ class Halfling extends Race {
      */
     constructor(subType = '') {
         super(subType);
-
+        this.name = this.constructor.name;
         this.abilityAdj.str = -2;
         this.abilityAdj.dex = 2;
 
@@ -43,7 +43,7 @@ class Halfling extends Race {
             },
             'dc': {},
             'dodge': {},
-            'feats': 0,
+            'feat': 0,
             'immunity': {
                 'sleep': true
             },

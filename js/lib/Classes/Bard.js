@@ -1,10 +1,12 @@
 
-class Bard {
+class Bard extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Bard');
+
         this.alignment = ['Nonlawful'];
         this.hitDie = 6;
         this.skills = ['Appraise', 'Balance', 'Bluff', 'Climb', 'Concentration', 'Craft', 'Decipher Script', 'Diplomacy',
@@ -18,6 +20,14 @@ class Bard {
             1: [6, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
                 "Base Attack Bonus": 0,
                 "Saving": {

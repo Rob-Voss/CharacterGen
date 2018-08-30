@@ -1,10 +1,12 @@
 
-class Ranger {
+class Ranger extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Ranger');
+
         this.alignment = ['Any'];
         this.hitDie = 8;
         this.skills = [
@@ -17,6 +19,14 @@ class Ranger {
             1: [6, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
                 "Base Attack Bonus": 1,
                 "Saving": {

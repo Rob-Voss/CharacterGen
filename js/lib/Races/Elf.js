@@ -29,6 +29,7 @@ class Elf extends Race {
      */
     constructor(subType = '') {
         super(subType);
+        this.name = this.constructor.name;
 
         this.abilityAdj.dex = 2;
         this.abilityAdj.con = -2;
@@ -37,7 +38,7 @@ class Elf extends Race {
             'attack': {},
             'dc': {},
             'dodge': {},
-            'feats': 0,
+            'feat': 0,
             'immunity': {
                 'sleep': true
             },

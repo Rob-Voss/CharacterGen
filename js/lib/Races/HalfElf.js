@@ -27,12 +27,13 @@ class HalfElf extends Race {
      */
     constructor(subType = '') {
         super(subType);
+        this.name = this.constructor.name;
 
         this.bonuses = {
             'attack': {},
             'dc': {},
             'dodge': {},
-            'feats': 0,
+            'feat': 0,
             'immunity': {
                 'sleep': true
             },

@@ -22,12 +22,13 @@ class Human extends Race {
      */
     constructor(subType = '') {
         super(subType);
+        this.name = this.constructor.name;
 
          this.bonuses = {
              'attack': {},
              'dc': {},
              'dodge': {},
-             'feats': 1,
+             'feat': 1,
              'immunity': {},
              'saving': {},
              'size': {},

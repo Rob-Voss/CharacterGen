@@ -1,10 +1,12 @@
 
-class Fighter {
+class Fighter extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Fighter');
+
         this.alignment = ['Any'];
         this.hitDie = 10;
         this.skills = [
@@ -15,6 +17,14 @@ class Fighter {
             1: [2, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
                 "Base Attack Bonus": 1,
                 "Saving": {

@@ -29,6 +29,7 @@ class HalfOrc extends Race {
      */
     constructor(subType = '') {
         super(subType);
+        this.name = this.constructor.name;
 
         this.abilityAdj.str = 2;
         this.abilityAdj.int = -2;
@@ -38,7 +39,7 @@ class HalfOrc extends Race {
             'attack': {},
             'dc': {},
             'dodge': {},
-            'feats': 0,
+            'feat': 0,
             'immunity': {},
             'saving': {},
             'size': {},

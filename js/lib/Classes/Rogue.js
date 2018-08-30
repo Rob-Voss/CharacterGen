@@ -1,10 +1,12 @@
 
-class Rogue {
+class Rogue extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Rogue');
+
         this.alignment = ['Any'];
         this.hitDie = 6;
         this.skills = [
@@ -19,8 +21,15 @@ class Rogue {
             1: [8, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
-                "Base Attack Bonus": 0,
                 "Saving": {
                     "Fortitude": 0,
                     "Reflex": 2,
@@ -29,7 +38,6 @@ class Rogue {
                 "Special": "Sneak Attack +1d6, Trapfinding"
             },
             2: {
-                "Base Attack Bonus": 1,
                 "Saving": {
                     "Fortitude": 0,
                     "Reflex": 3,
@@ -38,7 +46,6 @@ class Rogue {
                 "Special": "Evasion"
             },
             3: {
-                "Base Attack Bonus": 2,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 3,
@@ -47,7 +54,6 @@ class Rogue {
                 "Special": "Sneak Attack +2d6, Trap Sense +1"
             },
             4: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 4,
@@ -56,7 +62,6 @@ class Rogue {
                 "Special": "Uncanny Dodge"
             },
             5: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 4,
@@ -65,7 +70,6 @@ class Rogue {
                 "Special": "Sneak Attack +3d6"
             },
             6: {
-                "Base Attack Bonus": 4,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 5,
@@ -74,7 +78,6 @@ class Rogue {
                 "Special": "Trap Sense +2"
             },
             7: {
-                "Base Attack Bonus": 5,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 5,
@@ -83,7 +86,6 @@ class Rogue {
                 "Special": "Sneak Attack +4d6"
             },
             8: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 6,
@@ -92,7 +94,6 @@ class Rogue {
                 "Special": "Improved Uncanny Dodge"
             },
             9: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 6,
@@ -101,7 +102,6 @@ class Rogue {
                 "Special": "Sneak Attack +5d6, Trap Sense +3"
             },
             10: {
-                "Base Attack Bonus": [7, 2],
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 7,
@@ -110,7 +110,6 @@ class Rogue {
                 "Special": "Reflex Ability"
             },
             11: {
-                "Base Attack Bonus": [8, 3],
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 7,
@@ -119,7 +118,6 @@ class Rogue {
                 "Special": "Sneak Attack +6d6"
             },
             12: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 8,
@@ -128,7 +126,6 @@ class Rogue {
                 "Special": "Trap Sense +4"
             },
             13: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 8,
@@ -137,7 +134,6 @@ class Rogue {
                 "Special": "Sneak Attack +7d6, Reflex Ability"
             },
             14: {
-                "Base Attack Bonus": [10, 5],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 9,
@@ -146,7 +142,6 @@ class Rogue {
                 "Special": null
             },
             15: {
-                "Base Attack Bonus": [11, 6, 1],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 9,
@@ -155,7 +150,6 @@ class Rogue {
                 "Special": "Sneak Attack +8d6, Trap Sense +5"
             },
             16: {
-                "Base Attack Bonus": [12, 7, 2],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 10,
@@ -164,7 +158,6 @@ class Rogue {
                 "Special": "Reflex Ability"
             },
             17: {
-                "Base Attack Bonus": [12, 7, 2],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 10,
@@ -173,7 +166,6 @@ class Rogue {
                 "Special": "Sneak Attack +9d6"
             },
             18: {
-                "Base Attack Bonus": [13, 8, 3],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 11,
@@ -182,7 +174,6 @@ class Rogue {
                 "Special": "Trap Sense +6"
             },
             19: {
-                "Base Attack Bonus": [14, 9, 4],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 11,
@@ -191,7 +182,6 @@ class Rogue {
                 "Special": "Sneak Attack +10d6, Reflex Ability"
             },
             20: {
-                "Base Attack Bonus": [15, 10, 5],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 12,
@@ -200,15 +190,6 @@ class Rogue {
                 "Special": null
             }
         };
-
     }
 
-    /**
-     *
-     * @param level
-     * @returns {*}
-     */
-    getLevelStats(level) {
-        return this.classTable[level];
-    }
 }

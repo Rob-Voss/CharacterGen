@@ -1,10 +1,12 @@
 
-class Wizard {
+class Wizard extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Wizard');
+
         this.alignment = ['Any'];
         this.hitDie = 4;
         this.skills = [
@@ -16,8 +18,15 @@ class Wizard {
             1: [2, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
-                "Base Attack Bonus": 0,
                 "Saving": {
                     "Fortitude": 0,
                     "Reflex": 0,
@@ -38,7 +47,6 @@ class Wizard {
                 }
             },
             2: {
-                "Base Attack Bonus": 1,
                 "Saving": {
                     "Fortitude": 0,
                     "Reflex": 0,
@@ -59,7 +67,6 @@ class Wizard {
                 }
             },
             3: {
-                "Base Attack Bonus": 1,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 1,
@@ -80,7 +87,6 @@ class Wizard {
                 }
             },
             4: {
-                "Base Attack Bonus": 2,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 1,
@@ -101,7 +107,6 @@ class Wizard {
                 }
             },
             5: {
-                "Base Attack Bonus": 2,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 1,
@@ -122,7 +127,6 @@ class Wizard {
                 }
             },
             6: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 2,
@@ -143,7 +147,6 @@ class Wizard {
                 }
             },
             7: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 2,
@@ -164,7 +167,6 @@ class Wizard {
                 }
             },
             8: {
-                "Base Attack Bonus": 4,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 2,
@@ -185,7 +187,6 @@ class Wizard {
                 }
             },
             9: {
-                "Base Attack Bonus": 4,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 3,
@@ -206,7 +207,6 @@ class Wizard {
                 }
             },
             10: {
-                "Base Attack Bonus": 5,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 3,
@@ -227,7 +227,6 @@ class Wizard {
                 }
             },
             11: {
-                "Base Attack Bonus": 5,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 3,
@@ -248,7 +247,6 @@ class Wizard {
                 }
             },
             12: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 4,
@@ -269,7 +267,6 @@ class Wizard {
                 }
             },
             13: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 4,
@@ -290,7 +287,6 @@ class Wizard {
                 }
             },
             14: {
-                "Base Attack Bonus": [7, 2],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 4,
@@ -311,7 +307,6 @@ class Wizard {
                 }
             },
             15: {
-                "Base Attack Bonus": [7, 2],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 5,
@@ -332,7 +327,6 @@ class Wizard {
                 }
             },
             16: {
-                "Base Attack Bonus": [8, 3],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 5,
@@ -353,7 +347,6 @@ class Wizard {
                 }
             },
             17: {
-                "Base Attack Bonus": [8, 3],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 5,
@@ -374,7 +367,6 @@ class Wizard {
                 }
             },
             18: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 6,
@@ -395,7 +387,6 @@ class Wizard {
                 }
             },
             19: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 6,
@@ -416,7 +407,6 @@ class Wizard {
                 }
             },
             20: {
-                "Base Attack Bonus": [10, 5],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 6,
@@ -440,12 +430,4 @@ class Wizard {
 
     }
 
-    /**
-     *
-     * @param level
-     * @returns {*}
-     */
-    getLevelStats(level) {
-        return this.classTable[level];
-    }
 }

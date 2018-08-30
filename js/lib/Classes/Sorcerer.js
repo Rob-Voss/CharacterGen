@@ -22,12 +22,14 @@
  19th    9    5    5    4    4    4    3    3    3    2
  20th    9    5    5    4    4    4    3    3    3    3*/
 
-class Sorcerer {
+class Sorcerer extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Sorcerer');
+
         this.alignment = ['Any'];
         this.hitDie = 4;
         this.skills = [
@@ -38,8 +40,15 @@ class Sorcerer {
             1: [2, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
-                "Base Attack Bonus": 0,
                 "Saving": {
                     "Fortitude": 0,
                     "Reflex": 0,
@@ -60,7 +69,6 @@ class Sorcerer {
                 }
             },
             2: {
-                "Base Attack Bonus": 1,
                 "Saving": {
                     "Fortitude": 0,
                     "Reflex": 0,
@@ -81,7 +89,6 @@ class Sorcerer {
                 }
             },
             3: {
-                "Base Attack Bonus": 1,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 1,
@@ -102,7 +109,6 @@ class Sorcerer {
                 }
             },
             4: {
-                "Base Attack Bonus": 2,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 1,
@@ -123,7 +129,6 @@ class Sorcerer {
                 }
             },
             5: {
-                "Base Attack Bonus": 2,
                 "Saving": {
                     "Fortitude": 1,
                     "Reflex": 1,
@@ -144,7 +149,6 @@ class Sorcerer {
                 }
             },
             6: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 2,
@@ -165,7 +169,6 @@ class Sorcerer {
                 }
             },
             7: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 2,
@@ -186,7 +189,6 @@ class Sorcerer {
                 }
             },
             8: {
-                "Base Attack Bonus": 4,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 2,
@@ -207,7 +209,6 @@ class Sorcerer {
                 }
             },
             9: {
-                "Base Attack Bonus": 4,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 3,
@@ -228,7 +229,6 @@ class Sorcerer {
                 }
             },
             10: {
-                "Base Attack Bonus": 5,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 3,
@@ -249,7 +249,6 @@ class Sorcerer {
                 }
             },
             11: {
-                "Base Attack Bonus": 5,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 3,
@@ -270,7 +269,6 @@ class Sorcerer {
                 }
             },
             12: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 4,
@@ -291,7 +289,6 @@ class Sorcerer {
                 }
             },
             13: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 4,
@@ -312,7 +309,6 @@ class Sorcerer {
                 }
             },
             14: {
-                "Base Attack Bonus": [7, 2],
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 4,
@@ -333,7 +329,6 @@ class Sorcerer {
                 }
             },
             15: {
-                "Base Attack Bonus": [7, 2],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 5,
@@ -354,7 +349,6 @@ class Sorcerer {
                 }
             },
             16: {
-                "Base Attack Bonus": [8, 3],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 5,
@@ -375,7 +369,6 @@ class Sorcerer {
                 }
             },
             17: {
-                "Base Attack Bonus": [8, 3],
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 5,
@@ -396,7 +389,6 @@ class Sorcerer {
                 }
             },
             18: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 6,
@@ -417,7 +409,6 @@ class Sorcerer {
                 }
             },
             19: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 6,
@@ -438,7 +429,6 @@ class Sorcerer {
                 }
             },
             20: {
-                "Base Attack Bonus": [10, 5],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 6,
@@ -459,15 +449,6 @@ class Sorcerer {
                 }
             }
         };
-
     }
 
-    /**
-     *
-     * @param level
-     * @returns {*}
-     */
-    getLevelStats(level) {
-        return this.classTable[level];
-    }
 }

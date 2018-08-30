@@ -19,7 +19,7 @@ class Race {
             'attack': {},
             'dc': {},
             'dodge': {},
-            'feat': 1,
+            'feat': 0,
             'immunities': {},
             'saving': {},
             'size': {},
@@ -41,6 +41,10 @@ class Race {
         this.subType = subType;
     }
 
+    getRacialBonus(bonus) {
+        return this.bonuses[bonus];
+    }
+
     get attackBonuses() {
         return this.bonuses.attack;
     }
@@ -59,10 +63,6 @@ class Race {
 
     get immunities() {
         return this.bonuses.immunities;
-    }
-
-    get race() {
-        return this.constructor.name;
     }
 
     get savingBonuses() {

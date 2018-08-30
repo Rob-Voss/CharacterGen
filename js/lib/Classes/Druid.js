@@ -1,10 +1,12 @@
 
-class Druid {
+class Druid extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Druid');
+
         this.alignment = ['Neutral good', 'lawful neutral', 'neutral', 'chaotic neutral', 'neutral evil'];
         this.hitDie = 8;
         this.skills = ['Concentration', 'Craft', 'Diplomacy', 'Handle Animal', 'Heal', 'Knowledge (nature)',
@@ -15,8 +17,15 @@ class Druid {
             1: [4, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
-                "Base Attack Bonus": 0,
                 "Saving": {
                     "Fortitude": 2,
                     "Reflex": 0,
@@ -37,7 +46,6 @@ class Druid {
                 }
             },
             2: {
-                "Base Attack Bonus": 1,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 0,
@@ -58,7 +66,6 @@ class Druid {
                 }
             },
             3: {
-                "Base Attack Bonus": 2,
                 "Saving": {
                     "Fortitude": 3,
                     "Reflex": 1,
@@ -79,7 +86,6 @@ class Druid {
                 }
             },
             4: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 1,
@@ -100,7 +106,6 @@ class Druid {
                 }
             },
             5: {
-                "Base Attack Bonus": 3,
                 "Saving": {
                     "Fortitude": 4,
                     "Reflex": 1,
@@ -121,7 +126,6 @@ class Druid {
                 }
             },
             6: {
-                "Base Attack Bonus": 4,
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 2,
@@ -142,7 +146,6 @@ class Druid {
                 }
             },
             7: {
-                "Base Attack Bonus": 5,
                 "Saving": {
                     "Fortitude": 5,
                     "Reflex": 2,
@@ -163,7 +166,6 @@ class Druid {
                 }
             },
             8: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 2,
@@ -184,7 +186,6 @@ class Druid {
                 }
             },
             9: {
-                "Base Attack Bonus": [6, 1],
                 "Saving": {
                     "Fortitude": 6,
                     "Reflex": 3,
@@ -205,7 +206,6 @@ class Druid {
                 }
             },
             10: {
-                "Base Attack Bonus": [7, 2],
                 "Saving": {
                     "Fortitude": 7,
                     "Reflex": 3,
@@ -226,7 +226,6 @@ class Druid {
                 }
             },
             11: {
-                "Base Attack Bonus": [8, 3],
                 "Saving": {
                     "Fortitude": 7,
                     "Reflex": 3,
@@ -247,7 +246,6 @@ class Druid {
                 }
             },
             12: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 8,
                     "Reflex": 4,
@@ -268,7 +266,6 @@ class Druid {
                 }
             },
             13: {
-                "Base Attack Bonus": [9, 4],
                 "Saving": {
                     "Fortitude": 8,
                     "Reflex": 4,
@@ -289,7 +286,6 @@ class Druid {
                 }
             },
             14: {
-                "Base Attack Bonus": [10, 5],
                 "Saving": {
                     "Fortitude": 9,
                     "Reflex": 4,
@@ -310,7 +306,6 @@ class Druid {
                 }
             },
             15: {
-                "Base Attack Bonus": [11, 6, 1],
                 "Saving": {
                     "Fortitude": 9,
                     "Reflex": 5,
@@ -331,7 +326,6 @@ class Druid {
                 }
             },
             16: {
-                "Base Attack Bonus": [12, 7, 2],
                 "Saving": {
                     "Fortitude": 10,
                     "Reflex": 5,
@@ -352,7 +346,6 @@ class Druid {
                 }
             },
             17: {
-                "Base Attack Bonus": [12, 7, 2],
                 "Saving": {
                     "Fortitude": 10,
                     "Reflex": 5,
@@ -373,7 +366,6 @@ class Druid {
                 }
             },
             18: {
-                "Base Attack Bonus": [13, 8, 3],
                 "Saving": {
                     "Fortitude": 11,
                     "Reflex": 6,
@@ -394,7 +386,6 @@ class Druid {
                 }
             },
             19: {
-                "Base Attack Bonus": [14, 9, 4],
                 "Saving": {
                     "Fortitude": 11,
                     "Reflex": 6,
@@ -415,7 +406,6 @@ class Druid {
                 }
             },
             20: {
-                "Base Attack Bonus": [15, 10, 5],
                 "Saving": {
                     "Fortitude": 12,
                     "Reflex": 6,
@@ -438,12 +428,4 @@ class Druid {
         };
     }
 
-    /**
-     *
-     * @param level
-     * @returns {*}
-     */
-    getLevelStats(level) {
-        return this.classTable[level];
-    }
 }

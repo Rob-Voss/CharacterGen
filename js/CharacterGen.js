@@ -23,6 +23,16 @@ class CharacterGen {
     /**
      *
      */
+    doneAdvLvl() {
+        document.getElementById("handle-level-adv").style.display = "none";
+        document.getElementById("select-skills").style.display = "block";
+        document.getElementById("feats-remaining").innerHTML = this.character.startingFeats;
+        document.getElementById("show-hp").innerHTML = this.character.hitPoints;
+    }
+
+    /**
+     *
+     */
     customItemSubMenu() {
         let kind = document.getElementById("custom-select").value;
         document.getElementById("custom-" + kind).style.display = "block";
@@ -48,16 +58,6 @@ class CharacterGen {
         document.getElementById("custom-armor").style.display = "none";
         document.getElementById("custom-item").style.display = "none";
         window.scrollTo(0, 0);
-    }
-
-    /**
-     *
-     */
-    doneAdvLvl() {
-        document.getElementById("handle-level-adv").style.display = "none";
-        document.getElementById("select-skills").style.display = "block";
-        document.getElementById("feats-remaining").innerHTML = this.character.startingFeats;
-        document.getElementById("show-hp").innerHTML = this.character.hitPoints;
     }
 
     /**
@@ -514,19 +514,14 @@ class CharacterGen {
     }
 
     showFinalAttributes() {
-        // Now that the switch is done, and every score is in its final state, let's show them.
-        document.getElementById("final-str").innerHTML = this.character.strAttr;
-        document.getElementById("final-str-mod").innerHTML = this.character.strMod;
-        document.getElementById("final-dex").innerHTML = this.character.dexAttr;
-        document.getElementById("final-dex-mod").innerHTML = this.character.dexMod;
-        document.getElementById("final-con").innerHTML = this.character.conAttr;
-        document.getElementById("final-con-mod").innerHTML = this.character.conMod;
-        document.getElementById("final-wis").innerHTML = this.character.wisAttr;
-        document.getElementById("final-wis-mod").innerHTML = this.character.wisMod;
-        document.getElementById("final-int").innerHTML = this.character.intAttr;
-        document.getElementById("final-int-mod").innerHTML = this.character.intMod;
-        document.getElementById("final-cha").innerHTML = this.character.chaAttr;
-        document.getElementById("final-cha-mod").innerHTML = this.character.chaMod;
+        for (let ability in this.character.ability) {
+            // Now that the switch is done, and every score is in its final state, let's show them.
+            document.getElementById("final-" + ability).innerHTML = this.character.ability[ability];
+            document.getElementById("final-" + ability + "-mod").innerHTML = this.character.abilityMod[ability];
+        }
     }
 
+    subMenu(whichSubMenu) {
+
+    }
 }

@@ -1,10 +1,12 @@
 
-class Monk {
+class Monk extends Class {
 
     /**
      *
      */
     constructor() {
+        super('Monk');
+
         this.alignment = ['lawful'];
         this.hitDie = 8;
         this.skills = [
@@ -17,6 +19,14 @@ class Monk {
             1: [4, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
                 "Base Attack Bonus": 0,
                 "Saving": {

@@ -37,6 +37,14 @@ class Class {
             1: [0, 0]
         };
         this.classTable = {
+            0: {
+                "Saving": {
+                    "Fortitude": 0,
+                    "Reflex": 0,
+                    "Will": 0
+                },
+                "Special": ""
+            },
             1: {
                 "Saving": {
                     "Fortitude": 0,
@@ -198,7 +206,6 @@ class Class {
                 "Special": ""
             }
         };
-        this.baseAttackBonuses = [0, 0, 0, 0];
     }
 
     /**
@@ -207,22 +214,23 @@ class Class {
      * @returns {number[]}
      */
     getBaseAttackBonuses(level) {
+        let baseAttack = [];
         switch (this.baseAttackType) {
             case "G":
-                this.baseAttackBonuses[1] = level;
+                baseAttack[0] = level;
                 break;
             case "A":
-                this.baseAttackBonuses[1] = Math.floor((level + (level / 2)) / 2);
+                baseAttack[0] = Math.floor((level + (level / 2)) / 2);
                 break;
             case "P":
-                this.baseAttackBonuses[1] = Math.floor(level / 2);
+                baseAttack[0] = Math.floor(level / 2);
                 break;
         }
-        this.baseAttackBonuses[2] = this.baseAttackBonuses[1] - 5;
-        this.baseAttackBonuses[3] = this.baseAttackBonuses[1] - 10;
-        this.baseAttackBonuses[4] = this.baseAttackBonuses[1] - 15;
+        baseAttack[1] = baseAttack[0] - 5;
+        baseAttack[2] = baseAttack[0] - 10;
+        baseAttack[3] = baseAttack[0] - 15;
 
-        return this.baseAttackBonuses;
+        return baseAttack;
     }
 
     /**
